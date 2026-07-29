@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "kunde": "frauenaerztin",
+  "name": "Frauenärztin (Name offen)",
+  "branche": [
+    "arzt"
+  ],
+  "betriebsart": "betrieb",
+  "stand": "im-bau",
+  "seit": null,
+  "substrat": {
+    "art": "vite-react",
+    "version": null,
+    "node": ">=22"
+  },
+  "abweichungen": [],
+  "konfig": "src/praxis.config.ts",
+  "deploy": {
+    "art": "keins",
+    "ziel": null,
+    "domain": null,
+    "vorschau": null
+  },
+  "pflege": {
+    "art": "keine",
+    "seit": null,
+    "monatlich": 0
+  },
+  "recht": {
+    "impressum": "geruest",
+    "datenschutz": "geruest",
+    "geprueft": null
+  },
+  "eimer": [
+    "hero",
+    "leistungen",
+    "ueber",
+    "anfahrt",
+    "kontakt",
+    "recht"
+  ],
+  "prompt": "engine/prompts/fertige/frauenarztpraxis-v2.md",
+  "assets": {
+    "master": "prozedural",
+    "credits": 28
+  },
+  "wacht": {
+    "pruefen": false,
+    "url": null
+  },
+  "offen": [
+    "Build (Phase 5) steht aus",
+    "Praxisname · Logo · Ort · Zeiten · Kammer"
+  ]
+}
