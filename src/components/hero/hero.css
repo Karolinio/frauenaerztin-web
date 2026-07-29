@@ -1,0 +1,181 @@
+/**
+ * Hero: Textblock auf Papier, darunter ein breites Bewegtbild-Band, das ohne
+ * Rand in die dunkle Sektion darunter läuft. Das Glaspanel hängt über die
+ * Bandkante hinaus — halb über dem Video, halb über dem dunklen Grund.
+ * Beides sind erlaubte Gründe für Glas.
+ */
+
+.hero {
+  padding-top: calc(4.5rem + clamp(2.5rem, 1rem + 5vw, 6.5rem));
+  padding-bottom: 0;
+  /* Hebt den Hero über die folgende dunkle Sektion, damit das Glaspanel
+     über deren Kante hängen darf. */
+  position: relative;
+  z-index: 2;
+}
+
+.hero__kopf {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  column-gap: clamp(2rem, 0.5rem + 4vw, 6rem);
+  row-gap: clamp(1.75rem, 1rem + 2vw, 3rem);
+  align-items: end;
+  padding-bottom: clamp(2.75rem, 1.5rem + 4vw, 6rem);
+}
+
+.hero__marke {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.hero__ort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+
+.hero__punkt {
+  color: color-mix(in oklch, var(--ink) 35%, transparent);
+}
+
+.hero__titel {
+  grid-column: 1;
+  font-family: var(--font-display);
+  /* Eigener Grad statt --text-hero: der Einzeiler ist ein Satz, keine Wortmarke.
+     Bei 64 px läuft er über drei Zeilen und bleibt lesbar. */
+  font-size: clamp(2.25rem, 1.1rem + 3.6vw, 4.125rem);
+  line-height: 1.04;
+  letter-spacing: var(--tracking-hero);
+  font-variation-settings:
+    'opsz' 110,
+    'wght' 360,
+    'SOFT' 45;
+  text-wrap: balance;
+  margin: 0;
+  /* Optischer Randausgleich: der Großbuchstabe soll auf der Kante sitzen. */
+  margin-left: -0.035em;
+}
+
+.hero__seite {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 1rem + 1.4vw, 2.25rem);
+  /* Sitzt tiefer als die Überschrift — Rhythmus statt gleicher Oberkante. */
+  padding-bottom: 0.4rem;
+}
+
+.hero__satz {
+  color: var(--ink-soft);
+  max-width: 34ch;
+  /* Haarlinie in Tinte, nicht in Clay: Clay markiert auf dieser Seite
+     ausschließlich den nächsten Schritt, nie eine Trennlinie. */
+  border-left: 1.5px solid color-mix(in oklch, var(--ink) 25%, transparent);
+  padding-left: 1.25rem;
+}
+
+.hero__aktionen {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 0.5rem + 1.4vw, 2rem);
+  flex-wrap: wrap;
+}
+
+.hero__telefon {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+
+/* ── Band ───────────────────────────────────────────────────────────────*/
+.hero__band {
+  position: relative;
+  margin: 0;
+  /* Die Höhe steht fest, damit beim Laden nichts springt. */
+  height: clamp(19rem, 52svh, 34rem);
+}
+
+.hero__medium {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  background: var(--paper-deep);
+}
+
+.hero__zeiten {
+  position: absolute;
+  left: max(var(--gutter), calc((100% - var(--shell)) / 2 + var(--gutter)));
+  bottom: -3.25rem;
+  z-index: 2;
+  width: min(26rem, calc(100% - 2 * var(--gutter)));
+  padding: 1.4rem 1.6rem 1.5rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.hero__zeiten-kopf {
+  color: var(--on-dark-soft);
+}
+
+.hero__zeiten-zeit {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-variation-settings:
+    'opsz' 32,
+    'wght' 440,
+    'SOFT' 20;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.hero__zeiten-hinweis {
+  font-size: var(--text-meta);
+  color: var(--on-dark-soft);
+}
+
+.hero__zeiten-telefon {
+  margin-top: 0.55rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid color-mix(in oklch, var(--paper) 20%, transparent);
+  font-size: var(--text-meta);
+  line-height: 1.45;
+  color: var(--on-dark-soft);
+  text-wrap: pretty;
+}
+
+/* ── Schmaler ───────────────────────────────────────────────────────────*/
+@media (max-width: 900px) {
+  .hero__kopf {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__titel,
+  .hero__seite {
+    grid-column: 1;
+  }
+
+  .hero__band {
+    height: auto;
+  }
+
+  .hero__medium {
+    height: clamp(14rem, 40svh, 21rem);
+  }
+
+  .hero__zeiten {
+    position: static;
+    width: auto;
+    margin-inline: var(--gutter);
+    /* Statisch platziert liegt das Panel weder über Video noch über dunklem
+       Grund — hier wird es deshalb zur deckenden Fläche, nicht zu Glas.
+       Die Lichtkante oben bleibt, damit es als Platte liest. */
+    margin-top: -2.5rem;
+    background: var(--teal-deep);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

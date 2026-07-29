@@ -22,3 +22,6 @@ pnpm-debug.log*
 # Higgsfield-Rohdownloads vor der Optimierung.
 # Die ausgelieferten Assets in public/media/ gehören ins Repo.
 /media-raw/
+
+# Ausgabe der Sichtprüfung (scripts/qa*.mjs)
+/qa*/

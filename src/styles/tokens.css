@@ -1,0 +1,87 @@
+/**
+ * Design-Tokens. Einzige Quelle für Farbe, Grad, Abstand, Zeit.
+ * Kein Wert aus dieser Datei wird woanders hartkodiert.
+ */
+
+:root {
+  /* ── Farbe ─────────────────────────────────────────────────────────────
+     Genau eine Farbe bedeutet etwas: --clay markiert „der nächste Schritt".
+     Alles andere ist Papier, Tinte und Teal. */
+  --paper: oklch(97.5% 0.008 85);
+  --paper-deep: oklch(93.5% 0.012 85);
+  --ink: oklch(24% 0.02 200);
+  --ink-soft: oklch(48% 0.015 200);
+  --teal-deep: oklch(32% 0.05 195);
+  --teal: oklch(58% 0.07 190);
+  --clay: oklch(66% 0.12 45);
+  --clay-ink: oklch(38% 0.09 45);
+  /* Clay für Milchglas. Transmission dunkelt jede Farbe ab (Beer-Lambert);
+     dieselbe Farbe muss dafür heller angesetzt werden, sonst kippt sie ins
+     Braune. Wird ausschließlich im Grundriss des Showpiece benutzt. */
+  --clay-glas: oklch(80% 0.1 48);
+
+  /* Auf dunklem Grund liest Papier als Text, nicht als Fläche. */
+  --on-dark: oklch(94% 0.008 90);
+  --on-dark-soft: oklch(78% 0.012 100);
+
+  /* ── Typografie ────────────────────────────────────────────────────────
+     Fraunces trägt „jemand nimmt sich Zeit", Instrument Sans trägt
+     Lesbarkeit von 16 bis 75. */
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+  --text-hero: clamp(2.75rem, 1.1rem + 6.6vw, 6.75rem);
+  --text-section: clamp(2rem, 1.2rem + 2.6vw, 3.5rem);
+  --text-sub: clamp(1.375rem, 1.05rem + 1.1vw, 1.875rem);
+  --text-lead: clamp(1.125rem, 1.02rem + 0.42vw, 1.375rem);
+  --text-base: 1.125rem;
+  --text-meta: 0.9375rem;
+  --text-micro: 0.8125rem;
+
+  --leading-tight: 1.06;
+  --leading-head: 1.14;
+  --leading-body: 1.65;
+
+  /* Laufweite wird mit dem Grad kleiner, nicht überall gleich. */
+  --tracking-hero: -0.022em;
+  --tracking-head: -0.014em;
+  --tracking-label: 0.14em;
+
+  --measure: 62ch;
+  --measure-narrow: 46ch;
+
+  /* ── Raum ──────────────────────────────────────────────────────────────
+     Sektionen atmen weit, Zeilen innerhalb einer Gruppe eng. Kein
+     gleichmäßiges Padding-Raster über die ganze Seite. */
+  --space-section: clamp(5rem, 3rem + 6vw, 10.5rem);
+  --space-block: clamp(2.5rem, 1.6rem + 3vw, 5rem);
+  --gutter: clamp(1.25rem, 0.4rem + 3.2vw, 4.5rem);
+  --shell: 1440px;
+  --content: 1180px;
+
+  /* ── Kanten ────────────────────────────────────────────────────────────
+     Zwei Radien mit Bedeutung: hart für alles Bauliche (Bild, Glas,
+     Sektionskante), weich nur für Flächen, die auf Bedienung reagieren. */
+  --radius-hard: 2px;
+  --radius-soft: 12px;
+
+  /* ── Tiefe ─────────────────────────────────────────────────────────────
+     Drei Schatten mit drei Aufgaben — nicht ein Schatten für alles. */
+  --shadow-lift: 0 1px 1px -0.5px oklch(24% 0.02 200 / 0.06), 0 10px 24px -16px oklch(24% 0.02 200 / 0.28);
+  --shadow-raised: 0 2px 3px -1px oklch(24% 0.02 200 / 0.08), 0 22px 48px -28px oklch(24% 0.02 200 / 0.38);
+  --shadow-image: 0 2px 6px -2px oklch(24% 0.02 200 / 0.14), 0 48px 92px -52px oklch(20% 0.03 200 / 0.55);
+  --shadow-glass:
+    inset 0 1px 0 0 color-mix(in oklch, var(--paper) 30%, transparent),
+    0 24px 60px -20px oklch(20% 0.03 200 / 0.45);
+
+  /* ── Zeit ──────────────────────────────────────────────────────────────*/
+  --duration-fast: 140ms;
+  --duration-normal: 320ms;
+  --duration-slow: 620ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* ── Grain ─────────────────────────────────────────────────────────────
+     Feines Filmkorn über den dunklen Sektionen. Ein SVG, kein Bild-Request. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}

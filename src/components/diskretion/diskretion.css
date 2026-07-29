@@ -1,0 +1,57 @@
+.diskretion {
+  padding-block: 0;
+  overflow: clip;
+}
+
+.diskretion__gitter {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: clamp(2rem, 1rem + 4vw, 6rem);
+  align-items: center;
+  padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+}
+
+.diskretion__bild {
+  margin: 0;
+  /* Ragt oben und unten aus der Sektion heraus — Tiefe durch Überlappung,
+     nicht durch einen weiteren Schatten. */
+  margin-block: clamp(-4rem, -2rem - 3vw, -1.5rem);
+  overflow: hidden;
+  border-radius: var(--radius-hard);
+  box-shadow: var(--shadow-image);
+}
+
+.diskretion__bild img {
+  width: 100%;
+  height: clamp(20rem, 62svh, 38rem);
+  object-fit: cover;
+}
+
+.diskretion__text {
+  display: grid;
+  gap: 1rem;
+  max-width: 34rem;
+}
+
+.diskretion__titel {
+  max-width: 17ch;
+}
+
+.diskretion__satz {
+  color: var(--on-dark-soft);
+}
+
+@media (max-width: 900px) {
+  .diskretion__gitter {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .diskretion__bild {
+    margin-block: 0;
+  }
+
+  .diskretion__bild img {
+    height: clamp(16rem, 44svh, 24rem);
+  }
+}

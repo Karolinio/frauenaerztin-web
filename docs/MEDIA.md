@@ -35,15 +35,21 @@ WebP hätte nur Safari 14–15 zusätzlich bedient — den Aufwand nicht wert.
 
 ## Video
 
-| Datei | Größe | Länge |
-|---|---|---|
-| `hero-loop.webm` (VP9) | 585 KB | 16 s |
-| `hero-loop.mp4` (H.264, faststart) | 992 KB | 16 s |
-| `hero-poster.jpg` | 62 KB | 1280×720 |
+| Datei | Größe | Maße | Länge |
+|---|---|---|---|
+| `hero-loop.webm` (VP9) | 621 KB | 1072×720 | 16 s |
+| `hero-loop.mp4` (H.264, faststart) | 1,0 MB | 1072×720 | 16 s |
+| `hero-poster.jpg` | 53 KB | 1072×720 | — |
+
+**Nachtrag 2026-07-29 (Build):** Veo hat das 3:2-Bild in einen 16:9-Container
+gelegt und links und rechts je 104 px Schwarz einkodiert. Mit `object-fit: cover`
+sah das nach Letterbox aus. Die Balken sind mit
+`ffmpeg -vf crop=1072:720:104:0` weggeschnitten, Video und Poster neu kodiert.
+Beim nächsten Veo-Clip vor der Optimierung `cropdetect` laufen lassen.
 
 ```html
 <video autoplay muted loop playsinline preload="metadata"
-       poster="/media/hero-poster.jpg" width="1280" height="720">
+       poster="/media/hero-poster.jpg" width="1072" height="720">
   <source src="/media/hero-loop.webm" type="video/webm">
   <source src="/media/hero-loop.mp4" type="video/mp4">
 </video>

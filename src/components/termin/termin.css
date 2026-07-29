@@ -1,0 +1,210 @@
+.termin__gitter {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 1rem + 5vw, 6rem);
+  align-items: start;
+}
+
+.termin__ruf {
+  display: grid;
+  gap: 1rem;
+  position: sticky;
+  top: 7.5rem;
+}
+
+.termin__titel {
+  max-width: 14ch;
+}
+
+/* Die Rufnummer ist auf dieser Seite die eigentliche Handlung — sie bekommt
+   den größten Grad der ganzen Sektion, nicht der Button. */
+.termin__nummer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: fit-content;
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-variation-settings:
+    'opsz' 60,
+    'wght' 400,
+    'SOFT' 30;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out-soft);
+}
+
+.termin__nummer:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.14em;
+}
+
+.termin__hoerer {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+}
+
+.termin__zeiten {
+  color: var(--ink-soft);
+  max-width: 34ch;
+}
+
+/* ── Formular ───────────────────────────────────────────────────────────*/
+.termin__formular {
+  background: var(--paper-deep);
+  border-radius: var(--radius-soft);
+  padding: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+  box-shadow: var(--shadow-lift);
+}
+
+.termin__formular-lead {
+  margin-top: 0.35rem;
+}
+
+.formular {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.formular__feld {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.formular__feld--weit {
+  grid-column: 1 / -1;
+}
+
+.formular label {
+  font-size: var(--text-meta);
+  font-weight: 500;
+}
+
+.formular input[type='text'],
+.formular input[type='tel'],
+.formular select {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid color-mix(in oklch, var(--ink) 20%, transparent);
+  border-radius: var(--radius-soft);
+  font-size: var(--text-base);
+  transition:
+    border-color var(--duration-fast) var(--ease-out-soft),
+    box-shadow var(--duration-fast) var(--ease-out-soft);
+}
+
+.formular input:hover,
+.formular select:hover {
+  border-color: color-mix(in oklch, var(--ink) 38%, transparent);
+}
+
+.formular input:focus-visible,
+.formular select:focus-visible {
+  border-color: var(--clay);
+  outline-offset: 1px;
+}
+
+.formular [aria-invalid='true'] {
+  border-color: var(--clay-ink);
+  box-shadow: 0 0 0 1px var(--clay-ink);
+}
+
+.formular__fehler {
+  font-size: var(--text-meta);
+  color: var(--clay-ink);
+}
+
+/* ── Einwilligung ───────────────────────────────────────────────────────*/
+.formular__einwilligung {
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.35rem 0.75rem;
+  align-items: start;
+  margin-top: 0.35rem;
+}
+
+.formular__einwilligung input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.24rem;
+  accent-color: var(--clay);
+}
+
+.formular__einwilligung label {
+  font-size: var(--text-meta);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.formular__einwilligung .formular__fehler {
+  grid-column: 2;
+}
+
+/* ── Abschluss ──────────────────────────────────────────────────────────*/
+.formular__abschluss {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.formular .cta {
+  border: 1px solid color-mix(in oklch, var(--clay) 70%, black);
+  cursor: pointer;
+}
+
+.formular .cta:disabled {
+  opacity: 0.65;
+  cursor: progress;
+  transform: none;
+}
+
+.formular__notiz {
+  max-width: 24ch;
+  text-wrap: pretty;
+}
+
+.formular__meldung {
+  grid-column: 1 / -1;
+  padding: 0.9rem 1.1rem;
+  border-left: 2px solid var(--clay);
+  background: color-mix(in oklch, var(--clay) 10%, transparent);
+  font-size: var(--text-meta);
+  border-radius: 0 var(--radius-hard) var(--radius-hard) 0;
+}
+
+.formular--fertig {
+  display: grid;
+  gap: 0.75rem;
+  border-left: 2px solid var(--clay);
+  padding-left: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .termin__gitter {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .termin__ruf {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .formular {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

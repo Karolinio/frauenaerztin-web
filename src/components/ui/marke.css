@@ -1,0 +1,37 @@
+.marke {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.marke__name {
+  font-family: var(--font-display);
+  font-size: 1.3125rem;
+  letter-spacing: -0.012em;
+  font-variation-settings:
+    'opsz' 24,
+    'wght' 480,
+    'SOFT' 20;
+  white-space: nowrap;
+}
+
+.marke__trenner {
+  width: 1px;
+  height: 0.95em;
+  background: color-mix(in oklch, var(--ink) 28%, transparent);
+  align-self: center;
+}
+
+.marke__fach {
+  white-space: nowrap;
+}
+
+/* In engen Leisten fällt der Zusatz zuerst weg. */
+@media (max-width: 1180px) {
+  .marke__fach,
+  .marke__trenner {
+    display: none;
+  }
+}

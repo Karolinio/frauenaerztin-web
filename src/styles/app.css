@@ -1,0 +1,8 @@
+/* Einstieg: Tokens, Schrift, Grundlage. Der Reset steht in global.css.
+
+   Kein Tailwind. Das Layout dieser Seite ist durchgehend eigenes Grid mit
+   Tokens; es kam am Ende keine einzige Utility-Klasse zum Einsatz. Ein
+   mitgeliefertes Preflight ohne Nutzen wären rund 10 kB CSS für nichts. */
+@import './tokens.css';
+@import './typography.css';
+@import './global.css';

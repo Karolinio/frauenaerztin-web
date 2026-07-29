@@ -1,0 +1,354 @@
+/**
+ * Grundlage: Basissatz, Sektionsrhythmus, Glas, Korn, Fokus.
+ * Alles Weitere liegt bei der jeweiligen Komponente.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Lenis übernimmt das weiche Scrollen; nativ nur als Rückfall für Ankerlinks. */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+/* Überschriften tragen ihre Größe über die Rollen in typography.css, nicht
+   über den Browser-Default — sonst kämpfen zwei Systeme um denselben Wert. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd,
+fieldset {
+  margin: 0;
+}
+
+fieldset,
+legend {
+  padding: 0;
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  text-indent: 0;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+::placeholder {
+  color: var(--ink-soft);
+  opacity: 1;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: color-mix(in oklch, currentColor 35%, transparent);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color var(--duration-fast) var(--ease-out-soft);
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* ── Fokus ──────────────────────────────────────────────────────────────
+   Clay markiert „der nächste Schritt" — bei Tastaturbedienung ist das
+   buchstäblich das fokussierte Element. */
+:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 3px;
+  border-radius: var(--radius-hard);
+}
+
+.on-dark :focus-visible {
+  outline-color: var(--clay);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: color-mix(in oklch, var(--clay) 30%, transparent);
+  color: var(--ink);
+}
+
+/* ── Gerüst ─────────────────────────────────────────────────────────────*/
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.content {
+  width: 100%;
+  max-width: var(--content);
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--space-section);
+  position: relative;
+}
+
+/* Dunkle Sektionen. Nie zwei hintereinander — das Auge braucht Papier
+   zwischen den Bildstrecken. */
+.on-dark {
+  background: var(--teal-deep);
+  color: var(--on-dark);
+  position: relative;
+  isolation: isolate;
+}
+
+.on-dark .t-meta,
+.on-dark .t-label {
+  color: var(--on-dark-soft);
+}
+
+/* Filmkorn. Liegt über der Fläche, nie über dem Text — daher z-index 0
+   und alle Inhalte auf position:relative darüber. */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  background-repeat: repeat;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grain > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Glas ───────────────────────────────────────────────────────────────
+   Nur über dunklen Gründen und über Bildern. Über flachem Papier wäre es
+   eine Milchscheibe vor einer Wand. */
+.glass {
+  background: color-mix(in oklch, var(--paper) 12%, transparent);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid color-mix(in oklch, var(--paper) 28%, transparent);
+  border-top-color: color-mix(in oklch, var(--paper) 55%, transparent);
+  box-shadow: var(--shadow-glass);
+  border-radius: var(--radius-hard);
+  color: var(--on-dark);
+}
+
+/* Glas über einem Foto braucht mehr Grund als Glas über einer dunklen Fläche.
+   Das Rezept mit 12 % Papier setzt einen dunklen Untergrund voraus; über einem
+   hellen Vormittagsbild bleibt der Text sonst unter 4.5:1 — gemessen mit
+   scripts/qa-a11y.mjs. Blur, Lichtkante und Schatten bleiben, nur die Tönung
+   trägt weiter. */
+.glass--foto {
+  background: color-mix(in oklch, var(--teal-deep) 80%, transparent);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass--foto {
+    background: color-mix(in oklch, var(--teal-deep) 92%, transparent);
+  }
+}
+
+/* ── Der eine gefüllte Button der Seite ─────────────────────────────────*/
+.cta {
+  --cta-bg: var(--clay);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.95rem 1.6rem;
+  background: var(--cta-bg);
+  color: oklch(21% 0.04 45);
+  font-weight: 600;
+  font-size: var(--text-meta);
+  letter-spacing: 0.01em;
+  border: 1px solid color-mix(in oklch, var(--cta-bg) 70%, black);
+  border-radius: var(--radius-hard);
+  text-decoration: none;
+  box-shadow: var(--shadow-lift);
+  transition:
+    transform var(--duration-fast) var(--ease-out-soft),
+    box-shadow var(--duration-normal) var(--ease-out-soft),
+    background-color var(--duration-fast) var(--ease-out-soft);
+}
+
+.cta:hover {
+  --cta-bg: oklch(70% 0.128 45);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-raised);
+}
+
+.cta:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-lift);
+}
+
+.cta__arrow {
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.cta:hover .cta__arrow {
+  transform: translateX(3px);
+}
+
+/* Zweitrangige Handlung. Umriss statt Fläche — Clay bleibt dem CTA vorbehalten. */
+.link-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-size: var(--text-meta);
+  font-weight: 500;
+  text-decoration: none;
+  padding-block: 0.35em;
+  border-bottom: 1px solid color-mix(in oklch, currentColor 28%, transparent);
+  transition: border-color var(--duration-fast) var(--ease-out-soft);
+}
+
+.link-quiet:hover {
+  border-bottom-color: currentColor;
+}
+
+/* ── Skip-Link ──────────────────────────────────────────────────────────*/
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1.1rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-hard);
+  transform: translateY(-160%);
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ── Erscheinen beim Scrollen ───────────────────────────────────────────
+   Nur opacity und transform. Kein Scroll-Handler, siehe ui/Enthuellen.tsx. */
+.enthuellen {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out-soft),
+    transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.enthuellen[data-sichtbar] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enthuellen {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Reduzierte Bewegung ────────────────────────────────────────────────
+   Keine kürzeren Dauern, sondern gar keine Bewegung. Endzustand sofort. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Nur für Screenreader. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

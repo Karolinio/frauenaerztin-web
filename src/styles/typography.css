@@ -1,0 +1,126 @@
+/**
+ * Schriften. Selbst gehostet, kein Google-CDN, kein externer Request.
+ * Fraunces liegt als eine variable Datei vor (opsz, wght, SOFT);
+ * Instrument Sans als drei statische Schnitte.
+ */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fonts/fraunces-var-latin.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-stretch: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('/fonts/instrument-sans-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('/fonts/instrument-sans-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('/fonts/instrument-sans-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Rollen ─────────────────────────────────────────────────────────────
+   Die optische Größe wandert mit dem Grad mit: große Grade bekommen
+   feinere Strichstärken, kleine Grade robustere. Genau dafür ist opsz da. */
+
+.t-hero {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-hero);
+  font-variation-settings:
+    'opsz' 120,
+    'wght' 380,
+    'SOFT' 40;
+  text-wrap: balance;
+}
+
+.t-section {
+  font-family: var(--font-display);
+  font-size: var(--text-section);
+  line-height: var(--leading-head);
+  letter-spacing: var(--tracking-head);
+  font-variation-settings:
+    'opsz' 72,
+    'wght' 420,
+    'SOFT' 30;
+  text-wrap: balance;
+}
+
+.t-sub {
+  font-family: var(--font-display);
+  font-size: var(--text-sub);
+  line-height: 1.22;
+  letter-spacing: -0.008em;
+  font-variation-settings:
+    'opsz' 36,
+    'wght' 460,
+    'SOFT' 24;
+}
+
+.t-lead {
+  font-size: var(--text-lead);
+  line-height: 1.55;
+  font-weight: 400;
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+.t-body {
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+.t-meta {
+  font-size: var(--text-meta);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* Kleinste Stufe: Quellenangaben, Hinweise unter einer Fläche. */
+.t-micro {
+  font-size: var(--text-micro);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* Kleine Auszeichnung über Sektionsköpfen. Gesperrt, damit sie als
+   Beschriftung liest und nicht als Überschrift. */
+.t-label {
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Zahlen in Tabellen und Stationsnummern laufen gleich breit. */
+.t-num {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-variation-settings:
+    'opsz' 14,
+    'wght' 500,
+    'SOFT' 0;
+}

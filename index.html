@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>%PRAXIS_NAME% — %PRAXIS_FACH% in %PRAXIS_ORT%</title>
+    <meta
+      name="description"
+      content="%PRAXIS_EINZEILER% 20 Minuten pro Termin, Ultraschall im Haus, Rückruf am selben Werktag."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#f7f4ef" />
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href="/" />
+
+    <!-- Schriften: selbst gehostet, kein Google-CDN. Nur die zwei Schnitte
+         vorladen, die im ersten Bild tatsächlich gebraucht werden. -->
+    <link rel="preload" href="/fonts/fraunces-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Das erste sichtbare Bild vorladen. Wer Bewegung abgewählt hat, sieht
+         das Standbild statt des Videos und lädt entsprechend das andere. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/media/hero-poster.jpg"
+      fetchpriority="high"
+      media="(prefers-reduced-motion: no-preference)"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/media/hero-sprechecke.avif"
+      type="image/avif"
+      fetchpriority="high"
+      media="(prefers-reduced-motion: reduce)"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
