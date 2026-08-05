@@ -1,0 +1,5 @@
+allowBuilds:
+  # Vite bündelt mit esbuild — ohne dessen Build-Skript startet weder Dev-Server noch Bau.
+  # pnpm schreibt hier einen Platzhaltersatz hinein und wartet auf eine Antwort; bleibt er
+  # stehen, bricht jeder `pnpm build` ab, bevor er anfängt.
+  esbuild: true
