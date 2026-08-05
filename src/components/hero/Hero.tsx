@@ -90,13 +90,13 @@ function HeroBewegtbild() {
       loop
       playsInline
       preload="metadata"
-      poster="/media/hero-poster.jpg"
+      poster={`${import.meta.env.BASE_URL}media/hero-poster.jpg`}
       width={1072}
       height={720}
       aria-label="Die Sprechecke der Praxis am Vormittag. Im Bild bewegt sich nur das einfallende Licht."
     >
-      <source src="/media/hero-loop.webm" type="video/webm" />
-      <source src="/media/hero-loop.mp4" type="video/mp4" />
+      <source src={`${import.meta.env.BASE_URL}media/hero-loop.webm`} type="video/webm" />
+      <source src={`${import.meta.env.BASE_URL}media/hero-loop.mp4`} type="video/mp4" />
     </video>
   );
 }
