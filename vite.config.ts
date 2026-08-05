@@ -30,6 +30,18 @@ function praxisdatenInsHtml(): Plugin {
 // Impressum und Datenschutz sind eigene Dokumente ohne Router, ohne GSAP,
 // ohne Three.js — sie sollen nichts von der Startseite mitschleppen.
 export default defineConfig({
+  /*
+   * `base` aus der Umgebung, nicht fest verdrahtet.
+   *
+   * GitHub Pages liefert unter `/<repo>/` aus, ein eigener Namensbereich unter `/`.
+   * Ohne diese Zeile zeigen alle Verweise auf `/assets/…` ab der Wurzel — auf Pages
+   * ist das ein 404 und die Seite bleibt weiss. Gemessen am gebauten index.html:
+   * `src="/assets/main-….js"`.
+   *
+   * Sobald eine eigene Domain draufliegt, faellt VITE_BASIS weg und es steht wieder
+   * `/`. Deshalb eine Variable und kein fester Pfad.
+   */
+  base: process.env.VITE_BASIS ?? '/',
   plugins: [react(), praxisdatenInsHtml()],
   build: {
     rollupOptions: {
