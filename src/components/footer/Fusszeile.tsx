@@ -45,10 +45,10 @@ export function Fusszeile() {
         <nav className="fuss__nav" aria-label="Rechtliches">
           <ul>
             <li>
-              <a href="/impressum.html">Impressum</a>
+              <a href={`${import.meta.env.BASE_URL}impressum.html`}>Impressum</a>
             </li>
             <li>
-              <a href="/datenschutz.html">Datenschutz</a>
+              <a href={`${import.meta.env.BASE_URL}datenschutz.html`}>Datenschutz</a>
             </li>
           </ul>
         </nav>

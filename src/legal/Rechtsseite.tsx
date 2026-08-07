@@ -22,7 +22,7 @@ export function Rechtsseite({ titel, stand, children }: RechtsseiteProps) {
       <header className="recht__kopf">
         <div className="shell recht__kopfzeile">
           <Marke ziel="/" />
-          <a className="link-quiet" href="/">
+          <a className="link-quiet" href={`${import.meta.env.BASE_URL}`}>
             Zurück zur Startseite
           </a>
         </div>
@@ -38,13 +38,13 @@ export function Rechtsseite({ titel, stand, children }: RechtsseiteProps) {
         <div className="shell">
           <ul>
             <li>
-              <a href="/impressum.html">Impressum</a>
+              <a href={`${import.meta.env.BASE_URL}impressum.html`}>Impressum</a>
             </li>
             <li>
-              <a href="/datenschutz.html">Datenschutz</a>
+              <a href={`${import.meta.env.BASE_URL}datenschutz.html`}>Datenschutz</a>
             </li>
             <li>
-              <a href="/">Startseite</a>
+              <a href={`${import.meta.env.BASE_URL}`}>Startseite</a>
             </li>
           </ul>
         </div>

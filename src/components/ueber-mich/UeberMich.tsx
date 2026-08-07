@@ -53,7 +53,7 @@ export function UeberMich() {
             </ol>
             <p className="t-meta ueber__fach">
               {praxis.fachbezeichnung}. Zuständige Ärztekammer und Kassenärztliche Vereinigung stehen im{' '}
-              <a href="/impressum.html">Impressum</a>.
+              <a href={`${import.meta.env.BASE_URL}impressum.html`}>Impressum</a>.
             </p>
           </Enthuellen>
         </div>

@@ -196,7 +196,7 @@ export function Rueckrufformular() {
         <label htmlFor={feld('einwilligung')}>
           Ich bin damit einverstanden, dass mein Name und meine Telefonnummer gespeichert werden, bis der
           Rückruf erledigt ist. Die Einwilligung kann ich jederzeit widerrufen. Mehr dazu in der{' '}
-          <a href="/datenschutz.html">Datenschutzerklärung</a>.
+          <a href={`${import.meta.env.BASE_URL}datenschutz.html`}>Datenschutzerklärung</a>.
         </label>
         {fehler.einwilligung ? (
           <p className="formular__fehler" id={feld('einwilligung-fehler')}>
