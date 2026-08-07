@@ -1,0 +1,45 @@
+/* Meldungen als Liste, nicht als Kachelraster.
+ *
+ * Ein Raster suggeriert Gleichrangigkeit und laedt zum Ueberfliegen ein. Hier steht
+ * meistens EINE Sache, und die muss gelesen werden — „Praxis vom 10. bis 21.
+ * geschlossen" ueberfliegt man nicht folgenlos.
+ */
+.aktuelles__liste {
+  list-style: none;
+  padding: 0;
+  margin: clamp(2rem, 1.5rem + 2vw, 3rem) 0 0;
+  display: grid;
+  gap: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+  max-width: 46rem;
+}
+
+.meldung {
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+  background: var(--paper-deep);
+  border-radius: var(--radius-m, 10px);
+  /* Die Kante traegt die Dringlichkeit, nicht die Flaeche. Eine eingefaerbte Flaeche
+     waere Clay als Dekoration — und Clay heisst in dieser Palette ausschliesslich
+     „der naechste Schritt". */
+  border-left: 3px solid transparent;
+}
+
+.meldung[data-art='hinweis'] { border-left-color: var(--clay); }
+
+.meldung__datum {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.meldung__titel { margin: 0.4rem 0 0.6rem; }
+.meldung__text { margin: 0; max-width: 60ch; }
+
+.meldung__bis {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.aktuelles__leer { max-width: 52ch; }

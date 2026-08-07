@@ -2,7 +2,14 @@ import { leistungen, type Leistung } from '../../praxis.config';
 import { Zeichen } from './Zeichen';
 import './leistungen.css';
 
-export function Leistungen() {
+/**
+ * `auszug` zeigt nur die ersten drei Leistungen und verweist auf die volle Seite.
+ *
+ * Zwei Fassungen desselben Textes zu pflegen waere `zwei-listen-die-driften` in der
+ * teuersten Variante: die Startseite naeme irgendwann eine Leistung an, die es auf der
+ * Unterseite nicht mehr gibt — und das ist auf einer Arztseite eine Falschauskunft.
+ */
+export function Leistungen({ auszug = false }: { auszug?: boolean } = {}) {
   return (
     <section className="section leistungen" id="leistungen" aria-labelledby="leistungen-titel">
       <div className="shell">
@@ -18,12 +25,21 @@ export function Leistungen() {
         </div>
 
         <ul className="leistungen__raster">
-          {leistungen.map((leistung) => (
+          {/* Im Auszug die ersten drei — dieselbe Quelle, nur kuerzer. */}
+          {(auszug ? leistungen.slice(0, 3) : leistungen).map((leistung) => (
             <li className="leistung" key={leistung.titel} data-gewicht={leistung.gewicht}>
               <Kachel leistung={leistung} />
             </li>
           ))}
         </ul>
+
+        {auszug && (
+          <p className="leistungen__weiter">
+            <a className="knopf knopf--leise" href={`${import.meta.env.BASE_URL}leistungen/`}>
+              Alle Leistungen ansehen
+            </a>
+          </p>
+        )}
       </div>
     </section>
   );

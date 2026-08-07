@@ -1,24 +1,32 @@
 import { useEffect, useId, useState } from 'react';
 import { praxis } from '../../praxis.config';
-import { useAktiverAbschnitt } from '../../hooks/useAktiverAbschnitt';
+import { MENUE, aktiveSeite } from '../../seiten';
 import { Marke } from '../ui/Marke';
 import { Pfeil } from '../ui/Pfeil';
 import './kopfzeile.css';
 
-const ABSCHNITTE = [
-  { id: 'besuch', label: 'Der Besuch' },
-  { id: 'leistungen', label: 'Leistungen' },
-  { id: 'ueber-mich', label: 'Über mich' },
-  { id: 'praxis', label: 'Praxis & Anfahrt' },
-  { id: 'termin', label: 'Termin' },
-] as const;
-
-const IDS = ABSCHNITTE.map((a) => a.id);
+/**
+ * Das Menue kommt aus `src/seiten.ts` — der einen Liste.
+ *
+ * Bis zum 07.08.2026 stand hier eine EIGENE Liste aus fuenf Ankern (`#besuch`,
+ * `#leistungen`, …). Yvonne hat das nach einem Tag bemerkt:
+ *
+ *   „Es gibt zwar ein Menue aber in den Unterpunkten kommt man immer wieder zu den
+ *    Texten/Bildern von der Hauptpage?"
+ *
+ * Ein Menue, dessen Punkte alle auf dieselbe Seite zeigen, ist kein Menue. Und zwei
+ * Listen fuer dieselben Seiten waeren `zwei-listen-die-driften` — die Kopfzeile wuerde
+ * irgendwann eine Seite anbieten, die es nicht gibt.
+ */
+const adresse = (weg: string) =>
+  weg === '/' ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}${weg.replace(/^\//, '')}`;
 
 export function Kopfzeile() {
   const [gescrollt, setGescrollt] = useState(false);
   const [menueOffen, setMenueOffen] = useState(false);
-  const aktiv = useAktiverAbschnitt(IDS);
+  /* Welche Seite offen ist, steht in der ADRESSE. Ein eigener Zustand dafuer waere
+     eine zweite Wahrheit, die beim ersten Zurueck-Knopf falsch steht. */
+  const hier = aktiveSeite(window.location.pathname);
   const menueId = useId();
 
   useEffect(() => {
@@ -45,10 +53,14 @@ export function Kopfzeile() {
     return () => window.removeEventListener('keydown', beiTaste);
   }, [menueOffen]);
 
-  // Genau ein gefüllter Button ist gleichzeitig sichtbar: der in der Kopfzeile
-  // erscheint erst, wenn der aus dem Hero weggescrollt ist, und verschwindet
-  // wieder, sobald der Terminabschnitt selbst im Bild steht.
-  const ctaSichtbar = gescrollt && aktiv !== 'termin';
+  /*
+   * Genau ein gefuellter Knopf ist gleichzeitig sichtbar.
+   *
+   * Auf der Startseite erscheint der in der Kopfzeile erst, wenn der aus dem Hero
+   * weggescrollt ist. AUF DER TERMINSEITE gar nicht — dort ist der Termin der Inhalt,
+   * und ein Knopf, der auf die Seite zeigt, auf der man steht, ist kein Weg.
+   */
+  const ctaSichtbar = gescrollt && hier?.weg !== '/termin/';
 
   return (
     <header className="kopf" data-gescrollt={gescrollt || undefined}>
@@ -57,13 +69,13 @@ export function Kopfzeile() {
 
         <nav className="kopf__nav" aria-label="Hauptnavigation">
           <ul>
-            {ABSCHNITTE.map((abschnitt) => (
-              <li key={abschnitt.id}>
+            {MENUE.map((abschnitt) => (
+              <li key={abschnitt.weg}>
                 <a
-                  href={`#${abschnitt.id}`}
+                  href={adresse(abschnitt.weg)}
                   className="kopf__link"
-                  data-aktiv={aktiv === abschnitt.id || undefined}
-                  aria-current={aktiv === abschnitt.id ? 'true' : undefined}
+                  data-aktiv={hier?.weg === abschnitt.weg || undefined}
+                  aria-current={hier?.weg === abschnitt.weg ? 'page' : undefined}
                 >
                   {abschnitt.label}
                 </a>
@@ -76,7 +88,7 @@ export function Kopfzeile() {
           <a className="kopf__telefon" href={praxis.telefon.href}>
             {praxis.telefon.anzeige}
           </a>
-          <a className="cta kopf__cta" href="#termin" data-sichtbar={ctaSichtbar || undefined}>
+          <a className="cta kopf__cta" href={adresse('/termin/')} data-sichtbar={ctaSichtbar || undefined}>
             Termin
             <Pfeil className="cta__arrow" />
           </a>
@@ -95,9 +107,9 @@ export function Kopfzeile() {
 
       <div className="kopf__menue" id={menueId} hidden={!menueOffen}>
         <ul className="shell">
-          {ABSCHNITTE.map((abschnitt) => (
-            <li key={abschnitt.id}>
-              <a href={`#${abschnitt.id}`} onClick={() => setMenueOffen(false)}>
+          {MENUE.map((abschnitt) => (
+            <li key={abschnitt.weg}>
+              <a href={adresse(abschnitt.weg)} onClick={() => setMenueOffen(false)}>
                 {abschnitt.label}
               </a>
             </li>
@@ -108,7 +120,7 @@ export function Kopfzeile() {
             </a>
           </li>
           <li>
-            <a className="cta" href="#termin" onClick={() => setMenueOffen(false)}>
+            <a className="cta" href={adresse('/termin/')} onClick={() => setMenueOffen(false)}>
               Termin vereinbaren
               <Pfeil className="cta__arrow" />
             </a>

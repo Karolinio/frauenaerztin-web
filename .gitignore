@@ -25,3 +25,11 @@ pnpm-debug.log*
 
 # Ausgabe der Sichtprüfung (scripts/qa*.mjs)
 /qa*/
+
+# Die Unterseiten-Einstiege entstehen beim Bauen aus src/seiten.ts. Sie einzuchecken
+# waere eine zweite Wahrheit neben der Liste — und die driftet beim ersten Umbenennen.
+/leistungen/
+/team/
+/praxis/
+/aktuelles/
+/termin/
