@@ -1,7 +1,11 @@
 # Baut die Seite und liefert sie über GitHub Pages aus.
 #
+# Erzeugt von `node engine/ausrollen.mjs`. Von Hand geändert werden darf er —
+# dann bitte den Grund dazuschreiben, sonst überschreibt ihn der nächste Lauf
+# wortlos.
+#
 # Warum ein Bauschritt und nicht einfach der Ordner: `dist/` steht im .gitignore
-# und gehoert da auch hin — ein eingecheckter Bau ist eine zweite Wahrheit neben
+# und gehört da auch hin — ein eingecheckter Bau ist eine zweite Wahrheit neben
 # dem Quellcode und driftet beim ersten vergessenen Lauf.
 name: Seite ausrollen
 
@@ -30,6 +34,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
         env:
+          # Der Basispfad. Unter github.io liegt die Seite in einem Unterordner,
+          # der so heisst wie das Repo — steht hier etwas anderes, sucht der
+          # Browser JS und CSS an einer Stelle, an der nichts liegt.
           VITE_BASIS: /frauenaerztin-web/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
