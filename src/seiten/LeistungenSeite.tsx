@@ -1,3 +1,4 @@
+import { Seitenkopf } from '../components/ui/Seitenkopf';
 import { Leistungen } from '../components/leistungen/Leistungen';
 import { Diskretion } from '../components/diskretion/Diskretion';
 
@@ -15,6 +16,11 @@ import { Diskretion } from '../components/diskretion/Diskretion';
 export default function LeistungenSeite() {
   return (
     <>
+      <Seitenkopf
+        augenbraue="Leistungen"
+        titel="Was ich anbiete — und was jeweils dahintersteckt."
+        vorspann="Jeder Punkt lässt sich aufklappen. Dort steht, was die Untersuchung leistet, wie lange sie dauert und wer sie bezahlt."
+      />
       <Leistungen />
       <Diskretion />
     </>

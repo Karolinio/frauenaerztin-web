@@ -1,3 +1,4 @@
+import { Seitenkopf } from '../components/ui/Seitenkopf';
 import { UeberMich } from '../components/ueber-mich/UeberMich';
 import { TEAM, TEAM_LEER } from '../daten/team';
 import './team.css';
@@ -24,13 +25,18 @@ import './team.css';
 export default function TeamSeite() {
   return (
     <>
+      <Seitenkopf
+        augenbraue="Team"
+        titel="Wer Sie in der Praxis empfängt."
+        vorspann="Eine Einzelpraxis lebt von den Menschen darin. Deshalb steht hier, wer behandelt und warum die Praxis so arbeitet, wie sie arbeitet."
+      />
       <UeberMich />
 
       <section className="section team" id="team" aria-labelledby="team-titel">
         <div className="shell">
           <p className="t-label">Team</p>
           <h2 className="t-section" id="team-titel">
-            {TEAM.length ? 'Wer Sie sonst noch empfängt.' : TEAM_LEER.titel}
+            {TEAM.length ? 'Am Empfang und in der Assistenz.' : TEAM_LEER.titel}
           </h2>
 
           {!TEAM.length && <p className="t-lead team__leer">{TEAM_LEER.text}</p>}

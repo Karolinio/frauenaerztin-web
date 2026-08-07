@@ -1,3 +1,4 @@
+import { Seitenkopf } from '../components/ui/Seitenkopf';
 import { MELDUNGEN, gilt, type Meldung } from '../daten/aktuelles';
 import './aktuelles.css';
 
@@ -28,13 +29,14 @@ export default function AktuellesSeite() {
   const gueltig = MELDUNGEN.filter((m) => gilt(m, jetzt)).sort((a, b) => b.datum.localeCompare(a.datum));
 
   return (
-    <section className="section aktuelles" id="aktuelles" aria-labelledby="aktuelles-titel">
+    <>
+      <Seitenkopf
+        augenbraue="Aktuelles"
+        titel="Was gerade in der Praxis gilt."
+        vorspann="Urlaub, Vertretung, geänderte Sprechzeiten. Hier steht, was Sie wissen müssen, bevor Sie anrufen oder vorbeikommen."
+      />
+    <section className="section aktuelles" id="aktuelles" aria-label="Aktuelles">
       <div className="shell">
-        <p className="t-label">Aktuelles</p>
-        <h2 className="t-section" id="aktuelles-titel">
-          Was gerade in der Praxis gilt.
-        </h2>
-
         {!gueltig.length && (
           <p className="t-lead aktuelles__leer">
             Zurzeit gibt es nichts Besonderes zu melden — die Praxis ist zu den üblichen
@@ -65,5 +67,6 @@ export default function AktuellesSeite() {
         )}
       </div>
     </section>
+    </>
   );
 }

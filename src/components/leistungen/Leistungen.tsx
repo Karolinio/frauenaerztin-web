@@ -13,7 +13,10 @@ export function Leistungen({ auszug = false }: { auszug?: boolean } = {}) {
   return (
     <section className="section leistungen" id="leistungen" aria-labelledby="leistungen-titel">
       <div className="shell">
-        <div className="leistungen__kopf">
+        {/* Auf der Startseite traegt dieser Kopf den Abschnitt. Auf `/leistungen/`
+            steht darueber der Seitenkopf mit derselben Aussage — zweimal derselbe
+            Satz liest sich als Fehler, und Vorlesegeraete bekommen zwei Titel. */}
+        {auszug && <div className="leistungen__kopf">
           <p className="t-label">Leistungen</p>
           <h2 className="t-section leistungen__titel" id="leistungen-titel">
             Was ich anbiete — und was jeweils dahintersteckt.
@@ -22,7 +25,7 @@ export function Leistungen({ auszug = false }: { auszug?: boolean } = {}) {
             Jeder Punkt lässt sich aufklappen. Dort steht, was die Untersuchung leistet, wie lange sie dauert
             und wer sie bezahlt.
           </p>
-        </div>
+        </div>}
 
         <ul className="leistungen__raster">
           {/* Im Auszug die ersten drei — dieselbe Quelle, nur kuerzer. */}
