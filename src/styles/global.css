@@ -352,3 +352,42 @@ a:hover {
   white-space: nowrap;
   border: 0;
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+ * Tippziele am Handy
+ *
+ * Gemessen am 07.08.2026 bei 390 px, auf allen sechs Seiten:
+ *
+ *     72×40  112 · 116 117 · 116 016     ← die Notrufnummern
+ *    115×19  0000 · 00 00 00             ← die Praxisnummer
+ *     79×22  Impressum / Datenschutz
+ *    204×35  die Wortmarke
+ *
+ * WCAG 2.5.8 verlangt 24×24 und nimmt Verweise INNERHALB eines Satzes aus. Die hier
+ * stehen alle allein — sie sind nicht ausgenommen.
+ *
+ * Und bei den Notrufnummern ist die Norm die falsche Messlatte. Wer `116 016` tippt,
+ * das Hilfetelefon Gewalt gegen Frauen, tippt nicht in Ruhe und nicht zweimal. Das
+ * ist das folgenreichste Tippziel dieser ganzen Website.
+ *
+ * 44 px ist die Grenze, unter der eine Fingerkuppe daneben trifft. Erreicht ueber
+ * `min-height` plus Innenabstand — NICHT ueber `font-size`: die Schrift soll bleiben,
+ * wie sie ist, nur die Flaeche darum waechst.
+ * ══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .fuss a,
+  .kopf__telefon,
+  .marke {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* Die Notrufnummern zuerst und mit Abstand: sie stehen nebeneinander, und zwei
+     Ziele, die sich beruehren, sind ein Ziel mit einer unsichtbaren Trennlinie. */
+  .fuss__notfall a {
+    min-height: 48px;
+    padding-inline: 0.5rem;
+    margin-inline-start: -0.5rem;
+  }
+}
