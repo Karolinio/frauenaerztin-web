@@ -5,9 +5,10 @@ import { weg } from '../../lib/weg';
 /**
  * Die Leistungen im Auszug — ihre Worte, ihre Reihenfolge.
  *
- * „Mädelssprechstunde" steht exakt so da. Es ist ihr Wort, und es ist der
- * einzige Begriff auf dieser Seite, den keine andere Praxis in Erkelenz
- * benutzt — also das konkrete Detail, das niemand erraten könnte.
+ * „Mädelssprechstunde" steht exakt so da. Es ist ihr Wort — nicht aber, wie hier
+ * bis zum 18.08.2026 stand, der einzige Begriff, den keine andere Praxis in
+ * Erkelenz benutzt: Antje Hagen führt drei Kilometer entfernt eine
+ * „Mädchen-Sprechstunde". Der Eintrag bleibt, seine Sonderrolle nicht.
  *
  * ═══ Warum eine Liste und keine Kacheln ═══
  *

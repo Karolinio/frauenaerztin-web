@@ -298,3 +298,44 @@ reservierten Höhe: **0,000** auf allen sieben Seiten.
 auf einer Arztseite ist es Aufwand ohne Wirkung), kein Bild aus `media-raw/` als
 Raum, kein erzeugter Mensch. Higgsfield-Verbrauch: **13 von 60 Credits**,
 ausschliesslich `nano_banana_pro`.
+
+---
+
+## Amendements aus der Politur vom 18.08.2026
+
+**9 · Die Mädelssprechstunde ist kein Alleinstellungsmerkmal.** An zwei Stellen
+stand in diesem Dokument, „Mädelssprechstunde" sei der einzige Begriff, den
+keine andere Praxis in Erkelenz benutzt. Am 18.08.2026 gegen die vier
+Frauenarztpraxen am Ort geprüft: **frauenarztpraxis-erkelenz.de** (Antje Hagen)
+führt eine **„Mädchen-Sprechstunde"** in ihrer Leistungsliste.
+
+Der Begriff bleibt — er ist Yvonnes Wort, er ist wärmer, und er ist richtig.
+Aber die Seite darf sich nicht auf ihn stützen wie auf eine Unterscheidung. Wer
+eine Seite auf ein Merkmal stellt, das der Nachbar auch hat, hat keine
+Unterscheidung, sondern eine Behauptung.
+
+**10 · Sprechzeit und Telefon gehören nach oben.** Wettbewerbsbefund derselben
+Messung: `gyn-tuerker.de` zeigt die Öffnungszeiten ganz oben auf der Startseite,
+`frauenarztpraxis-erkelenz.de` setzt eine Zeitenänderung als erste Meldung,
+`praxis-adhami.de` stellt die Telefonnummer neben den Titel. Diese Seite hatte
+beides zwei Klicks entfernt auf `/termin/`.
+
+Der Hero trägt jetzt die Sprechzeit **von heute** und die Nummer als Knopf. Die
+vollständige Tabelle bleibt auf `/termin/` — eine Tabelle mit sechs Zeilen
+beantwortet die Frage „hat die jetzt auf" nicht, sie stellt sie neu.
+
+**11 · Was die Palette angeht, trägt die Direktion.** Alle vier Praxen am Ort
+sind blau oder dunkelblau. Weiss, Salbei und Beige unterscheiden im lokalen Feld
+tatsächlich — das war eine Vermutung und ist jetzt gemessen.
+
+**12 · Der Wettbewerb hat, was wir nicht haben: Online-Termine.** Drei der vier
+(Petit, Türker, Adhami über Doctolib) bieten Online-Buchung. Yvonne startet ohne.
+Der Rückrufweg muss deshalb nicht „vorhanden" sein, sondern **besser** als ein
+Doctolib-Knopf — er ist der einzige Terminweg dieser Praxis.
+
+**13 · Der Demo-Schalter.** Solange `DEMO` in `src/praxis.config.ts` an ist,
+zeigt die Seite erfundene Angaben, damit die Gestaltung an einer gefüllten Seite
+beurteilt werden kann. Das ist eine bewusste, befristete Ausnahme von der
+Lücken-Doktrin — abgesichert über `noindex`, `scripts/pruefe-freigabe.mjs` und
+`inhalt/DEMO`. Die Doktrin selbst gilt unverändert: `DEMO = false` stellt sie in
+einem Handgriff wieder her.

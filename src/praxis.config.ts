@@ -165,8 +165,20 @@ export const praxis = {
  * Schwangerschaft · Krebsvorsorge · Verhütung · Kinderwunschberatung ·
  * Mädelssprechstunde. Impfungen und Botox stehen darunter als „weitere".
  *
- * „Mädelssprechstunde" bleibt exakt so stehen. Es ist ihr Wort und der einzige
- * Begriff auf dieser Seite, den keine andere Praxis in Erkelenz benutzt.
+ * „Mädelssprechstunde" bleibt exakt so stehen. Es ist ihr Wort.
+ *
+ * ═══ Korrektur vom 18.08.2026 ═══
+ *
+ * Hier stand, es sei „der einzige Begriff, den keine andere Praxis in Erkelenz
+ * benutzt". Das ist widerlegt: frauenarztpraxis-erkelenz.de (Antje Hagen, rund
+ * drei Kilometer entfernt) führt eine „Mädchen-Sprechstunde" in ihrer
+ * Leistungsliste.
+ *
+ * Der Begriff bleibt trotzdem — er ist ihr Wort, er ist wärmer, und er ist
+ * richtig. Was NICHT bleibt, ist die Rolle, die ihm die Direktion zugedacht
+ * hatte: er trägt die Unterscheidung dieser Seite nicht allein. Wer eine Seite
+ * auf ein Alleinstellungsmerkmal stellt, das der Nachbar auch hat, hat keine
+ * Unterscheidung, sondern eine Behauptung.
  *
  * ═══ Woher die Zahlen kommen ═══
  *
