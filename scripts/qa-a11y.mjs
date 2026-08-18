@@ -155,7 +155,11 @@ const ueberBild = await seite.evaluate(() => {
 
   const vorn = alsRGB(getComputedStyle(text).color);
   const glas = alsRGB(getComputedStyle(panel).backgroundColor);
-  const glasAnteil = Number(getComputedStyle(panel).backgroundColor.match(/[\d.]+\)$/)?.[0]?.slice(0, -1) ?? 1);
+  const glasAnteil = Number(
+    getComputedStyle(panel)
+      .backgroundColor.match(/[\d.]+\)$/)?.[0]
+      ?.slice(0, -1) ?? 1,
+  );
 
   // Videobild in Panelgröße abtasten.
   const vRect = video.getBoundingClientRect();

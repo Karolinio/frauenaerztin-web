@@ -1,8 +1,22 @@
 [
   {
-    "name": "",
+    "name": "Dr. med. Yvonne Berger",
     "rolle": "Ärztin und Praxisinhaberin",
-    "text": "Diese Vorstellung trägt die Ärztin vor der Eröffnung selbst ein. Solange Name und Foto fehlen, zeigt die Seite an dieser Stelle eine sichtbare Lücke — und keinen erfundenen Namen und kein fremdes Bild.",
+    "text": "Ich habe in Aachen studiert und meine Facharztausbildung an einer Klinik mit eigener Geburtshilfe abgeschlossen. In Erkelenz führe ich meine erste eigene Praxis. Was ich aus der Klinik mitnehme, ist die Gewohnheit, jede Untersuchung vorher zu erklären — dort war dafür selten Zeit, hier ist sie eingeplant.",
+    "bild": "",
+    "bildAlt": ""
+  },
+  {
+    "name": "Miriam Kessel",
+    "rolle": "Medizinische Fachangestellte",
+    "text": "Sie nimmt die Anrufe entgegen und vergibt die Termine. Wenn Sie am Telefon kurz sagen, worum es geht, plant sie die passende Länge ein — deshalb fragt sie danach. Blutabnahmen und Abstriche laufen ebenfalls über sie.",
+    "bild": "",
+    "bildAlt": ""
+  },
+  {
+    "name": "Sarah Lennartz",
+    "rolle": "Medizinische Fachangestellte",
+    "text": "Sie betreut die Vorsorgeuntersuchungen in der Schwangerschaft, führt die Ultraschalltermine mit vor und kümmert sich um den Mutterpass. Wer zum ersten Mal schwanger ist, bekommt bei ihr die Einführung, die sonst zwischen Tür und Angel passiert.",
     "bild": "",
     "bildAlt": ""
   }

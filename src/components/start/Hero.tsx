@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { praxis } from '../../praxis.config';
+import { zeiten, hatZeiten, istHeute } from '../../inhalt';
 import { Marke } from '../ui/Marke';
+import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
 import './hero.css';
 
@@ -50,10 +52,79 @@ export function Hero() {
             gleich passiert, bevor es passiert — und Sie dürfen jederzeit sagen, dass Sie es nicht möchten.
           </p>
         </div>
+
+        <Praxisdaten />
       </div>
 
       <Portraet />
     </section>
+  );
+}
+
+/**
+ * Sprechzeit von heute, Telefonnummer, Terminweg — direkt im Hero.
+ *
+ * ═══ Warum das hier oben steht und nicht auf /termin/ ═══
+ *
+ * Weil es der Wettbewerb in Erkelenz so macht und weil er damit recht hat.
+ * Gemessen am 18.08.2026 an den vier Frauenarztpraxen am Ort: gyn-tuerker.de
+ * zeigt die Öffnungszeiten ganz oben, frauenarztpraxis-erkelenz.de setzt eine
+ * Zeitenänderung als erste Meldung der Startseite, praxis-adhami.de stellt die
+ * Telefonnummer neben den Titel.
+ *
+ * Der Grund ist nicht Mode. „Wann hat die auf" und „wie erreiche ich die" sind
+ * die beiden Fragen, wegen denen eine Praxisseite überhaupt aufgerufen wird.
+ * Sie lagen hier bisher auf einer Unterseite, zwei Klicks entfernt.
+ *
+ * ═══ Warum ausgerechnet HEUTE ═══
+ *
+ * Eine Tabelle mit sechs Zeilen beantwortet die Frage nicht, sie stellt sie neu:
+ * die Leserin muss erst den Wochentag suchen. Ein Satz, der „heute" sagt,
+ * beantwortet sie. Die vollständige Tabelle steht weiterhin auf /termin/ — dort
+ * sucht jemand, der einen anderen Tag plant.
+ *
+ * ═══ Was hier NICHT passiert ═══
+ *
+ * Es wird nichts erfunden. Fehlt die Nummer, steht der Knopf trotzdem — er führt
+ * dann zu den Zeiten statt ins Telefon, und die Lücke bleibt sichtbar. Fehlen
+ * die Zeiten, sagt die Zeile das, statt „geschlossen" zu behaupten: eine falsche
+ * Zeitangabe ist eine Patientin vor verschlossener Tür.
+ */
+function Praxisdaten() {
+  const telefonSteht = steht(praxis.telefon.href) && steht(praxis.telefon.anzeige);
+
+  const heute = zeiten.find((z) => istHeute(z));
+  const spanne =
+    heute && hatZeiten(heute) ? [heute.vormittag, heute.nachmittag].filter(Boolean).join(' · ') : null;
+
+  return (
+    <div className="hero__daten">
+      <p className="hero__heute">
+        <span className="hero__heute-wort">Heute</span>
+        {heute === undefined ? (
+          <span className="luecke">Sprechzeiten</span>
+        ) : spanne === null ? (
+          <span className="hero__heute-zu">geschlossen</span>
+        ) : (
+          <span className="hero__heute-zeit">{spanne} Uhr</span>
+        )}
+      </p>
+
+      <div className="hero__wege">
+        {telefonSteht ? (
+          <a className="knopf" href={praxis.telefon.href as string}>
+            {praxis.telefon.anzeige} anrufen
+          </a>
+        ) : (
+          <a className="knopf" href={weg('/termin/')}>
+            Zeiten und Termin
+          </a>
+        )}
+        <a className="knopf knopf--leise" href={weg('/termin/')}>
+          Alle Sprechzeiten
+        </a>
+      </div>
+    </div>
   );
 }
 

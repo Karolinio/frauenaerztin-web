@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "freigabe": "node scripts/pruefe-freigabe.mjs",
     "preview": "vite preview",
     "fonts": "node scripts/copy-fonts.mjs",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"*.{ts,json,html}\" \"scripts/*.mjs\"",

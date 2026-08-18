@@ -1,0 +1,8 @@
+Solange diese Datei existiert, stehen in inhalt/*.json ERFUNDENE Inhalte.
+
+Sie sind da, damit die Gestaltung an einer gefuellten Seite beurteilt werden
+kann. Namen, Sprechzeiten und Meldungen sind frei erfunden.
+
+Vor dem Ausrollen: inhalt/*.json durch die echten Angaben der Aerztin ersetzen
+und DANN diese Datei loeschen. `node scripts/pruefe-freigabe.mjs` bricht ab,
+solange sie da ist.

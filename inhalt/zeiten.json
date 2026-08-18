@@ -1,8 +1,8 @@
 [
-  { "tag": "Montag", "vormittag": "", "nachmittag": "", "hinweis": "" },
-  { "tag": "Dienstag", "vormittag": "", "nachmittag": "", "hinweis": "" },
-  { "tag": "Mittwoch", "vormittag": "", "nachmittag": "", "hinweis": "" },
-  { "tag": "Donnerstag", "vormittag": "", "nachmittag": "", "hinweis": "" },
-  { "tag": "Freitag", "vormittag": "", "nachmittag": "", "hinweis": "" },
-  { "tag": "Samstag und Sonntag", "vormittag": "", "nachmittag": "", "hinweis": "" }
+  { "tag": "Montag", "vormittag": "08:00 – 12:30", "nachmittag": "15:00 – 18:00", "hinweis": "" },
+  { "tag": "Dienstag", "vormittag": "08:00 – 12:30", "nachmittag": "", "hinweis": "" },
+  { "tag": "Mittwoch", "vormittag": "08:00 – 12:30", "nachmittag": "", "hinweis": "nachmittags Mädelssprechstunde nach Vereinbarung" },
+  { "tag": "Donnerstag", "vormittag": "08:00 – 12:30", "nachmittag": "15:00 – 18:00", "hinweis": "" },
+  { "tag": "Freitag", "vormittag": "08:00 – 13:00", "nachmittag": "", "hinweis": "" },
+  { "tag": "Samstag und Sonntag", "vormittag": "", "nachmittag": "", "hinweis": "geschlossen" }
 ]

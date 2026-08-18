@@ -206,3 +206,68 @@
     height: auto;
   }
 }
+
+/* ══ Sprechzeit, Telefon und Terminweg im Hero ═══════════════════════════════
+ *
+ * Der Wettbewerbsbefund vom 18.08.2026: drei der vier Erkelenzer
+ * Frauenarztpraxen zeigen Zeiten oder Telefonnummer oben auf der Startseite.
+ * Diese Seite hatte beides auf einer Unterseite.
+ *
+ * Gestalterisch ist der Block die einzige Stelle des Heros mit einer waagerechten
+ * Linie. Sie trennt nicht Text von Text, sondern Aussage von Angebot — oberhalb
+ * steht, wer hier arbeitet, unterhalb, wie man hinkommt.
+ */
+.hero__daten {
+  margin-top: clamp(1.75rem, 1.2rem + 2vw, 3rem);
+  padding-top: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  border-top: 1px solid var(--linie);
+}
+
+.hero__heute {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+/* Das Wort trägt die Aufgabe des Labels und ist deshalb klein, gesperrt und in
+   Versalien — dieselbe Behandlung wie `.t-label`, aber inline statt als Zeile. */
+.hero__heute-wort {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--tinte-mtl);
+}
+
+/* Die Uhrzeit ist die Antwort, also ist sie das Grösste in dieser Zeile.
+   Tabellenziffern, damit die beiden Spannen unter- und nebeneinander bündig
+   stehen und nicht flackern, wenn sich der Tag ändert. */
+.hero__heute-zeit {
+  font-size: var(--text-lead);
+  font-variant-numeric: tabular-nums;
+  color: var(--tinte);
+}
+
+/* „geschlossen" ist eine vollwertige Antwort und keine Lücke — es wird deshalb
+   nicht gestrichelt unterlegt, sondern nur zurückgenommen. */
+.hero__heute-zu {
+  font-size: var(--text-lead);
+  color: var(--tinte-mtl);
+}
+
+.hero__wege {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+@media (min-width: 62rem) {
+  /* Der Einleitungstext wird schmaler als die Überschrift daneben. Gleich breite
+     Absätze und Überschriften erzeugen eine Textwand ohne Leserichtung — das war
+     der Grund, warum der Hero flach wirkte, obwohl die Schriftgrade stimmten. */
+  .hero__einleitung {
+    max-width: 38ch;
+  }
+}

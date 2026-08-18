@@ -2,7 +2,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
-import { praxis } from './src/praxis.config';
+import { praxis, DEMO } from './src/praxis.config';
 import { SEITEN } from './src/seiten';
 
 /**
@@ -27,10 +27,19 @@ function praxisdatenInsHtml(): Plugin {
   return {
     name: 'praxisdaten-ins-html',
     transformIndexHtml(html) {
-      return Object.entries(ersetzungen).reduce(
+      const gefuellt = Object.entries(ersetzungen).reduce(
         (acc, [platzhalter, wert]) => acc.replaceAll(platzhalter, wert),
         html,
       );
+
+      /* Solange DEMO gilt, zeigt die Seite erfundene Namen, Zeiten und eine
+         erfundene Anschrift. Eine solche Fassung darf unter keinen Umstaenden
+         in einen Suchindex geraten — jemand sucht „Frauenarzt Erkelenz", findet
+         die Demo und ruft eine Nummer an, die es nicht gibt.
+         Das Verbot wird hier beim Bauen gesetzt und nicht zur Laufzeit: ein
+         Crawler, der kein JavaScript ausfuehrt, saehe eine Laufzeit-Marke nie. */
+      if (!DEMO) return gefuellt;
+      return gefuellt.replace('</head>', '  <meta name="robots" content="noindex, nofollow" />\n  </head>');
     },
   };
 }

@@ -25,6 +25,47 @@
 /** Ein Wert, der noch aussteht. `null` wird zur Lücke, nie zum Platzhaltertext. */
 export type Offen<T> = T | null;
 
+/* ══ Der Demo-Schalter ════════════════════════════════════════════════════
+ *
+ * Solange er `true` ist, zeigt die Seite ERFUNDENE Werte — Name, Anschrift,
+ * Telefonnummer, Sprechzeiten. Sie stehen hier, damit die Gestaltung an einer
+ * gefüllten Seite beurteilt werden kann und nicht an einem Lückenraster.
+ *
+ * ═══ Warum ein Schalter und nicht einfach eingetragene Werte ═══
+ *
+ * Weil ein Demo-Wert genau dafür gebaut ist, plausibel auszusehen — und deshalb
+ * beim letzten Durchsehen übersehen wird. Ein einzelner Wert, der live geht,
+ * ist auf einer Arztseite kein Schönheitsfehler: eine erfundene Öffnungszeit
+ * ist eine Patientin vor verschlossener Tür, eine erfundene Ärztekammer ein
+ * Abmahngrund auf einer Pflichtseite.
+ *
+ * Mit dem Schalter gibt es diesen Handgriff nicht mehr. `DEMO = false` setzen,
+ * und JEDER erfundene Wert dieser Datei ist im selben Moment wieder `null` —
+ * also wieder eine sichtbare Lücke. Es kann keiner einzeln vergessen werden,
+ * weil keiner einzeln eingetragen ist.
+ *
+ * Drei weitere Sperren hängen daran:
+ *   1. `index.html` bekommt `noindex`, solange DEMO gilt — eine versehentlich
+ *      ausgerollte Demo-Fassung landet nicht bei Google.
+ *   2. `node scripts/pruefe-freigabe.mjs` bricht ab, solange DEMO gilt.
+ *   3. `npm run build` schreibt eine laute Warnung in die Ausgabe.
+ *
+ * ═══ Was beim Umlegen zu tun ist ═══
+ *
+ * `DEMO = false`, dann `node scripts/pruefe-freigabe.mjs`. Das Skript listet
+ * jede Angabe auf, die dann noch fehlt. Diese Liste ist die Frageliste an die
+ * Ärztin — sie muss nicht von Hand gepflegt werden.
+ */
+export const DEMO = true;
+
+/**
+ * Ein erfundener Wert. Gilt nur, solange `DEMO` an ist — sonst ist er `null`.
+ *
+ * Jeder Aufruf ist zugleich die Markierung: `grep -c "demo(" praxis.config.ts`
+ * zählt, wie viele Angaben in Wahrheit noch fehlen.
+ */
+const demo = <T>(wert: T): Offen<T> => (DEMO ? wert : null);
+
 export const praxis = {
   /* ── Identität ───────────────────────────────────────────────────────────
      Eine Einzelpraxis brandet sich über die Person, nicht über einen
@@ -39,7 +80,7 @@ export const praxis = {
    * anders als ein ausgedachter Eigenname, der auf jeder Seite stünde und beim
    * Ausliefern übersehen würde.
    */
-  name: null as Offen<string>,
+  name: demo('Praxis für Frauenheilkunde Dr. Berger'),
 
   /**
    * Ihr Logo, sobald es fertig ist: „ist hoffentlich bald fertig, würde ich dir
@@ -58,11 +99,12 @@ export const praxis = {
 
   aerztin: {
     /** „Dr. med." oder nichts. Ein Doktortitel, den jemand nicht hat, ist strafbar. */
-    titel: null as Offen<string>,
-    vorname: null as Offen<string>,
-    nachname: null as Offen<string>,
+    titel: demo('Dr. med.'),
+    vorname: demo('Yvonne'),
+    /** ERFUNDEN. Ihr echter Nachname ist nicht bekannt und wird nicht geraten. */
+    nachname: demo('Berger'),
     /** Die geschützte Berufsbezeichnung. Muss mit der Kammerurkunde übereinstimmen. */
-    fachbezeichnung: null as Offen<string>,
+    fachbezeichnung: demo('Fachärztin für Frauenheilkunde und Geburtshilfe'),
   },
 
   /**
@@ -81,25 +123,25 @@ export const praxis = {
   ort: 'Erkelenz',
 
   /** Der Eröffnungstag. Bis er feststeht, wird er nirgends behauptet. */
-  eroeffnung: null as Offen<string>,
+  eroeffnung: demo('1. Oktober 2026'),
 
   adresse: {
-    strasse: null as Offen<string>,
-    plz: null as Offen<string>,
+    strasse: demo('Kölner Straße 24'),
+    plz: demo('41812'),
     ort: 'Erkelenz',
   },
 
   telefon: {
     /** Wie die Nummer dasteht, z. B. „02431 · 12 34 56". */
-    anzeige: null as Offen<string>,
+    anzeige: demo('02431 · 97 84 20'),
     /** Dieselbe Nummer wählbar, z. B. „tel:+492431123456". */
-    href: null as Offen<string>,
+    href: demo('tel:+4924319784 20'.replace(/\s/g, '')),
   },
 
   /** Telefonzeiten stehen bewusst getrennt von den Sprechzeiten — sie sind es. */
-  telefonzeiten: null as Offen<string>,
+  telefonzeiten: demo('Montag bis Freitag, 8:00 – 12:00 Uhr'),
 
-  email: null as Offen<string>,
+  email: demo('praxis@frauenheilkunde-erkelenz.de'),
 
   /**
    * Der Endpunkt des Rückrufformulars. MUSS in der EU liegen.
@@ -108,10 +150,10 @@ export const praxis = {
    * Ein Formular, das ins Nichts sendet, ist schlimmer als keins: die Patientin
    * wartet auf einen Rückruf, den niemand bekommen hat.
    */
-  formularEndpunkt: null as Offen<string>,
+  formularEndpunkt: demo('https://api.frauenheilkunde-erkelenz.de/rueckruf'),
 
   /** Kassenzulassung. Steht noch nicht fest, also steht sie nirgends. */
-  kassen: null as Offen<string>,
+  kassen: demo('Alle gesetzlichen Kassen und privat'),
 
   /** Kein Doctolib. Sie startet ohne und nimmt es „ggf. später" dazu. */
   onlineTermin: null as Offen<{ readonly anbieter: string; readonly url: string }>,
@@ -299,23 +341,26 @@ export const notruf = {
  * werden, und bis dahin steht dort eine Lücke. */
 
 export const rechtliches = {
-  berufsbezeichnung: null as Offen<string>,
+  berufsbezeichnung: demo('Ärztin — verliehen in der Bundesrepublik Deutschland'),
   verleihenderStaat: 'Bundesrepublik Deutschland',
-  aerztekammer: null as Offen<string>,
-  aerztekammerUrl: null as Offen<string>,
-  kassenaerztlicheVereinigung: null as Offen<string>,
-  kassenaerztlicheVereinigungUrl: null as Offen<string>,
-  berufsordnungUrl: null as Offen<string>,
-  aufsichtsbehoerde: null as Offen<string>,
-  umsatzsteuerId: null as Offen<string>,
-  datenschutzbeauftragter: null as Offen<string>,
-  hostingAnbieter: null as Offen<string>,
-  berufshaftpflicht: null as Offen<string>,
+  /* Erkelenz liegt im Kreis Heinsberg und damit im Bezirk Nordrhein. Das ist
+     nachprüfbar richtig — es steht trotzdem unter `demo()`, weil es die Ärztin
+     auf ihrer Pflichtseite bestätigen muss und nicht wir. */
+  aerztekammer: demo('Ärztekammer Nordrhein'),
+  aerztekammerUrl: demo('https://www.aekno.de/'),
+  kassenaerztlicheVereinigung: demo('Kassenärztliche Vereinigung Nordrhein'),
+  kassenaerztlicheVereinigungUrl: demo('https://www.kvno.de/'),
+  berufsordnungUrl: demo('https://www.aekno.de/aerzte/berufsordnung'),
+  aufsichtsbehoerde: demo('Ärztekammer Nordrhein, Tersteegenstraße 9, 40474 Düsseldorf'),
+  umsatzsteuerId: demo('Heilbehandlungen sind nach § 4 Nr. 14 UStG umsatzsteuerfrei'),
+  datenschutzbeauftragter: demo('praxis@frauenheilkunde-erkelenz.de'),
+  hostingAnbieter: demo('Hetzner Online GmbH, Industriestraße 25, 91710 Gunzenhausen'),
+  berufshaftpflicht: demo('Deutsche Ärzteversicherung AG, Hansaring 40–50, 50670 Köln'),
   /** Räumlicher Geltungsbereich der Berufshaftpflicht, § 2 DL-InfoV. */
-  berufshaftpflichtGeltung: null as Offen<string>,
-  datenschutzAufsicht: null as Offen<string>,
+  berufshaftpflichtGeltung: demo('Bundesrepublik Deutschland'),
+  datenschutzAufsicht: demo('Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen'),
   /** Wie lange eine Rückrufanfrage gespeichert wird. Pflichtangabe, Art. 13 DSGVO. */
-  speicherdauerRueckruf: null as Offen<string>,
+  speicherdauerRueckruf: demo('Bis zum Rückruf, längstens 30 Tage'),
 } as const;
 
 /* ══ Anfahrt ══════════════════════════════════════════════════════════════ */
@@ -333,10 +378,16 @@ export interface Zugangspunkt {
  * leer. Eine falsche Zusage über einen Aufzug ist schlimmer als gar keine.
  */
 export const zugang: readonly Zugangspunkt[] = [
-  { punkt: 'Stufenloser Zugang', detail: null },
-  { punkt: 'Aufzug', detail: null },
-  { punkt: 'Platz für Kinderwagen', detail: null },
-  { punkt: 'Parken', detail: null },
-  { punkt: 'Bus und Bahn', detail: null },
-  { punkt: 'Behindertengerechte Toilette', detail: null },
+  { punkt: 'Stufenloser Zugang', detail: demo('Ja, ebenerdig von der Kölner Straße aus.') },
+  { punkt: 'Aufzug', detail: demo('Ja, die Praxis liegt im ersten Obergeschoss.') },
+  { punkt: 'Platz für Kinderwagen', detail: demo('Im Eingangsbereich, überdacht und einsehbar.') },
+  {
+    punkt: 'Parken',
+    detail: demo('Sechs Plätze hinter dem Haus, dazu Parkhaus Franziskanerplatz in 200 m.'),
+  },
+  {
+    punkt: 'Bus und Bahn',
+    detail: demo('Bahnhof Erkelenz in 600 m, Bushaltestelle Kölner Straße direkt vor der Tür.'),
+  },
+  { punkt: 'Behindertengerechte Toilette', detail: demo('Ja, im Wartebereich.') },
 ];

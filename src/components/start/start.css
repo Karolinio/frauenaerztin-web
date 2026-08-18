@@ -580,3 +580,80 @@
     align-items: start;
   }
 }
+
+/* ══ Politur der Leistungsliste ══════════════════════════════════════════════
+ *
+ * Gemessen an drei Referenzen (Mobbin, 18.08.2026): Koto setzt den Namen einer
+ * Leistung deutlich grösser als ihre Beschreibung, Hims markiert jeden Eintrag
+ * mit einer senkrechten Akzentlinie, Miro trägt eine ganze Liste allein über den
+ * Grössenkontrast.
+ *
+ * Der Befund an unserer Fassung: Name und Satz standen zu nah beieinander. Eine
+ * Liste, in der alles ungefähr gleich gross ist, liest sich als Tabelle — das
+ * Auge findet keinen Einstieg und überfliegt sie als Block.
+ */
+
+/**
+ * Die Akzentlinie. Sie erscheint NUR unter dem Zeiger und nur dort.
+ *
+ * ═══ Warum nicht dauerhaft an jedem Eintrag ═══
+ *
+ * Weil `--signal` auf dieser Seite genau eine Bedeutung hat: der nächste
+ * Schritt. Fünf dauerhafte Signallinien untereinander wären fünf nächste
+ * Schritte, also keiner — und die Farbe verlöre die Aufgabe, die sie im Termin-
+ * knopf und im Fokusring erfüllt.
+ *
+ * Unter dem Zeiger stimmt die Bedeutung dagegen wörtlich: DIESE Leistung ist
+ * gerade der nächste Schritt. Damit ist die Linie kein Dekor, sondern dieselbe
+ * Aussage wie überall sonst.
+ */
+.auszug__punkt {
+  position: relative;
+}
+
+.auszug__punkt::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  width: 3px;
+  background: var(--signal);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 250ms var(--ease-ruhig);
+}
+
+.auszug__punkt:hover::before,
+.auszug__punkt:focus-visible::before {
+  transform: scaleY(1);
+  transition-duration: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auszug__punkt::before {
+    transition: none;
+  }
+}
+
+@media (min-width: 48rem) {
+  /* Der Name wächst, der Satz bleibt. Erst dieser Abstand macht aus der Tabelle
+     eine Liste mit Leserichtung. */
+  .auszug__name {
+    font-size: clamp(1.5rem, 1.15rem + 1.1vw, 2.125rem);
+    line-height: 1.15;
+  }
+
+  .auszug__satz {
+    font-size: var(--text-meta);
+    line-height: 1.6;
+    max-width: 42ch;
+  }
+
+  /* Die eingerückte Fläche beim Überfahren beginnt jetzt hinter der Linie,
+     sonst überdeckt der Hintergrund sie an ihrer linken Kante. */
+  .auszug__punkt:hover,
+  .auszug__punkt:focus-visible {
+    padding-inline: 1rem;
+  }
+}
