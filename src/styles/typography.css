@@ -1,14 +1,15 @@
 /**
- * Schriften. Selbst gehostet, kein Google-CDN, kein externer Request.
- * Fraunces liegt als eine variable Datei vor (opsz, wght, SOFT);
- * Instrument Sans als drei statische Schnitte.
+ * Schriften. Selbst gehostet, kein Google-CDN, kein externer Request — bei einer
+ * Arztseite ist jede Fremdverbindung eine Datenschutzfrage, die man sich sparen kann.
+ *
+ * Fraunces liegt als EINE variable Datei vor (Achsen: opsz, wght, SOFT).
+ * Instrument Sans als drei statische Schnitte — mehr braucht die Seite nicht.
  */
 
 @font-face {
   font-family: 'Fraunces';
   src: url('/fonts/fraunces-var-latin.woff2') format('woff2-variations');
   font-weight: 300 700;
-  font-stretch: normal;
   font-style: normal;
   font-display: swap;
 }
@@ -37,90 +38,93 @@
   font-display: swap;
 }
 
-/* ── Rollen ─────────────────────────────────────────────────────────────
-   Die optische Größe wandert mit dem Grad mit: große Grade bekommen
-   feinere Strichstärken, kleine Grade robustere. Genau dafür ist opsz da. */
+/* ── Rollen ─────────────────────────────────────────────────────────────────
+   Fraunces steht auf `SOFT 30`: die Serifen werden runder, die Kanten weicher.
+   Das ist der Unterschied zwischen „warm" und „Kanzlei" — bei SOFT 0 sieht
+   dieselbe Schrift juristisch aus.
+
+   `opsz` folgt der Grösse von Hand, weil `auto` in Safari nicht überall greift:
+   grosse Grade bekommen 72 (offener, schmalere Strichstärkenkontraste), kleine
+   Grade 14. Wer das weglässt, bekommt bei 5rem eine Schrift, die für 16px
+   gezeichnet wurde — sie wirkt dann plump, ohne dass man sagen kann warum. */
 
 .t-hero {
-  font-family: var(--font-display);
-  font-size: var(--text-hero);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-hero);
+  font-family: var(--schrift-display);
   font-variation-settings:
-    'opsz' 120,
-    'wght' 380,
-    'SOFT' 40;
+    'SOFT' 30,
+    'opsz' 72,
+    'WONK' 0;
+  font-weight: 400;
+  font-size: var(--text-hero);
+  line-height: 0.95;
+  letter-spacing: var(--tracking-hero);
+  color: var(--tinte);
   text-wrap: balance;
 }
 
 .t-section {
-  font-family: var(--font-display);
-  font-size: var(--text-section);
-  line-height: var(--leading-head);
-  letter-spacing: var(--tracking-head);
+  font-family: var(--schrift-display);
   font-variation-settings:
-    'opsz' 72,
-    'wght' 420,
-    'SOFT' 30;
+    'SOFT' 30,
+    'opsz' 48,
+    'WONK' 0;
+  font-weight: 400;
+  font-size: var(--text-section);
+  line-height: 1.06;
+  letter-spacing: var(--tracking-head);
+  color: var(--tinte);
   text-wrap: balance;
 }
 
-.t-sub {
-  font-family: var(--font-display);
-  font-size: var(--text-sub);
-  line-height: 1.22;
-  letter-spacing: -0.008em;
+.t-unter {
+  font-family: var(--schrift-display);
   font-variation-settings:
-    'opsz' 36,
-    'wght' 460,
-    'SOFT' 24;
+    'SOFT' 30,
+    'opsz' 24,
+    'WONK' 0;
+  font-weight: 400;
+  font-size: var(--text-unter);
+  line-height: 1.18;
+  letter-spacing: var(--tracking-head);
+  color: var(--tinte);
 }
 
 .t-lead {
+  font-family: var(--schrift-text);
   font-size: var(--text-lead);
   line-height: 1.55;
-  font-weight: 400;
+  color: var(--tinte);
   max-width: var(--measure);
-  text-wrap: pretty;
 }
 
 .t-body {
+  font-family: var(--schrift-text);
   font-size: var(--text-base);
-  line-height: var(--leading-body);
+  line-height: 1.68;
+  color: var(--tinte);
   max-width: var(--measure);
-  text-wrap: pretty;
 }
 
 .t-meta {
+  font-family: var(--schrift-text);
   font-size: var(--text-meta);
   line-height: 1.5;
-  color: var(--ink-soft);
+  color: var(--tinte-mtl);
 }
 
-/* Kleinste Stufe: Quellenangaben, Hinweise unter einer Fläche. */
-.t-micro {
-  font-size: var(--text-micro);
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-
-/* Kleine Auszeichnung über Sektionsköpfen. Gesperrt, damit sie als
-   Beschriftung liest und nicht als Überschrift. */
+/**
+ * Das Etikett über einer Sektion. Gesperrt, klein, in Versalien.
+ *
+ * Es steht bewusst in --tinte-mtl und NICHT im Signal: das Signal markiert den
+ * nächsten Schritt, und eine Sektionsüberschrift ist kein Schritt. Wer Etiketten
+ * einfärbt, hat am Ende acht Signale und keins.
+ */
 .t-label {
-  font-size: var(--text-micro);
+  font-family: var(--schrift-text);
+  font-size: 0.8125rem;
   font-weight: 500;
+  line-height: 1.2;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--ink-soft);
-  font-variant-numeric: tabular-nums;
-}
-
-/* Zahlen in Tabellen und Stationsnummern laufen gleich breit. */
-.t-num {
-  font-family: var(--font-display);
-  font-variant-numeric: tabular-nums lining-nums;
-  font-variation-settings:
-    'opsz' 14,
-    'wght' 500,
-    'SOFT' 0;
+  color: var(--tinte-mtl);
 }

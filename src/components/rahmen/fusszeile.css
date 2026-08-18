@@ -1,0 +1,193 @@
+/* Leinen statt Dunkelheit. Getrennt wird durch die Fläche, nicht durch Kontrast. */
+
+/**
+ * ═══ Warum die Fusszeile KEINEN Aussenabstand hat ═══
+ *
+ * Sie hatte `margin-top: var(--raum-sektion)`. Die letzte Sektion darüber
+ * bringt aber schon ihr eigenes Polster derselben Grösse mit — zwischen Inhalt
+ * und Fusszeile standen damit zwei Lücken aus zwei Quellen, zusammen bis zu
+ * 288px. Ein Abstand, den niemand gesetzt hat, weil zwei Regeln ihn je zur
+ * Hälfte verantworten.
+ *
+ * Die Ausnahme steht darunter: folgt die Fusszeile direkt auf eine
+ * Leinenfläche, braucht es einen Streifen Papier dazwischen — sonst
+ * verschmelzen beide zu einem Block, und der Flächenwechsel ist weg.
+ */
+.fuss {
+  background-color: var(--leinen);
+  background-image: var(--gewebe);
+  border-top: 1px solid var(--linie);
+  padding-block: var(--raum-gross) var(--raum);
+  margin-top: 0;
+}
+
+main:has(> .flaeche-leinen:last-child) + .fuss {
+  margin-top: var(--raum-sektion);
+}
+
+/**
+ * Vier ungleiche Spalten statt vier gleicher.
+ *
+ * `repeat(auto-fit, minmax(13rem, 1fr))` gab allen vier dieselbe Breite — und
+ * damit der Marke genauso viel Platz wie den Sprechzeiten, die dreimal so viel
+ * Inhalt haben. Gleich breite Spalten sind keine Ordnung, sie sind die
+ * Abwesenheit einer Entscheidung.
+ */
+.fuss__raster {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--raum-gross) var(--raum);
+  align-items: start;
+}
+
+@media (min-width: 44rem) {
+  .fuss__raster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 68rem) {
+  .fuss__raster {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 0.9fr);
+    column-gap: var(--raum-gross);
+  }
+}
+
+/* Die Markenspalte darf breiter atmen als die drei Datenspalten — gleich breite
+   Spalten wären das Raster, gegen das diese Seite gebaut ist. */
+.fuss__spalte--marke {
+  min-width: 12rem;
+}
+
+.fuss__ort {
+  margin-top: 0.6rem;
+}
+
+.fuss__spalte h2 {
+  margin-bottom: 0.9rem;
+}
+
+.fuss__adresse {
+  font-style: normal;
+  font-size: var(--text-meta);
+  line-height: 1.7;
+  color: var(--tinte);
+}
+
+.fuss__telefon {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  margin-top: 0.35rem;
+  font-size: var(--text-base);
+  color: var(--signal);
+  text-decoration: none;
+  border-bottom: 1px solid var(--linie);
+}
+
+.fuss__telefon:hover {
+  border-bottom-color: var(--signal);
+}
+
+.fuss__zeiten {
+  font-size: var(--text-meta);
+  line-height: 1.9;
+  color: var(--tinte);
+}
+
+.fuss__zeiten li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--linie);
+}
+
+.fuss__tag {
+  color: var(--tinte-mtl);
+}
+
+.fuss__spanne {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.fuss__ausstehend {
+  margin-bottom: 0.5rem;
+}
+
+.fuss__mehr {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  font-size: var(--text-meta);
+}
+
+/* Zwei Spalten: sechs Punkte untereinander sind in einer Fusszeile eine Säule
+   aus Luft. Nebeneinander sind es drei Zeilen — und die Spalte steht dann so
+   hoch wie ihre Nachbarn. */
+.fuss__wege {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--raum);
+}
+
+.fuss__wege li a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  font-size: var(--text-meta);
+  color: var(--tinte);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 250ms var(--ease-ruhig),
+    border-color 250ms var(--ease-ruhig);
+}
+
+/* Farbe allein ist kein Zustand — die Haarlinie kommt dazu. */
+.fuss__wege li a:hover {
+  color: var(--signal);
+  border-bottom-color: var(--linie);
+  transition-duration: 150ms;
+}
+
+.fuss__abschluss {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--raum-klein) var(--raum);
+  margin-top: var(--raum-gross);
+  padding-top: var(--raum);
+  border-top: 1px solid var(--linie);
+}
+
+/* Auch hier 44px: die Notrufnummern sind an JEDER Stelle der Seite ein
+   vollwertiges Tippziel, nicht nur auf /kontakt/. Wer sie braucht, sucht sie
+   nicht zweimal. */
+.fuss__abschluss a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  padding-inline: 0.35rem;
+  color: var(--signal);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.fuss__recht {
+  display: flex;
+  gap: var(--raum);
+}
+
+.fuss__recht a {
+  font-size: var(--text-meta);
+  font-weight: 400;
+  color: var(--tinte-mtl);
+  border-bottom-color: var(--linie);
+}
+
+.fuss__recht a:hover {
+  color: var(--signal);
+}

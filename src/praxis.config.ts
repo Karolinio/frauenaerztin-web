@@ -1,254 +1,342 @@
 /**
  * Sämtliche Kundendaten dieser Seite. Einzige Stelle.
  *
- * Kein Name, keine Adresse, keine Uhrzeit und keine Leistungsangabe steht
- * irgendwo sonst im Code. Wenn der Praxisname feststeht, wird diese Datei
- * getauscht — sonst nichts.
+ * Kein Name, keine Anschrift, keine Uhrzeit und keine Leistungsangabe steht
+ * irgendwo sonst im Code.
  *
- * Jeder Wert, den die Ärztin noch bestätigen oder ersetzen muss, ist mit
- * `TODO Kunde` markiert. Die Demo-Werte sind echte deutsche Sätze mit
- * erfundenen Zahlen, keine Blindtexte — sie zeigen, wie die Seite mit
- * realen Angaben aussieht.
+ * ═══ Die Regel, die diese Datei zusammenhält ═══
+ *
+ * `null` heisst: steht noch nicht fest. Es wird als **sichtbare Lücke** gezeigt,
+ * nie als Demo-Wert und nie als Erfindung.
+ *
+ * Das ist keine Pedanterie. Eine erfundene Öffnungszeit ist eine Patientin vor
+ * einer verschlossenen Tür. Eine erfundene Ärztekammer ist ein Abmahngrund auf
+ * einer Pflichtseite. Und ein Demo-Wert, der plausibel aussieht, wird beim
+ * Ausrollen übersehen — genau dafür sind Demo-Werte gebaut.
+ *
+ * Solange hier ein `null` steht, geht die Seite nicht live. Das ist der Zweck.
+ *
+ * ═══ Was NICHT hier steht ═══
+ *
+ * Team, Aktuelles und Öffnungszeiten pflegt die Ärztin selbst — die liegen in
+ * `inhalt/*.json` und werden von dort gelesen. Siehe `inhalt/schema.json`.
  */
 
-export type Wochentag = 'Montag' | 'Dienstag' | 'Mittwoch' | 'Donnerstag' | 'Freitag';
-
-export interface Sprechzeit {
-  readonly tag: Wochentag;
-  /** Leer = an diesem Tag keine Sprechstunde. */
-  readonly vormittag: string | null;
-  readonly nachmittag: string | null;
-  readonly hinweis?: string;
-}
-
-export interface Station {
-  readonly nummer: string;
-  readonly name: string;
-  readonly dauer: string;
-  readonly satz: string;
-  /** Dateiname in /media, ohne Endung. AVIF und JPEG liegen unter gleichem Namen. */
-  readonly bild: string;
-  readonly alt: string;
-}
-
-export type Zeichen = 'intervall' | 'verlauf' | 'auswahl' | 'folge' | 'uebergang';
-
-export interface Leistung {
-  readonly titel: string;
-  readonly kurz: string;
-  readonly details: readonly string[];
-  /** Steuert die Kachelgröße im asymmetrischen Raster. */
-  readonly gewicht: 'gross' | 'mittel' | 'schmal';
-  /** Handgezeichnetes Inline-SVG, siehe components/leistungen/Zeichen.tsx. */
-  readonly zeichen: Zeichen;
-}
-
-export interface WerdegangEintrag {
-  readonly zeit: string;
-  readonly was: string;
-  readonly wo: string;
-}
+/** Ein Wert, der noch aussteht. `null` wird zur Lücke, nie zum Platzhaltertext. */
+export type Offen<T> = T | null;
 
 export const praxis = {
-  /* TODO Kunde — Praxisname und Nachname stehen noch nicht fest.
-     Bis dahin ist die Wortmarke der Titel plus Platzhalter. Kein Logo. */
-  nachname: '[Nachname]',
-  titel: 'Dr. med.',
-  fachbezeichnung: 'Fachärztin für Frauenheilkunde und Geburtshilfe',
-  kurzbezeichnung: 'Frauenärztin',
+  /* ── Identität ───────────────────────────────────────────────────────────
+     Eine Einzelpraxis brandet sich über die Person, nicht über einen
+     Fantasienamen. Solange der Name fehlt, trägt die Wortmarke die Lücke —
+     und nicht „Musterpraxis". */
 
-  /** Das Versprechen der ganzen Seite. Verfahrensaussage, kein Qualitätsanspruch. */
-  einzeiler: 'Eine Frauenarztpraxis, in der Sie vorher wissen, was passiert.',
+  /**
+   * Der Praxisname, wie er über der Tür steht.
+   *
+   * Solange er fehlt, setzt `Marke.tsx` die beschreibende Wortmarke „Praxis für
+   * Frauenheilkunde". Das ist keine Erfindung, sondern eine wahre Beschreibung —
+   * anders als ein ausgedachter Eigenname, der auf jeder Seite stünde und beim
+   * Ausliefern übersehen würde.
+   */
+  name: null as Offen<string>,
+
+  /**
+   * Ihr Logo, sobald es fertig ist: „ist hoffentlich bald fertig, würde ich dir
+   * zukommen lassen, sobald es final steht."
+   *
+   * Wird es hier gesetzt, rendert `Marke.tsx` ein `<img>` statt der Wortmarke.
+   * Kopfzeile, Hero, Fusszeile und Rechtsseiten folgen von selbst — das ist der
+   * ganze Grund, warum die Marke eine eigene Komponente ist.
+   */
+  logo: null as Offen<{
+    readonly src: string;
+    readonly alt: string;
+    readonly breite: number;
+    readonly hoehe: number;
+  }>,
+
+  aerztin: {
+    /** „Dr. med." oder nichts. Ein Doktortitel, den jemand nicht hat, ist strafbar. */
+    titel: null as Offen<string>,
+    vorname: null as Offen<string>,
+    nachname: null as Offen<string>,
+    /** Die geschützte Berufsbezeichnung. Muss mit der Kammerurkunde übereinstimmen. */
+    fachbezeichnung: null as Offen<string>,
+  },
+
+  /**
+   * Ihr Porträt — das einzige Bild dieser Seite, das echt sein MUSS.
+   *
+   * Es wird nicht erzeugt, auch nicht als Symbolbild einer Ärztin. Solange es
+   * fehlt, hält im Hero eine Materialstudie exakt dessen Platz, und darüber
+   * steht sichtbar „Porträt folgt". Beides verschwindet, sobald hier ein Wert
+   * steht — es gibt keinen zweiten Handgriff, den jemand vergessen könnte.
+   *
+   * Aufnahmehinweis siehe `public/bilder/PLATZHALTER.md`.
+   */
+  portraet: null as Offen<{ readonly src: string; readonly alt: string }>,
+
+  /** Der Ort steht fest — er ist der Grund, warum es die Seite gibt. */
+  ort: 'Erkelenz',
+
+  /** Der Eröffnungstag. Bis er feststeht, wird er nirgends behauptet. */
+  eroeffnung: null as Offen<string>,
 
   adresse: {
-    /* TODO Kunde — Praxisanschrift */
-    strasse: '[Straße und Hausnummer]',
-    plz: '[PLZ]',
-    ort: '[Ort]',
-    /* TODO Kunde — für die Karte nach Consent. Bis dahin ohne Kartenausschnitt. */
-    koordinaten: null as { readonly lat: number; readonly lon: number } | null,
+    strasse: null as Offen<string>,
+    plz: null as Offen<string>,
+    ort: 'Erkelenz',
   },
 
   telefon: {
-    /* TODO Kunde — echte Rufnummer eintragen. Die Demo-Nummer ist bewusst
-       nicht wählbar, damit im Vorschau-Betrieb niemand Fremdes klingelt. */
-    anzeige: '0000 · 00 00 00',
-    href: 'tel:+49000000000',
+    /** Wie die Nummer dasteht, z. B. „02431 · 12 34 56". */
+    anzeige: null as Offen<string>,
+    /** Dieselbe Nummer wählbar, z. B. „tel:+492431123456". */
+    href: null as Offen<string>,
   },
 
-  /* TODO Kunde — E-Mail-Adresse der Praxis (Impressum, § 5 DDG) */
-  email: '[E-Mail-Adresse]',
+  /** Telefonzeiten stehen bewusst getrennt von den Sprechzeiten — sie sind es. */
+  telefonzeiten: null as Offen<string>,
 
-  /* TODO Kunde — EU-gehosteter Endpunkt für das Rückrufformular.
-     Solange null, nimmt das Formular nichts entgegen und verweist auf das Telefon. */
-  formularEndpunkt: null as string | null,
+  email: null as Offen<string>,
+
+  /**
+   * Der Endpunkt des Rückrufformulars. MUSS in der EU liegen.
+   *
+   * Solange `null`, nimmt das Formular nichts entgegen und verweist ans Telefon.
+   * Ein Formular, das ins Nichts sendet, ist schlimmer als keins: die Patientin
+   * wartet auf einen Rückruf, den niemand bekommen hat.
+   */
+  formularEndpunkt: null as Offen<string>,
+
+  /** Kassenzulassung. Steht noch nicht fest, also steht sie nirgends. */
+  kassen: null as Offen<string>,
+
+  /** Kein Doctolib. Sie startet ohne und nimmt es „ggf. später" dazu. */
+  onlineTermin: null as Offen<{ readonly anbieter: string; readonly url: string }>,
 } as const;
 
-/** TODO Kunde — Sprechzeiten bestätigen. */
-export const sprechzeiten: readonly Sprechzeit[] = [
-  { tag: 'Montag', vormittag: '08:00 – 12:00', nachmittag: '15:00 – 18:00' },
-  { tag: 'Dienstag', vormittag: '08:00 – 12:00', nachmittag: null },
-  { tag: 'Mittwoch', vormittag: '08:00 – 13:00', nachmittag: null, hinweis: 'nur nach Vereinbarung' },
-  { tag: 'Donnerstag', vormittag: '08:00 – 12:00', nachmittag: '15:00 – 18:00' },
-  { tag: 'Freitag', vormittag: '08:00 – 13:00', nachmittag: null },
-];
+/* ══ Leistungen ═══════════════════════════════════════════════════════════
+ *
+ * Ihre Worte, ihre Reihenfolge, keine dazuerfunden:
+ * Schwangerschaft · Krebsvorsorge · Verhütung · Kinderwunschberatung ·
+ * Mädelssprechstunde. Impfungen und Botox stehen darunter als „weitere".
+ *
+ * „Mädelssprechstunde" bleibt exakt so stehen. Es ist ihr Wort und der einzige
+ * Begriff auf dieser Seite, den keine andere Praxis in Erkelenz benutzt.
+ *
+ * ═══ Woher die Zahlen kommen ═══
+ *
+ * Jede Zahl in diesen Texten ist eine allgemeine Angabe zum Verfahren — aus den
+ * Mutterschaftsrichtlinien, dem Krebsfrüherkennungsprogramm des Gemeinsamen
+ * Bundesausschusses oder den STIKO-Empfehlungen. KEINE davon ist eine Zusage
+ * über diese Praxis („20 Minuten pro Termin", „Rückruf am selben Tag"). Solche
+ * Zusagen kann nur die Ärztin machen, und sie hat sie noch nicht gemacht.
+ */
 
-/** TODO Kunde — Telefonzeiten bestätigen. Stehen bewusst getrennt von den Sprechzeiten. */
-export const telefonzeiten = {
-  zeile: 'Montag bis Freitag, 08:00 – 11:30',
-  rueckruf: 'Rückruf am selben Werktag, wenn Sie bis 11:30 anrufen.',
-} as const;
+export interface Leistung {
+  /** Die Sprungmarke auf /leistungen/. */
+  readonly id: string;
+  readonly titel: string;
+  /** Ein Satz für die Startseite. Behauptend, mit Punkt. */
+  readonly kurz: string;
+  /**
+   * EIN Absatz für /leistungen/ — so steht es im Bauauftrag.
+   *
+   * Der erste Entwurf hatte drei je Leistung. Gemessen mit `engine/pruefen.mjs`
+   * bei 393×727: 9,2 Bildschirmhöhen, über der Grenze von 8. Sieben Leistungen
+   * mal drei Absätze sind kein ausführlicher Text, sondern eine Wand — und eine
+   * Patientin, die auf dem Handy nach der Mädelssprechstunde sucht, scrollt
+   * daran vorbei statt hindurch.
+   *
+   * Gekürzt wurde die Prosa, nicht die Sache: jede Zahl, jede Woche und jede
+   * Altersgrenze aus der langen Fassung steht noch hier.
+   */
+  readonly absatz: string;
+}
 
-/** TODO Kunde — Kassenzulassung bestätigen. */
-export const kassen = {
-  gesetzlich: true,
-  privat: true,
-  selbstzahler: true,
-  zeile: 'Alle gesetzlichen Kassen, private Kassen, Selbstzahlerinnen.',
-} as const;
-
-/** TODO Kunde — Barrierefreiheit vor Ort prüfen. Jede Zeile muss stimmen. */
-export const zugang: readonly { readonly punkt: string; readonly detail: string }[] = [
-  { punkt: 'Aufzug', detail: 'Praxis im [1.] Obergeschoss, Aufzug ab Hauseingang, Kabine 110 × 140 cm.' },
-  { punkt: 'Kinderwagen', detail: 'Stellplatz im Flur vor der Praxis. Kein Treppenabsatz vor der Tür.' },
-  { punkt: 'Parken', detail: '[Anzahl] Parkplätze im Hof, Zufahrt über die [Straße].' },
-  { punkt: 'Öffentlich', detail: '[Linie] bis [Haltestelle], von dort [Anzahl] Minuten zu Fuß.' },
-];
-
-/** TODO Kunde — Leistungsspektrum bestätigen und streichen, was nicht angeboten wird. */
 export const leistungen: readonly Leistung[] = [
   {
-    titel: 'Vorsorge',
-    kurz: 'Die jährliche Untersuchung, plus Ultraschall im Haus, wenn er nötig ist.',
-    details: [
-      'Krebsfrüherkennung nach den Richtlinien des Gemeinsamen Bundesausschusses: Abstrich vom Gebärmutterhals, ab 35 zusätzlich der HPV-Test, alle drei Jahre.',
-      'Ultraschall der Gebärmutter und der Eierstöcke über die Scheide — sechs bis acht Minuten, kein zusätzlicher Termin.',
-      'Tastuntersuchung der Brust und Anleitung zur Selbstuntersuchung, wenn Sie sie möchten.',
-    ],
-    gewicht: 'gross',
-    zeichen: 'intervall',
-  },
-  {
+    id: 'schwangerschaft',
     titel: 'Schwangerschaft',
-    kurz: 'Betreuung nach Mutterschaftsrichtlinien, von der ersten Woche bis nach der Geburt.',
-    details: [
-      'Alle Vorsorgeuntersuchungen und Ultraschalle nach Mutterschaftsrichtlinien, im Mutterpass dokumentiert.',
-      'Ersttrimester-Screening und weiterführende Diagnostik: ich sage Ihnen, was die Untersuchung leisten kann und was nicht, bevor Sie entscheiden.',
-      'Nachsorge sechs bis acht Wochen nach der Geburt, Termin mit Kind möglich.',
-    ],
-    gewicht: 'mittel',
-    zeichen: 'verlauf',
+    kurz: 'Betreuung von der ersten Untersuchung bis nach der Geburt.',
+    absatz:
+      'Die Vorsorge richtet sich nach den Mutterschaftsrichtlinien: bis zur 32. Woche etwa alle vier Wochen ein Termin, danach alle zwei, dazu drei Ultraschalluntersuchungen in der 9. bis 12., der 19. bis 22. und der 29. bis 32. Schwangerschaftswoche. Alles wird im Mutterpass eingetragen, den Sie beim ersten Termin bekommen und ab dann immer dabeihaben sollten. Untersuchungen, die über diesen Rahmen hinausgehen, bespreche ich vorher mit Ihnen — was sie zeigen kann, was nicht, und was ein auffälliges Ergebnis für Sie bedeuten würde. Nach der Geburt sehen wir uns noch einmal, etwa sechs bis acht Wochen später; Ihr Kind dürfen Sie selbstverständlich mitbringen.',
   },
   {
-    titel: 'Verhütung & Beratung',
+    id: 'krebsvorsorge',
+    titel: 'Krebsvorsorge',
+    kurz: 'Die jährliche Untersuchung, und was sich ab 35 daran ändert.',
+    absatz:
+      'Ab 20 Jahren übernimmt die Kasse einmal im Jahr die Untersuchung auf Gebärmutterhalskrebs. Dazu gehört ein Abstrich vom Muttermund — der sogenannte Pap-Test, benannt nach dem Arzt, der ihn entwickelt hat. Er dauert weniger als eine Minute; das Ergebnis kommt aus dem Labor und braucht einige Tage. Ab 35 ändert sich das Verfahren: dann wird der Abstrich mit einem Test auf humane Papillomviren (HPV) kombiniert, dafür nur noch alle drei Jahre. Zur Untersuchung gehört ausserdem das Abtasten der Brust, ab 30 Jahren als Kassenleistung — auf Wunsch zeige ich Ihnen dabei, worauf Sie beim Selbstabtasten achten können.',
+  },
+  {
+    id: 'verhuetung',
+    titel: 'Verhütung',
     kurz: 'Was zu Ihnen passt, hängt von Ihrem Leben ab — nicht von einer Tabelle.',
-    details: [
-      'Pille, Spirale (Kupfer und Hormon), Implantat, Ring, natürliche Verfahren — Wirkung, Nebenwirkungen und Kosten im Vergleich.',
-      'Spiraleneinlage in der Praxis, etwa 20 Minuten, auf Wunsch mit örtlicher Betäubung.',
-      'Kinderwunsch: Zyklusdiagnostik und die Frage, ab wann eine weiterführende Abklärung sinnvoll ist.',
-    ],
-    gewicht: 'mittel',
-    zeichen: 'auswahl',
+    absatz:
+      'Pille, Hormonspirale, Kupferspirale, Implantat, Ring, Pflaster, Kupferkette, natürliche Verfahren: jedes davon hat eine andere Sicherheit, andere Nebenwirkungen und andere Kosten. Eine Spirale bleibt je nach Modell drei bis zehn Jahre liegen und wird nach dem Einlegen zweimal per Ultraschall kontrolliert. Das Einlegen dauert wenige Minuten und liegt zeitlich am besten gegen Ende der Periode, weil der Muttermund dann etwas weicher ist; es kann ziehen wie ein starker Regelschmerz, und auf Wunsch geht es mit örtlicher Betäubung. Wir gehen im Termin durch, was für Sie in Frage kommt und was dagegen spricht — dafür muss ich wissen, ob Sie rauchen, welche Medikamente Sie nehmen und ob es in Ihrer Familie Thrombosen gab.',
   },
   {
+    id: 'kinderwunsch',
+    titel: 'Kinderwunschberatung',
+    kurz: 'Wann es Sinn ergibt abzuwarten, und ab wann nicht mehr.',
+    absatz:
+      'Es gibt eine Faustregel, nach der sich auch die Kostenübernahme richtet: Wenn Sie jünger als 35 sind, gilt ein Jahr regelmässiger Versuche als normal, bevor abgeklärt wird; ab 35 sind es sechs Monate. Wer früher kommt, kommt nicht zu früh — aber diese Zahlen erklären, warum ich manchmal zum Abwarten rate. Der erste Schritt ist meistens keine grosse Diagnostik, sondern der Zyklus: wann der Eisprung stattfindet und ob die zweite Zyklushälfte lang genug ist, dazu Blutwerte und ein Ultraschall der Eierstöcke. Zur Abklärung gehören immer beide Partner — ein Spermiogramm ist einfacher, schneller und günstiger als alles, was ich bei Ihnen untersuchen kann, und steht deshalb meistens am Anfang.',
+  },
+  {
+    id: 'maedelssprechstunde',
+    titel: 'Mädelssprechstunde',
+    kurz: 'Der erste Termin beim Frauenarzt, ohne dass etwas passieren muss.',
+    absatz:
+      'Zum ersten Termin gehört keine Untersuchung auf dem Stuhl, wenn Sie keine möchten. Wir reden — über den Zyklus, über Schmerzen, über Verhütung, über das, was Sie im Internet gelesen haben. Das ist ein vollwertiger Termin und keine Vorstufe zu einem richtigen. Sie dürfen jemanden mitbringen: die Mutter, eine Freundin, den Freund. Sie dürfen auch allein kommen und die Begleitung im Wartebereich lassen; beides ist in Ordnung, und Sie müssen sich vorher nicht entscheiden. Ich unterliege der Schweigepflicht, auch gegenüber Ihren Eltern, sobald Sie die Tragweite selbst überblicken können — in der Regel ab etwa 16 Jahren. Was Sie mir erzählen, bleibt in diesem Zimmer.',
+  },
+];
+
+/**
+ * „Weitere Leistungen" — ihre eigene Einordnung.
+ *
+ * ═══ Warum bei Botox drei Sätze fehlen ═══
+ *
+ * Das Heilmittelwerbegesetz verbietet bei ästhetischen Eingriffen die Werbung mit
+ * Vorher-Nachher-Bildern (§ 11 Abs. 1 Satz 3 HWG) und untersagt Heilungs- oder
+ * Wirkversprechen. Nennen darf man die Leistung, bewerben nicht. Kein Preis,
+ * kein Ergebnisbild, kein „strahlend jung", keine Haltbarkeitsangabe.
+ *
+ * Das ist bei Heilberufen kein Formalkram: abgemahnt wird von Mitbewerbern, und
+ * eine Praxis, die am Eröffnungstag eine Abmahnung im Briefkasten hat, hat ein
+ * echtes Problem. Der kurze Text ist Absicht, nicht Faulheit.
+ */
+export const weitereLeistungen: readonly Leistung[] = [
+  {
+    id: 'impfungen',
     titel: 'Impfungen',
     kurz: 'Nach den Empfehlungen der Ständigen Impfkommission.',
-    details: [
-      'HPV-Impfung für Mädchen und Frauen, Kassenleistung bis zum 18. Geburtstag.',
-      'Röteln, Windpocken und Keuchhusten vor einer geplanten Schwangerschaft.',
-      'Impfstatus-Kontrolle anhand des Impfpasses, im laufenden Termin.',
-    ],
-    gewicht: 'schmal',
-    zeichen: 'folge',
+    absatz:
+      'Die HPV-Impfung empfiehlt die Ständige Impfkommission für Mädchen und Jungen zwischen 9 und 14 Jahren; nachgeholt werden kann sie bis zum 18. Geburtstag, bis dahin zahlt die Kasse. Wer vor dem 15. Geburtstag anfängt, braucht zwei Dosen statt drei. Vor einer geplanten Schwangerschaft sehe ich mir den Impfpass an — Röteln, Windpocken und Keuchhusten sind die drei, auf die es dabei ankommt. Bringen Sie den Pass mit, wenn Sie ihn finden: ohne ihn müssen wir raten oder Blut abnehmen.',
   },
   {
-    titel: 'Wechseljahre',
-    kurz: 'Beschwerden einordnen, Behandlung abwägen, Entscheidung bei Ihnen.',
-    details: [
-      'Hormonstatus und Einordnung der Beschwerden — was zur Umstellung gehört und was abgeklärt werden sollte.',
-      'Hormontherapie: Nutzen und Risiken nach aktueller Leitlinie, auch die Gründe dagegen.',
-      'Knochendichte und Herz-Kreislauf-Risiko als Teil derselben Beratung, nicht als Zusatztermin.',
-    ],
-    gewicht: 'schmal',
-    zeichen: 'uebergang',
+    id: 'aesthetik',
+    titel: 'Kleine ästhetische Botoxbehandlungen',
+    kurz: 'Biete ich an. Besprochen wird das im Termin, nicht auf einer Website.',
+    absatz:
+      'Über ästhetische Behandlungen mit Botulinumtoxin darf ich auf einer Website nicht mehr schreiben als: es gibt sie hier. Das Heilmittelwerbegesetz erlaubt bei solchen Eingriffen keine Vorher-Nachher-Bilder und keine Wirkversprechen, und das halte ich für richtig. Was die Behandlung kostet, wie sie abläuft, was sie kann und was nicht, besprechen wir im Termin. Es ist eine Selbstzahlerleistung.',
   },
 ];
 
-/** TODO Kunde — Werdegang, Jahreszahlen und Häuser bestätigen. */
-export const werdegang: readonly WerdegangEintrag[] = [
-  { zeit: '[2008–2014]', was: 'Studium der Humanmedizin', wo: '[Universität]' },
-  { zeit: '[2015–2020]', was: 'Facharztweiterbildung Frauenheilkunde und Geburtshilfe', wo: '[Klinik]' },
-  { zeit: '[2020]', was: 'Anerkennung als Fachärztin', wo: '[Ärztekammer]' },
-  { zeit: '[2020–2025]', was: 'Oberärztin, Schwerpunkt Ultraschalldiagnostik', wo: '[Klinik]' },
-  { zeit: '[2026]', was: 'Eröffnung der eigenen Praxis', wo: '[Ort]' },
-];
+/* ══ Der erste Besuch ═════════════════════════════════════════════════════
+ * Allgemeine Angaben, keine Zusage über diese Praxis. */
 
-/** Die fünf Stationen des Showpiece. Jede Zeitangabe ist eine überprüfbare Zusage. */
-export const besuch: readonly Station[] = [
+export interface Mitbringen {
+  readonly was: string;
+  readonly warum: string;
+}
+
+export const mitbringen: readonly Mitbringen[] = [
   {
-    nummer: '01',
-    name: 'Ankommen',
-    dauer: 'etwa 2 Minuten',
-    satz: 'Sie klingeln, ich mache selbst auf. Es gibt keinen Wartesaal voller Menschen.',
-    bild: 'station-01-ankommen',
-    alt: 'Flur der Praxis mit hohem Fenster und offener Tür zum Sprechzimmer, heller Eichenboden.',
+    was: 'Ihre Versichertenkarte',
+    warum:
+      'Ohne sie geht es auch, dann bekommen Sie aber Post — die Karte muss innerhalb des Quartals nachgereicht werden.',
   },
   {
-    nummer: '02',
-    name: 'Anmeldung',
-    dauer: 'etwa 3 Minuten',
-    satz: 'Karte, Geburtsdatum, ein kurzer Bogen. Mehr wird an der Anmeldung nicht besprochen.',
-    bild: 'station-02-anmeldung',
-    alt: 'Anmeldetresen aus heller Eiche mit Milchglas-Sichtschutz und einem einzelnen Ordner.',
+    was: 'Den Mutterpass, wenn Sie schwanger sind',
+    warum: 'Er gehört Ihnen und wandert mit Ihnen. Alles, was untersucht wird, wird dort eingetragen.',
   },
   {
-    nummer: '03',
-    name: 'Warten',
-    dauer: 'etwa 5 Minuten',
-    satz: 'Ich plane 20 Minuten pro Termin. Wenn es länger dauert, sage ich Ihnen warum.',
-    bild: 'station-03-warten',
-    alt: 'Drei Leinenstühle an einer Fensterwand, daneben eine Ablage mit Zeitschriften.',
+    was: 'Den Impfpass, wenn Sie ihn finden',
+    warum: 'Damit sehe ich in zwei Minuten, was fehlt. Ohne ihn kostet dieselbe Frage eine Blutabnahme.',
   },
   {
-    nummer: '04',
-    name: 'Sprechen',
-    dauer: 'etwa 10 Minuten',
-    satz: 'Wir reden zuerst. Sie bleiben angezogen. Erst danach entscheiden wir, ob untersucht wird.',
-    bild: 'station-04-sprechen',
-    alt: 'Zwei Leinensessel an einem niedrigen Tisch mit Wasserglas und Notizblock vor einem Bücherregal.',
+    was: 'Die Namen Ihrer Medikamente',
+    warum: 'Ein Foto der Packungen auf dem Handy genügt. Die Dosis steht drauf.',
   },
   {
-    nummer: '05',
-    name: 'Untersuchen',
-    dauer: 'etwa 5 Minuten',
-    satz: 'Ich sage jeden Schritt an, bevor ich ihn mache. Sie können jederzeit stoppen.',
-    bild: 'station-05-untersuchen',
-    alt: 'Untersuchungsliege mit frischem Tuch, halb zugezogener Paravent, Ultraschallgerät am Bildrand.',
+    was: 'Den ersten Tag Ihrer letzten Periode',
+    warum: 'Danach wird jedes Mal gefragt, und fast niemand hat die Antwort parat.',
   },
 ];
 
-/** TODO Kunde — Angaben für Impressum und Datenschutz. Nichts hiervon erfinden. */
+/* ══ Notrufe ══════════════════════════════════════════════════════════════
+ *
+ * Feste Nummern, keine Kundendaten. Sie stehen hier, damit sie nirgends doppelt
+ * liegen und niemand sie beim Kundenwechsel vergisst.
+ *
+ * In der alten Fassung dieses Repos waren ausgerechnet diese Nummern die
+ * KLEINSTEN Tippziele der ganzen Seite — 40px. Wer sie braucht, hat es eilig
+ * und zittert womöglich. Sie sind jetzt die grössten. */
+
+export const notruf = {
+  bereitschaft: {
+    anzeige: '116 117',
+    href: 'tel:116117',
+    titel: 'Ärztlicher Bereitschaftsdienst',
+    wann: 'Wenn die Praxis geschlossen hat und es nicht bis zum nächsten Werktag warten kann.',
+  },
+  rettung: {
+    anzeige: '112',
+    href: 'tel:112',
+    titel: 'Rettungsdienst',
+    wann: 'Bei starken Blutungen, plötzlichen heftigen Unterbauchschmerzen, Bewusstlosigkeit.',
+  },
+  hilfetelefon: {
+    anzeige: '116 016',
+    href: 'tel:116016',
+    titel: 'Hilfetelefon Gewalt gegen Frauen',
+    wann: 'Rund um die Uhr, kostenlos, auf Wunsch anonym und in 18 Sprachen.',
+  },
+} as const;
+
+/* ══ Rechtliches ══════════════════════════════════════════════════════════
+ *
+ * Bei Heilberufen verlangt § 5 DDG mehr als bei anderen: die zuständige Kammer,
+ * die gesetzliche Berufsbezeichnung, den Staat der Verleihung und wo die
+ * Berufsordnung einzusehen ist.
+ *
+ * Nichts hiervon wird geraten. Für Erkelenz ist mit hoher Wahrscheinlichkeit die
+ * Ärztekammer Nordrhein zuständig — „mit hoher Wahrscheinlichkeit" ist auf einer
+ * Pflichtseite aber keine Angabe, sondern eine Vermutung. Sie muss bestätigt
+ * werden, und bis dahin steht dort eine Lücke. */
+
 export const rechtliches = {
-  berufsbezeichnung: 'Ärztin / Fachärztin für Frauenheilkunde und Geburtshilfe',
+  berufsbezeichnung: null as Offen<string>,
   verleihenderStaat: 'Bundesrepublik Deutschland',
-  aerztekammer: '[Zuständige Ärztekammer]',
-  aerztekammerUrl: '[URL der Ärztekammer]',
-  kassenaerztlicheVereinigung: '[Zuständige Kassenärztliche Vereinigung]',
-  kassenaerztlicheVereinigungUrl: '[URL der KV]',
-  berufsordnungUrl: '[URL der Berufsordnung]',
-  aufsichtsbehoerde: '[Zuständige Aufsichtsbehörde]',
-  umsatzsteuerId: '[Umsatzsteuer-Identifikationsnummer oder: nicht vorhanden]',
-  datenschutzbeauftragter: '[Name und Kontakt, falls bestellt — sonst: nicht bestellt]',
-  hostingAnbieter: '[Hosting-Anbieter, Sitz, Auftragsverarbeitungsvertrag]',
-  berufshaftpflicht: '[Versicherer, Anschrift]',
-  berufshaftpflichtGeltung: '[Räumlicher Geltungsbereich der Versicherung]',
-  datenschutzAufsicht: '[Zuständige Datenschutzaufsichtsbehörde des Landes]',
-  speicherdauerRueckruf: '[Zahl] Tage nach erledigtem Rückruf',
+  aerztekammer: null as Offen<string>,
+  aerztekammerUrl: null as Offen<string>,
+  kassenaerztlicheVereinigung: null as Offen<string>,
+  kassenaerztlicheVereinigungUrl: null as Offen<string>,
+  berufsordnungUrl: null as Offen<string>,
+  aufsichtsbehoerde: null as Offen<string>,
+  umsatzsteuerId: null as Offen<string>,
+  datenschutzbeauftragter: null as Offen<string>,
+  hostingAnbieter: null as Offen<string>,
+  berufshaftpflicht: null as Offen<string>,
+  /** Räumlicher Geltungsbereich der Berufshaftpflicht, § 2 DL-InfoV. */
+  berufshaftpflichtGeltung: null as Offen<string>,
+  datenschutzAufsicht: null as Offen<string>,
+  /** Wie lange eine Rückrufanfrage gespeichert wird. Pflichtangabe, Art. 13 DSGVO. */
+  speicherdauerRueckruf: null as Offen<string>,
 } as const;
 
-/** Notrufe. Feste Nummern, keine Kundendaten — stehen hier, damit sie nirgends doppelt liegen. */
-export const notfall = {
-  aerztlicherBereitschaftsdienst: { anzeige: '116 117', href: 'tel:116117' },
-  rettungsdienst: { anzeige: '112', href: 'tel:112' },
-  hilfetelefon: { anzeige: '116 016', href: 'tel:116016', titel: 'Hilfetelefon Gewalt gegen Frauen' },
-} as const;
+/* ══ Anfahrt ══════════════════════════════════════════════════════════════ */
+
+export interface Zugangspunkt {
+  readonly punkt: string;
+  readonly detail: Offen<string>;
+}
+
+/**
+ * Barrierefreiheit. Jede Zeile ist ein echtes Auswahlkriterium — für eine
+ * Hochschwangere im achten Monat ist „Aufzug ja/nein" keine Nebeninformation.
+ *
+ * Deshalb wird hier NICHTS geschätzt. Was nicht vor Ort nachgemessen ist, bleibt
+ * leer. Eine falsche Zusage über einen Aufzug ist schlimmer als gar keine.
+ */
+export const zugang: readonly Zugangspunkt[] = [
+  { punkt: 'Stufenloser Zugang', detail: null },
+  { punkt: 'Aufzug', detail: null },
+  { punkt: 'Platz für Kinderwagen', detail: null },
+  { punkt: 'Parken', detail: null },
+  { punkt: 'Bus und Bahn', detail: null },
+  { punkt: 'Behindertengerechte Toilette', detail: null },
+];

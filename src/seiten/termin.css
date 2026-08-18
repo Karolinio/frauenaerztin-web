@@ -1,0 +1,40 @@
+.zeiten-block__titel {
+  margin-bottom: var(--raum);
+}
+
+.wege {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--raum-gross);
+  margin-top: var(--raum-gross);
+}
+
+.weg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding-top: var(--raum);
+  /* Getrennt durch eine Haarlinie oben, nicht durch einen Kasten. Drei Kästen
+     nebeneinander wären das Preistabellen-Muster, und hier wird nichts verkauft. */
+  border-top: 1px solid var(--tinte-mtl);
+}
+
+.weg__text {
+  max-width: 40ch;
+}
+
+.weg__knopf {
+  margin-top: 0.3rem;
+}
+
+.wege__nachsatz {
+  margin-top: var(--raum-gross);
+}
+
+@media (min-width: 48rem) {
+  .wege {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--raum);
+  }
+}

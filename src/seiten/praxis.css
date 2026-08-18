@@ -1,0 +1,41 @@
+.zugang__titel {
+  margin-top: 0.8rem;
+}
+
+.zugang__lead {
+  margin-top: var(--raum);
+}
+
+.zugang {
+  margin-top: var(--raum-gross);
+  border-top: 1px solid var(--linie);
+}
+
+.zugang__zeile {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--linie);
+}
+
+.zugang__punkt {
+  font-weight: 500;
+}
+
+.zugang__detail {
+  max-width: 60ch;
+}
+
+.zugang__frage {
+  margin-top: var(--raum);
+  max-width: 58ch;
+}
+
+@media (min-width: 48rem) {
+  .zugang__zeile {
+    grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+    gap: var(--raum);
+    align-items: baseline;
+  }
+}

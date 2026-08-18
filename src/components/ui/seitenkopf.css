@@ -1,38 +1,23 @@
-/* Der Seitenanfang.
- *
- * Papier, nicht dunkel: die dunklen Flaechen sind fuer Bilder und Showpiece
- * reserviert. Ein dunkler Kopf auf jeder Unterseite haette den Rhythmus zerstoert,
- * den die Startseite aufbaut — hell, dunkel, hell.
- */
+/* Der Seitenkopf sitzt auf Papier und wird nach unten durch die nächste Fläche
+   begrenzt, nicht durch eine Linie — sonst hätte jede Unterseite zwei Striche
+   dicht untereinander (Kopfzeile und Seitenkopf). */
+
 .seitenkopf {
-  background: var(--paper);
-  padding-block: clamp(4.5rem, 3rem + 8vw, 9rem) clamp(2rem, 1.5rem + 3vw, 4rem);
+  padding-block: clamp(3rem, 2rem + 4vw, 6rem) var(--raum-gross);
 }
 
-.seitenkopf__augenbraue { margin: 0 0 clamp(0.75rem, 0.5rem + 1vw, 1.25rem); }
-
-/* Die eine Stelle, an der die Serif gross wird. Optische Groesse hoch, Laufweite
-   enger — eine variable Serif bei 5 rem mit Standardlaufweite faellt auseinander. */
 .seitenkopf__titel {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 1.6rem + 4.2vw, 5rem);
-  font-variation-settings: 'opsz' 96, 'wght' 400, 'SOFT' 20;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-  color: var(--ink);
-  max-width: 18ch;
+  margin-top: 0.9rem;
+  /* Die Überschrift einer Unterseite darf schmaler laufen als die Spalte —
+     eine Zeile, die über die volle Breite geht, liest sich wie eine Fliesstext-
+     zeile und nicht wie ein Anfang. */
+  max-width: 20ch;
 }
 
-.seitenkopf__vorspann {
-  margin: clamp(1.25rem, 1rem + 1.5vw, 2rem) 0 0;
-  max-width: 46ch;
+.seitenkopf__lead {
+  margin-top: var(--raum);
 }
 
-/* Die Linie trennt Kopf und Inhalt, ohne einen Kasten zu bauen. Sie steht in der
-   Tinte, nicht in Clay — Clay heisst „naechster Schritt" und sonst nichts. */
-.seitenkopf + .section {
-  border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
-  padding-top: clamp(3rem, 2rem + 4vw, 5rem);
+.seitenkopf__lead p + p {
+  margin-top: 0.9rem;
 }

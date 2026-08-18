@@ -1,0 +1,582 @@
+/**
+ * Die Startseite. Fünf Blöcke, höchstens 6,5 Bildschirmhöhen.
+ *
+ * Die alte Fassung dieses Repos hatte 9,3 — das war zu lang, und die Kundin hat
+ * zweimal „einfacher" gesagt. Ihre Referenz hat 6,3 (gemessen am 14.08.2026).
+ *
+ * Der Rhythmus wechselt: Papier · Leinen · Papier · Leinen · Papier. Zwei
+ * gleiche Flächen hintereinander lösen die Trennung auf — und die Trennung ist
+ * hier das einzige Mittel, weil es keine Schatten und keine Rahmen gibt.
+ */
+
+/* ── Einleitungstext unter dem Hero ────────────────────────────────────────
+   Er sitzt bewusst schmal und nicht über die volle Breite: eine Zeile von 90
+   Zeichen liest niemand freiwillig, und der erste Absatz einer Praxisseite ist
+   der einzige, den fast jede Besucherin wirklich liest. */
+
+.einleitung {
+  padding-block: var(--raum-gross) var(--raum-gross);
+}
+
+.einleitung__text {
+  max-width: 52ch;
+}
+
+.einleitung__text p + p {
+  margin-top: 1rem;
+}
+
+/* ── Hinweiszeile ─────────────────────────────────────────────────────────── */
+
+/**
+ * Die Hinweiszeile steht auf PAPIER, nicht auf Leinen.
+ *
+ * Mit Leinen stiess sie direkt an „Wer ich bin", das ebenfalls Leinen ist —
+ * zwei gleiche Flächen hintereinander, getrennt nur durch eine Haarlinie. Die
+ * beiden verschmolzen zu einem grossen beigen Block, und der Flächenwechsel,
+ * das einzige Trennmittel dieser Seite, war an dieser Stelle aufgehoben.
+ *
+ * Auf Papier mit zwei Haarlinien liest sie sich als eingezogene Notizzeile —
+ * und der Wechsel auf Leinen darunter wirkt wieder.
+ */
+.hinweis {
+  background: var(--papier);
+  border-block: 1px solid var(--linie);
+}
+
+.hinweis__zeile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem var(--raum);
+  padding-block: 1rem;
+}
+
+.hinweis__rubrik {
+  flex: none;
+  color: var(--signal);
+}
+
+.hinweis__text {
+  flex: 1 1 22rem;
+  font-size: var(--text-meta);
+  line-height: 1.6;
+  color: var(--tinte);
+  max-width: 70ch;
+}
+
+.hinweis__mehr {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  flex: none;
+  font-size: var(--text-meta);
+}
+
+/* ── Wer ich bin ──────────────────────────────────────────────────────────── */
+
+.werbin {
+  background-color: var(--leinen);
+  background-image: var(--gewebe);
+}
+
+.werbin__name {
+  margin-top: 0.8rem;
+  max-width: 14ch;
+}
+
+.werbin__rolle {
+  margin-top: 0.4rem;
+}
+
+.werbin__satz {
+  margin-top: var(--raum);
+  max-width: 50ch;
+}
+
+.werbin__mehr {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  margin-top: var(--raum);
+}
+
+/**
+ * Ab Tablet zweispaltig: Name und Funktion links, ihr Text rechts.
+ *
+ * Einspaltig endete dieser Abschnitt bei 55 % der Breite und darunter stand
+ * eine halbe Bildschirmhöhe Leinen ohne Inhalt. Das ist kein Weissraum, das ist
+ * eine Lücke im Satz.
+ */
+@media (min-width: 52rem) {
+  .werbin__text {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    column-gap: var(--raum-gross);
+    align-items: start;
+  }
+
+  .werbin__text > .t-label,
+  .werbin__name,
+  .werbin__rolle {
+    grid-column: 1;
+  }
+
+  .werbin__satz {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    margin-top: 0;
+  }
+
+  .werbin__mehr {
+    grid-column: 2;
+    margin-top: var(--raum);
+  }
+}
+
+/* ── Leistungen im Auszug ─────────────────────────────────────────────────── */
+
+.auszug {
+  position: relative;
+}
+
+.auszug__titel {
+  margin-top: 0.8rem;
+  max-width: 18ch;
+}
+
+.auszug__lead {
+  margin-top: var(--raum);
+  max-width: 44ch;
+}
+
+.auszug__kopf {
+  margin-bottom: var(--raum);
+}
+
+.auszug__salbei {
+  display: none;
+}
+
+.auszug__liste {
+  border-top: 1px solid var(--linie);
+  counter-reset: leistung;
+}
+
+/**
+ * Die Zeile. Vier Spalten: Ziffer · Name · Satz · Pfeil.
+ *
+ * Der Pfeil sitzt in der letzten Spalte am rechten Rand und ist der Grund,
+ * warum die Zeile über die volle Breite läuft. In der ersten Fassung endete der
+ * Inhalt bei 55 % und rechts stand nichts — das liest sich nicht als Ruhe,
+ * sondern als eine Zeile, die jemand nicht zu Ende gesetzt hat.
+ */
+.auszug__punkt {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'nr pfeil'
+    'name name'
+    'satz satz';
+  align-items: baseline;
+  gap: 0.35rem var(--raum);
+  padding: 1.1rem 0;
+  min-height: var(--tippziel);
+  border-bottom: 1px solid var(--linie);
+  text-decoration: none;
+  /* Der Rückweg ist langsamer als der Hinweg: 150 ms beim Ankommen wirkt
+     ansprechbar, 250 ms beim Verlassen wirkt ruhig. Ein Zustand, der genauso
+     schnell verschwindet wie er kam, wirkt nervös. */
+  transition:
+    background-color 250ms var(--ease-ruhig),
+    padding-inline 250ms var(--ease-ruhig);
+}
+
+.auszug__punkt:hover,
+.auszug__punkt:focus-visible {
+  background-color: var(--leinen);
+  background-image: var(--gewebe);
+  /* Der Inhalt rückt um eine Haaresbreite ein — dieselbe Geste, die eine
+     aufgeschlagene Karteikarte macht. Kein Anheben, kein Schatten. */
+  padding-inline: 0.75rem;
+  transition-duration: 150ms;
+}
+
+/**
+ * Die Ziffer. Tabellenziffern, damit 01 und 05 exakt gleich breit stehen —
+ * proportionale Ziffern lassen eine Spalte aus fünf Zahlen sichtbar zittern.
+ */
+.auszug__nr {
+  grid-area: nr;
+  font-family: var(--schrift-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  font-variant-numeric: tabular-nums;
+  color: var(--tinte-mtl);
+  transition: color 250ms var(--ease-ruhig);
+}
+
+.auszug__name {
+  grid-area: name;
+  transition: color 250ms var(--ease-ruhig);
+}
+
+.auszug__satz {
+  grid-area: satz;
+  font-size: var(--text-base);
+  line-height: 1.55;
+  color: var(--tinte-mtl);
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+.auszug__pfeil {
+  grid-area: pfeil;
+  align-self: center;
+  flex: none;
+  color: var(--linie);
+  transition:
+    color 250ms var(--ease-ruhig),
+    transform 250ms var(--ease-ruhig);
+}
+
+.auszug__punkt:hover .auszug__nr,
+.auszug__punkt:focus-visible .auszug__nr,
+.auszug__punkt:hover .auszug__name,
+.auszug__punkt:focus-visible .auszug__name {
+  color: var(--signal);
+  transition-duration: 150ms;
+}
+
+.auszug__punkt:hover .auszug__pfeil,
+.auszug__punkt:focus-visible .auszug__pfeil {
+  color: var(--signal);
+  transform: translateX(6px);
+  transition-duration: 150ms;
+}
+
+/* Der Druckmoment. Ohne ihn fühlt sich ein Klick an, als wäre nichts passiert. */
+.auszug__punkt:active {
+  background-color: var(--leinen-tief);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auszug__punkt,
+  .auszug__nr,
+  .auszug__name,
+  .auszug__pfeil {
+    transition: none;
+  }
+
+  .auszug__punkt:hover .auszug__pfeil,
+  .auszug__punkt:focus-visible .auszug__pfeil {
+    transform: none;
+  }
+}
+
+.auszug__weitere {
+  margin-top: var(--raum);
+}
+
+@media (min-width: 48rem) {
+  .auszug__punkt {
+    /* 19.5rem: „Kinderwunschberatung" ist bei 28px Fraunces rund 290px breit.
+       Die Spalte bemisst sich am längsten Wort, nicht am Durchschnitt — sonst
+       liegen genau bei diesem einen Eintrag Name und Satz übereinander. */
+    grid-template-columns: 3.25rem minmax(0, 19.5rem) minmax(0, 1fr) 2.5rem;
+    grid-template-areas: 'nr name satz pfeil';
+    align-items: baseline;
+    padding-block: 1.5rem;
+  }
+
+  /* Die Ziffer sitzt auf der Grundlinie des Namens, nicht auf seiner Oberkante —
+     mathematisch ausgerichtet sähe sie zu hoch aus. */
+  .auszug__nr {
+    align-self: baseline;
+    padding-top: 0.35em;
+  }
+
+  .auszug__pfeil {
+    align-self: center;
+    justify-self: end;
+  }
+}
+
+@media (min-width: 62rem) {
+  /* Etikett und Titel links, der Vorspann rechts daneben auf gleicher
+     Grundlinie. Damit trägt der Sektionskopf die volle Breite und die Seite
+     beginnt nicht schon wieder mit einer halbleeren Zeile. */
+  .auszug__kopf {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--raum-gross);
+    align-items: end;
+  }
+
+  .auszug__kopf > .t-label {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .auszug__kopf > .auszug__titel {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .auszug__lead {
+    margin-top: 0;
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+    padding-bottom: 0.4rem;
+  }
+
+  .auszug__salbei {
+    display: block;
+    position: absolute;
+    /* Weit genug nach oben und rechts hinaus, dass nur die unteren Blätter in
+       die Sektion ragen. Ein vollständig sichtbares Motiv wirkt wie ein Symbol,
+       ein angeschnittenes wie eine Fotografie — und dicht am Text wirkt es wie
+       ein Versehen. */
+    top: -6.5rem;
+    /* Nur ein halber Rand nach draussen. Bei -2,5 Rändern ragte der Zweig bei
+       1440px 17px über den Bildschirm — `overflow-x: hidden` versteckte das,
+       aber die Seite liess sich seitlich schieben. Gemessen mit
+       `engine/pruefen.mjs`, nicht gesehen. */
+    right: calc(-0.5 * var(--rand));
+    width: clamp(10rem, 14vw, 15rem);
+    height: auto;
+    opacity: 0.75;
+    pointer-events: none;
+    transform: rotate(-8deg);
+    z-index: 0;
+  }
+
+  .auszug__liste,
+  .auszug__kopf,
+  .auszug__weitere {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* ── Der erste Besuch ─────────────────────────────────────────────────────── */
+
+.besuch__kopf {
+  margin-bottom: var(--raum);
+}
+
+.besuch__lead {
+  margin-top: var(--raum);
+  max-width: 50ch;
+}
+
+/**
+ * Das Feldraster des Mutterpasses: eine Haarlinie über jedem Feld, zwei Spalten
+ * ab Tablet. Bewusst NICHT dasselbe Gerät wie die Leistungsliste darüber —
+ * dreimal dieselbe Form hintereinander ist der Baukasten-Look.
+ */
+.besuch__raster {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: var(--raum-gross);
+}
+
+.besuch__feld {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  grid-template-areas:
+    'nr was'
+    '.  warum';
+  column-gap: 0.5rem;
+  row-gap: 0.3rem;
+  padding-block: 1.1rem;
+  border-top: 1px solid var(--linie);
+}
+
+.besuch__nr {
+  grid-area: nr;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  font-variant-numeric: tabular-nums;
+  color: var(--tinte-mtl);
+  padding-top: 0.35em;
+}
+
+.besuch__was {
+  grid-area: was;
+  font-weight: 500;
+  font-size: var(--text-lead);
+  line-height: 1.3;
+  color: var(--tinte);
+  text-wrap: balance;
+}
+
+.besuch__warum {
+  grid-area: warum;
+  margin: 0;
+  font-size: var(--text-meta);
+  line-height: 1.6;
+  color: var(--tinte-mtl);
+  max-width: 42ch;
+  text-wrap: pretty;
+}
+
+@media (min-width: 48rem) {
+  .besuch__raster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .besuch__feld {
+    padding-block: var(--raum);
+  }
+
+  .besuch__kopf,
+  .auszug__kopf {
+    margin-bottom: var(--raum-gross);
+  }
+}
+
+/* ── Termin ───────────────────────────────────────────────────────────────── */
+
+.termin__raster {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--raum-gross);
+}
+
+.termin__titel {
+  margin-top: 0.8rem;
+  max-width: 16ch;
+}
+
+.termin__lead {
+  margin-top: var(--raum);
+  max-width: 46ch;
+}
+
+.termin__wege {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--raum-klein);
+  margin-top: var(--raum-gross);
+}
+
+/* Dasselbe Feldraster wie bei „Was Sie mitbringen": Etikett links, Wert rechts,
+   Haarlinie darüber. Wer es einmal gelesen hat, liest es hier ohne nachzudenken. */
+.termin__daten {
+  margin-top: var(--raum-gross);
+  max-width: 34rem;
+}
+
+.termin__zeile {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+  gap: 0.25rem var(--raum);
+  padding-block: 0.7rem;
+  border-top: 1px solid var(--linie);
+}
+
+.termin__zeile dt {
+  font-size: var(--text-meta);
+  color: var(--tinte-mtl);
+}
+
+.termin__zeile dd {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--tinte);
+}
+
+.termin__zeitliste li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  line-height: 1.7;
+}
+
+.termin__spanne {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Der Notfallblock: eigene Fläche, keine Umrandung. Er hebt sich durch Leinen
+   und dessen Gewebe ab, nicht durch einen Kasten — auf einer Seite ohne Kästen
+   wäre einer hier der erste Bruch der Direktion. */
+.termin__notfall {
+  background-color: var(--leinen);
+  background-image: var(--gewebe);
+  padding: var(--raum);
+  align-self: start;
+}
+
+.termin__notrufe {
+  margin-top: var(--raum-klein);
+}
+
+.termin__notrufe li + li {
+  border-top: 1px solid var(--linie);
+}
+
+/**
+ * Die Notrufnummern. In der alten Fassung dieses Repos waren ausgerechnet sie
+ * die KLEINSTEN Tippziele der ganzen Seite: 40px. Wer sie braucht, hat es eilig
+ * und zittert womöglich. Sie sind jetzt die grössten.
+ */
+.termin__notrufe a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.1rem;
+  min-height: 56px;
+  padding-block: 0.7rem;
+  text-decoration: none;
+  transition: color 250ms var(--ease-ruhig);
+}
+
+.termin__nummer {
+  font-family: var(--schrift-display);
+  font-variation-settings:
+    'SOFT' 30,
+    'opsz' 40;
+  font-size: 1.875rem;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: var(--signal);
+  font-variant-numeric: tabular-nums;
+}
+
+.termin__wer {
+  font-size: var(--text-meta);
+  line-height: 1.4;
+  color: var(--tinte-mtl);
+  transition: color 250ms var(--ease-ruhig);
+}
+
+.termin__notrufe a:hover .termin__nummer {
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+  text-decoration-thickness: 1.5px;
+}
+
+.termin__notrufe a:hover .termin__wer {
+  color: var(--tinte);
+  transition-duration: 150ms;
+}
+
+.termin__notfall-satz {
+  margin-top: var(--raum-klein);
+  padding-top: var(--raum-klein);
+  border-top: 1px solid var(--linie);
+  max-width: 34ch;
+}
+
+@media (min-width: 56rem) {
+  .termin__raster {
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: var(--raum-gross);
+    align-items: start;
+  }
+}

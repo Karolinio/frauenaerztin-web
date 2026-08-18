@@ -3,38 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>%PRAXIS_NAME% — %PRAXIS_FACH% in %PRAXIS_ORT%</title>
+    <title>%PRAXIS_NAME% — Medizin für Frauen in Erkelenz</title>
     <meta
       name="description"
-      content="%PRAXIS_EINZEILER% 20 Minuten pro Termin, Ultraschall im Haus, Rückruf am selben Werktag."
+      content="Die neue gynäkologische Praxis in Erkelenz. Schwangerschaft, Krebsvorsorge, Verhütung, Kinderwunschberatung und eine eigene Mädelssprechstunde."
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#f7f4ef" />
+    <meta name="theme-color" content="#fbf9f5" />
+    <!-- Die Seite hat genau ein Erscheinungsbild und es ist hell. Ohne diese
+         Zeile kippt Safari Formularfelder und Auswahlmenüs in den Dunkelmodus,
+         und dann steht ein dunkles Eingabefeld auf einer weissen Seite. -->
     <meta name="color-scheme" content="light" />
-    <link rel="canonical" href="/" />
 
-    <!-- Schriften: selbst gehostet, kein Google-CDN. Nur die zwei Schnitte
-         vorladen, die im ersten Bild tatsächlich gebraucht werden. -->
+    <!-- Schriften: selbst gehostet, kein Google-CDN, kein externer Request.
+         Bei einer Arztseite ist jede Fremdverbindung eine Datenschutzfrage,
+         die man sich sparen kann. Nur die zwei Schnitte vorladen, die im
+         ersten Bild wirklich gebraucht werden. -->
     <link rel="preload" href="/fonts/fraunces-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Das erste sichtbare Bild vorladen. Wer Bewegung abgewählt hat, sieht
-         das Standbild statt des Videos und lädt entsprechend das andere. -->
-    <link
-      rel="preload"
-      as="image"
-      href="/media/hero-poster.jpg"
-      fetchpriority="high"
-      media="(prefers-reduced-motion: no-preference)"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="/media/hero-sprechecke.avif"
-      type="image/avif"
-      fetchpriority="high"
-      media="(prefers-reduced-motion: reduce)"
-    />
+    <!-- Das erste sichtbare Bild. Ohne dieses Vorladen steht es in der
+         Warteschlange hinter dem Bündel, und die halbe Startseite ist beim
+         ersten Blick eine leere Fläche. -->
+    <link rel="preload" as="image" href="/bilder/hero.webp" fetchpriority="high" />
   </head>
   <body>
     <div id="root"></div>

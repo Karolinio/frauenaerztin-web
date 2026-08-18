@@ -10,11 +10,18 @@ import { SEITEN } from './src/seiten';
  * sonst müsste der Name beim Kundenwechsel an vier Stellen getauscht werden.
  */
 function praxisdatenInsHtml(): Plugin {
+  /*
+   * Ein Titel kann keine sichtbare Luecke sein — im Browsertab und in der
+   * Google-Zeile gibt es keine gestrichelte Unterlegung. Solange der Praxisname
+   * fehlt, steht dort deshalb eine Angabe, die WAHR ist, ohne etwas zu erfinden:
+   * es ist eine gynaekologische Praxis, und sie ist in Erkelenz.
+   *
+   * „Musterpraxis" oder „Dr. med. [Nachname]" waere beides falsch — das eine
+   * erfunden, das andere im Tab unlesbar.
+   */
   const ersetzungen: Record<string, string> = {
-    '%PRAXIS_NAME%': `${praxis.titel} ${praxis.nachname}`,
-    '%PRAXIS_ORT%': praxis.adresse.ort,
-    '%PRAXIS_FACH%': praxis.kurzbezeichnung,
-    '%PRAXIS_EINZEILER%': praxis.einzeiler,
+    '%PRAXIS_NAME%': praxis.name ?? `Gynäkologische Praxis ${praxis.ort}`,
+    '%PRAXIS_ORT%': praxis.ort,
   };
 
   return {

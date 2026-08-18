@@ -1,10 +1,8 @@
 {
   "schema": 1,
   "kunde": "frauenaerztin",
-  "name": "Frauenärztin (Name offen)",
-  "branche": [
-    "arzt"
-  ],
+  "name": "Gynäkologische Praxis Erkelenz (Name offen)",
+  "branche": ["arzt"],
   "betriebsart": "betrieb",
   "stand": "im-bau",
   "seit": null,
@@ -31,25 +29,33 @@
     "datenschutz": "geruest",
     "geprueft": null
   },
-  "eimer": [
-    "hero",
-    "leistungen",
-    "ueber",
-    "anfahrt",
-    "kontakt",
-    "recht"
-  ],
-  "prompt": "engine/prompts/fertige/frauenarztpraxis-v2.md",
+  "eimer": ["hero", "ueber", "leistungen", "erster-besuch", "galerie", "zeiten", "kontakt", "recht"],
+  "prompt": "clients/frauenaerztin/prompt-v3.md",
   "assets": {
-    "master": "prozedural",
-    "credits": 28
+    "master": "nano_banana_pro",
+    "credits": 13,
+    "video": false
   },
   "wacht": {
     "pruefen": false,
     "url": null
   },
   "offen": [
-    "Build (Phase 5) steht aus",
-    "Praxisname · Logo · Ort · Zeiten · Kammer"
-  ]
+    "Praxisname · Logo",
+    "Name, Titel und Fachbezeichnung der Ärztin",
+    "Anschrift, Telefonnummer, E-Mail",
+    "Sprech- und Telefonzeiten",
+    "Zuständige Ärztekammer, KV, Berufsordnung, Aufsichtsbehörde",
+    "Berufshaftpflicht und räumlicher Geltungsbereich",
+    "EU-Endpunkt für das Rückrufformular",
+    "Barrierefreiheit vor Ort nachmessen",
+    "Echtes Porträt der Ärztin (ersetzt bilder/hero.webp)",
+    "Praxisfotos nach Eröffnung (ersetzen bilder/praxis-01..04.webp)"
+  ],
+  "mandant": "finesite",
+  "ort": "Erkelenz",
+  "cms": {
+    "schema": "inhalt/schema.json",
+    "bereiche": ["team", "aktuelles", "zeiten"]
+  }
 }

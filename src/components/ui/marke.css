@@ -1,37 +1,79 @@
 .marke {
-  display: flex;
-  align-items: baseline;
+  display: inline-flex;
+  align-items: center;
   gap: 0.7rem;
+  min-height: var(--tippziel);
   text-decoration: none;
-  flex-shrink: 0;
+  color: var(--tinte);
 }
 
+/* Die Kante aus dem Master-Asset: weisser Putz trifft auf Salbei.
+   Fläche, nicht Schrift — deshalb ist sie ein Element und kein Zeichen. */
+.marke__kante {
+  flex: none;
+  width: 4px;
+  align-self: stretch;
+  min-height: 1.6em;
+  background: var(--flaeche-salbei);
+}
+
+/**
+ * Die Wortmarke. `opsz 72` auch im kleinen Grad — anders als im Fliesstext,
+ * wo die optische Grösse der Schriftgrösse folgt.
+ *
+ * Der Grund: eine Wortmarke wird nicht gelesen, sondern erkannt. `opsz 72`
+ * öffnet die Formen und erhöht den Strichstärkenkontrast; das gibt ihr den
+ * gesetzten Charakter, den ein auf 20px optimierter Schnitt nicht hat.
+ *
+ * Und die Laufweite ist POSITIV, während der Fliesstext eng läuft. Eine
+ * Wortmarke muss atmen — das ist der Unterschied zwischen einem Namen und einer
+ * Überschrift, die zufällig oben steht.
+ */
 .marke__name {
-  font-family: var(--font-display);
-  font-size: 1.3125rem;
-  letter-spacing: -0.012em;
+  font-family: var(--schrift-display);
   font-variation-settings:
-    'opsz' 24,
-    'wght' 480,
-    'SOFT' 20;
+    'SOFT' 30,
+    'opsz' 72,
+    'wght' 400,
+    'WONK' 0;
+  font-size: 1.1875rem;
+  line-height: 1.1;
+  letter-spacing: 0.008em;
   white-space: nowrap;
 }
 
-.marke__trenner {
-  width: 1px;
-  height: 0.95em;
-  background: color-mix(in oklch, var(--ink) 28%, transparent);
-  align-self: center;
+/* Sobald ihr Logo da ist. Die Höhe ist gedeckelt, damit ein zu gross geliefertes
+   Logo nicht die ganze Kopfzeile auseinanderschiebt. */
+.marke__logo {
+  height: clamp(1.75rem, 1.5rem + 0.8vw, 2.25rem);
+  width: auto;
 }
 
-.marke__fach {
-  white-space: nowrap;
+.marke--gross .marke__logo {
+  height: clamp(2.75rem, 2rem + 2vw, 4rem);
 }
 
-/* In engen Leisten fällt der Zusatz zuerst weg. */
-@media (max-width: 1180px) {
-  .marke__fach,
-  .marke__trenner {
-    display: none;
+/* Die Fassung im Hero. Sie trägt den Namen der Praxis über der grossen Zeile
+   und ist deshalb rund doppelt so gross wie die in der Kopfzeile. */
+.marke--gross {
+  gap: 1rem;
+}
+
+.marke--gross .marke__kante {
+  width: 6px;
+  min-height: 1.4em;
+}
+
+.marke--gross .marke__name {
+  font-size: clamp(1.5rem, 1.15rem + 1.1vw, 2.25rem);
+  /* Am Handy darf die Wortmarke umbrechen — sonst schiebt sie bei 393px die
+     Seite seitlich auf, und das ist auf jeder Unterseite dieselbe Kachel. */
+  white-space: normal;
+}
+
+@media (max-width: 26rem) {
+  .marke__name {
+    white-space: normal;
+    font-size: 1.0625rem;
   }
 }

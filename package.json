@@ -10,24 +10,16 @@
     "fonts": "node scripts/copy-fonts.mjs",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"*.{ts,json,html}\" \"scripts/*.mjs\"",
     "qa": "node scripts/qa.mjs",
-    "qa:a11y": "node scripts/qa-a11y.mjs",
-    "qa:showpiece": "node scripts/qa-showpiece.mjs"
+    "qa:a11y": "node scripts/qa-a11y.mjs"
   },
   "dependencies": {
-    "framer-motion": "^11.11.17",
-    "gsap": "^3.13.0",
-    "lenis": "^1.1.18",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "three": "^0.170.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@fontsource-variable/fraunces": "^5.1.0",
-    "@fontsource/instrument-sans": "^5.1.0",
     "@types/node": "^26.1.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@types/three": "^0.170.0",
     "@vitejs/plugin-react": "^4.3.4",
     "playwright-core": "^1.62.0",
     "prettier": "^3.9.6",

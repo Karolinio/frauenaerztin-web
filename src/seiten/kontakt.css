@@ -1,0 +1,233 @@
+/**
+ * ═══ Der Notfallblock ═══
+ *
+ * Er steht ganz oben, auf Leinen, und die Zahlen sind die grössten Ziffern der
+ * ganzen Website. In der alten Fassung dieses Repos waren sie mit 40px die
+ * kleinsten Tippziele überhaupt — hier sind sie 72px hoch.
+ *
+ * Sie tragen das Signal, obwohl das Signal sonst nur „der nächste Schritt" ist:
+ * wer diesen Block braucht, für den IST das der nächste Schritt, und zwar der
+ * einzige.
+ */
+
+.notfall {
+  background-color: var(--leinen);
+  background-image: var(--gewebe);
+  border-block: 1px solid var(--linie);
+  padding-block: var(--raum);
+}
+
+.notfall__titel {
+  margin-bottom: var(--raum-klein);
+}
+
+.notfall__liste {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.notfall__ruf {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'nummer was'
+    'nummer wann';
+  align-items: center;
+  column-gap: var(--raum);
+  /* 72px, nicht 44px. Die Untergrenze ist hier nicht das Ziel. */
+  min-height: 72px;
+  padding-block: 0.6rem;
+  text-decoration: none;
+  border-top: 1px solid var(--linie);
+  transition: background var(--dauer-mikro) var(--ease-ruhig);
+}
+
+.notfall__ruf:hover {
+  background: var(--leinen-tief);
+}
+
+.notfall__nummer {
+  grid-area: nummer;
+  font-family: var(--schrift-display);
+  font-variation-settings:
+    'SOFT' 30,
+    'opsz' 48;
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  line-height: 1;
+  color: var(--signal);
+  font-variant-numeric: tabular-nums;
+  /* Feste Breite, damit „112" und „116 117" untereinander an derselben Kante
+     beginnen — sonst wandert die Beschriftung von Zeile zu Zeile. */
+  min-width: 5.5ch;
+}
+
+.notfall__was {
+  grid-area: was;
+  font-weight: 500;
+  color: var(--tinte);
+}
+
+.notfall__wann {
+  grid-area: wann;
+  max-width: 60ch;
+}
+
+/* ── Kontaktdaten und Anfahrt ─────────────────────────────────────────────── */
+
+.kontakt__raster {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--raum-sektion);
+}
+
+.kontakt__adresse {
+  margin-top: var(--raum);
+  font-style: normal;
+  font-size: var(--text-lead);
+  line-height: 1.6;
+}
+
+.kontakt__daten {
+  margin-top: var(--raum-gross);
+}
+
+.kontakt__daten dt {
+  margin-bottom: 0.3rem;
+}
+
+.kontakt__daten dd {
+  margin: 0 0 var(--raum) 0;
+  padding-bottom: var(--raum);
+  border-bottom: 1px solid var(--linie);
+}
+
+.kontakt__daten dd:last-of-type {
+  border-bottom: 0;
+}
+
+.kontakt__gross {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  font-family: var(--schrift-display);
+  font-variation-settings:
+    'SOFT' 30,
+    'opsz' 32;
+  font-size: 1.75rem;
+  color: var(--signal);
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.kontakt__gross:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.kontakt__nachsatz {
+  display: block;
+  margin-top: 0.5rem;
+  max-width: 56ch;
+}
+
+.kontakt__karte {
+  margin-top: var(--raum);
+  max-width: 56ch;
+}
+
+@media (min-width: 56rem) {
+  .kontakt__raster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--raum-sektion) var(--raum-gross);
+  }
+
+  .notfall__liste {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 var(--raum-gross);
+  }
+
+  .notfall__ruf {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'nummer'
+      'was'
+      'wann';
+    align-items: start;
+    gap: 0.2rem;
+  }
+}
+
+/* ── Rückruf ──────────────────────────────────────────────────────────────── */
+
+.rueckruf__lead {
+  margin-top: var(--raum);
+  max-width: 56ch;
+}
+
+.rueckruf__form {
+  display: grid;
+  gap: var(--raum);
+  max-width: 32rem;
+  margin-top: var(--raum-gross);
+}
+
+.feld {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.feld label {
+  font-size: var(--text-meta);
+  font-weight: 500;
+  color: var(--tinte);
+}
+
+.feld input[type='text'],
+.feld input[type='tel'],
+.feld select {
+  min-height: var(--tippziel);
+  padding: 0.6rem 0.8rem;
+  background: var(--papier);
+  border: 1px solid var(--tinte-mtl);
+  color: var(--tinte);
+}
+
+/* Kein Kasten mit Schatten beim Fokus — dieselbe Kontur wie überall sonst. */
+.feld input:focus-visible,
+.feld select:focus-visible {
+  border-color: var(--signal);
+}
+
+.feld--zustimmung {
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 0.7rem;
+}
+
+.feld--zustimmung input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.15rem;
+  accent-color: var(--signal);
+}
+
+.feld--zustimmung label {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.rueckruf__aus {
+  margin-top: var(--raum-gross);
+  max-width: 56ch;
+}
+
+.rueckruf__aus .knopf,
+.rueckruf__luecke {
+  margin-top: var(--raum);
+}
+
+.rueckruf__luecke {
+  display: flex;
+  align-items: center;
+  min-height: var(--tippziel);
+}

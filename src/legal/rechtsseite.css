@@ -1,10 +1,21 @@
 /**
  * Rechtstexte. Eine Spalte, ruhige Zeilenlänge, keine Effekte.
  * Wer hier landet, sucht eine Angabe — nicht ein Erlebnis.
+ *
+ * ═══ Diese Datei war beim Umbau die letzte Altlast ═══
+ *
+ * Sie stand noch auf den Tokens der Fassung vom 07.08.2026 — Farbnamen und
+ * Schriftrollen, die es nicht mehr gibt. Die beiden Rechtsseiten wären also
+ * nicht bloss „etwas anders" gewesen, sondern weitgehend ungestylt: ohne
+ * Schriftfamilie, ohne Farbe, ohne Abstände. Und zwar ausgerechnet auf den
+ * beiden Seiten, die man vor dem Ausliefern am seltensten öffnet.
+ *
+ * Gefunden hat das nicht das Auge, sondern der Farbnamen-Grep aus dem
+ * Bauauftrag (Abgabe, Prüfung 1). Genau dafür ist er da.
  */
 
 .recht__kopf {
-  border-bottom: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
+  border-bottom: 1px solid var(--linie);
   padding-block: 1.1rem;
 }
 
@@ -17,41 +28,44 @@
 }
 
 .recht {
-  max-width: 46rem;
-  padding-block: clamp(3rem, 2rem + 4vw, 6rem) var(--space-block);
+  max-width: var(--schale-eng);
+  padding-block: clamp(3rem, 2rem + 4vw, 6rem) var(--raum-sektion);
 }
 
 .recht__titel {
-  font-family: var(--font-display);
+  font-family: var(--schrift-display);
   font-size: clamp(2.25rem, 1.5rem + 2.4vw, 3.25rem);
   line-height: 1.1;
   letter-spacing: var(--tracking-head);
   font-variation-settings:
     'opsz' 60,
     'wght' 400,
-    'SOFT' 35;
+    'SOFT' 30;
+  color: var(--tinte);
 }
 
 .recht__stand {
   margin-top: 0.6rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
+  border-bottom: 1px solid var(--linie);
 }
 
 .recht section {
   padding-block: 2.25rem;
-  border-bottom: 1px solid color-mix(in oklch, var(--ink) 8%, transparent);
+  border-bottom: 1px solid var(--linie);
 }
 
 .recht h2 {
-  font-family: var(--font-display);
+  font-family: var(--schrift-display);
   font-size: 1.5rem;
   line-height: 1.25;
   font-variation-settings:
     'opsz' 32,
     'wght' 460,
-    'SOFT' 25;
+    'SOFT' 30;
+  letter-spacing: var(--tracking-head);
   margin-bottom: 1rem;
+  color: var(--tinte);
 }
 
 .recht p {
@@ -72,17 +86,19 @@
 .recht ul li {
   position: relative;
   padding-left: 1.35rem;
-  color: var(--ink-soft);
+  color: var(--tinte-mtl);
 }
 
+/* Ein waagerechter Strich statt eines Punktes: dieselbe Haarlinie wie überall
+   sonst auf der Seite, nur zwei Millimeter lang. */
 .recht ul li::before {
   content: '';
   position: absolute;
   left: 0;
   top: 0.78em;
   width: 0.6rem;
-  height: 1.25px;
-  background: color-mix(in oklch, var(--ink) 40%, transparent);
+  height: 1px;
+  background: var(--tinte-mtl);
 }
 
 .recht dl {
@@ -95,7 +111,7 @@
 .recht dt {
   font-size: var(--text-meta);
   font-weight: 500;
-  color: var(--ink-soft);
+  color: var(--tinte-mtl);
   padding-top: 0.15em;
 }
 
@@ -107,33 +123,41 @@
 .recht__notiz {
   margin-top: 1rem;
   font-size: var(--text-meta);
-  color: var(--ink-soft);
+  color: var(--tinte-mtl);
   padding-left: 1rem;
-  border-left: 1.5px solid color-mix(in oklch, var(--ink) 20%, transparent);
+  border-left: 2px solid var(--linie);
 }
 
-/* Offene Stellen sollen unübersehbar sein. */
+/**
+ * Offene Stellen. Sie sehen genauso aus wie die Lücken auf der übrigen Seite
+ * (`.luecke` in global.css) — wer beide nebeneinander sieht, soll nicht zwei
+ * verschiedene Sorten „fehlt noch" lernen müssen.
+ */
 .offen {
-  background: color-mix(in oklch, var(--clay) 30%, transparent);
-  color: var(--ink);
-  padding: 0.05em 0.3em;
-  border-radius: 2px;
+  color: var(--tinte-mtl);
+  background: var(--leinen);
+  padding: 0.05em 0.35em;
+  border-bottom: 1px dashed var(--tinte-mtl);
   box-decoration-break: clone;
 }
 
+/* Der Hinweis, dass diese Seite noch nicht freigegeben ist. Kein Kasten mit
+   Rahmen und Radius — eine Leinenfläche mit einer Signalkante links. */
 .recht__warnung {
   margin-top: 2.5rem;
   padding: 1.1rem 1.35rem;
-  border: 1.5px solid var(--clay-ink);
-  border-radius: var(--radius-hard);
+  background: var(--leinen);
+  border-left: 3px solid var(--signal);
   font-size: var(--text-meta);
-  color: var(--clay-ink);
+  color: var(--tinte);
   max-width: none;
 }
 
 .recht__fuss {
-  border-top: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
+  border-top: 1px solid var(--linie);
   padding-block: 1.5rem 2.5rem;
+  background-color: var(--leinen);
+  background-image: var(--gewebe);
 }
 
 .recht__fuss ul {
@@ -143,9 +167,39 @@
 }
 
 .recht__fuss a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
   font-size: var(--text-meta);
   text-decoration: none;
-  border-bottom: 1px solid color-mix(in oklch, currentColor 25%, transparent);
+  color: var(--tinte);
+  border-bottom: 1px solid var(--linie);
+}
+
+.recht__fuss a:hover {
+  color: var(--signal);
+  border-bottom-color: var(--signal);
+}
+
+.recht .link-quiet {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+}
+
+.link-quiet {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  font-size: var(--text-meta);
+  color: var(--tinte-mtl);
+  text-decoration: none;
+  border-bottom: 1px solid var(--linie);
+}
+
+.link-quiet:hover {
+  color: var(--signal);
+  border-bottom-color: var(--signal);
 }
 
 @media (max-width: 640px) {

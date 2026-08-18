@@ -14,18 +14,19 @@ import { Offen, Rechtsseite } from './Rechtsseite';
  */
 export function Datenschutz() {
   return (
-    <Rechtsseite titel="Datenschutzerklärung" stand="TODO Kunde — Datum der Freigabe">
+    <Rechtsseite titel="Datenschutzerklärung" stand={null}>
       <section aria-labelledby="verantwortlich">
         <h2 id="verantwortlich">Verantwortliche Stelle</h2>
         <p>
           <Offen>
-            {praxis.titel} {praxis.nachname}
+            {praxis.aerztin.titel} {praxis.aerztin.nachname}
           </Offen>
-          , <Offen>{praxis.adresse.strasse}</Offen>,{' '}
+          , <Offen was="Strasse und Hausnummer">{praxis.adresse.strasse}</Offen>,{' '}
           <Offen>
             {praxis.adresse.plz} {praxis.adresse.ort}
           </Offen>
-          , Telefon <Offen>{praxis.telefon.anzeige}</Offen>, E-Mail <Offen>{praxis.email}</Offen>.
+          , Telefon <Offen was="Telefonnummer">{praxis.telefon.anzeige}</Offen>, E-Mail{' '}
+          <Offen was="E-Mail-Adresse">{praxis.email}</Offen>.
         </p>
         <dl>
           <dt>Datenschutzbeauftragte Person</dt>
@@ -124,9 +125,9 @@ export function Datenschutz() {
       </section>
 
       <p className="recht__warnung">
-        Diese Erklärung ist ein Gerüst und noch nicht vollständig. Alle gelb markierten Stellen müssen
-        eingetragen und die Seite vor der Veröffentlichung datenschutzrechtlich geprüft werden — insbesondere
-        dann, wenn der Formular-Endpunkt feststeht.
+        Diese Erklärung ist ein Gerüst und noch nicht vollständig. Alle markierten Stellen müssen eingetragen
+        und die Seite vor der Veröffentlichung datenschutzrechtlich geprüft werden — insbesondere dann, wenn
+        der Formular-Endpunkt feststeht.
       </p>
     </Rechtsseite>
   );

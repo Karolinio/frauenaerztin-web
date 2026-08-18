@@ -1,0 +1,103 @@
+/* Kopfzeile: Papier, eine Haarlinie darunter, sonst nichts.
+   Sie steht mit, sie klebt nicht — eine fixierte Leiste kostet auf dem Handy
+   ein Zehntel der Höhe, und diese Seite hat nur sechs Punkte zu bieten. */
+
+.kopf {
+  background: var(--papier);
+  border-bottom: 1px solid var(--linie);
+}
+
+.kopf__zeile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--raum);
+  min-height: 4.5rem;
+  flex-wrap: wrap;
+}
+
+.kopf__schalter {
+  display: none;
+  min-height: var(--tippziel);
+  min-width: var(--tippziel);
+  padding: 0 0.9rem;
+  background: transparent;
+  border: 1px solid var(--linie);
+  color: var(--tinte);
+  font-size: var(--text-meta);
+  cursor: pointer;
+}
+
+.kopf__menue ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 0.2rem + 1.4vw, 2rem);
+}
+
+.kopf__punkt {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  font-size: var(--text-meta);
+  text-decoration: none;
+  color: var(--tinte-mtl);
+  /* Der Platz für die Unterstreichung ist immer da, auch wenn sie durchsichtig
+     ist. Sonst springt die Zeile um zwei Pixel, sobald ein Punkt aktiv wird. */
+  border-bottom: 2px solid transparent;
+  transition: color var(--dauer-mikro) var(--ease-ruhig);
+}
+
+.kopf__punkt:hover {
+  color: var(--tinte);
+}
+
+/* Der aktive Punkt trägt das Signal: er markiert, wo man ist — und „wo man ist"
+   ist auf einer Seite mit sieben Adressen der nächste Schritt rückwärts. */
+.kopf__punkt--aktiv {
+  color: var(--signal);
+  border-bottom-color: var(--signal);
+}
+
+@media (max-width: 56rem) {
+  .kopf__schalter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Zu ist wirklich zu: `display: none` nimmt die Punkte auch aus der
+     Tastaturreihenfolge. Ein ausgeblendetes Menü, durch das man tabben kann,
+     ist für Screenreader-Nutzerinnen ein Menü, das immer offen steht. */
+  .kopf__menue {
+    display: none;
+    flex-basis: 100%;
+  }
+
+  .kopf__menue--offen {
+    display: block;
+    padding-bottom: var(--raum);
+  }
+
+  .kopf__menue ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .kopf__menue li + li {
+    border-top: 1px solid var(--linie);
+  }
+
+  .kopf__punkt {
+    width: 100%;
+    min-height: 3rem;
+    font-size: var(--text-base);
+    border-bottom: 0;
+    border-left: 2px solid transparent;
+    padding-left: 0.75rem;
+  }
+
+  .kopf__punkt--aktiv {
+    border-left-color: var(--signal);
+  }
+}

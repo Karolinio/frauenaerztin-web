@@ -1,0 +1,174 @@
+{
+  "_": [
+    "Was die Ärztin selbst ändern darf — und nichts darüber hinaus.",
+    "",
+    "Der Editor baut sich aus DIESER Datei. Er kennt die Seite nicht, er kennt nur",
+    "das Schema. Deshalb funktioniert derselbe Editor bei jedem Kunden, ohne eine",
+    "Zeile Sonderfall.",
+    "",
+    "Der Zuschnitt ist Absicht und stammt von ihr selbst. Sie hat gesagt: „Ich denke,",
+    "wenn sie einmal steht, muss nicht viel geändert werden, außer mal ein Foto bei",
+    "Personalwechsel, Aktuelles oder ggf. Änderungen der Öffnungszeiten.\" Genau diese",
+    "drei Bereiche stehen hier, und keiner mehr. Wer einer Ärztin am Eröffnungstag",
+    "Zugriff auf die Microcopy der Leistungstexte gibt, bekommt eine kaputte Seite",
+    "und einen Anruf.",
+    "",
+    "Feldarten: text · langtext · datum · auswahl · bild · url · zeit",
+    "",
+    "`ziel` sagt, WO auf der Seite der Inhalt landet. Ohne diese Angabe schreibt sie",
+    "in eine Datei, die die Seite nirgends liest — das CMS sähe vollständig aus und",
+    "wäre eine Attrappe. Geprüft mit: node engine/inhalt-pruefen.mjs frauenaerztin",
+    "",
+    "Jedes Bildfeld hat über `beschreibt` ein Pflichtfeld für die Bildbeschreibung",
+    "daneben. Sie hat gefragt: „Könntest du mir dann zeigen, wie man z. B. ein Foto",
+    "ändert?\" — die Antwort ist ja, und ohne diese Kopplung baut sie beim ersten",
+    "Tausch eine Barriere ein, ohne es zu merken. Seit dem BFSG ist das bei",
+    "Heilberufen kein Stilfehler mehr."
+  ],
+
+  "schema": 1,
+  "kunde": "frauenaerztin",
+  "stand": "2026-08-15",
+
+  "bereiche": [
+    {
+      "id": "team",
+      "titel": "Team",
+      "hinweis": "Erscheint auf /team/ in der Reihenfolge dieser Liste. Die erste Person steht oben und grösser. Bei Personalwechsel wird hier ein Eintrag getauscht — sonst nichts.",
+      "art": "liste",
+      "quelle": "inhalt/team.json",
+      "ziel": "/team/ — gelesen in src/inhalt.ts als `team`, gerendert von src/seiten/TeamSeite.tsx",
+      "min": 1,
+      "max": 12,
+      "sortierung": "keine — die Reihenfolge in der Datei ist die auf der Seite",
+      "eintrag": {
+        "name": {
+          "art": "text",
+          "label": "Name",
+          "pflicht": false,
+          "max": 60,
+          "hinweis": "Mit Titel, so wie er auf dem Praxisschild steht. Leer lassen, solange der Name nicht feststeht — dann zeigt die Seite eine sichtbare Lücke statt eines erfundenen Namens."
+        },
+        "rolle": {
+          "art": "text",
+          "label": "Funktion",
+          "pflicht": true,
+          "max": 60,
+          "hinweis": "z. B. „Ärztin und Praxisinhaberin\" oder „Medizinische Fachangestellte\"."
+        },
+        "text": {
+          "art": "langtext",
+          "label": "Vorstellung",
+          "pflicht": true,
+          "max": 420,
+          "hinweis": "Zwei bis vier Sätze. Was diese Person in der Praxis macht — nicht der ganze Lebenslauf."
+        },
+        "bild": {
+          "art": "bild",
+          "label": "Foto",
+          "pflicht": false,
+          "ordner": "/bilder/team",
+          "seitenverhaeltnis": "4:5",
+          "beschreibt": "bildAlt",
+          "hinweis": "Hochformat, mindestens 800 Pixel breit. Das Licht sollte von links kommen — dann passt es zu den übrigen Bildern der Seite. Solange kein Foto da ist, zeigt die Seite einen leeren Rahmen mit Hinweis, kein fremdes Bild."
+        },
+        "bildAlt": {
+          "art": "text",
+          "label": "Bildbeschreibung",
+          "pflicht": false,
+          "max": 120,
+          "hinweis": "Was ist zu sehen? Wird blinden Nutzerinnen vorgelesen. Kein „Foto von\" davor — z. B. „Ärztin im weissen Kittel vor einer hellen Wand\". Sobald ein Foto gesetzt ist, ist dieses Feld Pflicht."
+        }
+      }
+    },
+
+    {
+      "id": "aktuelles",
+      "titel": "Aktuelles",
+      "hinweis": "Erscheint auf /aktuelles/ und der jüngste Eintrag zusätzlich als Hinweiszeile auf der Startseite. Sortiert wird nach Datum, nicht nach Position in der Liste — ein nachgetragener älterer Beitrag rutscht von selbst nach unten.",
+      "art": "liste",
+      "quelle": "inhalt/aktuelles.json",
+      "ziel": "/aktuelles/ und Startseite — gelesen in src/inhalt.ts als `aktuelles`, gerendert von src/seiten/AktuellesSeite.tsx und src/components/start/Hinweiszeile.tsx",
+      "min": 1,
+      "max": 30,
+      "sortierung": "datum absteigend",
+      "eintrag": {
+        "titel": {
+          "art": "text",
+          "label": "Überschrift",
+          "pflicht": true,
+          "max": 70,
+          "hinweis": "Kurz und sachlich. „Urlaub vom 12. bis 23. Oktober\" ist besser als „Wichtige Mitteilung\"."
+        },
+        "art": {
+          "art": "auswahl",
+          "label": "Rubrik",
+          "pflicht": true,
+          "werte": ["Praxis", "Urlaub", "Vertretung", "Sprechzeiten", "Team"]
+        },
+        "datum": {
+          "art": "datum",
+          "label": "Datum",
+          "pflicht": true,
+          "hinweis": "Als JJJJ-MM-TT, also 2026-10-12. Danach wird sortiert."
+        },
+        "text": {
+          "art": "langtext",
+          "label": "Text",
+          "pflicht": true,
+          "max": 600,
+          "hinweis": "Bei Urlaub oder Vertretung gehört hinein, an wen man sich in der Zeit wendet. Das ist die Information, wegen der jemand diese Seite überhaupt aufruft."
+        },
+        "bisWann": {
+          "art": "datum",
+          "label": "Gilt bis",
+          "pflicht": false,
+          "hinweis": "Optional. Ab diesem Tag verschwindet der Eintrag von der Startseite — auf /aktuelles/ bleibt er stehen. Damit steht im November kein Urlaubshinweis vom Oktober mehr oben."
+        }
+      }
+    },
+
+    {
+      "id": "zeiten",
+      "titel": "Öffnungszeiten",
+      "hinweis": "Erscheinen auf /termin/ als Tabelle und in der Fusszeile jeder Seite. Eine Änderung hier wirkt an beiden Stellen. Der heutige Tag wird auf der Seite automatisch hervorgehoben — dafür muss unter „Tag\" ein einzelner Wochentag stehen.",
+      "art": "liste",
+      "quelle": "inhalt/zeiten.json",
+      "ziel": "/termin/ und Fusszeile — gelesen in src/inhalt.ts als `zeiten`, gerendert von src/components/praxis/Sprechzeiten.tsx",
+      "min": 1,
+      "max": 8,
+      "sortierung": "keine — die Reihenfolge in der Datei ist die in der Tabelle",
+      "eintrag": {
+        "tag": {
+          "art": "text",
+          "label": "Tag",
+          "pflicht": true,
+          "max": 30,
+          "hinweis": "Ein Wochentag ausgeschrieben („Montag\") oder eine Spanne („Samstag und Sonntag\"). Steht der Name des heutigen Tages darin, hebt die Seite die Zeile hervor — „Mo – Fr\" kann sie dagegen nicht erkennen."
+        },
+        "vormittag": {
+          "art": "zeit",
+          "label": "Vormittag",
+          "pflicht": false,
+          "max": 30,
+          "hinweis": "z. B. „08:00 – 12:00\". Leer lassen, wenn vormittags keine Sprechstunde ist."
+        },
+        "nachmittag": {
+          "art": "zeit",
+          "label": "Nachmittag",
+          "pflicht": false,
+          "max": 30,
+          "hinweis": "z. B. „15:00 – 18:00\". Leer lassen, wenn nachmittags keine Sprechstunde ist."
+        },
+        "hinweis": {
+          "art": "text",
+          "label": "Zusatz",
+          "pflicht": false,
+          "max": 60,
+          "hinweis": "Optional, steht klein neben der Zeile — z. B. „nur nach Vereinbarung\"."
+        }
+      },
+      "achtung": "Solange beide Zeitfelder eines Tages leer sind, zeigt die Seite dort eine sichtbare Lücke und keine Uhrzeit. Das ist Absicht: eine geratene Öffnungszeit ist eine Patientin vor einer verschlossenen Tür."
+    }
+  ]
+}

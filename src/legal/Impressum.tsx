@@ -12,21 +12,19 @@ import { Offen, Rechtsseite } from './Rechtsseite';
  */
 export function Impressum() {
   return (
-    <Rechtsseite titel="Impressum" stand="TODO Kunde — Datum der Freigabe">
+    <Rechtsseite titel="Impressum" stand={null}>
       <section aria-labelledby="anbieter">
         <h2 id="anbieter">Angaben nach § 5 DDG</h2>
         <p>
-          <Offen>
-            {praxis.titel} {praxis.nachname}
+          <Offen was="Name der Ärztin">
+            {praxis.aerztin.titel} {praxis.aerztin.nachname}
           </Offen>
           <br />
-          {praxis.fachbezeichnung}
+          <Offen was="Berufsbezeichnung laut Kammerurkunde">{praxis.aerztin.fachbezeichnung}</Offen>
           <br />
-          <Offen>{praxis.adresse.strasse}</Offen>
+          <Offen was="Strasse und Hausnummer">{praxis.adresse.strasse}</Offen>
           <br />
-          <Offen>
-            {praxis.adresse.plz} {praxis.adresse.ort}
-          </Offen>
+          <Offen was="Postleitzahl">{praxis.adresse.plz}</Offen> {praxis.adresse.ort}
         </p>
       </section>
 
@@ -35,11 +33,11 @@ export function Impressum() {
         <dl>
           <dt>Telefon</dt>
           <dd>
-            <Offen>{praxis.telefon.anzeige}</Offen>
+            <Offen was="Telefonnummer">{praxis.telefon.anzeige}</Offen>
           </dd>
           <dt>E-Mail</dt>
           <dd>
-            <Offen>{praxis.email}</Offen>
+            <Offen was="E-Mail-Adresse">{praxis.email}</Offen>
           </dd>
         </dl>
       </section>
@@ -48,7 +46,11 @@ export function Impressum() {
         <h2 id="beruf">Berufsrechtliche Angaben</h2>
         <dl>
           <dt>Berufsbezeichnung</dt>
-          <dd>{rechtliches.berufsbezeichnung}</dd>
+          <dd>
+            <Offen was="z. B. Fachärztin für Frauenheilkunde und Geburtshilfe">
+              {rechtliches.berufsbezeichnung}
+            </Offen>
+          </dd>
           <dt>Verliehen in</dt>
           <dd>{rechtliches.verleihenderStaat}</dd>
           <dt>Zuständige Ärztekammer</dt>
@@ -100,8 +102,8 @@ export function Impressum() {
       <section aria-labelledby="verantwortlich">
         <h2 id="verantwortlich">Verantwortlich für den Inhalt</h2>
         <p>
-          <Offen>
-            {praxis.titel} {praxis.nachname}
+          <Offen was="Name der Ärztin">
+            {praxis.aerztin.titel} {praxis.aerztin.nachname}
           </Offen>
           , Anschrift wie oben.
         </p>
@@ -114,24 +116,38 @@ export function Impressum() {
           nicht verpflichtet und nicht bereit.
         </p>
         <p className="recht__notiz">
-          TODO Kunde — bitte bestätigen. Falls die Praxis teilnimmt, muss hier die zuständige Stelle mit
-          Anschrift und Website stehen. Für Behandlungsfehlervorwürfe sind zusätzlich die
-          Gutachterkommissionen und Schlichtungsstellen der Ärztekammern zuständig.
+          <Offen was="Teilnahme an der Verbraucherschlichtung bestätigen" /> Falls die Praxis teilnimmt, muss
+          hier die zuständige Stelle mit Anschrift und Website stehen. Für Behandlungsfehlervorwürfe sind
+          zusätzlich die Gutachterkommissionen und Schlichtungsstellen der Ärztekammern zuständig.
         </p>
       </section>
 
       <section aria-labelledby="bilder">
         <h2 id="bilder">Bildnachweis</h2>
+        {/*
+          Dieser Absatz stand vorher anders da: „Die auf dieser Website gezeigten
+          Räume sind Visualisierungen." Das war für die erste Fassung richtig und
+          ist für diese falsch — es werden keine Räume gezeigt. Ein Bildnachweis,
+          der etwas anderes behauptet als die Seite zeigt, ist auf einer
+          Pflichtseite kein Schönheitsfehler.
+        */}
         <p>
-          Die auf dieser Website gezeigten Räume sind Visualisierungen. Sie geben die Gestaltung der Praxis
-          wieder, bilden sie aber nicht fotografisch ab. Vor dem Livegang werden sie entweder durch
-          Fotografien ersetzt oder an jeder Stelle als Visualisierung gekennzeichnet.
+          Diese Website zeigt <strong>keine Fotografien der Praxisräume</strong>. Die Praxis wird derzeit
+          gebaut und ist noch nicht fotografiert. Die abgebildeten Flächen — Kalkputz, Leinen, Licht auf
+          hellem Boden — sind computergenerierte Material- und Lichtstudien ohne erkennbaren Ort. Sie zeigen
+          die Materialien und die Lichtstimmung, nicht die Räume.
+        </p>
+        <p>
+          Sobald die Praxis fotografiert ist, treten die Fotografien an dieselben Stellen. Ein Bild einer
+          Person ist auf dieser Website nicht computergeneriert und wird es nicht sein.
         </p>
       </section>
 
       <p className="recht__warnung">
-        Dieses Impressum ist ein Gerüst und noch nicht vollständig. Alle gelb markierten Stellen müssen
-        eingetragen und die Seite vor der Veröffentlichung anwaltlich geprüft werden.
+        Dieses Impressum ist ein Gerüst und noch nicht vollständig. Alle markierten Stellen müssen eingetragen
+        und die Seite vor der Veröffentlichung anwaltlich geprüft werden. Bei Heilberufen gehören dazu
+        zwingend die zuständige Ärztekammer, die Berufsbezeichnung mit dem Staat ihrer Verleihung und der
+        Fundort der Berufsordnung.
       </p>
     </Rechtsseite>
   );

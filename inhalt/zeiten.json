@@ -1,0 +1,8 @@
+[
+  { "tag": "Montag", "vormittag": "", "nachmittag": "", "hinweis": "" },
+  { "tag": "Dienstag", "vormittag": "", "nachmittag": "", "hinweis": "" },
+  { "tag": "Mittwoch", "vormittag": "", "nachmittag": "", "hinweis": "" },
+  { "tag": "Donnerstag", "vormittag": "", "nachmittag": "", "hinweis": "" },
+  { "tag": "Freitag", "vormittag": "", "nachmittag": "", "hinweis": "" },
+  { "tag": "Samstag und Sonntag", "vormittag": "", "nachmittag": "", "hinweis": "" }
+]

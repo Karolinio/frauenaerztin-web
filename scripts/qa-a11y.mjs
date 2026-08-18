@@ -67,17 +67,28 @@ const messung = await seite.evaluate(() => {
     return { rgb: [r, g, b], alpha: a / 255 };
   };
 
+  /*
+   * Die Paarungen der Direktion vom 14.08.2026, jede an einem Element, das es
+   * auf dieser Seite WIRKLICH gibt.
+   *
+   * Diese Liste stand nach dem Umbau vom 15.08.2026 noch auf den Klassennamen
+   * der alten Fassung (`.hero__satz`, `.cta`, `.formular__einwilligung`). Das
+   * Werkzeug meldete zehnmal „Element nicht gefunden" und darunter „keine
+   * Verstöße" — ein Prüfer, der nichts findet, sieht aus wie ein Prüfer, der
+   * nichts zu beanstanden hat. Wer hier eine Klasse umbenennt, benennt sie hier
+   * mit um.
+   */
   const proben = [
-    ['Fließtext auf Papier', '.hero__satz'],
-    ['Meta auf Papier', '.leistungen__lead'],
-    ['Detailzeile auf Papier', '.leistung__details li'],
-    ['Tabellenkopf auf Papier-Deep', '.zeiten thead th'],
-    ['Tabellenzelle auf Papier-Deep', '.zeiten tbody td'],
-    ['Formularhinweis', '.formular__einwilligung label'],
-    ['Lead auf dunkel', '.besuch__lead'],
-    ['Meta in der Fußzeile', '.fuss__notfall .t-meta'],
-    ['Navigation inaktiv', '.kopf__link'],
-    ['CTA-Beschriftung', '.cta'],
+    ['Fließtext auf Papier', '.hero__einleitung p'],
+    ['Sekundärtext auf Papier', '.termin__zeile dt'],
+    ['Merksatz in der Leistungsliste', '.auszug__satz'],
+    ['Signal als Text (Verweis)', '.werbin__mehr'],
+    ['Etikett über einer Sektion', '.t-label'],
+    ['Fließtext auf Leinen', '.besuch__warum'],
+    ['Sichtbare Lücke auf Leinen', '.luecke'],
+    ['Meta in der Fußzeile', '.fuss__ort'],
+    ['Navigation inaktiv', '.kopf__punkt'],
+    ['Weiß auf Signal (Knopf)', '.knopf'],
   ];
 
   return proben

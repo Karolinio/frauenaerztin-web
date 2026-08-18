@@ -1,0 +1,211 @@
+/**
+ * Die Zieh-Galerie.
+ *
+ * ═══ Warum die Spur über die volle Breite geht ═══
+ *
+ * Weil eine Reihe, die an der Schalenkante endet, aussieht, als wäre sie zu
+ * Ende. Sie läuft deshalb bis an beide Bildschirmränder und ist rechts
+ * angeschnitten — eine angeschnittene Kante ist das Versprechen, dass es
+ * weitergeht, und es kostet keinen Pfeilknopf und keine Punktreihe.
+ *
+ * Die erste Kachel bekommt links denselben Abstand wie der Text darüber, damit
+ * die Reihe im Ruhezustand bündig unter der Überschrift beginnt.
+ */
+
+.galerie {
+  padding-block: var(--raum-sektion);
+}
+
+.galerie__titel {
+  max-width: 16ch;
+}
+
+.galerie__lead {
+  margin-top: var(--raum);
+}
+
+.galerie__anleitung {
+  margin-top: 0.9rem;
+}
+
+.galerie__spur {
+  display: flex;
+  gap: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
+  margin-top: var(--raum-gross);
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /**
+   * Links bündig mit der Überschrift, rechts randlos.
+   *
+   * Der erste Entwurf hatte auf beiden Seiten nur `var(--rand)`. Bei 1440px
+   * begann die erste Kachel damit 96px weiter links als „Die Räume" darüber und
+   * als der Fortschrittsbalken darunter — drei Kanten, drei verschiedene
+   * Positionen. Angeschnitten sieht nach Absicht aus; um 96px verrutscht nicht.
+   *
+   * Die Rechnung ist dieselbe, die `.schale` macht: halber Überschuss plus
+   * Rand. Unter der Schalenbreite greift `max()` auf den Rand zurück.
+   */
+  padding-inline-start: max(var(--rand), calc((100% - var(--schale)) / 2 + var(--rand)));
+  /* Rechts nur so viel, dass die Karte am Ende der Reihe nicht an der
+     Bildschirmkante klebt. Im Ruhezustand ändert das nichts — die Reihe ist
+     dort noch lange nicht zu Ende und bleibt angeschnitten. */
+  padding-inline-end: var(--rand);
+
+  /* Die eigene Bildlaufleiste wird ausgeblendet, weil der Balken darunter
+     dasselbe sagt — und zwar in der Farbe dieser Seite statt in der des
+     Betriebssystems. Ausgeblendet, nicht abgeschaltet: gescrollt werden kann
+     weiterhin mit Rad, Trackpad, Tastatur und Wischen. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  /* Sonst wandert der Fokusring beim Tabben in den abgeschnittenen Bereich und
+     klebt am Rand. */
+  scroll-padding-inline-start: max(var(--rand), calc((100% - var(--schale)) / 2 + var(--rand)));
+}
+
+.galerie__spur::-webkit-scrollbar {
+  display: none;
+}
+
+/**
+ * Zeigergeräte: der Code zieht, das CSS hält sich raus.
+ * `touch-action: pan-y` gibt das waagerechte Schieben an das Skript ab und
+ * behält das senkrechte Scrollen der Seite beim Browser — sonst hängt die Seite
+ * fest, sobald der Zeiger über der Galerie steht.
+ */
+@media (hover: hover) and (pointer: fine) {
+  .galerie__spur {
+    cursor: grab;
+    touch-action: pan-y;
+  }
+
+  .galerie__spur--zieht {
+    cursor: grabbing;
+    /* Beim Ziehen soll nichts blau markiert werden. */
+    user-select: none;
+  }
+}
+
+/**
+ * Wisch-Geräte: der Browser macht alles selbst.
+ * `proximity` und nicht `mandatory` — mandatory reisst die Reihe an die nächste
+ * Kante, sobald der Finger weg ist. Die Direktion sagt ausdrücklich: es rastet,
+ * aber es schnappt nicht.
+ */
+@media (hover: none), (pointer: coarse) {
+  .galerie__spur {
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .galerie__kachel,
+  .galerie__karte {
+    scroll-snap-align: start;
+  }
+}
+
+.galerie__kachel {
+  flex: none;
+  position: relative;
+  margin: 0;
+  height: clamp(15rem, 8rem + 28vw, 26rem);
+  width: auto;
+  background: var(--leinen);
+  overflow: hidden;
+}
+
+.galerie__kachel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Zwei Prozent grösser unter dem Zeiger — und sonst nichts. Kein Schatten,
+     kein Rahmen: auf einer Seite ohne Schlagschatten wäre einer hier der erste
+     Bruch der Direktion. */
+  transform: scale(1);
+  transition: transform 420ms var(--ease-ruhig);
+}
+
+.galerie__kachel:hover img,
+.galerie__kachel:focus-visible img {
+  transform: scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galerie__kachel img {
+    transition: none;
+  }
+
+  .galerie__kachel:hover img,
+  .galerie__kachel:focus-visible img {
+    transform: none;
+  }
+}
+
+/* Die Bildunterschrift liegt IM Bild, unten links, auf einem hellen Balken —
+   nicht als weisse Schrift direkt auf dem Foto. Diese Bilder sind hell; weiss
+   auf hell ist der klassische unlesbare Bildtext. */
+.galerie__unterschrift {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 0.45rem 0.85rem;
+  background: var(--papier);
+  color: var(--tinte-mtl);
+}
+
+/**
+ * Die Karte am Ende. Sie ist so hoch wie die Kacheln und so breit wie sie sein
+ * muss — und sie hebt sich durch ihre Fläche ab, nicht durch einen Rahmen.
+ */
+.galerie__karte {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.9rem;
+  height: clamp(15rem, 8rem + 28vw, 26rem);
+  width: clamp(16rem, 22vw, 22rem);
+  padding: var(--raum);
+  background-color: var(--leinen);
+  background-image: var(--gewebe);
+}
+
+.galerie__adresse {
+  font-style: normal;
+  font-size: var(--text-lead);
+  line-height: 1.5;
+  color: var(--tinte);
+}
+
+.galerie__knopf {
+  align-self: start;
+}
+
+.galerie__weg {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  font-size: var(--text-meta);
+  align-self: start;
+}
+
+/* ── Der Fortschrittsbalken ───────────────────────────────────────────────
+   Eine Haarlinie mit einem Balken im Signal darauf. Er zeigt an, er bedient
+   nicht — deshalb kein Zeiger, kein Hover, kein Tabstopp. */
+
+.galerie__linie {
+  position: relative;
+  height: 2px;
+  margin-top: var(--raum);
+  background: var(--linie);
+  overflow: hidden;
+}
+
+.galerie__balken {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  min-width: 2rem;
+  background: var(--signal);
+}

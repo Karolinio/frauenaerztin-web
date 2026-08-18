@@ -1,204 +1,300 @@
-# Direction — Frauenärztliche Einzelpraxis
+# Direction — Praxis für Frauenheilkunde, Erkelenz
 
-> **Status: Entwurf.** Die Referenzen sind mein Vorschlag; sobald deine dazukommen,
-> wird dieses Dokument geändert und die Tokens folgen. Kein Komponentencode, bevor
-> das hier steht — beim ersten Anlauf gab es dieses Dokument nicht, und genau
-> deshalb ist die Seite auf dem Median gelandet.
+> **Status: entschieden.** Ersetzt die Fassung vom 07.08.2026 („Beipackzettel, Aicher,
+> Signalorange") vollständig. Grund: die war eine Vermutung, weil Yvonne noch nichts
+> gesagt hatte. Jetzt hat sie — schriftlich und als Sprachnachricht — und sie will
+> etwas anderes.
+>
+> **Was von der alten Fassung gilt: nichts.** Wer beim Umbau eine Farbe, eine Schrift
+> oder eine Geste von dort übernimmt, baut halb Aicher und halb Salbei, und das sieht
+> man.
+
+## Was sie gesagt hat — wörtlich, weil daraus alles folgt
+
+> „Farben gerne viel weiß, etwas salbeigrün und warmes beige."
+> „Es muss gar nicht so krass vielkompliziert sein."
+> „Eher so ein bisschen einfacher."
+> „Zu 3D-Animation müsste ich gar nicht viel haben. Vllt das Foto auf der Hauptseite,
+> dass es eingeblendet wird und nicht fest ist. Oder dass man bei den Fotos der Praxis
+> die Fotos nicht alle untereinander hat, sondern so verschieben kann."
+> „Ich denke, wenn sie einmal steht, muss nicht viel geändert werden, außer mal ein
+> Foto bei Personalwechsel, Aktuelles oder ggf. Änderungen der Öffnungszeiten."
+
+**Sie eröffnet am 11.** und koordiniert gerade Handwerker. Jede Entscheidung, die wir
+ihr abnehmen können, ist die richtige.
 
 ## These
 
-Ein Beipackzettel, den jemand ernst genommen hat: die Seite ist gedruckte
-Ablaufinformation auf Papier — Zahl, Haarlinie, Diagramm, eine Signalfarbe —
-und darin liegen ruhige, dokumentarische Fotografien eines Altbauzimmers.
-Nicht die Praxisbroschüre, sondern der Plan, der an der Wand hängt.
+**Ein Raum, der gerade fertig geworden ist.** Frisch gestrichene Wand, Tageslicht von
+der Seite, Leinen, heller Boden, nichts steht herum. Die Praxis ist neu — das ist keine
+Behauptung, sondern der Grund, warum es sie gibt: *„Die neue gynäkologische Praxis in
+Erkelenz."*
 
-Falsifizierbar: Wenn auf dem Schirm eine Milchglasfläche, ein weicher
-Doppelschatten oder eine Fläche in Wellness-Türkis steht, ist es nicht diese
-Seite. Wenn eine Zahl kleiner gesetzt ist als der Satz daneben, auch nicht.
+Die Seite ist hell, ruhig und aufgeräumt wie dieser Raum. **Kein dunkler Grund, kein
+Glas, keine Tiefe aus Schatten.** Tiefe entsteht hier nur durch Licht auf Material und
+durch grosszügigen Weissraum — dieselbe Art Tiefe, die ein leerer, gut geschnittener
+Raum hat.
 
-Warum das trägt: Der Einzeiler ist eine **Verfahrensaussage** — „Sie wissen
-vorher, was passiert". Eine Seite, die aussieht wie eine gute Anleitung, löst
-dieses Versprechen in der Form ein und nicht nur im Text.
+**Falsifizierbar.** Es ist nicht diese Seite, wenn:
+- irgendwo Pink oder Magenta vorkommt
+- eine Fläche dunkler als `--tinte-mtl` als Hintergrund dient
+- ein Kasten einen sichtbaren Rahmen mit Schatten hat
+- ein Element beim Laden über den Inhalt springt (Popup, Overlay, Banner mit Schliessen-X)
+- helles Salbei als Schrift gesetzt ist
 
 ## Referenzen
 
-1. **Otl Aicher, Leitsystem Olympia München 1972** — zu klauen: die Haltung,
-   dass ein Weg erklärt wird, ohne dass jemand von oben herab spricht. Piktogramm,
-   Zahl, Richtung, eine Signalfarbe. Kein Schmuck, keine Beruhigungsgesten.
-2. **Erco Lichtkataloge (Aicher/Erco, 80er bis heute)** — zu klauen: die
-   Schnittzeichnung als Hauptbild einer Doppelseite, mit winzigen Beschriftungen
-   an dünnen Fahnenlinien. Das Diagramm ist die Ware, nicht die Illustration.
-3. **Schweizer Arzneimittel-Packungsbeilagen und Isotype (Gerd Arntz/Neurath)** —
-   zu klauen: Information als Höflichkeit. Nummerierte Abfolge, strikte
-   Spaltenordnung, Tabellenziffern, nirgends ein weicher Übergang.
-4. **Architekturmonografie (Birkhäuser/Lars Müller, kleines Format)** — zu
-   klauen: die Erlaubnis, eine ruhige Fotografie randlos über eine ganze Fläche
-   laufen zu lassen, daneben nichts als eine Bildunterschrift in 13 px.
-5. **Deutscher Mutterpass und Impfpass** — zu klauen: das Raster aus Feldern,
-   Datumsspalten und Kürzeln, das jede Frau in der Zielgruppe schon in der Hand
-   hatte. Vertrautheit als Gestaltungsmittel, nicht als Zitat.
-6. **Fahrplanaushang der Deutschen Bahn (Aushangfahrplan, gelb)** — zu klauen:
-   dass eine Uhrzeit groß und eine Erklärung klein ist, nie umgekehrt.
-
-> **Offene Stelle:** Zwei bis drei deiner eigenen Referenzen ersetzen hier
-> gerne welche von mir. Bei jedem Tausch ändern sich abgeleitete Werte.
+1. **[gynpraxisbonn.de](https://gynpraxisbonn.de/)** — ihre eigene Referenz. Zu klauen:
+   den **geteilten Hero** (links die grosse Zeile, rechts randlos das Porträt der
+   Ärztin) und die **Kürze**: 6,3 Bildschirmhöhen, gemessen am 14.08.2026.
+   **Nicht** zu klauen: das Knallpink `rgb(252,60,156)`, die Systemschrift
+   (`-apple-system`, es wurde nie eine gewählt), und das Popup, das beim Laden die
+   Ärztin und die Überschrift verdeckt.
+2. **Eine gute Hebammenpraxis-Broschüre, kein Klinikprospekt** — zu klauen: dass
+   medizinische Information freundlich gesetzt sein darf, ohne kindlich zu werden.
+3. **Leinen und Kalkputz im Streiflicht** — zu klauen: die einzige Textur, die diese
+   Seite braucht. Kein Korn, kein Rauschen, kein Verlauf.
+4. **Der deutsche Mutterpass** — zu klauen: das Raster aus Feldern und Datumsspalten,
+   das jede Frau in der Zielgruppe schon in der Hand hatte. Für die Sprechzeiten und
+   den Terminbereich. Vertrautheit als Mittel, nicht als Zitat.
 
 ## Palette (OKLCH)
 
-Drei Neutrale und **ein** Signal. Kein Türkis mehr — das war der Wellness-Rest
-im alten Entwurf und hat die Fotos flach gemacht.
+Genau ihre drei Farben. Nichts dazuerfunden.
 
 ```css
---paper:      oklch(97.5% 0.008 85);   /* warmes Off-White, Grundfläche */
---paper-deep: oklch(93.5% 0.012 85);   /* zweite Fläche, Tabellen, Formular */
---ink:        oklch(18% 0.008 250);    /* Text und Linien. Nahezu schwarz, kalter Stich */
---ink-soft:   oklch(46% 0.010 250);    /* Sekundärtext, Bildunterschriften */
---tief:       oklch(15% 0.010 250);    /* dunkle Sektionen: Druckerschwärze, kein Teal */
---linie:      oklch(84% 0.010 85);     /* Haarlinien, 1px */
---signal:     oklch(62% 0.20 40);      /* DER Akzent */
---signal-ink: oklch(36% 0.14 40);      /* Signal als Text auf Papier, AA */
+--papier:      oklch(98.5% 0.004  95);  /* Grund. Fast weiss, minimal warm */
+--leinen:      oklch(94%   0.012  85);  /* warmes Beige. Zweite Fläche */
+--leinen-tief: oklch(90%   0.016  82);  /* dritte Fläche, Tabellenzeilen */
+--tinte:       oklch(26%   0.012 150);  /* Text. Sehr dunkel, mit grünem Stich */
+--tinte-mtl:   oklch(48%   0.014 150);  /* Sekundärtext */
+--linie:       oklch(88%   0.010  90);  /* Haarlinien, 1px */
+--salbei:      oklch(72%   0.045 150);  /* Salbei HELL — nur Fläche */
+--salbei-tief: oklch(42%   0.055 152);  /* Salbei DUNKEL — Text, Knöpfe, Signal */
 ```
 
-**Rolle des Signals — unverändert gegenüber dem alten Build, aber jetzt heißer
-angesetzt:** markiert immer „der nächste Schritt". Zulässig an genau fünf
-Stellen: Termin-CTA · aktive Station im Ablauf · aktiver Navigationspunkt ·
-Fokus-Ring · der heutige Tag in der Sprechzeitentabelle. Nirgends als Fläche,
-Trennlinie oder Icon-Füllung.
+**`--tinte` ist nicht neutralschwarz, sondern trägt einen grünen Stich.** Ein neutrales
+Grau neben Salbei sieht schmutzig aus; ein Text, der dieselbe Farbfamilie hat wie der
+Akzent, wirkt gewählt statt geerbt.
 
-Warum heißer (`0.12` → `0.20` Chroma): Bei 0.12 lag Clay im selben Tonbereich
-wie die Eiche auf den Fotos und las sich als Materialfarbe. Ein Marker muss aus
-dem Bild herausfallen, sonst markiert er nichts.
+### Gemessen, nicht geschätzt
+
+`packages/shared/src/kontrast.ts`, am 14.08.2026:
+
+| Paarung | Kontrast | |
+|---|---|---|
+| Fließtext auf Weiß | **14,79** | AAA |
+| Fließtext auf Beige | **12,97** | AAA |
+| Sekundärtext auf Weiß | **6,22** | AA |
+| **Salbei-tief als Text auf Weiß** | **7,88** | AAA |
+| Salbei-tief als Text auf Beige | **6,92** | AA |
+| Weiß auf Salbei-tief (Knopf) | **7,88** | AAA |
+| **helles Salbei als Text** | **2,33** | **DURCHGEFALLEN** |
+
+**Die Regel, die daraus folgt — und sie ist die wichtigste dieser Datei:**
+`--salbei` ist eine **Fläche**. Niemals Schrift, niemals ein Symbol, niemals eine
+Linie, die etwas trennen soll. Wer damit Text setzt, baut eine Seite, die eine
+Schwangere im Wartezimmer bei Sonnenlicht nicht lesen kann.
+
+`--salbei-tief` ist das **Signal**, und es markiert genau eine Sache: **den nächsten
+Schritt.** Erlaubt an: Termin-Knopf · aktiver Menüpunkt · Fokusring · der heutige Tag
+in der Sprechzeitentabelle · die aktive Leistung. Nirgends als Fläche.
 
 ## Typografie
 
-Dieselben zwei Familien wie bisher — die Paarung war nicht das Problem, die
-**Einstellung** war es.
+**Hier gewinnen wir die Referenz.** Sie benutzt `-apple-system` — es wurde dort nie eine
+Schrift gewählt. Eine echte Paarung ist der billigste und grösste Vorsprung.
 
-- **Display: Fraunces** (variabel, opsz/wght/SOFT liegt bereits selbst gehostet
-  vor). Neu: `SOFT` fährt auf **0–12** statt 30–45 und `wght` auf **300** bei
-  großen Graden. Damit wird aus der freundlichen Sonntagsserife eine
-  hochkontrastige Displayschrift mit scharfen Serifen — Monografie statt Café.
-  `opsz` läuft mit dem Grad bis 144.
-- **Brot: Instrument Sans** 400/500/600, unverändert. Trägt Fließtext, Labels
-  und die **technische Ebene**: alle Ziffern `tabular-nums`, alle Beschriftungen
-  gesperrt in Versalien.
-- Zwei Familien, mehr nicht. Kontrast kommt aus Grad, Gewicht und Laufweite.
+**Display: Fraunces**, variabel. `SOFT 30`, `wght 400`, `opsz 72` bei grossen Graden.
+Weich, warm, mit optischer Grössenachse — sie trägt „hier nimmt sich jemand Zeit", ohne
+in Richtung Wellness zu kippen. Liegt in der Flotte bereits selbst gehostet vor.
 
-**Skala.** Verhältnis 1.25 für Fließtext und UI ab 18 px. Displaygrade brechen
-das Verhältnis absichtlich und werden an der Viewportkante bemessen, nicht an
-der Skala. Der alte Build hat den Hero bei 66 px gedeckelt — genau da kam das
-Brave her.
+**Text: Instrument Sans**, variabel. Ruhig, breit genug für 16 bis 75 Jahre, und sie
+verschwindet hinter dem Inhalt — genau das, was ein medizinischer Text braucht.
 
 ```css
---text-hero:  clamp(3rem, 0.5rem + 8vw, 9.5rem);   /* vorher max 4.125rem */
---text-zahl:  clamp(3.5rem, 1rem + 9vw, 12rem);    /* Uhrzeiten, Dauern, Jahre */
---text-h2:    clamp(2rem, 1rem + 3.4vw, 4.25rem);
---text-body:  1.125rem;
---text-label: 0.8125rem;
---tracking-display: -0.035em;
---tracking-label:    0.16em;
+--text-hero:    clamp(2.5rem, 1rem + 5.6vw, 5.5rem);
+--text-section: clamp(1.75rem, 1.1rem + 2.2vw, 3rem);
+--text-lead:    clamp(1.125rem, 1.02rem + 0.42vw, 1.375rem);
+--text-base:    1.0625rem;
+--text-meta:    0.9375rem;
+
+--tracking-hero: -0.022em;
+--tracking-head: -0.012em;
+--tracking-label: 0.14em;
+
+--measure: 64ch;
 ```
 
-**Die Zahl ist größer als der Satz.** 25 Minuten, 20 Minuten pro Termin, 08:00,
-alle drei Jahre, 116 117 — jede überprüfbare Zahl wird gesetzt wie eine
-Fahrplanzeit und nicht wie Fließtext. Das ist die Brücke zwischen der
-Konkretheitsregel aus Slot 6 und dem Erscheinungsbild.
+**Der Hero trägt zwei Zeilen, und nur die zweite ist ihre.** „Medizin für Frauen" steht
+wörtlich so auf ihrer Referenz — sie hat es übernommen, und sie darf es behalten. Aber
+darunter steht **„Die neue gynäkologische Praxis in Erkelenz"**, und das ist der Satz,
+den es nur einmal gibt. Er wird nicht kleiner gesetzt als eine Bildunterschrift.
 
 ## Tiefenstrategie
 
-**Editorial-Overlap.** Genau eine, konsequent.
+**`flat-with-light`** — eine einzige, und sie ist das Gegenteil der beiden anderen
+Kundenseiten dieser Werkstatt:
 
-- Bilder und Textblöcke **überlappen das Raster**, statt in gepolsterten Karten
-  zu sitzen: ein Foto läuft über die Spalte in den Bund, eine Bildunterschrift
-  sitzt halb auf der Bildkante, ein Zahlenblock ragt in die nächste Sektion.
-- **Schatten: höchstens 1 px versetzt, ohne Weichzeichnung**, und nur dort, wo
-  ein Element wirklich abhebt (CTA im Ruhezustand: gar keiner). Die drei weichen
-  Doppelschatten aus dem alten Build sind gestrichen.
-- **Glas ist gestrichen.** `backdrop-filter` kommt auf dieser Seite nicht mehr
-  vor. Wo bisher eine Milchscheibe über dem Foto lag, steht künftig eine
-  deckende Papier- oder Tieffläche mit einer Haarlinie — oder der Text steht
-  direkt im Bild, wenn das Bild dunkel genug ist.
-- Kanten: **ein Radius, 0 px.** Bilder, Flächen, Buttons und Felder laufen
-  rechtwinklig. Der einzige Radius der Seite ist der Fokusring.
+> Kein Glas. Keine Schlagschatten. Keine Kästen mit Rand. Trennung entsteht durch
+> **Flächenwechsel** (Papier → Leinen), durch **Haarlinien** und durch **Weissraum**.
+> Eine Karte, die sich abhebt, hebt sich hier durch ihre Fläche ab, nicht durch einen
+> Schatten darunter.
+
+Warum: TAFELWERK und Aram sind dunkel und arbeiten mit Glas. Diese Praxis ist hell und
+leer. Glas auf Weiss ist unsichtbar, und ein Schatten auf einer Arztseite sieht aus wie
+ein Software-Dialog. **Der Raum ist die Tiefe.**
 
 ## Bewegungsvokabular
 
-- **Primäre Kurve:** `cubic-bezier(0.16, 1, 0.3, 1)`.
-- **Dauern:** 180 ms Mikro-Interaktion, 420 ms Signature Move, 700 ms
-  Sektionswechsel. Nichts läuft über 700 ms.
-- **Signature Move — „der Strich":** eine 1.5 px starke Linie in `--signal`
-  zeichnet sich von 0 auf volle Länge (`scaleX` bzw. `stroke-dashoffset`,
-  420 ms, transform-origin an der Seite, aus der sie kommt) und **markiert
-  Ankunft**. Wiederholt an: aktivem Navigationspunkt · dem Weg durch den
-  Grundriss · unter jeder Sektionsbeschriftung beim Eintreten · entlang der
-  Zeitleiste im Werdegang · unter dem fokussierten Formularfeld · unter der
-  heutigen Zeile der Sprechzeitentabelle.
-- **Gestrichen: das Einblenden von unten.** `opacity` + `translateY(18px)` auf
-  fünf Sektionen war die generischste Bewegung des Webs und der Hauptgrund,
-  warum die Seite nach Vorlage aussah. Ersatzlos, außer wo der Strich passt.
-- Kein Video wird gescrubbt. `currentTime` lesen ja, schreiben nie.
-- Für `prefers-reduced-motion: reduce` gilt weiter: kein Pin, kein Scrub,
-  Endzustand sofort — der Strich steht dann einfach gezogen da.
+```css
+--ease-ruhig: cubic-bezier(0.32, 0.72, 0, 1);
+--dauer-ruhig: 620ms;
+--dauer-mikro: 180ms;
+```
 
-## Textur / Atmosphäre
+**Genau zwei Bewegungen — sie hat beide selbst benannt, mehr gibt es nicht.**
 
-**Keine.** Kein Filmkorn, kein Rauschen, kein Bloom, keine Vignette. Das
-feTurbulence-SVG bei 3 % aus dem alten Build ist gestrichen.
+1. **Das Porträt blendet ein.** *„Vllt das Foto auf der Hauptseite, dass es eingeblendet
+   wird und nicht fest ist."* Beim Laden: Deckkraft 0 → 1 über 900 ms, dazu ein sehr
+   langsamer Zoom von 1,04 auf 1,00. Kein Fliegen, kein Springen. Das Bild kommt zur
+   Ruhe, es tritt nicht auf.
+2. **Die Praxisfotos schiebt man.** *„Dass man bei den Fotos der Praxis die Fotos nicht
+   alle untereinander hat, sondern so verschieben kann."* Eine waagerechte Reihe zum
+   Ziehen und Wischen, mit Tastaturbedienung und sichtbarem Fortschritt. Kein
+   Karussell mit Automatik — sie hat „verschieben" gesagt, nicht „durchlaufen".
 
-Was die Fläche stattdessen trägt: die Fotografie selbst (Kalkputz, Leinen,
-Eiche liefern die Oberfläche), großzügiger Weißraum, Haarlinien in `--linie`
-und die Spannung zwischen kaltem Diagramm und warmem Raum. Wenn eine Sektion
-sich ohne Textur leer anfühlt, ist die Antwort mehr Weißraum oder ein größeres
-Bild — nicht ein Filter.
+Alles andere: Inhalt taucht beim Eintreten auf, 16 px von unten, Deckkraft 0 → 1.
+**Kein Pinnen, kein Scrub, kein Parallax.** Sie hat „einfacher" gesagt, zweimal.
+
+## Textur und Atmosphäre
+
+- **Eine** Textur: feines Leinen, 4 % Deckkraft, nur auf `--leinen`-Flächen.
+- **Kein Korn, kein Rauschen, kein Verlauf.** Ein Verlauf auf Weiss ist entweder
+  unsichtbar oder schmutzig.
+- Licht kommt von **links oben**, wie in ihrem Referenz-Hero. Wenn ein Bild einen
+  Schattenwurf hat, zeigt er nach rechts unten. Auf der ganzen Seite gleich.
 
 ## Anti-Ziele
 
-1. **Keine Wohlfühl-/Spa-Seite.** Kein Rosa, kein Flieder, kein Aquarell, keine
-   Blüte, keine geschwungene Frauensilhouette, kein weiches Verlaufsfeld. Der
-   Normalfall der Branche und deshalb der erste Ausschluss.
-2. **Keine Klinik-Corporate-Seite.** Kein Blau-Weiß-Verlauf, kein Stethoskop,
-   kein DNA-Motiv, kein gleichförmiges Drei-Spalten-Kartenraster mit identischen
-   Icons.
-3. **Nicht der erste Anlauf dieser Seite.** Keine Milchglaspanels, keine weichen
-   Doppelschatten, kein Türkis als Sektionsfläche, keine Fade-ups, kein
-   CSS-Rauschen, keine auf 66 px gedeckelte Überschrift. Das ist namentlich
-   ausgeschlossen, damit es nicht zurückkriecht.
+1. **Nicht wie gynpraxisbonn.de.** Sie ist die Referenz, nicht das Ziel. Kein Pink,
+   keine Systemschrift, kein Popup beim Laden.
+2. **Nicht wie ein Wellness-Studio.** Kein Bambus, keine Steine, keine Kerzen, kein
+   Verlauf von Türkis nach Grün. Salbei ist eine Wandfarbe, kein Spa-Signal.
+3. **Nicht wie eine Klinik.** Kein Blau, keine Kreuze, keine Stethoskope, keine
+   Stockfotos von Händen auf Schultern.
 
-## Sektionsmechanik
+## Was echt sein muss — und was nicht
 
-Die Lehre aus `nacho-macho`: dort hat **jede** Sektion einen erfundenen
-Mechanismus, nicht nur das Showpiece. Der alte Build hatte einen und fünf
-gewöhnliche Sektionen.
+**Die Praxis existiert noch nicht.** Sie wird gerade gebaut und öffnet am 11. Es gibt
+keine Innenaufnahmen, und es wird sie vor dem Start nicht geben.
 
-| Sektion | Mechanismus |
+| | |
 |---|---|
-| **Hero** | Die Seite weiß, wie spät es ist. Aus `sprechzeiten` wird live gerechnet und als Fahrplanzeile gesetzt: „Heute geöffnet bis 12:00" / „Öffnet morgen um 08:00" / „Noch 40 Minuten". Die Uhrzeit steht in `--text-zahl`, der Einzeiler daneben kleiner. Kein Panel, kein Glas — die Zeile sitzt direkt auf dem Papier über dem randlosen Bewegtbild. |
-| **Der Besuch** | Gepinnt. Ein **gezeichneter Grundriss** in orthografischer Aufsicht: Papierfläche, Wände als Ink-Linien, keine Perspektive. Ein Strich in `--signal` zeichnet den tatsächlichen Weg — Tür → Anmeldung → Warten → Sprechzimmer → Liege — über `stroke-dashoffset`, gescrubbt. An jeder Station rastet der Strich ein, die Raumbeschriftung setzt sich, die Dauer steht in `--text-zahl`, das Foto schneidet hart um (kein Crossfade). **Offene Entscheidung: 2D-SVG statt Three.js** — siehe unten. |
-| **Leistungen** | Numerierte Spezifikation statt Kacheln. Jede Leistung: laufende Nummer, Titel, und eine Datenzeile in Tabellenziffern („alle 3 Jahre · 6–8 Min · Kasse"). Aufklappen als harte `clip-path`-Wische von oben, 420 ms, mit dem Strich an der Front. |
-| **Diskretion** | Randloses Bild über die volle Breite, ein Satz darüber in `--text-hero`, über die Bildkante hinausgesetzt. Der Textblock überlappt das Bild, nicht umgekehrt. |
-| **Über mich** | Der Werdegang ist eine echte Zeitleiste: Jahreszahlen in `--text-zahl` links, eine Ink-Linie, die beim Scrollen mitzeichnet, Stationen rechts. Das Detailfoto überlappt die Leiste. |
-| **Praxis & Anfahrt** | Die Sprechzeitentabelle bleibt eine `<table>` — bekommt aber den heutigen Tag mit dem Strich markiert und einen Live-Zustand in der Kopfzeile. Der Zugangsblock wird zur Faktenspalte mit Maßen (Kabine 110 × 140 cm) in Tabellenziffern. |
-| **Termin** | Die Rufnummer in `--text-zahl`, größer als alles andere auf der Seite außer dem Hero. Formular unverändert in Funktion und Recht, aber rechtwinklig, ohne Karte, ohne Schatten. |
-| **Fußzeile** | Notrufnummern in `--text-zahl` auf `--tief`. Die einzige Stelle, an der drei Zahlen gleichzeitig groß stehen dürfen. |
+| **Muss echt sein** | Ihr Porträt. Später: die Praxisräume, das Team, die Ladenfront. |
+| **Darf erzeugt werden** | Material- und Lichtstudien ohne erkennbaren Ort: Kalkputz im Streiflicht, Leinengewebe, eine salbeigrün gestrichene Wandkante, Tageslicht auf hellem Boden. |
+| **Darf NIEMALS erzeugt werden** | Ein Behandlungsraum, ein Wartezimmer, eine Praxisfront, ein Mensch. Ein erfundener Raum ist eine Aussage über einen Ort, den eine Patientin betreten wird. |
 
-## Konsequenzen für die vorhandenen Assets
+**Der Tausch ist eingeplant, nicht nachgereicht:** die Materialstudien sitzen in
+denselben Slots, in die nach der Eröffnung die echten Fotos kommen. Gleiche Masse,
+gleiche Position — ein Dateitausch, kein Umbau.
 
-Die acht Bilder und der Clip bleiben — sie sind bezahlt, konsistent abgeleitet
-und passen zur These (dokumentarisch, Nordlicht, kein Mensch im Bild). Was sich
-ändert, ist die **Behandlung**:
+## Die Seiten
 
-- randlos oder hart bis an die Spaltenkante beschnitten, nie in eine gerundete
-  Karte gelegt, nie mit Schatten unterlegt;
-- jede Fotografie bekommt eine technische Bildunterschrift in 13 px an einer
-  Haarlinie, wie in einer Monografie;
-- kein Bild trägt Text auf sich, außer die Fläche darunter ist deckend.
+Ihre sechs Menüpunkte, gegen den Bestand des Repos geprüft:
 
-Falls nachgeneriert wird, gilt unverändert die Bild-Direktion aus
-`docs/MEDIA.md` (Vormittag, 35 mm, Nordlicht von rechts, kein Mensch im Bild) —
-diese These ändert die Fotografie nicht, nur ihre Rahmung.
+| Ihr Wunsch | Adresse | Stand |
+|---|---|---|
+| **Startseite** | `/` | steht |
+| Team | `/team/` | steht |
+| Leistungen | `/leistungen/` | steht |
+| Praxis | `/praxis/` | steht — Anfahrt zieht aus |
+| Aktuelles | `/aktuelles/` | steht |
+| Öffnungszeiten/Termine | `/termin/` | steht — Öffnungszeiten kommen dazu |
+| **Kontakt/Anfahrt** | `/kontakt/` | **neu** — zieht aus `/praxis/` aus |
 
-## Was bleibt
+Ihre Leistungen, wörtlich: **Schwangerschaft · Krebsvorsorge · Verhütung ·
+Kinderwunschberatung · Mädelssprechstunde**, dazu **Impfungen und kleine ästhetische
+Botoxbehandlungen** als „weitere Leistungen".
 
-Struktur, `src/praxis.config.ts` als einzige Datenquelle, die Rechtstexte, das
-Formular ohne Freitextfeld, die Consent-Karte, die Barrierefreiheitsprüfung,
-die Budgets und die drei QA-Läufe in `scripts/`. Daran lag es nicht.
+„Mädelssprechstunde" ist ihr Wort und bleibt so stehen. Es ist der einzige Begriff auf
+der ganzen Seite, den keine andere Praxis in Erkelenz benutzt.
+
+## Was sie selbst pflegt
+
+Drei Bereiche — sie hat sie selbst aufgezählt, und es sind genau die drei:
+
+| Bereich | ihre Worte |
+|---|---|
+| **`team`** | „mal ein Foto bei Personalwechsel" |
+| **`aktuelles`** | „Aktuelles" |
+| **`zeiten`** | „ggf. Änderungen der Öffnungszeiten" |
+
+Sie hat ausdrücklich gefragt: *„Könntest du mir dann zeigen, wie man z. B. ein Foto
+ändert?"* Die Antwort ist ja, und deshalb muss jedes Bildfeld ein **Pflichtfeld für die
+Bildbeschreibung** daneben haben — sonst baut sie beim ersten Tausch eine Barriere ein,
+ohne es zu merken.
+
+**Kein Doctolib.** Sie startet ohne und nimmt es „ggf. später" dazu. Der Terminbereich
+wird so gebaut, dass ein Doctolib-Knopf später eine Zeile ist und kein Umbau.
+
+---
+
+## Wenn geändert wird
+
+Amendieren ist erlaubt. Amendieren **ohne dieses Dokument zu ändern** heisst, dass
+spätere Sektionen von früheren abdriften — und genau diese Drift lässt eine Seite
+billig aussehen.
+
+---
+
+## Amendements aus dem Bau vom 15.08.2026
+
+Acht Entscheidungen, die beim Bauen fielen und die diese Datei sonst überholt
+hätten. Amendieren ohne das Dokument zu ändern ist die Drift, die eine Seite
+billig aussehen lässt — deshalb stehen sie hier.
+
+**1 · Rollennamen für Salbei.** Die Tokens heissen weiterhin `--salbei` und
+`--salbei-tief`, aber im Code wird ausschliesslich mit `--flaeche-salbei` und
+`--signal` gearbeitet. Grund: `color: var(--flaeche-salbei)` liest sich im Moment
+des Tippens falsch. Der Name trägt die Regel, nicht ein Kommentar.
+
+**2 · Der Porträt-Slot ist 3:4 und trägt eine Markierung.** Solange
+`praxis.portraet` leer ist, hält die Materialstudie exakt dessen Platz, und im
+Bild steht sichtbar „Porträt folgt". Beides verschwindet mit dem Eintragen des
+echten Bildes — es gibt keinen zweiten Handgriff.
+
+**3 · Kein `max-height` auf dem Hero-Bild.** Zusammen mit `aspect-ratio` löst der
+Browser das über die BREITE auf; bei 1440px blieben 111px Papier neben dem Bild
+stehen und „randlos bis an die Kante" war weg. Gefüllt wird stattdessen die
+linke Spalte.
+
+**4 · Der Einleitungstext steht IM Hero**, in der linken Spalte unter den beiden
+Zeilen — nicht in einer eigenen Sektion darunter. In ihrer Aufzählung gehört er
+zum Foto („Foto von ihr + kurzer Einleitungstext"), und er füllt genau den Platz,
+den das hohe Porträtformat rechts aufmacht.
+
+**5 · Die Wortmarke lautet „Praxis für Frauenheilkunde"**, bis Name oder Logo
+feststehen. Kein erfundener Eigenname (der stünde auf jeder Seite und würde beim
+Ausrollen übersehen) und kein leerer Kasten mit „LOGO". `Marke.tsx` rendert ein
+`<img>`, sobald `praxis.logo` gesetzt ist.
+
+**6 · `/leistungen/` trägt je EINEN Absatz**, nicht drei. Mit drei waren es 9,2
+Bildschirmhöhen am Handy. Nach dem Verdichten sind es **8,2** — 0,2 über der
+Grenze von 8, und das bleibt so: weiter zu kürzen hiesse, ihre Leistungstexte zu
+kürzen. Die Startseite liegt bei 7,4 (Handy) und 5,4 (Rechner).
+
+**7 · Die Zieh-Galerie beginnt bündig mit der Überschrift**, nicht am
+Bildschirmrand, und ist nur rechts angeschnitten. Mit Anschnitt auf beiden Seiten
+begann die erste Kachel bei 1440px 96px weiter links als Titel und
+Fortschrittsbalken — drei Kanten, drei Positionen.
+
+**8 · `main { min-height: 100svh }`.** Ohne das steht die Fusszeile für einen
+Moment 145px unter der Kopfzeile, weil der Seiteninhalt als eigenes Bündel
+nachlädt. Gemessen mit `engine/pruefen.mjs` bei 1,6 Mbit: **CLS 0,801**. Mit der
+reservierten Höhe: **0,000** auf allen sieben Seiten.
+
+**Was NICHT gebaut wurde und warum:** kein Video (die Direktion trägt ohne, und
+auf einer Arztseite ist es Aufwand ohne Wirkung), kein Bild aus `media-raw/` als
+Raum, kein erzeugter Mensch. Higgsfield-Verbrauch: **13 von 60 Credits**,
+ausschliesslich `nano_banana_pro`.

@@ -1,0 +1,208 @@
+/**
+ * Der geteilte Hero: links Text an der Schalenkante, rechts das Bild bis an den
+ * Bildschirmrand.
+ *
+ * ═══ Warum ein vierspaltiges Raster und kein `100vw` ═══
+ *
+ * Der übliche Trick für ein randloses Bild ist `margin-right: calc(50% - 50vw)`.
+ * `100vw` schliesst auf dem Rechner die Bildlaufleiste MIT ein — das Bild ragt
+ * dann 15px über den Rand hinaus, die Seite scrollt seitwärts, und `overflow-x:
+ * hidden` versteckt bloss den Beweis.
+ *
+ * Stattdessen zwei Randspalten, die den Überschuss schlucken, und zwei
+ * Inhaltsspalten dazwischen. Das Bild belegt die rechte Inhaltsspalte UND die
+ * rechte Randspalte — damit steht es bündig am Bildschirmrand, ohne dass ein
+ * einziger Wert die Bildlaufleiste raten müsste.
+ */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-top: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+}
+
+.hero__text {
+  padding-inline: var(--rand);
+  padding-bottom: var(--raum-gross);
+}
+
+.hero__marke {
+  margin-bottom: clamp(1.5rem, 1rem + 2vw, 3rem);
+}
+
+.hero__titel {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.9rem, 0.6rem + 1vw, 1.6rem);
+  font-weight: 400;
+}
+
+.hero__zeile1 {
+  display: block;
+}
+
+/**
+ * Die zweite Zeile. Sie ist deutlich kleiner als die erste — aber sie ist
+ * grösser als der Fliesstext, sie steht in der Textschrift statt in der
+ * Display-Schrift, und sie trägt links das Salbeiband.
+ *
+ * Das Band ist Fläche, nie Schrift: es steht NEBEN dem Satz und färbt ihn nicht.
+ * Ein Satz in hellem Salbei hätte einen Kontrast von 2,33 und wäre für eine
+ * Schwangere im Sonnenlicht nicht lesbar.
+ */
+.hero__einleitung {
+  margin-top: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+  max-width: 46ch;
+}
+
+.hero__einleitung p + p {
+  margin-top: 1rem;
+}
+
+.hero__zeile2 {
+  display: block;
+  position: relative;
+  padding-left: 1.1rem;
+  border-left: 4px solid var(--flaeche-salbei);
+  font-family: var(--schrift-text);
+  font-size: var(--text-lead);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--tinte);
+  max-width: 26ch;
+}
+
+.hero__bild {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: var(--leinen);
+  aspect-ratio: 3 / 2;
+}
+
+/**
+ * „Porträt folgt".
+ *
+ * ═══ Warum eine Markierung und kein Symbolbild ═══
+ *
+ * Weil ein Symbolbild einer Ärztin genau das wäre, was diese Seite nirgends tut:
+ * eine Behauptung über etwas, das es noch nicht gibt. Eine Fremde in einem
+ * Kittel auf der Startseite einer Einzelpraxis ist die schlimmste Variante
+ * davon — die Patientin glaubt, sie hätte die Ärztin gesehen.
+ *
+ * ═══ Warum sie im Bild sitzt und nicht darunter ═══
+ *
+ * Weil sie sonst wie eine Bildunterschrift aussähe und damit wie Inhalt. Sie
+ * liegt auf der Studie, in Papier auf Papier, und sagt in zwei Sätzen, was hier
+ * hingehört. Kein Schlagschatten, kein Milchglas: eine Fläche, wie überall.
+ */
+.hero__marker {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  bottom: 0;
+  max-width: 26rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--papier);
+  border-top: 3px solid var(--flaeche-salbei);
+}
+
+.hero__marker-wort {
+  display: block;
+  font-family: var(--schrift-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.hero__marker-satz {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: var(--text-meta);
+  line-height: 1.5;
+  color: var(--tinte-mtl);
+}
+
+.hero__bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 64 % waagerecht: dort sitzt die Kante zwischen Kalkputz und Salbei. Bei 50 %
+     stünde sie mittig und das Bild zerfiele in zwei gleiche Hälften. */
+  object-position: 64% 50%;
+
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity var(--dauer-portraet) var(--ease-ruhig),
+    transform 1400ms var(--ease-ruhig);
+}
+
+.hero__bild--da img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Wer Bewegung abgewählt hat, sieht das Bild sofort und stehend. Es fehlt dann
+   nichts: die Bewegung war Anmut, keine Information. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__bild img {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (min-width: 62rem) {
+  .hero {
+    grid-template-columns:
+      minmax(var(--rand), 1fr)
+      minmax(0, 40rem)
+      minmax(0, 28rem)
+      minmax(var(--rand), 1fr);
+    align-items: stretch;
+    column-gap: var(--raum-gross);
+    padding-top: clamp(3rem, 1rem + 5vw, 6rem);
+  }
+
+  .hero__text {
+    grid-column: 2;
+    padding-inline: 0;
+    padding-bottom: clamp(3rem, 2rem + 3vw, 6rem);
+    align-self: center;
+  }
+
+  /**
+   * Inhaltsspalte plus Randspalte: randlos bis an die Kante.
+   *
+   * Die Deckelung der Höhe ist nicht kosmetisch. Ohne sie ergibt 4:5 bei einer
+   * 640px breiten Spalte ein 800px hohes Bild — daneben stehen 250px Text, und
+   * die restlichen 550px sind Loch. Weissraum, den niemand gesetzt hat, sieht
+   * nicht nach Ruhe aus, sondern nach fehlendem Inhalt.
+   */
+  /**
+   * Hochformat 3:4 — das Format, in dem ein Porträt aufgenommen wird, und damit
+   * das Format, das der Slot bereithalten muss. Kommt ihr Foto, ist der Tausch
+   * eine Datei; die Komposition ändert sich nicht.
+   *
+   * ═══ Warum hier KEIN `max-height` steht ═══
+   *
+   * Es stand hier, um den Hero zu kürzen — und hat das Bild von der rechten
+   * Bildschirmkante weggezogen. `aspect-ratio` und `max-height` zusammen lösen
+   * der Browser so auf, dass er die BREITE verkleinert; bei 1440px blieben 111px
+   * Papier rechts neben dem Bild stehen. „Randlos bis an die Kante" war damit
+   * weg, und zwar auf die Art, die man erst im Screenshot sieht.
+   *
+   * Die Höhe wird jetzt nicht gedeckelt, sondern gefüllt: der Einleitungstext
+   * steht in der linken Spalte und nicht in einer Sektion darunter.
+   */
+  .hero__bild {
+    grid-column: 3 / span 2;
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    height: auto;
+  }
+}

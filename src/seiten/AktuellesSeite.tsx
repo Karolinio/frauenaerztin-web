@@ -1,72 +1,53 @@
+import { aktuelles } from '../inhalt';
 import { Seitenkopf } from '../components/ui/Seitenkopf';
-import { MELDUNGEN, gilt, type Meldung } from '../daten/aktuelles';
+import { Enthuellen } from '../components/ui/Enthuellen';
 import './aktuelles.css';
 
-const DATUM = new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
-
 /**
- * Aktuelles — Urlaub, Vertretung, geänderte Sprechzeiten.
+ * Aktuelles. Inhalt aus `inhalt/aktuelles.json` — sie pflegt ihn selbst.
  *
- * ═══ Die Seite, die Yvonne zuerst genannt hat ═══
- *
- * „Team/Leistungen/Aktuelles/Impressum" — erste Nachricht, 04.08. Im ersten Entwurf
- * fehlte sie. Ihre Referenz zeigt, wofür: gynpraxisbonn.de öffnet mit einem Kasten
- * „WIR MACHEN URLAUB", samt Vertretungspraxen und Telefonnummern.
- *
- * Das ist Praxisorganisation, keine Nachricht. Sie muss ohne uns änderbar sein —
- * sonst ruft sie dreimal im Jahr an und wartet auf einen Rückruf, um zwei Zeilen zu
- * ändern. Genau dafür ist der Eimer `news` im CMS da.
- *
- * ═══ Warum abgelaufene Meldungen verschwinden ═══
- *
- * Die Urlaubsmeldung vom letzten Sommer, die im Januar noch oben steht, kostet nicht
- * Vertrauen — sie kostet Termine. Wer „geschlossen" liest, ruft nicht an. Deshalb
- * verfällt ein Hinweis von selbst, sobald sein `bis` vorbei ist. Niemand muss daran
- * denken, und das ist der Punkt: niemand denkt daran.
+ * Sortiert nach Datum, nicht nach Position in der Datei (siehe `src/inhalt.ts`).
+ * Ein nachgetragener älterer Beitrag rutscht damit von selbst nach unten, statt
+ * oben zu stehen, weil er zuletzt getippt wurde.
  */
-export default function AktuellesSeite() {
-  const jetzt = new Date();
-  const gueltig = MELDUNGEN.filter((m) => gilt(m, jetzt)).sort((a, b) => b.datum.localeCompare(a.datum));
+const FORMAT = new Intl.DateTimeFormat('de-DE', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
 
+export default function AktuellesSeite() {
   return (
     <>
       <Seitenkopf
-        augenbraue="Aktuelles"
-        titel="Was gerade in der Praxis gilt."
-        vorspann="Urlaub, Vertretung, geänderte Sprechzeiten. Hier steht, was Sie wissen müssen, bevor Sie anrufen oder vorbeikommen."
-      />
-    <section className="section aktuelles" id="aktuelles" aria-label="Aktuelles">
-      <div className="shell">
-        {!gueltig.length && (
-          <p className="t-lead aktuelles__leer">
-            Zurzeit gibt es nichts Besonderes zu melden — die Praxis ist zu den üblichen
-            Zeiten geöffnet. Urlaub, Vertretungen und geänderte Sprechzeiten stehen hier,
-            sobald sie feststehen.
+        etikett="Aktuelles"
+        titel="Was gerade gilt"
+        einleitung={
+          <p>
+            Urlaub, Vertretung, kurzfristig geänderte Sprechzeiten. Wenn hier nichts steht, gelten die
+            normalen Zeiten.
           </p>
-        )}
+        }
+      />
 
-        {gueltig.length > 0 && (
-          <ol className="aktuelles__liste">
-            {gueltig.map((m: Meldung) => (
-              <li className="meldung" key={`${m.datum}-${m.titel}`} data-art={m.art}>
-                {/* Das Datum maschinenlesbar: Suchmaschinen und Vorlesegeräte lesen
-                    `datetime`, Menschen den ausgeschriebenen Monat. */}
-                <time className="meldung__datum" dateTime={m.datum}>
-                  {DATUM.format(new Date(`${m.datum}T12:00:00`))}
-                </time>
-                <h3 className="meldung__titel">{m.titel}</h3>
-                <p className="meldung__text">{m.text}</p>
-                {m.bis && (
-                  <p className="meldung__bis">
-                    Gilt bis einschließlich {DATUM.format(new Date(`${m.bis}T12:00:00`))}.
-                  </p>
-                )}
-              </li>
-            ))}
-          </ol>
-        )}
+      <div className="schale aktuelles">
+        {aktuelles.map((m) => (
+          <Enthuellen als="article" key={m.datum + m.titel} className="meldung">
+            <div className="meldung__kopf">
+              {/* `dateTime` macht das Datum maschinenlesbar — für Screenreader,
+                  die „15.8." sonst als Zahlenfolge vorlesen, und für Google. */}
+              <time className="t-meta meldung__datum" dateTime={m.datum}>
+                {FORMAT.format(new Date(m.datum))}
+              </time>
+              <span className="t-label meldung__rubrik">{m.art}</span>
+            </div>
+            <div className="meldung__text">
+              <h2 className="t-unter">{m.titel}</h2>
+              <p className="t-body meldung__satz">{m.text}</p>
+            </div>
+          </Enthuellen>
+        ))}
       </div>
-    </section>
     </>
   );
 }

@@ -1,33 +1,34 @@
-import { Hero } from '../components/hero/Hero';
-import { Besuch } from '../components/showpiece/Besuch';
-import { Leistungen } from '../components/leistungen/Leistungen';
-import { Termin } from '../components/termin/Termin';
+import { Hero } from '../components/start/Hero';
+import { Hinweiszeile } from '../components/start/Hinweiszeile';
+import { WerIchBin } from '../components/start/WerIchBin';
+import { LeistungenAuszug } from '../components/start/LeistungenAuszug';
+import { ErsterBesuch } from '../components/start/ErsterBesuch';
+import { TerminBlock } from '../components/start/TerminBlock';
+import '../components/start/start.css';
 
 /**
- * Die Startseite — kürzer als der erste Entwurf, und zwar aus einem Grund.
+ * Die Startseite. Ihre Reihenfolge, wörtlich aus ihrer Aufzählung:
  *
- * Gemessen am 07.08.2026: der Ein-Seiter hatte 12,9 Bildschirmhöhen, Yvonnes eigene
- * Referenz (gynpraxisbonn.de) hat 6,3. Sie hat dreimal „unkompliziert" und „nichts
- * super aufwendiges" geschrieben. Eine Startseite, die alles zeigt, macht die
- * Unterseiten überflüssig — und dann hat sie wieder eine Landingpage mit Menü.
+ *   Logo/Name · „Medizin für Frauen" · „Die neue gynäkologische Praxis in
+ *   Erkelenz" · Foto + kurzer Einleitungstext
+ *   → Wer ich bin → Leistungen im Auszug → Der erste Besuch → Termin → Fuss
  *
- * Also: die Startseite beantwortet vier Fragen und verweist für den Rest.
+ * Der Einleitungstext steht IM Hero, nicht in einer eigenen Sektion darunter —
+ * bei ihr gehört er zum Foto („Foto von ihr + kurzer Einleitungstext"), und in
+ * der linken Herospalte füllt er den Platz, den das hohe Porträtformat rechts
+ * aufmacht.
  *
- *   Wer ist das?        → Hero
- *   Was passiert da?    → Der Besuch (das Showpiece)
- *   Was gibt es?        → Leistungen im Auszug, mit Weg zur vollen Seite
- *   Wie komme ich hin?  → Termin
- *
- * `Diskretion`, `Über mich` und `Praxis & Anfahrt` stehen jetzt auf ihren eigenen
- * Seiten. Sie waren gut — sie waren nur zu viel für die erste Minute.
+ * Höchstens 6,5 Bildschirmhöhen am Rechner, 8 am Handy.
  */
 export default function Start() {
   return (
     <>
       <Hero />
-      <Besuch />
-      <Leistungen auszug />
-      <Termin />
+      <Hinweiszeile />
+      <WerIchBin />
+      <LeistungenAuszug />
+      <ErsterBesuch />
+      <TerminBlock />
     </>
   );
 }

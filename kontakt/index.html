@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kontakt und Anfahrt — %PRAXIS_NAME%</title>
+    <meta
+      name="description"
+      content="Anschrift, Telefon, Anfahrt mit Auto, Bus und Bahn — und welche Nummer im Notfall gilt."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#fbf9f5" />
+    <!-- Die Seite hat genau ein Erscheinungsbild und es ist hell. Ohne diese
+         Zeile kippt Safari Formularfelder und Auswahlmenüs in den Dunkelmodus,
+         und dann steht ein dunkles Eingabefeld auf einer weissen Seite. -->
+    <meta name="color-scheme" content="light" />
+
+    <!-- Schriften: selbst gehostet, kein Google-CDN, kein externer Request.
+         Bei einer Arztseite ist jede Fremdverbindung eine Datenschutzfrage,
+         die man sich sparen kann. Nur die zwei Schnitte vorladen, die im
+         ersten Bild wirklich gebraucht werden. -->
+    <link rel="preload" href="/fonts/fraunces-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Das erste sichtbare Bild. Ohne dieses Vorladen steht es in der
+         Warteschlange hinter dem Bündel, und die halbe Startseite ist beim
+         ersten Blick eine leere Fläche. -->
+    <link rel="preload" as="image" href="/bilder/hero.webp" fetchpriority="high" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

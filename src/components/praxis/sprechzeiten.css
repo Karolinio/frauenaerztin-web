@@ -1,0 +1,81 @@
+.zeiten__ausstehend {
+  margin-bottom: var(--raum);
+  max-width: 52ch;
+}
+
+.zeiten__tabelle {
+  width: 100%;
+  border-collapse: collapse;
+  /* Feste Ziffernbreite: sonst stehen 08:00 und 15:00 verschieden breit da und
+     die Spalte flimmert. Im Mutterpass steht sie auch gerade. */
+  font-variant-numeric: tabular-nums;
+}
+
+.zeiten__tabelle th,
+.zeiten__tabelle td {
+  text-align: left;
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid var(--linie);
+  vertical-align: baseline;
+}
+
+.zeiten__tabelle thead th {
+  font-family: var(--schrift-text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--tinte-mtl);
+  border-bottom-color: var(--tinte-mtl);
+}
+
+.zeiten__tabelle tbody th {
+  font-weight: 500;
+  color: var(--tinte);
+  /* Der Platz für die Signalkante ist in JEDER Zeile da, auch durchsichtig —
+     sonst rückt am Montag die ganze Tabelle um drei Pixel nach rechts. */
+  border-left: 3px solid transparent;
+}
+
+.zeiten__tabelle tbody td {
+  color: var(--tinte);
+}
+
+/* Der heutige Tag: Fläche in Leinen, Signal am linken Rand, und das Wort
+   „heute" daneben. Drei Merkmale, weil Farbe allein keins ist. */
+.zeiten__heute {
+  background: var(--leinen-tief);
+}
+
+.zeiten__heute th:first-child {
+  border-left-color: var(--signal);
+}
+
+.zeiten__marke {
+  display: inline-block;
+  margin-left: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.zeiten__zusatz {
+  display: block;
+  font-size: var(--text-meta);
+  font-weight: 400;
+  color: var(--tinte-mtl);
+}
+
+.zeiten__leer {
+  color: var(--tinte-mtl);
+}
+
+@media (max-width: 34rem) {
+  .zeiten__tabelle th,
+  .zeiten__tabelle td {
+    padding-inline: 0.4rem;
+    font-size: var(--text-meta);
+  }
+}

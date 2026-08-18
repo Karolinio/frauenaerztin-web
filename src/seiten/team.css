@@ -1,41 +1,70 @@
-/* Das Team-Raster.
- *
- * `auto-fit` mit `minmax`, NICHT eine feste Spaltenzahl: bei einer Person entsteht
- * eine Karte in Lesebreite statt einer Karte neben drei Luecken. Genau dieser Fall
- * tritt am Eroeffnungstag ein — dem Tag, an dem die meisten zum ersten Mal schauen.
- */
-.team__raster {
-  list-style: none;
-  padding: 0;
-  margin: clamp(2rem, 1.5rem + 2vw, 3rem) 0 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-  gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+.team {
+  padding-bottom: var(--raum-sektion);
 }
 
-.team__karte { max-width: 34rem; }
+.team__person {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--raum);
+  padding-block: var(--raum-gross);
+  border-top: 1px solid var(--linie);
+}
+
+.team__person:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
 
 .team__bild {
-  width: 100%;
-  height: auto;
+  /* Die Masse des künftigen Fotos. Der Platz steht schon, damit beim ersten
+     echten Bild nichts verrutscht. */
   aspect-ratio: 4 / 5;
+  background: var(--leinen);
+  overflow: hidden;
+}
+
+.team__bild img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: var(--radius-m, 10px);
-  margin-bottom: 1rem;
 }
 
-.team__name { margin: 0; }
+/* Der leere Rahmen. Er sagt, was fehlt und wohin es gehört — kein Stockfoto,
+   kein Initialenkreis, keine graue Silhouette. */
+.team__rahmen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.8rem;
+  height: 100%;
+  padding: var(--raum);
+  border: 1px dashed var(--tinte-mtl);
+}
 
-/* Versalien mit Sperrung: die Rolle ist eine Beschriftung, kein Satz. Ohne die
-   Sperrung klebt sie bei kleinen Graden zusammen. */
+.team__rahmen-hinweis {
+  line-height: 1.6;
+}
+
+.team__rahmen code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: var(--leinen-tief);
+  padding: 0.05em 0.3em;
+}
+
 .team__rolle {
-  margin: 0.35rem 0 0.75rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  margin-top: 0.35rem;
 }
 
-.team__text { margin: 0; max-width: 42ch; }
+.team__satz {
+  margin-top: var(--raum);
+}
 
-.team__leer { max-width: 52ch; }
+@media (min-width: 48rem) {
+  .team__person {
+    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+    gap: var(--raum-gross);
+    align-items: start;
+  }
+}

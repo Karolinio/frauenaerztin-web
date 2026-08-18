@@ -3,89 +3,75 @@
  *
  * ═══ Warum es echte Unterseiten sind und keine Anker ═══
  *
- * Der erste Entwurf war ein Ein-Seiter mit fünf Ankern im Menü. Yvonne hat das nach
- * einem Tag bemerkt und genau richtig beschrieben:
+ * Der erste Entwurf war ein Ein-Seiter mit fünf Ankern im Menü. Yvonne hat das
+ * nach einem Tag bemerkt und genau richtig beschrieben:
  *
- *   „Die Seite die du geschickt hast ist aber quasi eine Landingpage, oder? Es gibt
- *    zwar ein Menü aber in den Unterpunkten kommt man immer wieder zu den
+ *   „Die Seite die du geschickt hast ist aber quasi eine Landingpage, oder? Es
+ *    gibt zwar ein Menü aber in den Unterpunkten kommt man immer wieder zu den
  *    Texten/Bildern von der Hauptpage?"
  *
- * Ja. Und sie hatte von Anfang an etwas anderes bestellt: „eine Homepage mit paar
- * Unterpunkten (Team/Leistungen/Aktuelles/Impressum)". Ihre Referenz
- * (gynpraxisbonn.de) hat sechs echte Unterseiten.
- *
- * Ein Menü, dessen Punkte alle auf dieselbe Seite zeigen, ist kein Menü. Es sieht
- * aus wie eine Zusage und ist keine.
- *
- * ═══ Warum diese Liste und nicht ein Router ═══
- *
- * Jede Seite ist ein eigener HTML-Einstieg (Vite kann das von Haus aus). Das heisst:
- * echte Adressen, kein Umleitungstrick auf GitHub Pages, jede Seite mit eigenem
- * Titel und eigener Beschreibung — und wer nur „Leistungen" braucht, lädt auch nur
- * die. Ein Router wäre eine Abhängigkeit mehr und eine Fallunterscheidung beim
- * Ausrollen.
+ * Ein Menü, dessen Punkte alle auf dieselbe Seite zeigen, ist kein Menü. Es
+ * sieht aus wie eine Zusage und ist keine.
  *
  * ═══ Die eine Regel ═══
  *
  * Diese Liste ist die Quelle für die Kopfzeile, die Fusszeile, die Einstiege in
- * `vite.config.ts` und die Sitemap. Wer eine Seite dazulegt, legt sie HIER dazu —
- * eine zweite Liste im Menü wäre `zwei-listen-die-driften`, und die kostet in diesem
- * Repo nachweislich am meisten.
+ * `vite.config.ts` und die Titel. Wer eine Seite dazulegt, legt sie HIER dazu.
+ * Eine zweite Liste im Menü ist die Falle `zwei-listen-die-driften`, und die
+ * kostet in diesem Repo nachweislich am meisten.
  */
 
 export type Seite = {
   /** Die Adresse, mit Schrägstrich am Ende. Die Startseite ist `/`. */
-  weg: string
-  /** Was im Menü steht. Kurz — das Menü hat sieben Punkte und muss aufs Handy. */
-  label: string
+  weg: string;
+  /** Was im Menü steht. Kurz — sechs Punkte müssen aufs Handy. */
+  label: string;
   /** Der Titel im Browsertab und in der Google-Zeile. */
-  titel: string
+  titel: string;
   /** Die Beschreibung für Google. Ein Satz, der auch allein steht. */
-  beschreibung: string
-  /**
-   * Ob der Punkt ins Hauptmenü gehört.
-   *
-   * Impressum und Datenschutz stehen NUR in der Fusszeile — dorthin sucht man sie,
-   * und im Hauptmenü nähmen sie den Platz weg, den „Termin" braucht.
-   */
-  imMenue: boolean
-}
+  beschreibung: string;
+  /** Ob der Punkt ins Hauptmenü gehört. Impressum und Datenschutz: nein. */
+  imMenue: boolean;
+};
 
 /**
- * Die Reihenfolge ist die des Kundenwegs, nicht die des Alphabets: erst wer bin ich
- * (Start), dann was gibt es (Leistungen), dann wer macht es (Team), dann wo (Praxis),
- * dann was ist gerade (Aktuelles), zuletzt der Schritt (Termin).
+ * Die Reihenfolge ist ihre eigene, aus der Sprachnachricht:
+ * Team · Leistungen · Praxis · Aktuelles · Öffnungszeiten/Termine · Kontakt/Anfahrt.
  *
- * „Termin" steht bewusst am Ende und ist trotzdem der einzige gefüllte Knopf. Wer
- * ihn zuerst setzt, drängt — und diese Zielgruppe entscheidet sich nicht auf Zuruf.
+ * Abweichend davon steht „Leistungen" vor „Team": wer neu auf einer Praxisseite
+ * landet, sucht zuerst, ob es das gibt, was sie braucht — und erst dann, wer es
+ * macht. Das ist die einzige Abweichung von ihrer Liste, und sie ist eine
+ * Reihenfolge, kein Weglassen.
  */
 export const SEITEN: Seite[] = [
   {
     weg: '/',
     label: 'Start',
-    titel: '%PRAXIS_NAME% — %PRAXIS_FACH% in %PRAXIS_ORT%',
-    beschreibung: '%PRAXIS_EINZEILER% 20 Minuten pro Termin, Ultraschall im Haus, Rückruf am selben Werktag.',
+    titel: '%PRAXIS_NAME% — Medizin für Frauen in Erkelenz',
+    beschreibung:
+      'Die neue gynäkologische Praxis in Erkelenz. Schwangerschaft, Krebsvorsorge, Verhütung, Kinderwunschberatung und eine eigene Mädelssprechstunde.',
     imMenue: false,
   },
   {
     weg: '/leistungen/',
     label: 'Leistungen',
     titel: 'Leistungen — %PRAXIS_NAME%',
-    beschreibung: 'Vorsorge, Schwangerschaft, Verhütung und Beratung, Impfungen, Wechseljahre. Was jeweils dahintersteckt und wie lange es dauert.',
+    beschreibung:
+      'Schwangerschaft, Krebsvorsorge, Verhütung, Kinderwunschberatung, Mädelssprechstunde. Was jeweils dahintersteckt und wie es abläuft.',
     imMenue: true,
   },
   {
     weg: '/team/',
     label: 'Team',
     titel: 'Team — %PRAXIS_NAME%',
-    beschreibung: 'Wer Sie in der Praxis empfängt und behandelt. Werdegang, Schwerpunkte und warum die Praxis so arbeitet, wie sie arbeitet.',
+    beschreibung: 'Wer Sie in der Praxis empfängt und behandelt.',
     imMenue: true,
   },
   {
     weg: '/praxis/',
     label: 'Praxis',
-    titel: 'Praxis und Anfahrt — %PRAXIS_NAME%',
-    beschreibung: 'Öffnungszeiten, Anfahrt mit Bus, Bahn und Auto, Barrierefreiheit — und wie die Räume geschnitten sind.',
+    titel: 'Die Praxis — %PRAXIS_NAME%',
+    beschreibung: 'Die Räume der neuen Praxis in Erkelenz und wie Sie hineinkommen.',
     imMenue: true,
   },
   {
@@ -98,11 +84,18 @@ export const SEITEN: Seite[] = [
   {
     weg: '/termin/',
     label: 'Termin',
-    titel: 'Termin vereinbaren — %PRAXIS_NAME%',
-    beschreibung: 'Wie Sie einen Termin bekommen, wie lange es dauert und was Sie zum ersten Termin mitbringen.',
+    titel: 'Öffnungszeiten und Termine — %PRAXIS_NAME%',
+    beschreibung: 'Wann die Praxis geöffnet hat und wie Sie einen Termin bekommen.',
     imMenue: true,
   },
-]
+  {
+    weg: '/kontakt/',
+    label: 'Kontakt',
+    titel: 'Kontakt und Anfahrt — %PRAXIS_NAME%',
+    beschreibung: 'Anschrift, Telefon, Anfahrt mit Auto, Bus und Bahn — und welche Nummer im Notfall gilt.',
+    imMenue: true,
+  },
+];
 
 /** Was in der Fusszeile steht und nicht im Menü. Rechtlich Pflicht, aber kein Weg. */
 export const RECHT: Seite[] = [
@@ -120,20 +113,20 @@ export const RECHT: Seite[] = [
     beschreibung: 'Wie diese Website mit Ihren Daten umgeht.',
     imMenue: false,
   },
-]
+];
 
-export const MENUE = SEITEN.filter((s) => s.imMenue)
+export const MENUE = SEITEN.filter((s) => s.imMenue);
 
 /**
  * Welche Seite gerade offen ist — an der Adresse abgelesen, nicht gespeichert.
  *
- * Die Adresse ist die Wahrheit; ein zusätzlicher Zustand („aktive Seite") wäre eine
- * zweite, die beim ersten Zurück-Knopf falsch steht.
+ * Die Adresse ist die Wahrheit; ein zusätzlicher Zustand („aktive Seite") wäre
+ * eine zweite, die beim ersten Zurück-Knopf falsch steht.
  */
 export function aktiveSeite(pfad: string): Seite | undefined {
-  const sauber = pfad.replace(/index\.html$/, '')
+  const sauber = pfad.replace(/index\.html$/, '');
   return [...SEITEN, ...RECHT].find((s) => {
-    if (s.weg === '/') return sauber === '/' || sauber === ''
-    return sauber.endsWith(s.weg) || sauber.endsWith(s.weg.replace(/\/$/, ''))
-  })
+    if (s.weg === '/') return sauber === '/' || sauber === '';
+    return sauber.endsWith(s.weg) || sauber.endsWith(s.weg.replace(/\/$/, ''));
+  });
 }

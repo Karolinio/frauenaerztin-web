@@ -1,87 +1,121 @@
 /**
- * Design-Tokens. Einzige Quelle für Farbe, Grad, Abstand, Zeit.
- * Kein Wert aus dieser Datei wird woanders hartkodiert.
+ * Die Werte dieser Seite. Einzige Stelle.
+ *
+ * Grundlage ist `DIRECTION.md` vom 14.08.2026. Von der Fassung vom 07.08.2026
+ * („Beipackzettel, Aicher, Signalfarbe, Türkiston") ist hier kein Wert mehr übrig —
+ * ein halb übernommener Bestand sieht aus wie halb Aicher und halb Salbei, und
+ * genau das sieht man.
+ *
+ * ═══ Die wichtigste Regel dieser Datei ═══
+ *
+ * Salbei gibt es zweimal, und die beiden sind NICHT austauschbar:
+ *
+ *   helles Salbei   Fläche.   Als Text gemessen 2,33 — durchgefallen.
+ *   tiefes Salbei   Signal.   Als Text auf Weiß gemessen 7,88 — AAA.
+ *
+ * Damit man das nicht wissen muss, um es richtig zu machen, arbeitet der Code
+ * ausschliesslich mit den ROLLENNAMEN weiter unten. Wer eine Textfarbe aus `--flaeche-salbei`
+ * setzen will, liest im selben Moment, dass es falsch ist. Ein Kommentar hätte das nicht
+ * geschafft — der Name schafft es.
  */
 
 :root {
-  /* ── Farbe ─────────────────────────────────────────────────────────────
-     Genau eine Farbe bedeutet etwas: --clay markiert „der nächste Schritt".
-     Alles andere ist Papier, Tinte und Teal. */
-  --paper: oklch(97.5% 0.008 85);
-  --paper-deep: oklch(93.5% 0.012 85);
-  --ink: oklch(24% 0.02 200);
-  --ink-soft: oklch(48% 0.015 200);
-  --teal-deep: oklch(32% 0.05 195);
-  --teal: oklch(58% 0.07 190);
-  --clay: oklch(66% 0.12 45);
-  --clay-ink: oklch(38% 0.09 45);
-  /* Clay für Milchglas. Transmission dunkelt jede Farbe ab (Beer-Lambert);
-     dieselbe Farbe muss dafür heller angesetzt werden, sonst kippt sie ins
-     Braune. Wird ausschließlich im Grundriss des Showpiece benutzt. */
-  --clay-glas: oklch(80% 0.1 48);
+  /* ── Farbe ────────────────────────────────────────────────────────────────
+     Genau ihre drei: „viel weiß, etwas salbeigrün und warmes beige."
+     Nichts dazuerfunden. Gemessen mit packages/shared/src/kontrast.ts. */
 
-  /* Auf dunklem Grund liest Papier als Text, nicht als Fläche. */
-  --on-dark: oklch(94% 0.008 90);
-  --on-dark-soft: oklch(78% 0.012 100);
+  --papier: oklch(98.5% 0.004 95); /* Grund. Fast weiß, minimal warm */
+  --leinen: oklch(94% 0.012 85); /* warmes Beige. Zweite Fläche */
+  --leinen-tief: oklch(90% 0.016 82); /* dritte Fläche, Tabellenzeilen */
 
-  /* ── Typografie ────────────────────────────────────────────────────────
-     Fraunces trägt „jemand nimmt sich Zeit", Instrument Sans trägt
-     Lesbarkeit von 16 bis 75. */
-  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
-  --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  /* Text trägt einen grünen Stich, kein neutrales Grau. Neutral neben Salbei
+     sieht schmutzig aus; dieselbe Farbfamilie wirkt gewählt statt geerbt. */
+  --tinte: oklch(26% 0.012 150); /* Fließtext.    auf Weiß 14,79 · AAA */
+  --tinte-mtl: oklch(48% 0.014 150); /* Sekundärtext. auf Weiß  6,22 · AA  */
 
-  --text-hero: clamp(2.75rem, 1.1rem + 6.6vw, 6.75rem);
-  --text-section: clamp(2rem, 1.2rem + 2.6vw, 3.5rem);
-  --text-sub: clamp(1.375rem, 1.05rem + 1.1vw, 1.875rem);
+  --linie: oklch(88% 0.01 90); /* Haarlinien, immer 1px */
+
+  --salbei: oklch(72% 0.045 150); /* hell — Fläche */
+  --salbei-tief: oklch(42% 0.055 152); /* tief — Signal */
+
+  /**
+   * ── Die eine Textur ──────────────────────────────────────────────────────
+   *
+   * Feines Leinengewebe, 4 % Deckkraft, AUSSCHLIESSLICH auf Leinen-Flächen.
+   * Die Direktion nennt genau diese eine und schliesst alles andere aus: kein
+   * Korn, kein Rauschen, kein Verlauf.
+   *
+   * Zwei gekreuzte Streifenraster mit 3px Periode, beide gleich stark — mit
+   * ungleichen Werten kippt das Gewebe optisch in Cord. Bei normalem Betrachtungs-
+   * abstand sieht man kein Muster, sondern dass die Fläche eine Oberfläche hat
+   * — und genau das ist der Unterschied zwischen „beiger Kasten" und „Material".
+   *
+   * Der Ton ist --tinte, nicht Schwarz: ein neutrales Grau auf warmem Beige
+   * ergibt einen schmutzigen Schleier. Dieselbe Farbfamilie bleibt sauber.
+   */
+  --gewebe:
+    repeating-linear-gradient(90deg, oklch(26% 0.012 150 / 0.035) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(0deg, oklch(26% 0.012 150 / 0.035) 0 1px, transparent 1px 3px);
+
+  /* ── Rollen: hiermit wird gearbeitet, nicht mit den beiden Zeilen darüber ── */
+
+  /** Fläche in hellem Salbei. Hintergrund, Balken, Marke. Niemals Text. */
+  --flaeche-salbei: var(--salbei);
+
+  /**
+   * Das Signal. Es markiert GENAU EINE Sache: den nächsten Schritt.
+   * Erlaubt: Termin-Knopf · aktiver Menüpunkt · Fokusring · heutiger Tag in der
+   * Sprechzeitentabelle · aktive Leistung. Nirgends als grosse Fläche.
+   */
+  --signal: var(--salbei-tief);
+  --auf-signal: var(--papier); /* Weiß auf Signal: 7,88 · AAA */
+
+  /* ── Raster und Rhythmus ─────────────────────────────────────────────────
+     Kein gleichmässiges Polster überall — das ist der Vorlagen-Look. Der
+     Abstand zwischen zwei Sektionen ist ein anderer als der innerhalb einer. */
+
+  --schale: 78rem; /* Maximalbreite des Inhalts */
+  --schale-eng: 46rem; /* Fließtextspalten */
+  --rand: clamp(1.25rem, 0.9rem + 1.8vw, 3.5rem);
+
+  --raum-sektion: clamp(4.5rem, 3rem + 6vw, 9rem);
+  --raum-gross: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
+  --raum: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  --raum-klein: 0.75rem;
+
+  /* ── Typografie ──────────────────────────────────────────────────────────
+     Fraunces (Display) + Instrument Sans (Text). Beide selbst gehostet.
+     Die Referenz benutzt -apple-system — dort wurde nie eine Schrift gewählt.
+     Eine echte Paarung ist der billigste und grösste Vorsprung dieser Seite. */
+
+  --schrift-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --schrift-text: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+
+  --text-hero: clamp(2.5rem, 1rem + 5.6vw, 5.5rem);
+  --text-section: clamp(1.75rem, 1.1rem + 2.2vw, 3rem);
+  --text-unter: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
   --text-lead: clamp(1.125rem, 1.02rem + 0.42vw, 1.375rem);
-  --text-base: 1.125rem;
+  --text-base: 1.0625rem;
   --text-meta: 0.9375rem;
-  --text-micro: 0.8125rem;
 
-  --leading-tight: 1.06;
-  --leading-head: 1.14;
-  --leading-body: 1.65;
-
-  /* Laufweite wird mit dem Grad kleiner, nicht überall gleich. */
   --tracking-hero: -0.022em;
-  --tracking-head: -0.014em;
+  --tracking-head: -0.012em;
   --tracking-label: 0.14em;
 
-  --measure: 62ch;
-  --measure-narrow: 46ch;
+  --measure: 64ch;
 
-  /* ── Raum ──────────────────────────────────────────────────────────────
-     Sektionen atmen weit, Zeilen innerhalb einer Gruppe eng. Kein
-     gleichmäßiges Padding-Raster über die ganze Seite. */
-  --space-section: clamp(5rem, 3rem + 6vw, 10.5rem);
-  --space-block: clamp(2.5rem, 1.6rem + 3vw, 5rem);
-  --gutter: clamp(1.25rem, 0.4rem + 3.2vw, 4.5rem);
-  --shell: 1440px;
-  --content: 1180px;
+  /* ── Bewegung ────────────────────────────────────────────────────────────
+     Genau zwei Bewegungen auf der ganzen Seite, beide hat sie selbst benannt.
+     Alles Übrige taucht auf und tut sonst nichts. */
 
-  /* ── Kanten ────────────────────────────────────────────────────────────
-     Zwei Radien mit Bedeutung: hart für alles Bauliche (Bild, Glas,
-     Sektionskante), weich nur für Flächen, die auf Bedienung reagieren. */
-  --radius-hard: 2px;
-  --radius-soft: 12px;
+  --ease-ruhig: cubic-bezier(0.32, 0.72, 0, 1);
+  --dauer-portraet: 900ms; /* das Foto blendet ein */
+  --dauer-ruhig: 620ms; /* Inhalt taucht auf */
+  --dauer-mikro: 180ms; /* Hover, Fokus */
 
-  /* ── Tiefe ─────────────────────────────────────────────────────────────
-     Drei Schatten mit drei Aufgaben — nicht ein Schatten für alles. */
-  --shadow-lift: 0 1px 1px -0.5px oklch(24% 0.02 200 / 0.06), 0 10px 24px -16px oklch(24% 0.02 200 / 0.28);
-  --shadow-raised: 0 2px 3px -1px oklch(24% 0.02 200 / 0.08), 0 22px 48px -28px oklch(24% 0.02 200 / 0.38);
-  --shadow-image: 0 2px 6px -2px oklch(24% 0.02 200 / 0.14), 0 48px 92px -52px oklch(20% 0.03 200 / 0.55);
-  --shadow-glass:
-    inset 0 1px 0 0 color-mix(in oklch, var(--paper) 30%, transparent),
-    0 24px 60px -20px oklch(20% 0.03 200 / 0.45);
-
-  /* ── Zeit ──────────────────────────────────────────────────────────────*/
-  --duration-fast: 140ms;
-  --duration-normal: 320ms;
-  --duration-slow: 620ms;
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
-
-  /* ── Grain ─────────────────────────────────────────────────────────────
-     Feines Filmkorn über den dunklen Sektionen. Ein SVG, kein Bild-Request. */
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* ── Tippziele ───────────────────────────────────────────────────────────
+     44px ist keine Empfehlung, sondern die Untergrenze. In der alten Fassung
+     dieses Repos waren ausgerechnet die Notrufnummern die kleinsten Ziele der
+     ganzen Seite — 40px. Deshalb steht die Zahl hier und nicht in einer Regel. */
+  --tippziel: 44px;
 }

@@ -1,0 +1,100 @@
+/**
+ * Zweispaltig ab Tablet: Titel links, Text rechts.
+ *
+ * Der Titel steht damit AUF der Höhe des ersten Absatzes und nicht darüber —
+ * beim Überfliegen findet das Auge die Reihe der Titel als eigene Spalte, und
+ * genau so wird eine Leistungsseite gelesen. Eine Überschrift über dem Text
+ * hätte dieselbe Information und wäre nur nicht auffindbar.
+ */
+
+/**
+ * ═══ Warum diese Seite am Handy enger gesetzt ist als jede andere ═══
+ *
+ * Sieben Leistungen mit Titel, Merksatz und einem Absatz sind der längste Text
+ * der ganzen Website. Gemessen mit `engine/pruefen.mjs` bei 393×727: erst 9,2
+ * Bildschirmhöhen, nach dem Kürzen auf je einen Absatz 8,6 — die Grenze liegt
+ * bei 8.
+ *
+ * Gekürzt wird deshalb der WEISSRAUM und nicht der Inhalt. Grosszügige Abstände
+ * sind am Rechner Ruhe; am Handy, wo die Zeile ohnehin die volle Breite hat,
+ * sind sie nur Daumenarbeit zwischen zwei Absätzen.
+ */
+.leistungen {
+  padding-block: var(--raum);
+}
+
+/**
+ * Am Handy engere Abstände als am Rechner.
+ *
+ * Gemessen mit `scripts/qa-sicht.mjs` bei 393px: mit `--raum-gross` rundherum
+ * kam diese Seite auf 8,06 Bildschirmhöhen — über der Grenze von 8. Sieben
+ * Leistungen mit je drei Absätzen sind viel Text; wo die Zeile ohnehin die volle
+ * Breite hat, trägt der grosse Abstand nichts mehr, er kostet nur Daumen.
+ */
+.leistung {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--raum-klein);
+  padding-block: var(--raum);
+  border-top: 1px solid var(--linie);
+}
+
+.leistung:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.leistung__titel {
+  /* Damit der Sprung von der Startseite nicht unter der Kopfzeile landet. */
+  scroll-margin-top: 2rem;
+}
+
+.leistung__kurz {
+  color: var(--tinte);
+}
+
+.leistung__text > * + * {
+  margin-top: 0.9rem;
+}
+
+.leistungen__schluss {
+  margin-bottom: var(--raum);
+  max-width: 54ch;
+}
+
+/* Am Handy tragen die beiden Sektionen dieser Seite weniger Polster als
+   anderswo — siehe die Begründung oben. */
+@media (max-width: 47.99rem) {
+  .leistungen-seite .sektion {
+    padding-block: var(--raum-gross);
+  }
+
+  .leistungen-seite .seitenkopf {
+    padding-block: var(--raum-gross) var(--raum);
+  }
+
+  /* Der Merksatz läuft am Handy in Fliesstextgrösse. Er bleibt die Zeile, die
+     man beim Überfliegen liest — aber in einer Spalte von 45 Zeichen ist der
+     Grössensprung ohnehin kaum noch zu sehen, und er kostet sieben Mal Höhe. */
+  .leistung__kurz {
+    font-size: var(--text-base);
+    font-weight: 500;
+  }
+
+  .leistungen-seite .sektion:last-of-type {
+    padding-block: var(--raum);
+  }
+}
+
+@media (min-width: 48rem) {
+  .leistungen {
+    padding-block: var(--raum-gross);
+  }
+
+  .leistung {
+    grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+    gap: var(--raum-gross);
+    padding-block: var(--raum-gross);
+    align-items: start;
+  }
+}
