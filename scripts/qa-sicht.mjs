@@ -10,9 +10,14 @@ const BREITEN = [
   { name: '768', width: 768, height: 1024 },
   { name: '393', width: 393, height: 852 },
 ];
+/* Alle sieben Adressen aus src/seiten.ts, nicht sechs.
+   `aktuelles/` fehlte hier seit dem ersten Bau und wurde deshalb nie gemessen —
+   ausgerechnet die Seite, die die Aerztin selbst pflegt und die sich damit als
+   einzige ohne unser Zutun aendert. Eine ungemessene Seite ist eine Seite, von
+   der niemand merkt, wann sie kaputtgeht. */
 const SEITEN = process.argv[2]
   ? process.argv[2].split(',')
-  : ['', 'praxis/', 'kontakt/', 'termin/', 'leistungen/', 'team/'];
+  : ['', 'leistungen/', 'team/', 'praxis/', 'aktuelles/', 'termin/', 'kontakt/'];
 
 const browser = await chromium.launch({ channel: 'chrome' });
 const befund = [];
