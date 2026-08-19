@@ -497,9 +497,27 @@
   line-height: 1.7;
 }
 
+.termin__zeitliste li {
+  flex-wrap: wrap;
+}
+
 .termin__spanne {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0 0.55rem;
   font-variant-numeric: tabular-nums;
+}
+
+/* Die einzelne Spanne bleibt zusammen — der Umbruch passiert zwischen ihnen. */
+.termin__teil {
   white-space: nowrap;
+}
+
+.termin__teil + .termin__teil::before {
+  content: '·';
+  margin-right: 0.55rem;
+  color: var(--tinte-mtl);
 }
 
 /* Der Notfallblock: eigene Fläche, keine Umrandung. Er hebt sich durch Leinen

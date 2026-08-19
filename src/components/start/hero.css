@@ -271,3 +271,68 @@
     max-width: 38ch;
   }
 }
+
+/* ══ Die grosse Zeile kommt hervor ═══════════════════════════════════════════
+ *
+ * Bewegung 1 von zweien, die am 19.08.2026 dazukamen. Sie ist typografisch:
+ * die Zeile wird nicht eingeblendet und nicht bewegt, sondern FREIGEGEBEN —
+ * eine feste Kante, unter der sie hervorkommt.
+ *
+ * Der Unterschied ist nicht kosmetisch. Ein Fade sagt „hier lädt etwas nach",
+ * eine Maske sagt „hier war schon etwas, du siehst es jetzt". Bei einer
+ * Überschrift, die schon beim Laden im Bild steht, ist das Zweite die Wahrheit.
+ */
+
+.hero__maske {
+  display: block;
+  /* Die Kante. */
+  overflow: hidden;
+  /* Luft für Umlautpunkte oben und Unterlängen unten — sonst schneidet die
+     Maske dem „ü" in „für" die Punkte ab, und zwar dauerhaft, nicht nur
+     während der Bewegung. Der negative Aussenabstand nimmt die Luft für das
+     Layout wieder heraus, damit die Zeilenhöhe unverändert bleibt. */
+  padding-block: 0.1em 0.16em;
+  margin-block: -0.1em -0.16em;
+}
+
+.hero__hub {
+  display: block;
+  transform: translate3d(0, 108%, 0);
+  transition: transform 1100ms var(--ease-ruhig);
+}
+
+.hero--auf .hero__hub {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Die zweite Zeile folgt, statt gleichzeitig zu kommen. Sie trägt links das
+   Salbeiband und darf deshalb NICHT maskiert werden — eine Maske schnitte das
+   Band mit ab. Sie hebt sich stattdessen an, leicht verzögert. */
+.hero__zeile2 {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    opacity var(--dauer-ruhig) var(--ease-ruhig) 380ms,
+    transform var(--dauer-ruhig) var(--ease-ruhig) 380ms;
+}
+
+.hero--auf .hero__zeile2 {
+  opacity: 1;
+  transform: none;
+}
+
+/* Abgewählte Bewegung: alles steht sofort da, ohne Maske und ohne Versatz.
+   Die Überschrift ist die wichtigste Zeile der Seite — sie darf unter keinen
+   Umständen von einer Bewegung abhängen, die jemand abgeschaltet hat. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__hub,
+  .hero__zeile2 {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+
+  .hero__maske {
+    overflow: visible;
+  }
+}

@@ -33,7 +33,21 @@ const JOBS = [
   {
     from: '@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2',
     to: 'fraunces-var-latin.woff2',
-    // WONK festnageln (nicht gebraucht), die drei genutzten Achsen im Bereich lassen.
+    /* WONK festnageln, die drei genutzten Achsen im Bereich lassen.
+     *
+     * ═══ WONK ist nicht verfuegbar, auch wenn es so aussieht ═══
+     *
+     * Die Metadaten von @fontsource-variable/fraunces melden `WONK 0..1`, und
+     * das Paket liefert sogar eine eigene Datei `fraunces-latin-wonk-normal`.
+     * Gemessen am 19.08.2026 im Browser, per Pixelvergleich zweier Schnitte bei
+     * 150px: `font-variation-settings: 'WONK' 1` erzeugt in KEINER dieser
+     * Dateien ein anderes Bild — nicht in der subsetteten, nicht in der
+     * Rohdatei `fraunces-latin-full-normal`, nicht in der WONK-Datei selbst.
+     * In der von Google ausgelieferten Binaerdatei ist die Achse festgenagelt.
+     *
+     * Wer sie haben will, braucht das Original von undercasetype/Fraunces.
+     * Bis dahin: nicht noch einmal untersuchen. SOFT und opsz reagieren
+     * dagegen nachweislich — mit denen wird gearbeitet. */
     variationAxes: {
       WONK: 0,
       opsz: { min: 9, max: 144 },

@@ -1,0 +1,83 @@
+/**
+ * Die Aussage-Sektion. Die einzige farbige Fläche der Startseite.
+ *
+ * Sie ist bewusst FLACH: keine abgerundeten Ecken, kein Schatten, kein Rand.
+ * Eine Farbfläche, die zusätzlich Ecken und einen Schatten bekommt, ist eine
+ * Karte — und Karten sind auf dieser Seite verboten, weil `flat-with-light`
+ * Trennung über Flächenwechsel herstellt und nicht über Kästen.
+ */
+
+.aussage {
+  /* Randlos über die volle Breite. Die Fläche IST die Sektion, nicht ein Kasten
+     in einer Sektion. Deshalb kein `border-radius` und kein Innenabstand aussen. */
+  padding-block: clamp(4rem, 3rem + 5vw, 8rem);
+}
+
+.aussage__block {
+  /* Breit genug, dass die Fläche von der Schrift getragen wird.
+     Bei 34rem stand die Aussage auf einem 1440px-Farbfeld in der linken Hälfte
+     und rechts blieben 55 % leer — das liest sich nicht als Weissraum, sondern
+     als eine Sektion, die jemand nicht fertig gesetzt hat. Eine Farbfläche
+     verzeiht Leere deutlich schlechter als Papier: auf Weiss ist Leere der
+     Grund, auf Farbe ist sie ein Loch. */
+  max-width: 48rem;
+}
+
+/* ══ Die Fassungen ═════════════════════════════════════════════════════════
+ *
+ * Alle sechs Werte am 19.08.2026 im Browser gemessen, nicht gerechnet: die
+ * Farben stehen in `oklch()`, und das laesst sich nicht aus dem Stylesheet
+ * ablesen. Gemessen wurde ueber ein 1x1-Canvas — also an der Farbe, die
+ * tatsaechlich auf dem Schirm landet.
+ *
+ *                    Aussage   Zusatz/Etikett
+ *   dunkel            7,88       5,40           beide ueber AA
+ *   hell              6,34       4,76           beide ueber AA, knapper
+ *
+ * Ein frueherer Kommentar an dieser Stelle behauptete 9,4 fuer die helle
+ * Fassung und 5,9 fuer den Zusatz. Beides war geschaetzt und beides war falsch.
+ * Die helle Fassung ist der schwaechere Kontrast, nicht der staerkere — helles
+ * Salbei ist eben nur 72 % hell, und dunkle Tinte darauf gewinnt weniger als
+ * Papierweiss auf dem tiefen Ton. */
+
+/* Salbei tief als Fläche, Papier darauf — 7,88 : 1, AAA. */
+.aussage--dunkel {
+  background: var(--signal);
+}
+
+.aussage--dunkel .aussage__satz {
+  color: var(--auf-signal);
+}
+
+.aussage--dunkel .aussage__label,
+.aussage--dunkel .aussage__zusatz {
+  /* Nicht Papier auf voller Deckkraft: der Zusatz soll unter der Aussage
+     stehen, nicht neben ihr. 78 % ergibt gemessen 5,40 : 1 — über AA. */
+  color: color-mix(in oklch, var(--auf-signal) 78%, var(--signal));
+}
+
+/* Salbei hell als Fläche, Tinte darauf — 6,34 : 1. Bleibt hell. */
+.aussage--hell {
+  background: var(--flaeche-salbei);
+}
+
+.aussage--hell .aussage__satz {
+  color: var(--tinte);
+}
+
+.aussage--hell .aussage__label,
+.aussage--hell .aussage__zusatz {
+  color: color-mix(in oklch, var(--tinte) 82%, var(--flaeche-salbei));
+}
+
+.aussage__label {
+  margin-bottom: clamp(1rem, 0.7rem + 1.2vw, 1.75rem);
+}
+
+.aussage__zusatz {
+  margin-top: clamp(1.25rem, 0.9rem + 1.4vw, 2rem);
+  font-family: var(--schrift-text);
+  font-size: var(--text-lead);
+  line-height: 1.5;
+  max-width: 32ch;
+}

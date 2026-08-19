@@ -39,9 +39,30 @@
 }
 
 /* ── Rollen ─────────────────────────────────────────────────────────────────
-   Fraunces steht auf `SOFT 30`: die Serifen werden runder, die Kanten weicher.
-   Das ist der Unterschied zwischen „warm" und „Kanzlei" — bei SOFT 0 sieht
-   dieselbe Schrift juristisch aus.
+   Fraunces wird ueber ZWEI Achsen gesteuert, nicht ueber eine.
+
+   ═══ SOFT folgt dem Grad, statt ueberall gleich zu stehen ═══
+
+   Bis zum 19.08.2026 stand `SOFT 30` auf jeder Rolle. Eine variable Schrift, bei
+   der eine Achse ueberall denselben Wert hat, ist eine statische Schrift mit
+   Mehrgewicht — man bezahlt die Achse und benutzt sie nicht.
+
+   Jetzt traegt SOFT eine Regel: **weich wenn gross, klar wenn klein.**
+
+     t-hero     SOFT 70   Die Serifen werden rund und offen. Bei 120px ist das
+                          der Unterschied zwischen einer Praxis und einer Kanzlei.
+     t-aussage  SOFT 55
+     t-section  SOFT 40
+     t-unter    SOFT 20
+     klein      SOFT 10   Runde Terminals verschlucken bei 17px Details.
+
+   Das ist keine Kosmetik: SOFT veraendert die Strichenden. Bei grossem Grad hat
+   eine runde Endung Platz und wirkt warm; bei kleinem Grad frisst sie den
+   Kontrast, den das Auge zum Unterscheiden braucht.
+
+   Nachgemessen (Browser, 150px, 'Gynaekologie'): SOFT 0 = 1084,78px,
+   SOFT 100 = 1095,28px. Die Achse reagiert also nachweislich — anders als WONK,
+   siehe scripts/copy-fonts.mjs.
 
    `opsz` folgt der Grösse von Hand, weil `auto` in Safari nicht überall greift:
    grosse Grade bekommen 72 (offener, schmalere Strichstärkenkontraste), kleine
@@ -51,12 +72,12 @@
 .t-hero {
   font-family: var(--schrift-display);
   font-variation-settings:
-    'SOFT' 30,
-    'opsz' 72,
+    'SOFT' 70,
+    'opsz' 96,
     'WONK' 0;
   font-weight: 400;
   font-size: var(--text-hero);
-  line-height: 0.95;
+  line-height: 0.94;
   letter-spacing: var(--tracking-hero);
   color: var(--tinte);
   text-wrap: balance;
@@ -65,7 +86,7 @@
 .t-section {
   font-family: var(--schrift-display);
   font-variation-settings:
-    'SOFT' 30,
+    'SOFT' 40,
     'opsz' 48,
     'WONK' 0;
   font-weight: 400;
@@ -79,7 +100,7 @@
 .t-unter {
   font-family: var(--schrift-display);
   font-variation-settings:
-    'SOFT' 30,
+    'SOFT' 20,
     'opsz' 24,
     'WONK' 0;
   font-weight: 400;
@@ -87,6 +108,32 @@
   line-height: 1.18;
   letter-spacing: var(--tracking-head);
   color: var(--tinte);
+}
+
+/**
+ * Die Aussage — ein Satz pro Seite, gross gesetzt, ohne Nachbarn.
+ *
+ * Sie ist die einzige Rolle, die BEHAUPTET. Alles andere auf dieser Seite
+ * erklaert: was eine Untersuchung kostet, wie lange sie dauert, was mitzubringen
+ * ist. Genau deshalb braucht die Seite eine Stelle, an der sie einmal nicht
+ * erklaert — sonst liest sie sich durchgehend als Beipackzettel.
+ *
+ * Sie steht bewusst NICHT in --measure: 64 Zeichen bei 64px sind drei Zeilen
+ * Fliesstext in gross. Eine Aussage ist kurz, oder sie ist keine.
+ */
+.t-aussage {
+  font-family: var(--schrift-display);
+  font-variation-settings:
+    'SOFT' 55,
+    'opsz' 72,
+    'WONK' 0;
+  font-weight: 400;
+  font-size: var(--text-aussage);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-hero);
+  color: var(--tinte);
+  max-width: 26ch;
+  text-wrap: balance;
 }
 
 .t-lead {

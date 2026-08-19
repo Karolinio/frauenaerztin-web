@@ -24,15 +24,25 @@ import './hero.css';
  * zweite Zeile als Absatz wäre für Google eine Bildunterschrift.
  */
 export function Hero() {
+  const auf = useSchriftBereit();
+
   return (
-    <section className="hero" aria-labelledby="hero-titel">
+    <section className={`hero ${auf ? 'hero--auf' : ''}`} aria-labelledby="hero-titel">
       <div className="hero__text">
         <div className="hero__marke">
           <Marke alsUeberschrift />
         </div>
 
+        {/* Die grosse Zeile kommt unter einer Kante hervor, statt einzublenden.
+            Die Maske ist ein zweites Element, weil `overflow: hidden` auf dem
+            bewegten Element selbst nichts abschneiden kann — es muss der Rahmen
+            sein, der steht, und der Inhalt, der sich darin bewegt. */}
         <h1 id="hero-titel" className="hero__titel">
-          <span className="t-hero hero__zeile1">Medizin für Frauen</span>
+          <span className="t-hero hero__zeile1">
+            <span className="hero__maske">
+              <span className="hero__hub">Medizin für Frauen</span>
+            </span>
+          </span>
           <span className="hero__zeile2">Die neue gynäkologische Praxis in {praxis.ort}</span>
         </h1>
 
@@ -47,10 +57,11 @@ export function Hero() {
             In {praxis.ort} entsteht eine neue gynäkologische Praxis. Vorsorge, Schwangerschaft, Verhütung und
             Kinderwunsch — und eine eigene Sprechstunde für Mädchen und junge Frauen.
           </p>
-          <p>
-            Ich nehme mir für jede Untersuchung die Zeit, sie vorher zu erklären. Sie sollen wissen, was
-            gleich passiert, bevor es passiert — und Sie dürfen jederzeit sagen, dass Sie es nicht möchten.
-          </p>
+          {/* Der zweite Satz dieses Absatzes — „Sie sollen wissen, was gleich
+              passiert, bevor es passiert" — steht jetzt als eigene Sektion in
+              der grössten Schrift der Seite. Er ist die These der Praxis und
+              ging hier als Halbsatz unter. Siehe Aussage.tsx. */}
+          <p>Ich nehme mir für jede Untersuchung die Zeit, sie vorher zu erklären.</p>
         </div>
 
         <Praxisdaten />
@@ -59,6 +70,48 @@ export function Hero() {
       <Portraet />
     </section>
   );
+}
+
+/**
+ * Wann die grosse Zeile hervorkommen darf: erst wenn die Schrift steht.
+ *
+ * ═══ Warum nicht einfach beim Mounten ═══
+ *
+ * Weil Fraunces dann noch lädt. Die Zeile führe ihre Bewegung in der
+ * Ersatzschrift aus, käme zur Ruhe, und WÄHREND sie steht, tauschte der Browser
+ * die Schrift — bei 120px verschiebt sich dabei jede Zeile sichtbar. Die
+ * Bewegung wäre sauber und der Moment danach kaputt.
+ *
+ * `document.fonts.ready` ist genau die Zusage, die hier fehlt. Der Rückfall auf
+ * `setTimeout` ist keine Vorsicht, sondern Notwendigkeit: hängt das Versprechen
+ * (abgebrochene Ladung, Netz weg), stünde die Überschrift sonst dauerhaft
+ * unsichtbar hinter ihrer Maske. Eine unsichtbare Überschrift ist der teuerste
+ * Fehler, den diese Datei machen kann.
+ */
+function useSchriftBereit(): boolean {
+  const [bereit, setBereit] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setBereit(true);
+      return;
+    }
+
+    let abgebrochen = false;
+    const zeigen = () => {
+      if (!abgebrochen) setBereit(true);
+    };
+
+    document.fonts.ready.then(zeigen, zeigen);
+    const notausgang = window.setTimeout(zeigen, 1200);
+
+    return () => {
+      abgebrochen = true;
+      window.clearTimeout(notausgang);
+    };
+  }, []);
+
+  return bereit;
 }
 
 /**

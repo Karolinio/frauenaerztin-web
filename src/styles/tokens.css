@@ -91,7 +91,18 @@
   --schrift-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --schrift-text: 'Instrument Sans', system-ui, -apple-system, sans-serif;
 
-  --text-hero: clamp(2.5rem, 1rem + 5.6vw, 5.5rem);
+  /* Der Hero-Grad. Von 5,5rem auf 7,5rem angehoben.
+     Gemessen am 19.08.2026 bei 1440px: der alte Wert ergab 88px Hero gegen 48px
+     Sektionsueberschrift — Faktor 1,8. Das ist kein Groessenkontrast, das ist
+     eine Abstufung. Redaktionell gesetzte Seiten fahren Faktor 3 bis 4. Jetzt
+     120px gegen 48px, also 2,5 — und die Ueberschrift traegt endlich die Seite,
+     statt nur die groesste von mehreren aehnlichen zu sein. */
+  --text-hero: clamp(2.75rem, 0.9rem + 7.4vw, 7.5rem);
+
+  /* Die Aussage. Ein Satz pro Seite, gross gesetzt, ohne Nachbarn.
+     Sie sitzt zwischen Hero und Sektionsueberschrift und ist die einzige Stelle,
+     an der diese Seite etwas BEHAUPTET statt es zu erklaeren. */
+  --text-aussage: clamp(2rem, 0.9rem + 4vw, 5rem);
   --text-section: clamp(1.75rem, 1.1rem + 2.2vw, 3rem);
   --text-unter: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
   --text-lead: clamp(1.125rem, 1.02rem + 0.42vw, 1.375rem);

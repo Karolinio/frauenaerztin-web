@@ -1,7 +1,9 @@
 import { Hero } from '../components/start/Hero';
 import { Hinweiszeile } from '../components/start/Hinweiszeile';
 import { WerIchBin } from '../components/start/WerIchBin';
+import { Aussage } from '../components/start/Aussage';
 import { LeistungenAuszug } from '../components/start/LeistungenAuszug';
+import { Bilderband } from '../components/start/Bilderband';
 import { ErsterBesuch } from '../components/start/ErsterBesuch';
 import { TerminBlock } from '../components/start/TerminBlock';
 import '../components/start/start.css';
@@ -26,7 +28,9 @@ export default function Start() {
       <Hero />
       <Hinweiszeile />
       <WerIchBin />
+      <Aussage />
       <LeistungenAuszug />
+      <Bilderband />
       <ErsterBesuch />
       <TerminBlock />
     </>

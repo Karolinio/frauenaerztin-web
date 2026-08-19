@@ -73,9 +73,32 @@
 }
 
 @media (max-width: 34rem) {
+  /**
+   * Feste Spaltenbreiten, sonst sprengt die Tabelle das Fenster.
+   *
+   * `width: 100%` bindet eine Tabelle NICHT: bei automatischem Layout gewinnt
+   * die Mindestbreite des Inhalts. Mit beiden Zeitspalten gefüllt mass die
+   * Tabelle bei 393px 385px und stand damit 32px über ihrer Spalte — die Seite
+   * scrollte seitwärts. Sichtbar wurde das erst, seit echte Zeiten drinstehen;
+   * mit leeren Zellen passte sie immer.
+   *
+   * `fixed` zwingt sie in die Spalte, die Zeiten brechen dann an ihren
+   * Leerzeichen um. Ein Umbruch in der Tabelle ist allemal besser als eine
+   * Seite, die sich seitlich schieben lässt.
+   */
+  .zeiten__tabelle {
+    table-layout: fixed;
+  }
+
   .zeiten__tabelle th,
   .zeiten__tabelle td {
     padding-inline: 0.4rem;
     font-size: var(--text-meta);
+  }
+
+  /* Der Tag bekommt mehr Platz als die Zeiten: „Samstag und Sonntag" ist das
+     längste Wort der Tabelle, „08:00 – 12:30" das berechenbarste. */
+  .zeiten__tabelle th:first-child {
+    width: 38%;
   }
 }

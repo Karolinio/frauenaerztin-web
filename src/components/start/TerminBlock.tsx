@@ -100,8 +100,19 @@ export function TerminBlock() {
                     {naechsteZeiten.map((z) => (
                       <li key={z.tag}>
                         <span>{z.tag}</span>
+                        {/* Jede Spanne ein eigenes Element, statt einer Zeichenkette.
+                            Als „08:00 – 12:30 · 15:00 – 18:00" mit `nowrap` war die
+                            Zeile bei 393px 223px breit und schob die Seite um 96px
+                            seitlich heraus — sichtbar erst, seit hier echte Zeiten
+                            stehen. Jetzt bricht es ZWISCHEN den Spannen um, und
+                            jede einzelne bleibt zusammen: „08:00 –\n12:30" wäre
+                            in einer Zeittabelle schlimmer als ein Umbruch. */}
                         <span className="termin__spanne">
-                          {[z.vormittag, z.nachmittag].filter(Boolean).join(' · ')}
+                          {[z.vormittag, z.nachmittag].filter(Boolean).map((t) => (
+                            <span className="termin__teil" key={t}>
+                              {t}
+                            </span>
+                          ))}
                         </span>
                       </li>
                     ))}
