@@ -281,10 +281,15 @@
 
 @media (min-width: 48rem) {
   .auszug__punkt {
-    /* 19.5rem: „Kinderwunschberatung" ist bei 28px Fraunces rund 290px breit.
-       Die Spalte bemisst sich am längsten Wort, nicht am Durchschnitt — sonst
-       liegen genau bei diesem einen Eintrag Name und Satz übereinander. */
-    grid-template-columns: 3.25rem minmax(0, 19.5rem) minmax(0, 1fr) 2.5rem;
+    /* 24rem, gemessen am längsten Wort — nicht geschätzt.
+       „Kinderwunschberatung" ist bei 34px Fraunces 367px breit (Browser,
+       19.08.2026, Range über den Textinhalt). Bei den vorherigen 19,5rem = 312px
+       lief es 55px aus seiner Spalte und schob sich in die Beschreibung; die
+       Kastengrenzen ueberlappten dabei NICHT, nur der Text — ein Vergleich der
+       Rechtecke haette das nie gefunden.
+       Die Spalte bemisst sich am längsten Wort, nicht am Durchschnitt. Wer die
+       Schriftgroesse hier anfasst, misst diesen Wert neu. */
+    grid-template-columns: 3.25rem minmax(0, 24rem) minmax(0, 1fr) 2.5rem;
     grid-template-areas: 'nr name satz pfeil';
     align-items: baseline;
     padding-block: 1.5rem;

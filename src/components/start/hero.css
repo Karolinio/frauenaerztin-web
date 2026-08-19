@@ -70,7 +70,10 @@
   line-height: 1.4;
   letter-spacing: 0;
   color: var(--tinte);
-  max-width: 26ch;
+  /* 34ch statt 26ch: bei 26ch stand „Erkelenz" allein auf der zweiten Zeile.
+     Ein Schusterjunge unter einer 120px-Ueberschrift ist kein Detail — er ist
+     das Erste, was neben der grossen Zeile auffaellt. */
+  max-width: 34ch;
 }
 
 .hero__bild {
