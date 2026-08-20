@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { praxis } from '../../praxis.config';
 import { zeiten, hatZeiten, istHeute } from '../../inhalt';
 import { Marke } from '../ui/Marke';
@@ -25,11 +25,12 @@ import './hero.css';
  */
 export function Hero() {
   const auf = useSchriftBereit();
+  const marke = useAndocken();
 
   return (
     <section className={`hero ${auf ? 'hero--auf' : ''}`} aria-labelledby="hero-titel">
       <div className="hero__text">
-        <div className="hero__marke">
+        <div className="hero__marke" ref={marke}>
           <Marke alsUeberschrift />
         </div>
 
@@ -70,6 +71,61 @@ export function Hero() {
       <Portraet />
     </section>
   );
+}
+
+/**
+ * Das Andocken: solange das grosse Logo im Bild ist, bleibt die Kopfzeile leer.
+ *
+ * ═══ Warum ein Attribut am `<html>` und kein gemeinsamer Zustand ═══
+ *
+ * Weil Hero und Kopfzeile keine gemeinsame Wurzel haben, die den Zustand halten
+ * könnte — die Kopfzeile steht im Rahmen, der Hero in der Seite. Die
+ * Alternativen wären ein Kontext quer durch die ganze Anwendung oder ein Ereignis
+ * zwischen zwei Komponenten. Beides ist mehr Maschinerie als die Sache wert ist:
+ * es geht um ein Ja/Nein, das nur die Gestaltung interessiert, und dafür ist ein
+ * Attribut am Wurzelelement das ehrlichste Mittel — CSS liest es direkt.
+ *
+ * ═══ Warum `useLayoutEffect` und nicht `useEffect` ═══
+ *
+ * Weil der Beobachter seinen ersten Befund erst nach dem ersten Bild liefert.
+ * Bis dahin stünde die Marke in der Kopfzeile sichtbar da und verschwände dann —
+ * ein Aufblitzen genau im ersten Moment, den jemand von der Seite sieht.
+ * `useLayoutEffect` setzt das Attribut VOR dem ersten Bild.
+ *
+ * ═══ Warum beim Verlassen aufgeräumt wird ═══
+ *
+ * Weil das Attribut am `<html>` hängt und die Startseite verlassen werden kann.
+ * Bliebe es stehen, wäre die Kopfzeile auf der nächsten Seite dauerhaft leer —
+ * und niemand käme auf die Idee, den Grund im Hero zu suchen.
+ */
+function useAndocken() {
+  const knoten = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const el = knoten.current;
+    if (!el) return;
+
+    const wurzel = document.documentElement;
+    wurzel.dataset.markeImHero = 'ja';
+
+    const beobachter = new IntersectionObserver(
+      ([eintrag]) => {
+        wurzel.dataset.markeImHero = eintrag?.isIntersecting ? 'ja' : 'nein';
+      },
+      /* Erst wenn das Logo ganz oben hinaus ist. Der Einzug von oben sorgt dafür,
+         dass die Marke nicht schon auftaucht, während das Logo noch halb unter
+         der Kopfzeile hervorschaut — dann stünden beide gleichzeitig da. */
+      { rootMargin: '-72px 0px 0px 0px', threshold: 0 },
+    );
+
+    beobachter.observe(el);
+    return () => {
+      beobachter.disconnect();
+      delete wurzel.dataset.markeImHero;
+    };
+  }, []);
+
+  return knoten;
 }
 
 /**

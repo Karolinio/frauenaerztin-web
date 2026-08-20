@@ -101,3 +101,52 @@
     border-left-color: var(--signal);
   }
 }
+
+/* ══ Das Logo dockt an ═══════════════════════════════════════════════════════
+ *
+ * Auf der Startseite steht das Logo gross im Hero. Solange es dort sichtbar ist,
+ * waere dasselbe Logo 40px darueber in der Kopfzeile eine Dopplung — zweimal
+ * dieselbe Marke im ersten Bild, und keine davon wirkt.
+ *
+ * Also: die Kopfzeile ist zunaechst leer und BEKOMMT die Marke in dem Moment,
+ * in dem das grosse Logo nach oben hinausgescrollt ist. Es wandert nicht wirklich
+ * — es wird an der einen Stelle frei und an der anderen gesetzt, und weil beide
+ * an derselben waagerechten Kante sitzen, liest das Auge es als Andocken.
+ *
+ * `visibility` und nicht nur `opacity`: ein unsichtbarer, aber fokussierbarer
+ * Verweis ist eine Falle fuer die Tastatur — man springt hin und sieht nichts.
+ * `visibility: hidden` nimmt ihn aus der Tabulatorfolge und laesst sich trotzdem
+ * ueberblenden.
+ *
+ * Ohne das Attribut ist die Marke sichtbar. Das ist der Zustand jeder Unterseite
+ * und der Zustand ohne JavaScript — im Zweifel steht die Marke da.
+ */
+[data-marke-im-hero='ja'] .kopf .marke {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.kopf .marke {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 420ms var(--ease-ruhig),
+    transform 420ms var(--ease-ruhig),
+    visibility 420ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kopf .marke {
+    transition: none;
+  }
+
+  /* Ohne Bewegung gibt es kein Andocken — dann steht die Marke einfach immer
+     da. Ein Element, das ohne Uebergang erscheint und verschwindet, flackert. */
+  [data-marke-im-hero='ja'] .kopf .marke {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+}

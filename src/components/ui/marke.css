@@ -49,8 +49,23 @@
   width: auto;
 }
 
+/**
+ * Das Logo im Hero. Deutlich groesser als die 4rem, die hier bis zum 20.08.2026
+ * standen — die waren fuer eine Wortmarke aus Fraunces bemessen.
+ *
+ * Ihr Logo ist ein Querformat-Lockup (860 x 329, Verhaeltnis 2,6 : 1). Bei 4rem
+ * Hoehe waere es 167px breit und saesse als Briefkopf ueber der Ueberschrift.
+ * Bei 7rem sind es 292px — gross genug, dass die Blase und die Figur darin
+ * lesbar sind, und das ist der Teil des Logos, den man wiedererkennt.
+ */
 .marke--gross .marke__logo {
-  height: clamp(2.75rem, 2rem + 2vw, 4rem);
+  /* Gemessen am 20.08.2026: bei 7rem Deckelung stand das Logo 240px breit da
+     und die Wortmarke darin war unleserlich. Ihr Lockup ist 2,6 : 1 quer, und
+     die Schrift belegt darin nur die rechten zwei Drittel der Hoehe — was bei
+     einem breiten Logo gross aussieht, ist fuer die Schrift darin klein.
+     Bei 9rem sind es rund 370px, also gut die Haelfte der linken Heros-Spalte:
+     ein Briefkopf, kein Aufkleber. */
+  height: clamp(4rem, 2.6rem + 6.2vw, 9rem);
 }
 
 /* Die Fassung im Hero. Sie trägt den Namen der Praxis über der grossen Zeile

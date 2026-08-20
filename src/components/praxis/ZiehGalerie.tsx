@@ -43,14 +43,15 @@ interface Kachel {
 }
 
 /**
- * Die vier Slots. Nach der Eröffnung wird hier die Datei getauscht — gleiche
- * Masse, gleiche Position, kein Umbau. Siehe `public/bilder/PLATZHALTER.md`.
+ * Die vier Slots von `/praxis/`. Nach der Eröffnung wird hier die Datei
+ * getauscht — gleiche Masse, gleiche Position, kein Umbau. Siehe
+ * `public/bilder/PLATZHALTER.md`.
  *
  * Die Bildunterschriften sagen, was WIRKLICH zu sehen ist. Eine Materialstudie
  * als „unser Wartezimmer" auszugeben wäre eine Aussage über einen Ort, den eine
  * Patientin betreten wird — und den es noch nicht gibt.
  */
-const KACHELN: readonly Kachel[] = [
+export const PRAXIS_KACHELN: readonly Kachel[] = [
   {
     datei: 'praxis-01.webp',
     breite: 1400,
@@ -81,12 +82,93 @@ const KACHELN: readonly Kachel[] = [
   },
 ];
 
+/**
+ * Die drei Materialstudien der Startseite.
+ *
+ * Sie standen bis zum 20.08.2026 in einem gestaffelten Band, das beim Scrollen
+ * wanderte. Yvonne wollte stattdessen schieben können — also stehen sie jetzt
+ * in derselben Reihe wie die Praxisbilder, nur kleiner und ohne Adresskarte.
+ *
+ * Keins der drei zeigt einen Raum. Sie behaupten nichts über einen Ort, den eine
+ * Patientin betreten wird, und müssen deshalb nach der Eröffnung auch nicht
+ * getauscht werden — anders als die Slots auf `/praxis/`.
+ */
+export const MATERIAL_KACHELN: readonly Kachel[] = [
+  {
+    datei: 'material-wandkante.webp',
+    breite: 1100,
+    hoehe: 821,
+    alt: 'Nahaufnahme der Kante, an der eine warmweisse Kalkputzwand auf eine salbeigrün gestrichene Fläche trifft.',
+    bildunterschrift: 'Kalkputz und Salbei',
+  },
+  {
+    datei: 'material-leinen.webp',
+    breite: 900,
+    hoehe: 1205,
+    alt: 'Gefaltetes ungefärbtes Leinen auf heller Putzfläche, das Streiflicht zeichnet die einzelnen Fäden nach.',
+    bildunterschrift: 'Leinen im Streiflicht',
+  },
+  {
+    datei: 'material-karten.webp',
+    breite: 760,
+    hoehe: 1018,
+    alt: 'Ein kleiner Stapel unbedruckter warmweisser Karten auf naturbelassenem Leinen, die Schatten fallen nach rechts unten.',
+    bildunterschrift: 'Papier auf Leinen',
+  },
+  {
+    datei: 'material-eiche.webp',
+    breite: 1000,
+    hoehe: 747,
+    alt: 'Helle Eichenfläche im Streiflicht, die Maserung wirft feine Schatten nach rechts unten.',
+    bildunterschrift: 'Eiche im Streiflicht',
+  },
+  {
+    datei: 'material-salbei.webp',
+    breite: 800,
+    hoehe: 800,
+    alt: 'Ein frischer Salbeizweig mit vier Blättern auf warmweissem Papier, der Schatten fällt nach rechts unten.',
+    bildunterschrift: 'Salbei',
+  },
+];
+
 /** Wie stark der Schwung nachläuft. Aus dem Gefühl gedreht, nicht aus einer Formel. */
 const NACHLAUF_MS = 240;
 /** Ab hier gilt eine Zeigerbewegung als Ziehen und nicht mehr als Klick. */
 const ZIEH_SCHWELLE = 6;
 
-export function ZiehGalerie() {
+/**
+ * ═══ Warum die Galerie jetzt zweimal vorkommt ═══
+ *
+ * Weil Yvonne es am 20.08.2026 ausdrücklich so wollte: die Bilder sollen sich
+ * von links nach rechts schieben lassen, und die Parallaxe auf der Startseite
+ * soll weg. Dort stand bis dahin ein gestaffeltes Bilderband, das beim Scrollen
+ * wanderte — technisch sauber, aber eben nicht das, was sie bestellt hat.
+ *
+ * Die Direktion sagte „genau EIN Element mit voller Tiefe". Das galt gegen drei
+ * konkurrierende Showpieces und bleibt richtig — deshalb wird hier nicht eine
+ * zweite Mechanik gebaut, sondern DIESE wiederverwendet. Zwei Sektionen, die
+ * sich gleich anfassen, sind eine Handschrift; zwei Sektionen, die sich
+ * verschieden anfassen, sind ein Demo-Reel.
+ *
+ * Die Startseiten-Fassung ist die leisere: kleinere Kacheln, keine Adresskarte
+ * am Ende. Die Adresse steht dort schon im Terminblock, und ein zweiter
+ * „nächster Schritt" auf derselben Seite ist keiner.
+ */
+export function ZiehGalerie({
+  kacheln = PRAXIS_KACHELN,
+  titel = 'Die Räume',
+  lead = 'Die Praxis wird gerade gebaut, fotografiert ist sie noch nicht. Solange stehen hier Material- und Lichtstudien — der Putz, das Leinen, das Licht, mit dem eingerichtet wird. Nach der Eröffnung stehen an denselben Stellen die echten Fotos.',
+  kennung = 'galerie-titel',
+  mitKarte = true,
+  klein = false,
+}: {
+  kacheln?: readonly Kachel[];
+  titel?: string;
+  lead?: string;
+  kennung?: string;
+  mitKarte?: boolean;
+  klein?: boolean;
+} = {}) {
   const spur = useRef<HTMLDivElement>(null);
   const [balken, setBalken] = useState({ breite: 0, links: 0 });
   const laeuft = useRef(0);
@@ -279,16 +361,12 @@ export function ZiehGalerie() {
   const anschriftSteht = steht(praxis.adresse.strasse) && steht(praxis.adresse.plz);
 
   return (
-    <section className="galerie" aria-labelledby="galerie-titel">
+    <section className={`galerie ${klein ? 'galerie--klein' : ''}`} aria-labelledby={kennung}>
       <div className="schale">
-        <h2 id="galerie-titel" className="t-section galerie__titel">
-          Die Räume
+        <h2 id={kennung} className="t-section galerie__titel">
+          {titel}
         </h2>
-        <p className="t-body galerie__lead">
-          Die Praxis wird gerade gebaut, fotografiert ist sie noch nicht. Solange stehen hier Material- und
-          Lichtstudien — der Putz, das Leinen, das Licht, mit dem eingerichtet wird. Nach der Eröffnung stehen
-          an denselben Stellen die echten Fotos.
-        </p>
+        <p className="t-body galerie__lead">{lead}</p>
         <p className="t-meta galerie__anleitung">
           Zum Verschieben ziehen oder wischen. Mit der Tabulatortaste hineinspringen, dann mit den Pfeiltasten
           weiter.
@@ -304,7 +382,7 @@ export function ZiehGalerie() {
         onPointerCancel={hoch}
         onClickCapture={klickSperre}
       >
-        {KACHELN.map((k, i) => (
+        {kacheln.map((k, i) => (
           <figure
             key={k.datei}
             className="galerie__kachel"
@@ -329,31 +407,35 @@ export function ZiehGalerie() {
         ))}
 
         {/* Am Ende der Reihe steht kein weiteres Bild, sondern der nächste
-            Schritt. Die Galerie endet dort, wo etwas zu tun ist. */}
-        <div className="galerie__karte" tabIndex={0} onKeyDown={taste}>
-          <p className="t-label">Hierher kommen Sie</p>
-          <address className="galerie__adresse">
-            {anschriftSteht ? (
-              <>
-                {praxis.adresse.strasse}
-                <br />
-                {praxis.adresse.plz} {praxis.adresse.ort}
-              </>
-            ) : (
-              <>
-                <span className="luecke">Strasse und Hausnummer</span>
-                <br />
-                <span className="luecke">PLZ</span> {praxis.adresse.ort}
-              </>
-            )}
-          </address>
-          <a className="knopf galerie__knopf" href={weg('/termin/')}>
-            Termin und Zeiten
-          </a>
-          <a className="link galerie__weg" href={weg('/kontakt/')}>
-            Anfahrt und Parken
-          </a>
-        </div>
+            Schritt. Die Galerie endet dort, wo etwas zu tun ist.
+            Auf der Startseite entfällt die Karte: die Adresse steht dort schon
+            im Terminblock, und zwei „nächste Schritte" sind keiner. */}
+        {mitKarte ? (
+          <div className="galerie__karte" tabIndex={0} onKeyDown={taste}>
+            <p className="t-label">Hierher kommen Sie</p>
+            <address className="galerie__adresse">
+              {anschriftSteht ? (
+                <>
+                  {praxis.adresse.strasse}
+                  <br />
+                  {praxis.adresse.plz} {praxis.adresse.ort}
+                </>
+              ) : (
+                <>
+                  <span className="luecke">Strasse und Hausnummer</span>
+                  <br />
+                  <span className="luecke">PLZ</span> {praxis.adresse.ort}
+                </>
+              )}
+            </address>
+            <a className="knopf galerie__knopf" href={weg('/termin/')}>
+              Termin und Zeiten
+            </a>
+            <a className="link galerie__weg" href={weg('/kontakt/')}>
+              Anfahrt und Parken
+            </a>
+          </div>
+        ) : null}
       </div>
 
       <div className="schale">

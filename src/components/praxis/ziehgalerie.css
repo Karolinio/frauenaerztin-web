@@ -209,3 +209,25 @@
   min-width: 2rem;
   background: var(--signal);
 }
+
+/* ══ Die leisere Fassung auf der Startseite ══════════════════════════════════
+ *
+ * Dieselbe Mechanik, kleinerer Auftritt. Die Direktion sagt „genau EIN Element
+ * mit voller Tiefe" — das bleibt `/praxis/`. Hier steht dieselbe Geste eine
+ * Nummer kleiner, damit die Startseite nicht mit ihrer eigenen Unterseite
+ * konkurriert.
+ *
+ * Gebaut als Abwandlung und nicht als zweite Komponente: zwei Galerien, die
+ * sich verschieden anfassen, wären zwei Mechaniken für dieselbe Sache — und die
+ * driften auseinander, sobald jemand eine davon anfasst.
+ */
+.galerie--klein .galerie__kachel {
+  /* 62 % der grossen Kachel. Damit passen am Rechner gut drei ins Bild statt
+     zwei, und die angeschnittene vierte Kante bleibt sichtbar — sie ist das
+     Einzige, was ohne Worte sagt, dass es weitergeht. */
+  height: clamp(13rem, 9rem + 14vw, 21rem);
+}
+
+.galerie--klein .galerie__lead {
+  max-width: 52ch;
+}

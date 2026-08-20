@@ -27,9 +27,16 @@ export type Offen<T> = T | null;
 
 /* ══ Der Demo-Schalter ════════════════════════════════════════════════════
  *
- * Solange er `true` ist, zeigt die Seite ERFUNDENE Werte — Name, Anschrift,
- * Telefonnummer, Sprechzeiten. Sie stehen hier, damit die Gestaltung an einer
- * gefüllten Seite beurteilt werden kann und nicht an einem Lückenraster.
+ * Solange er `true` ist, zeigt die Seite ERFUNDENE Werte — Anschrift,
+ * Telefonnummer, Sprechzeiten, Kammer. Sie stehen hier, damit die Gestaltung an
+ * einer gefüllten Seite beurteilt werden kann und nicht an einem Lückenraster.
+ *
+ * ═══ Was NICHT mehr erfunden ist (Stand 20.08.2026) ═══
+ *
+ * Praxisname, Logo, Titel und Name der Ärztin sowie der Eröffnungstag stehen
+ * ohne `demo()` da — sie sind bestätigt: das Logo kam von ihr und trägt den
+ * Namen, den Eröffnungstag hat sie genannt (1. November). Diese Werte
+ * überstehen `DEMO = false` und müssen es auch.
  *
  * ═══ Warum ein Schalter und nicht einfach eingetragene Werte ═══
  *
@@ -80,7 +87,7 @@ export const praxis = {
    * anders als ein ausgedachter Eigenname, der auf jeder Seite stünde und beim
    * Ausliefern übersehen würde.
    */
-  name: demo('Praxis für Frauenheilkunde Dr. Berger'),
+  name: 'Frauenarztpraxis Dr. med. Yvonne Erkens',
 
   /**
    * Ihr Logo, sobald es fertig ist: „ist hoffentlich bald fertig, würde ich dir
@@ -90,7 +97,15 @@ export const praxis = {
    * Kopfzeile, Hero, Fusszeile und Rechtsseiten folgen von selbst — das ist der
    * ganze Grund, warum die Marke eine eigene Komponente ist.
    */
-  logo: null as Offen<{
+  logo: {
+    src: '/bilder/logo.webp',
+    /* Die Bildbeschreibung beschreibt, was zu SEHEN ist — nicht, dass es ein
+       Logo ist. Wer die Seite vorgelesen bekommt, braucht den Namen der Praxis
+       an dieser Stelle, nicht das Wort „Logo". */
+    alt: 'Frauenarztpraxis Dr. med. Yvonne Erkens',
+    breite: 860,
+    hoehe: 329,
+  } as Offen<{
     readonly src: string;
     readonly alt: string;
     readonly breite: number;
@@ -99,10 +114,9 @@ export const praxis = {
 
   aerztin: {
     /** „Dr. med." oder nichts. Ein Doktortitel, den jemand nicht hat, ist strafbar. */
-    titel: demo('Dr. med.'),
-    vorname: demo('Yvonne'),
-    /** ERFUNDEN. Ihr echter Nachname ist nicht bekannt und wird nicht geraten. */
-    nachname: demo('Berger'),
+    titel: 'Dr. med.',
+    vorname: 'Yvonne',
+    nachname: 'Erkens',
     /** Die geschützte Berufsbezeichnung. Muss mit der Kammerurkunde übereinstimmen. */
     fachbezeichnung: demo('Fachärztin für Frauenheilkunde und Geburtshilfe'),
   },
@@ -123,7 +137,7 @@ export const praxis = {
   ort: 'Erkelenz',
 
   /** Der Eröffnungstag. Bis er feststeht, wird er nirgends behauptet. */
-  eroeffnung: demo('1. Oktober 2026'),
+  eroeffnung: '1. November 2026',
 
   adresse: {
     strasse: demo('Kölner Straße 24'),
