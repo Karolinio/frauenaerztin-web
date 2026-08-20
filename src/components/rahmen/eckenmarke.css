@@ -1,0 +1,53 @@
+/**
+ * Das Wasserzeichen unten rechts.
+ *
+ * Es haengt an derselben Eigenschaft wie das Andocken in der Kopfzeile:
+ * `data-marke-im-hero` am `<html>`, gesetzt vom Hero. Eine Quelle, zwei
+ * Wirkungen — ein zweiter Beobachter fuer dieselbe Frage waere die Falle
+ * `zwei-listen-die-driften` in ihrer Laufzeitform.
+ *
+ * Ohne das Attribut (jede Unterseite, jeder Zustand ohne JavaScript) steht es
+ * da. Genau so haelt es die Fassung bei physio-mack auch.
+ */
+.eckenmarke {
+  position: fixed;
+  right: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+  bottom: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+  /* Ueber dem Inhalt, unter der Kopfzeile. Die Kopfzeile traegt dieselbe Marke
+     und darf nie von ihrem eigenen Wasserzeichen verdeckt werden. */
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0.62;
+  transition: opacity 620ms var(--ease-ruhig);
+}
+
+.eckenmarke img {
+  display: block;
+  width: clamp(7rem, 5rem + 6vw, 12rem);
+  height: auto;
+}
+
+/* Solange das grosse Logo im Hero steht, waere das Wasserzeichen die dritte
+   Marke im selben Bild. Es kommt erst, wenn der Hero durch ist. */
+[data-marke-im-hero='ja'] .eckenmarke {
+  opacity: 0;
+}
+
+/**
+ * Am Handy weg.
+ *
+ * Bei 393px liegt es unweigerlich auf dem Inhalt — und der Inhalt ist hier
+ * eine Telefonnummer oder ein Termin-Knopf. `pointer-events: none` verhindert,
+ * dass es Klicks frisst, aber nicht, dass es Text verdeckt.
+ */
+@media (max-width: 48rem) {
+  .eckenmarke {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eckenmarke {
+    transition: none;
+  }
+}

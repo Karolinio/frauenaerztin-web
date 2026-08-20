@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Kopfzeile } from './components/rahmen/Kopfzeile';
 import { Fusszeile } from './components/rahmen/Fusszeile';
+import { Eckenmarke } from './components/rahmen/Eckenmarke';
 
 /**
  * Der Rahmen jeder Seite: Sprunglink, Kopfzeile, Inhalt, Fusszeile.
@@ -30,6 +31,7 @@ export function Seite({ children }: { children: ReactNode }) {
       <Kopfzeile />
       <main id="inhalt">{children}</main>
       <Fusszeile />
+      <Eckenmarke />
     </>
   );
 }
