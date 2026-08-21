@@ -11,6 +11,25 @@
   /* Randlos über die volle Breite. Die Fläche IST die Sektion, nicht ein Kasten
      in einer Sektion. Deshalb kein `border-radius` und kein Innenabstand aussen. */
   padding-block: clamp(4rem, 3rem + 5vw, 8rem);
+
+  /* Bezugspunkt für die Figur, die auf der Oberkante dieser Sektion sitzt. */
+  position: relative;
+
+  /*
+   * `clip` und ausdrücklich NICHT `hidden`.
+   *
+   * Die Figur ragt nach oben aus dieser Sektion heraus — das ist ihr ganzer
+   * Zweck. `overflow-x: hidden` wäre hier fatal: sobald eine Achse `hidden`
+   * ist, zwingt CSS die andere von `visible` auf `auto`, und die obere Hälfte
+   * der Figur wäre abgeschnitten. `clip` hat diese Nebenwirkung nicht — die
+   * senkrechte Achse bleibt wirklich `visible`.
+   *
+   * Gebraucht wird es, weil die Figur am Handy bewusst über die rechte Kante
+   * hinausläuft. Gemessen am 21.08.2026 bei 393px: ohne diese Zeile liess sich
+   * die Seite seitlich schieben.
+   */
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .aussage__block {

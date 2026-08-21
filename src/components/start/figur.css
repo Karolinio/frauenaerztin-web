@@ -1,0 +1,130 @@
+/**
+ * Die Figur auf der Naht.
+ *
+ * ═══ Die Geometrie ═══
+ *
+ * Sie sitzt in der Aussage-Sektion und wird um ihre halbe Hoehe nach OBEN
+ * gezogen. Damit liegt ihre Mitte exakt auf der Oberkante der Sektion — also
+ * auf der Kante zwischen Beige und Salbei. Oberhalb davon steht sie auf Beige,
+ * unterhalb auf Salbei.
+ *
+ * Genau deshalb darf die Aussage-Sektion kein `overflow: hidden` bekommen. Wer
+ * das spaeter setzt, schneidet die obere Haelfte ab und wundert sich ueber eine
+ * halbe Frau.
+ */
+.figur {
+  position: absolute;
+  top: 0;
+  /* Rechts, weil der Textblock links steht (max-width 48rem in der Schale).
+     Auf der Naht mittig waere sie schoen und wuerde den Satz zerschneiden. */
+  right: clamp(1rem, -1rem + 8vw, 7rem);
+  height: clamp(16rem, 10rem + 26vw, 34rem);
+  aspect-ratio: 652.36 / 1547.82;
+  transform: translateY(-50%);
+  /* Ueber den Flaechen, unter dem Text. Der Satz muss lesbar bleiben, auch wenn
+     die Figur einmal zu weit nach links geraet. */
+  z-index: 1;
+  pointer-events: none;
+}
+
+.figur__haelfte {
+  position: absolute;
+  inset: 0;
+}
+
+/**
+ * Die Farbumkehr an der Naht.
+ *
+ * Beide Haelften sind deckungsgleich, jede zeigt nur ihre Haelfte der
+ * Zeichnung. 50 % ist keine Schaetzung: die Figur ist um exakt ihre halbe Hoehe
+ * hochgezogen, ihre Mitte liegt damit auf der Kante.
+ */
+.figur__haelfte--oben {
+  clip-path: inset(0 0 50% 0);
+  /* Salbei tief auf Beige — dieselbe Farbe, die auf der ganzen Seite den
+     naechsten Schritt markiert. Hier ist sie ausnahmsweise Zeichnung und nicht
+     Signal; das ist vertretbar, weil es EINE Stelle ist und weil es ihre eigene
+     Marke ist, kein von uns erfundenes Ornament. */
+  color: var(--signal);
+}
+
+.figur__haelfte--unten {
+  clip-path: inset(50% 0 0 0);
+  color: var(--auf-signal);
+}
+
+.figur__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/**
+ * ═══ Das Fliessen ═══
+ *
+ * Die Zeichnung kommt beim Scrollen von oben nach unten herein — erst der Kopf
+ * auf Beige, dann der Rest auf Salbei. Sie wird nicht eingeblendet und sie
+ * faehrt nicht ein: sie entsteht.
+ *
+ * Umgesetzt mit einer scrollgesteuerten CSS-Animation (`animation-timeline`),
+ * nicht mit JavaScript. Der Unterschied ist nicht Geschmack: eine
+ * JS-gescrubbte Animation rechnet bei JEDEM Scrollereignis im Hauptstrang,
+ * eine scrollgesteuerte CSS-Animation laeuft im Compositor. Auf einem
+ * Mittelklasse-Handy ist das der Unterschied zwischen ruhig und ruckelig.
+ *
+ * ═══ Warum der Rueckfall die Regel ist und nicht die Ausnahme ═══
+ *
+ * Ohne `animation-timeline` (aeltere Browser) steht die Figur einfach da —
+ * vollstaendig, richtig gefaerbt, an der richtigen Stelle. Das ist der Zustand,
+ * der ohne jede Zusatzregel gilt. Die Animation ist ausschliesslich ADDITIV.
+ * Umgekehrt gebaut — Figur erst unsichtbar, Animation macht sie sichtbar —
+ * waere sie in einem Browser ohne Unterstuetzung dauerhaft weg, und niemand
+ * wuerde je erfahren warum.
+ */
+@keyframes figur-fliessen {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .figur {
+      animation: figur-fliessen linear both;
+      animation-timeline: view();
+      /* Abgestimmt, nicht geraten. Gemessen am 21.08.2026 bei 1440x900, wie
+         weit die Zeichnung an vier Scrollstaenden vor der Naht gediehen ist:
+
+           entry 10% cover 55%   31 %   54 %   74 %   95 %
+           entry  5% cover 40%   46 %   77 %  100 %  100 %   ← gewaehlt
+           entry  0% cover 30%   65 %  100 %  100 %  100 %
+
+         Der erste Wert war zu langsam: die Figur war noch im Entstehen, wenn
+         der Satz daneben schon zu lesen war — dann konkurrieren beide. Der
+         letzte ist zu schnell, da ist sie fertig, bevor man sie bemerkt hat.
+         Mit dem mittleren steht sie 300px vor der Naht, also kurz bevor der
+         Satz mittig steht. */
+      animation-range: entry 5% cover 40%;
+    }
+  }
+}
+
+/**
+ * Am Handy.
+ *
+ * Bei 393px ist die Schale randlos und der Satz nimmt die volle Breite. Eine
+ * Figur rechts laege dann auf der Schrift. Sie wird deshalb kleiner, rutscht
+ * weiter an den Rand und tritt hinter den Text zurueck — sichtbar genug, dass
+ * die Naht etwas hat, leise genug, dass der Satz gewinnt.
+ */
+@media (max-width: 48rem) {
+  .figur {
+    right: -1.5rem;
+    height: clamp(11rem, 8rem + 22vw, 15rem);
+    opacity: 0.5;
+    z-index: 0;
+  }
+}

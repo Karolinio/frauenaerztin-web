@@ -1,4 +1,5 @@
 import { Enthuellen } from '../ui/Enthuellen';
+import { Figur } from './Figur';
 import './aussage.css';
 
 /**
@@ -41,6 +42,7 @@ import './aussage.css';
 export function Aussage({ fassung = 'dunkel' }: { fassung?: 'dunkel' | 'hell' }) {
   return (
     <section className={`aussage aussage--${fassung}`} aria-labelledby="aussage-titel">
+      <Figur />
       <div className="schale aussage__schale">
         <Enthuellen className="aussage__block">
           <p className="t-label aussage__label">Wie ich arbeite</p>
