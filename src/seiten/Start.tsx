@@ -37,6 +37,7 @@ export default function Start() {
         lead="Die Praxis wird gerade saniert und ist noch nicht fotografiert. Was hier steht, ist ihr Material und ihr Licht — nicht ihre Räume. Die Fotos der Praxis und des Teams entstehen Anfang Oktober und kommen dann an dieselben Stellen."
         mitKarte={false}
         klein
+        erstesBildSofort={false}
       />
       <ErsterBesuch />
       <TerminBlock />

@@ -103,8 +103,8 @@ export const praxis = {
        Logo ist. Wer die Seite vorgelesen bekommt, braucht den Namen der Praxis
        an dieser Stelle, nicht das Wort „Logo". */
     alt: 'Frauenarztpraxis Dr. med. Yvonne Erkens',
-    breite: 860,
-    hoehe: 329,
+    breite: 720,
+    hoehe: 276,
   } as Offen<{
     readonly src: string;
     readonly alt: string;

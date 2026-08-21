@@ -300,7 +300,31 @@ function Portraet() {
       ) : null}
       <img
         ref={bild}
-        src={weg(praxis.portraet?.src ?? '/bilder/hero.webp')}
+        src={weg(praxis.portraet?.src ?? '/bilder/hero-1100.webp')}
+        /*
+         * Drei Grössen, solange die Materialstudie den Platz hält.
+         *
+         * ═══ Warum das hier besonders viel ausmacht ═══
+         *
+         * Das ist das erste Bild der Seite, es lädt `eager` und mit hoher
+         * Priorität — es ist damit das, worauf eine Patientin am Handy im
+         * Mobilfunknetz wartet. Gemessen am 20.08.2026 wurden dafür 1800px
+         * ausgeliefert und auf 393px dargestellt: 64 kB für ein Bild, das in
+         * 3,4 kB dieselbe Fläche füllt.
+         *
+         * Sobald ihr echtes Porträt da ist, greift `srcset` nicht mehr — dann
+         * steht dort eine Datei, und die Grössen dafür gibt es noch nicht. Das
+         * ist Absicht: lieber ein einzelnes, korrekt eingesetztes Bild als ein
+         * `srcset`, das auf drei Dateien zeigt, von denen zwei fehlen.
+         */
+        {...(praxis.portraet
+          ? {}
+          : {
+              srcSet: [760, 1100, 1800].map((b) => `${weg(`/bilder/hero-${b}.webp`)} ${b}w`).join(', '),
+              /* Am Handy füllt das Bild die Breite, ab 62rem sitzt es in der
+                 rechten Spalte und belegt gut zwei Fünftel des Fensters. */
+              sizes: '(min-width: 62rem) 42vw, 100vw',
+            })}
         width={1800}
         height={1208}
         /* Das erste Bild der Seite. `eager` und hohe Priorität, sonst steht es

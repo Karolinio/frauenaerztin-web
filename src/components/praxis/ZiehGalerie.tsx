@@ -161,6 +161,7 @@ export function ZiehGalerie({
   kennung = 'galerie-titel',
   mitKarte = true,
   klein = false,
+  erstesBildSofort = true,
 }: {
   kacheln?: readonly Kachel[];
   titel?: string;
@@ -168,6 +169,17 @@ export function ZiehGalerie({
   kennung?: string;
   mitKarte?: boolean;
   klein?: boolean;
+  /**
+   * Ob die erste Kachel sofort geholt wird.
+   *
+   * Auf `/praxis/` steht die Galerie weit oben und ist beim Oeffnen im Bild —
+   * dort ist `eager` richtig. Auf der Startseite steht sie in der unteren
+   * Haelfte, und dort war es schlicht falsch: gemessen am 20.08.2026 lud eine
+   * Patientin am Handy 72,8 kB fuer ein Bild, das sie erst nach vier
+   * Bildschirmhoehen sieht — bei 545 kB Gesamtgewicht der groesste einzelne
+   * vermeidbare Posten.
+   */
+  erstesBildSofort?: boolean;
 } = {}) {
   const spur = useRef<HTMLDivElement>(null);
   const [balken, setBalken] = useState({ breite: 0, links: 0 });
@@ -397,7 +409,7 @@ export function ZiehGalerie({
               /* Die erste Kachel ist beim Öffnen im Bild und wird sofort geholt.
                  Die übrigen erst beim Heranziehen — sonst lädt eine Patientin im
                  Mobilfunknetz vier Bilder für eines, das sie sieht. */
-              loading={i === 0 ? 'eager' : 'lazy'}
+              loading={i === 0 && erstesBildSofort ? 'eager' : 'lazy'}
               decoding="async"
               draggable={false}
               alt={k.alt}
