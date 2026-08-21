@@ -1,5 +1,4 @@
 import { praxis, notruf } from '../../praxis.config';
-import { zeiten, hatZeiten, zeitenStehenAus } from '../../inhalt';
 import { Enthuellen } from '../ui/Enthuellen';
 import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
@@ -33,7 +32,6 @@ import { weg } from '../../lib/weg';
 export function TerminBlock() {
   const telefon = praxis.telefon.href;
   const telefonSteht = steht(telefon) && steht(praxis.telefon.anzeige);
-  const naechsteZeiten = zeiten.filter(hatZeiten).slice(0, 3);
 
   return (
     <section className="sektion termin" aria-labelledby="termin-titel">
@@ -90,36 +88,25 @@ export function TerminBlock() {
               <dt>Telefonzeiten</dt>
               <dd>{praxis.telefonzeiten ?? <span className="luecke">stehen noch nicht fest</span>}</dd>
             </div>
-            <div className="termin__zeile">
-              <dt>Sprechzeiten</dt>
-              <dd>
-                {zeitenStehenAus ? (
-                  <span className="luecke">stehen noch nicht fest</span>
-                ) : (
-                  <ul className="termin__zeitliste">
-                    {naechsteZeiten.map((z) => (
-                      <li key={z.tag}>
-                        <span>{z.tag}</span>
-                        {/* Jede Spanne ein eigenes Element, statt einer Zeichenkette.
-                            Als „08:00 – 12:30 · 15:00 – 18:00" mit `nowrap` war die
-                            Zeile bei 393px 223px breit und schob die Seite um 96px
-                            seitlich heraus — sichtbar erst, seit hier echte Zeiten
-                            stehen. Jetzt bricht es ZWISCHEN den Spannen um, und
-                            jede einzelne bleibt zusammen: „08:00 –\n12:30" wäre
-                            in einer Zeittabelle schlimmer als ein Umbruch. */}
-                        <span className="termin__spanne">
-                          {[z.vormittag, z.nachmittag].filter(Boolean).map((t) => (
-                            <span className="termin__teil" key={t}>
-                              {t}
-                            </span>
-                          ))}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </dd>
-            </div>
+            {/*
+              ═══ Warum hier KEINE Sprechzeiten mehr stehen ═══
+
+              Weil sie auf dieser einen Seite dreimal standen: im Hero die von
+              heute, hier die naechsten drei Tage, und in der Fusszeile die
+              vollstaendige Tabelle. Gemessen am 20.08.2026 war der Terminblock
+              mit 1,55 Bildschirmhoehen die laengste Sektion der Startseite am
+              Handy — ein gutes Stueck davon war Wiederholung.
+
+              Drei Fassungen derselben Angabe sind ausserdem drei Stellen, an
+              denen sie falsch werden kann. Sie kommen zwar alle aus
+              inhalt/zeiten.json und koennen nicht auseinanderlaufen — aber eine
+              Patientin, die dreimal dieselbe Tabelle liest, glaubt beim dritten
+              Mal nicht mehr, dass sie etwas Neues erfaehrt.
+
+              Was bleibt: heute oben, vollstaendig unten, und der Weg zu /termin/
+              als Knopf. Das ist einmal die Antwort und einmal der Ort, an dem
+              alles steht.
+            */}
           </dl>
         </Enthuellen>
 

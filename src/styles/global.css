@@ -261,6 +261,34 @@ main {
   transition: text-decoration-thickness var(--dauer-mikro) var(--ease-ruhig);
 }
 
+/**
+ * Ein Verweis, der ALLEIN als Wert dasteht — Telefonnummer, E-Mail-Adresse —
+ * bekommt ein volles Tippziel.
+ *
+ * ═══ Warum nur diese und nicht jeder `.link` ═══
+ *
+ * Weil die WCAG (2.5.8, Zielgroesse) fuer Verweise INNERHALB eines Satzes eine
+ * ausdrueckliche Ausnahme macht: einen Verweis mitten im Fliesstext auf 44px
+ * aufzublasen zerreisst den Zeilenabstand, und der Gewinn ist keiner — man
+ * trifft ihn ueber das Wort.
+ *
+ * Ein Verweis, der als direktes Kind eines `dd` steht, ist dagegen kein Satz,
+ * sondern ein Wert in einem Feldraster. Genau den tippt jemand an.
+ *
+ * ═══ Warum das hier besonders zaehlt ═══
+ *
+ * Gemessen am 20.08.2026: die Telefonnummer der Praxis war mit 20px das
+ * KLEINSTE Tippziel der ganzen Seite — waehrend 112 und 116 117 daneben bei
+ * 44px liegen, weil die Direktion das ausdruecklich verlangt.
+ * Die Nummer der Praxis ist das, was eine Schwangere mit einer Frage anruft.
+ * Sie darf nicht schwerer zu treffen sein als der Rettungsdienst.
+ */
+dd > .link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+}
+
 .link:hover {
   text-decoration-thickness: 2px;
 }

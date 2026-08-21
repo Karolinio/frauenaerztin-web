@@ -45,12 +45,34 @@ for (const b of BREITEN) {
     /* Erst einmal durchscrollen, sonst haben die IntersectionObserver nie
        ausgeloest und der Vollbild-Screenshot zeigt lauter unsichtbaren Inhalt.
        Genau so haette man einen leeren Abschnitt fuer Absicht halten koennen. */
+    /* Scrollen wie ein Mensch: kleine Schritte, und zwischen den Schritten
+       echte Frames statt einer Wartezeit.
+       ═══ Warum das dreimal noetig war ═══
+       Ein IntersectionObserver meldet an Frame-Grenzen. Wer in
+       0,7-Bildschirmschritten springt und mit setTimeout wartet, schiebt ein
+       Element durch das Bild, ohne dass je ein Frame mit ihm darin gerendert
+       wird — der Beobachter loest nie aus, das Element bleibt bei Deckkraft 0,
+       und der Screenshot zeigt ein leeres Band.
+       Am 20.08.2026 hat genau das dreimal einen Fehler auf der SEITE
+       vorgetaeuscht, den es nicht gab: /team/ zeigte zwei von drei Personen.
+       Mit rAF-Schritten gegengeprueft waren es alle drei.
+       120px-Schritte mit je zwei Frames: langsam genug, dass jedes Element
+       mindestens einen gerenderten Frame im Bild hat. */
     await page.evaluate(async () => {
       const h = document.documentElement.scrollHeight;
-      for (let y = 0; y < h; y += window.innerHeight * 0.7) {
+      for (let y = 0; y <= h; y += 120) {
         window.scrollTo(0, y);
-        await new Promise((r) => setTimeout(r, 120));
+        await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
       }
+      /* Unten ANKOMMEN und warten, bevor es zurueckgeht.
+         Ein IntersectionObserver meldet verzoegert. Wer sofort nach der letzten
+         Zeile zurueck an den Anfang springt, laesst die Meldungen der zuletzt
+         gesehenen Elemente ins Leere laufen: sie treffen ein, wenn die Seite
+         schon wieder oben steht, und melden dann „nicht im Bild".
+         Gemessen am 20.08.2026: ohne dieses Warten blieben 14 Elemente zu —
+         die ganze Leistungsliste und der komplette Terminblock. Eine echte
+         Nutzerin sieht sie, weil sie nicht an den Anfang zurueckspringt. */
+      await new Promise((r) => setTimeout(r, 450));
       window.scrollTo(0, 0);
       await new Promise((r) => setTimeout(r, 400));
     });

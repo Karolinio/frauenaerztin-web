@@ -46,13 +46,30 @@ export default function TeamSeite() {
                   alt={p.bildAlt}
                 />
               ) : (
+                /*
+                 * ═══ Warum hier keine Aufnahmehinweise mehr stehen ═══
+                 *
+                 * Bis zum 20.08.2026 stand an dieser Stelle „Hochformat,
+                 * mindestens 800 px breit, Licht von links. Ablegen unter
+                 * /bilder/team/ und in der Redaktion auswählen." Das ist eine
+                 * Anweisung an die Person, die das Foto einsetzt — und sie stand
+                 * auf einer ÖFFENTLICHEN Seite. Eine Patientin, die wissen will,
+                 * wer sie empfängt, las einen Dateipfad.
+                 *
+                 * Zweiter Grund, unabhängig vom ersten: dieselbe Anweisung steht
+                 * bereits in `inhalt/schema.json` beim Feld `bild` — also genau
+                 * dort, wo Yvonne sie beim Bearbeiten sieht. Zwei Fassungen
+                 * derselben Anweisung driften auseinander, sobald jemand eine
+                 * davon anfasst, und dann widersprechen sich Editor und Seite.
+                 *
+                 * Was bleibt, ist ein Satz für die Leserin: dass hier ein Foto
+                 * hingehört und wann es kommt. Das ist wahr und geht niemanden
+                 * etwas an, der es nicht einsetzen muss.
+                 */
                 <p className="team__rahmen">
-                  <span className="luecke">Foto fehlt</span>
+                  <span className="luecke">Foto folgt</span>
                   <span className="t-meta team__rahmen-hinweis">
-                    Hochformat, mindestens 800 px breit, Licht von links.
-                    <br />
-                    Ablegen unter <code>/bilder/team/</code> und in der Redaktion auswählen — die
-                    Bildbeschreibung nicht vergessen.
+                    Die Praxis wird gerade eingerichtet. Die Fotos entstehen im Oktober.
                   </span>
                 </p>
               )}
