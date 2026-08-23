@@ -78,23 +78,33 @@ const messung = await seite.evaluate(() => {
    * nichts zu beanstanden hat. Wer hier eine Klasse umbenennt, benennt sie hier
    * mit um.
    */
+  /*
+   * Der dritte Eintrag jeder Zeile sagt, ob die Probe auf DIESER Seite stehen
+   * MUSS. Fehlt eine Pflichtprobe, ist das ein Fehler und kein Hinweis — siehe
+   * die Auswertung unten.
+   *
+   * `.luecke` ist die einzige bedingte: solange DEMO an ist, sind die Werte der
+   * Startseite gefuellt und es gibt dort keine Luecke. Mit DEMO = false kommt
+   * sie zurueck.
+   */
   const proben = [
-    ['Fließtext auf Papier', '.hero__einleitung p'],
-    ['Sekundärtext auf Papier', '.termin__zeile dt'],
-    ['Merksatz in der Leistungsliste', '.auszug__satz'],
-    ['Signal als Text (Verweis)', '.werbin__mehr'],
-    ['Etikett über einer Sektion', '.t-label'],
-    ['Fließtext auf Leinen', '.besuch__warum'],
-    ['Sichtbare Lücke auf Leinen', '.luecke'],
-    ['Meta in der Fußzeile', '.fuss__ort'],
-    ['Navigation inaktiv', '.kopf__punkt'],
-    ['Weiß auf Signal (Knopf)', '.knopf'],
+    ['Fließtext auf Papier', '.hero__einleitung p', true],
+    ['Sekundärtext auf Papier', '.termin__wann', true],
+    ['Satz in einer Leistungskachel', '.kachel__satz', true],
+    ['Verweis in einer Leistungskachel', '.kachel__weiter', true],
+    ['Signal als Text (Verweis)', '.werbin__mehr', true],
+    ['Etikett über einer Sektion', '.t-label', true],
+    ['Fließtext auf Leinen', '.besuch__warum', true],
+    ['Sichtbare Lücke auf Leinen', '.luecke', false],
+    ['Meta in der Fußzeile', '.fuss__ort', true],
+    ['Navigation inaktiv', '.kopf__punkt', true],
+    ['Weiß auf Signal (Knopf)', '.knopf', true],
   ];
 
   return proben
-    .map(([name, wahl]) => {
+    .map(([name, wahl, pflicht]) => {
       const el = document.querySelector(wahl);
-      if (!el) return { name, fehlt: true };
+      if (!el) return { name, pflicht, fehlt: true };
       const vorn = zahlen(getComputedStyle(el).color).rgb;
       // Hintergrund vom nächsten Vorfahren mit weitgehend deckender Fläche.
       let knoten = el;
@@ -107,7 +117,7 @@ const messung = await seite.evaluate(() => {
         }
         knoten = knoten.parentElement;
       }
-      if (!hinten) return { name, fehlt: true };
+      if (!hinten) return { name, pflicht, fehlt: true };
       const a = leuchtdichte(vorn);
       const b = leuchtdichte(hinten);
       const verhaeltnis = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
@@ -124,12 +134,31 @@ const messung = await seite.evaluate(() => {
     .filter(Boolean);
 });
 
+/*
+ * ═══ Warum ein fehlendes Element ein FEHLER ist ═══
+ *
+ * Im Kopf dieser Datei steht die Warnung seit dem 15.08.2026: „Ein Pruefer, der
+ * nichts findet, sieht aus wie ein Pruefer, der nichts zu beanstanden hat." Sie
+ * war richtig und hat trotzdem nicht gereicht — am 23.08.2026 meldete das
+ * Werkzeug drei fehlende Elemente und lief mit Erfolg durch, weil beim Umbau
+ * auf die Leistungskacheln `.auszug__satz` und `.termin__zeile` verschwanden.
+ *
+ * Ein Hinweis, den man uebersehen kann, ist keine Pruefung. Eine fehlende
+ * Pflichtprobe beendet den Lauf deshalb jetzt mit einem Fehler.
+ */
 console.log('\nKONTRAST (WCAG AA)');
+let verstoesse = 0;
 for (const m of messung) {
   if (m.fehlt) {
-    console.log(`  ?  ${m.name} — Element nicht gefunden`);
+    if (m.pflicht) {
+      verstoesse++;
+      console.log(`  NEIN ${m.name} — Element nicht gefunden. Klasse umbenannt? Dann hier mit umbenennen.`);
+    } else {
+      console.log(`  –    ${m.name} — kommt auf dieser Seite derzeit nicht vor (erlaubt)`);
+    }
     continue;
   }
+  if (!m.bestanden) verstoesse++;
   console.log(`  ${m.bestanden ? 'ok ' : 'NEIN'} ${m.name}: ${m.verhaeltnis}:1 (nötig ${m.schwelle}:1)`);
 }
 
@@ -209,3 +238,8 @@ if (ueberBild) {
 }
 
 await browser.close();
+
+if (verstoesse > 0) {
+  console.error(`\n  ${verstoesse} Befund(e) im Kontrast. Kein Durchlauf.\n`);
+  process.exit(1);
+}
