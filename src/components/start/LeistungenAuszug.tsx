@@ -1,5 +1,6 @@
 import { leistungen, weitereLeistungen } from '../../praxis.config';
 import { Enthuellen } from '../ui/Enthuellen';
+import { SYMBOLE } from './Symbole';
 import { weg } from '../../lib/weg';
 
 /**
@@ -10,13 +11,25 @@ import { weg } from '../../lib/weg';
  * Erkelenz benutzt: Antje Hagen führt drei Kilometer entfernt eine
  * „Mädchen-Sprechstunde". Der Eintrag bleibt, seine Sonderrolle nicht.
  *
- * ═══ Warum eine Liste und keine Kacheln ═══
+ * ═══ Doch Kacheln — und warum das kein Rückschritt ist ═══
  *
- * Fünf gleich grosse Kacheln mit Symbol und Randlinie sind der Vorlagen-Look,
- * gegen den diese Seite gebaut ist — und sie behaupten, alle fünf Leistungen
- * seien gleich wichtig. Eine Liste mit Haarlinien hat eine Leserichtung, kostet
- * ein Drittel der Höhe und trägt die Reihenfolge, die die Ärztin selbst gewählt
- * hat.
+ * Hier stand: „Fünf gleich grosse Kacheln mit Symbol und Randlinie sind der
+ * Vorlagen-Look, gegen den diese Seite gebaut ist." Das galt für FÜNF
+ * Leistungen und für eine Anordnung, die niemand bestellt hatte.
+ *
+ * Am 23.08.2026 hat die Ärztin eine eigene Übersicht geschickt, gezeichnet, mit
+ * neun Leistungen, je einem Symbol und je einem Satz. Ihre Worte dazu: „So
+ * könnte man die Leistungen auf der Hauptseite präsentieren mit so kleinen
+ * Icons und dann nur einem Satz und dann einzeln genauer beschreiben."
+ *
+ * Neun Zeilen in einer Liste sind ausserdem etwas anderes als fünf: die Liste
+ * war kurz genug, um am Stück gelesen zu werden. Neun sind eine Wand.
+ *
+ * Übernommen wird ihr AUFBAU, nicht die Optik der Skizze. Die zeigt weiche
+ * Karten mit runden Ecken, Schatten und zentriertem Text — genau die drei
+ * Dinge, die `flat-with-light` ausschliesst. Die Kacheln hier sind Flächen:
+ * kein Radius, kein Schatten, linksbündig, getrennt durch Flächenwechsel. Der
+ * Unterschied ist im Screenshot klein und auf dem Schirm gross.
  *
  * ═══ Was die erste Fassung falsch machte ═══
  *
@@ -55,17 +68,15 @@ export function LeistungenAuszug() {
   return (
     <section className="sektion" aria-labelledby="leistungen-titel">
       <div className="schale auszug">
-        {/* Der Kopf IST das Raster — nicht ein Kasten, in dem eins steckt.
-            Schöbe sich hier ein Wrapper dazwischen, wäre er das einzige
-            Rasterkind, und Titel wie Vorspann stünden beide in Spalte eins. */}
         <Enthuellen className="auszug__kopf">
           <p className="t-label">Leistungen</p>
           <h2 id="leistungen-titel" className="t-section auszug__titel">
-            Was ich anbiete
+            Für jede Lebensphase
           </h2>
           <p className="t-body auszug__lead">
-            Fünf Bereiche, dazu Impfungen. Was jeweils dahintersteckt, steht ausführlich auf der
-            Leistungsseite — hier in je einem Satz.
+            Von der Vorsorge über Kinderwunsch und Schwangerschaft bis zu den Wechseljahren und darüber
+            hinaus. Was jeweils dahintersteckt, steht ausführlich auf der Leistungsseite — hier in je einem
+            Satz.
           </p>
         </Enthuellen>
 
@@ -80,20 +91,21 @@ export function LeistungenAuszug() {
           aria-hidden="true"
         />
 
-        <ol className="auszug__liste">
+        <ul className="auszug__raster">
           {leistungen.map((l, i) => (
-            <Enthuellen als="li" key={l.id} verzoegerung={i * 55}>
-              <a className="auszug__punkt" href={`${weg('/leistungen/')}#${l.id}`}>
-                <span className="auszug__nr" aria-hidden="true">
-                  {String(i + 1).padStart(2, '0')}
+            <Enthuellen als="li" key={l.id} verzoegerung={(i % 3) * 55}>
+              <a className="kachel" href={`${weg('/leistungen/')}#${l.id}`}>
+                {SYMBOLE[l.id] ?? null}
+                <h3 className="kachel__titel">{l.titel}</h3>
+                <p className="kachel__satz">{l.kurz}</p>
+                <span className="kachel__weiter">
+                  Mehr erfahren
+                  <Pfeil />
                 </span>
-                <span className="t-unter auszug__name">{l.titel}</span>
-                <span className="auszug__satz">{l.kurz}</span>
-                <Pfeil />
               </a>
             </Enthuellen>
           ))}
-        </ol>
+        </ul>
 
         <Enthuellen className="auszug__weitere">
           <p className="t-meta">

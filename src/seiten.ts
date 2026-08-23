@@ -49,7 +49,7 @@ export const SEITEN: Seite[] = [
     label: 'Start',
     titel: '%PRAXIS_NAME% — Medizin für Frauen in Erkelenz',
     beschreibung:
-      'Die neue gynäkologische Praxis in Erkelenz. Schwangerschaft, Krebsvorsorge, Verhütung, Kinderwunschberatung und eine eigene Mädelssprechstunde.',
+      'Die neue gynäkologische Praxis in Erkelenz. Vorsorge, Kinderwunsch, Schwangerschaft, Wechseljahre — und eine eigene Mädelssprechstunde.',
     imMenue: false,
   },
   {
@@ -57,7 +57,7 @@ export const SEITEN: Seite[] = [
     label: 'Leistungen',
     titel: 'Leistungen — %PRAXIS_NAME%',
     beschreibung:
-      'Schwangerschaft, Krebsvorsorge, Verhütung, Kinderwunschberatung, Mädelssprechstunde. Was jeweils dahintersteckt und wie es abläuft.',
+      'Vorsorge und Früherkennung, Mädelssprechstunde, Verhütung, Kinderwunsch, Schwangerschaft, Wechseljahre, Blase und Beckenboden, onkologische Nachsorge, ästhetische Medizin.',
     imMenue: true,
   },
   {

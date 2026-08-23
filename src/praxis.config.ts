@@ -226,55 +226,82 @@ export interface Leistung {
 
 export const leistungen: readonly Leistung[] = [
   {
-    id: 'schwangerschaft',
-    titel: 'Schwangerschaft',
-    kurz: 'Betreuung von der ersten Untersuchung bis nach der Geburt.',
-    absatz:
-      'Die Vorsorge richtet sich nach den Mutterschaftsrichtlinien: bis zur 32. Woche etwa alle vier Wochen ein Termin, danach alle zwei, dazu drei Ultraschalluntersuchungen in der 9. bis 12., der 19. bis 22. und der 29. bis 32. Schwangerschaftswoche. Alles wird im Mutterpass eingetragen, den Sie beim ersten Termin bekommen und ab dann immer dabeihaben sollten. Untersuchungen, die über diesen Rahmen hinausgehen, bespreche ich vorher mit Ihnen — was sie zeigen kann, was nicht, und was ein auffälliges Ergebnis für Sie bedeuten würde. Nach der Geburt sehen wir uns noch einmal, etwa sechs bis acht Wochen später; Ihr Kind dürfen Sie selbstverständlich mitbringen.',
-  },
-  {
-    id: 'krebsvorsorge',
-    titel: 'Krebsvorsorge',
-    kurz: 'Die jährliche Untersuchung, und was sich ab 35 daran ändert.',
+    id: 'vorsorge',
+    titel: 'Vorsorge & Früherkennung',
+    kurz: 'Regelmäßige Vorsorge für Ihre Gesundheit und ein gutes Gefühl.',
     absatz:
       'Ab 20 Jahren übernimmt die Kasse einmal im Jahr die Untersuchung auf Gebärmutterhalskrebs. Dazu gehört ein Abstrich vom Muttermund — der sogenannte Pap-Test, benannt nach dem Arzt, der ihn entwickelt hat. Er dauert weniger als eine Minute; das Ergebnis kommt aus dem Labor und braucht einige Tage. Ab 35 ändert sich das Verfahren: dann wird der Abstrich mit einem Test auf humane Papillomviren (HPV) kombiniert, dafür nur noch alle drei Jahre. Zur Untersuchung gehört ausserdem das Abtasten der Brust, ab 30 Jahren als Kassenleistung — auf Wunsch zeige ich Ihnen dabei, worauf Sie beim Selbstabtasten achten können.',
   },
   {
+    id: 'maedelssprechstunde',
+    titel: 'Mädelssprechstunde',
+    kurz: 'Raum für alle Fragen rund um Zyklus, Körper, Sexualität und Verhütung.',
+    absatz:
+      'Zum ersten Termin gehört keine Untersuchung auf dem Stuhl, wenn Sie keine möchten. Wir reden — über den Zyklus, über Schmerzen, über Verhütung, über das, was Sie im Internet gelesen haben. Das ist ein vollwertiger Termin und keine Vorstufe zu einem richtigen. Sie dürfen jemanden mitbringen: die Mutter, eine Freundin, den Freund. Sie dürfen auch allein kommen und die Begleitung im Wartebereich lassen; beides ist in Ordnung, und Sie müssen sich vorher nicht entscheiden. Ich unterliege der Schweigepflicht, auch gegenüber Ihren Eltern, sobald Sie die Tragweite selbst überblicken können — in der Regel ab etwa 16 Jahren. Was Sie mir erzählen, bleibt in diesem Zimmer.',
+  },
+  {
     id: 'verhuetung',
     titel: 'Verhütung',
-    kurz: 'Was zu Ihnen passt, hängt von Ihrem Leben ab — nicht von einer Tabelle.',
+    kurz: 'Individuelle Beratung für eine Verhütung, die zu Ihnen und Ihrem Leben passt.',
     absatz:
       'Pille, Hormonspirale, Kupferspirale, Implantat, Ring, Pflaster, Kupferkette, natürliche Verfahren: jedes davon hat eine andere Sicherheit, andere Nebenwirkungen und andere Kosten. Eine Spirale bleibt je nach Modell drei bis zehn Jahre liegen und wird nach dem Einlegen zweimal per Ultraschall kontrolliert. Das Einlegen dauert wenige Minuten und liegt zeitlich am besten gegen Ende der Periode, weil der Muttermund dann etwas weicher ist; es kann ziehen wie ein starker Regelschmerz, und auf Wunsch geht es mit örtlicher Betäubung. Wir gehen im Termin durch, was für Sie in Frage kommt und was dagegen spricht — dafür muss ich wissen, ob Sie rauchen, welche Medikamente Sie nehmen und ob es in Ihrer Familie Thrombosen gab.',
   },
   {
     id: 'kinderwunsch',
-    titel: 'Kinderwunschberatung',
-    kurz: 'Wann es Sinn ergibt abzuwarten, und ab wann nicht mehr.',
+    titel: 'Kinderwunsch',
+    kurz: 'Wir begleiten Sie auf dem Weg zu Ihrem Kinderwunsch — einfühlsam und kompetent.',
     absatz:
       'Es gibt eine Faustregel, nach der sich auch die Kostenübernahme richtet: Wenn Sie jünger als 35 sind, gilt ein Jahr regelmässiger Versuche als normal, bevor abgeklärt wird; ab 35 sind es sechs Monate. Wer früher kommt, kommt nicht zu früh — aber diese Zahlen erklären, warum ich manchmal zum Abwarten rate. Der erste Schritt ist meistens keine grosse Diagnostik, sondern der Zyklus: wann der Eisprung stattfindet und ob die zweite Zyklushälfte lang genug ist, dazu Blutwerte und ein Ultraschall der Eierstöcke. Zur Abklärung gehören immer beide Partner — ein Spermiogramm ist einfacher, schneller und günstiger als alles, was ich bei Ihnen untersuchen kann, und steht deshalb meistens am Anfang.',
   },
   {
-    id: 'maedelssprechstunde',
-    titel: 'Mädelssprechstunde',
-    kurz: 'Der erste Termin beim Frauenarzt, ohne dass etwas passieren muss.',
+    id: 'schwangerschaft',
+    titel: 'Schwangerschaft',
+    kurz: 'Für eine rundum gut betreute Schwangerschaft in einer besonderen Zeit.',
     absatz:
-      'Zum ersten Termin gehört keine Untersuchung auf dem Stuhl, wenn Sie keine möchten. Wir reden — über den Zyklus, über Schmerzen, über Verhütung, über das, was Sie im Internet gelesen haben. Das ist ein vollwertiger Termin und keine Vorstufe zu einem richtigen. Sie dürfen jemanden mitbringen: die Mutter, eine Freundin, den Freund. Sie dürfen auch allein kommen und die Begleitung im Wartebereich lassen; beides ist in Ordnung, und Sie müssen sich vorher nicht entscheiden. Ich unterliege der Schweigepflicht, auch gegenüber Ihren Eltern, sobald Sie die Tragweite selbst überblicken können — in der Regel ab etwa 16 Jahren. Was Sie mir erzählen, bleibt in diesem Zimmer.',
+      'Die Vorsorge richtet sich nach den Mutterschaftsrichtlinien: bis zur 32. Woche etwa alle vier Wochen ein Termin, danach alle zwei, dazu drei Ultraschalluntersuchungen in der 9. bis 12., der 19. bis 22. und der 29. bis 32. Schwangerschaftswoche. Alles wird im Mutterpass eingetragen, den Sie beim ersten Termin bekommen und ab dann immer dabeihaben sollten. Untersuchungen, die über diesen Rahmen hinausgehen, bespreche ich vorher mit Ihnen — was sie zeigen kann, was nicht, und was ein auffälliges Ergebnis für Sie bedeuten würde. Nach der Geburt sehen wir uns noch einmal, etwa sechs bis acht Wochen später; Ihr Kind dürfen Sie selbstverständlich mitbringen.',
+  },
+  {
+    id: 'wechseljahre',
+    titel: 'Wechseljahre & Hormone',
+    kurz: 'Beschwerden verstehen, Möglichkeiten kennen, neue Balance finden.',
+    absatz:
+      'Die Wechseljahre sind keine Krankheit, sondern ein Abschnitt — er dauert bei den meisten Frauen mehrere Jahre und beginnt im Schnitt Anfang bis Mitte vierzig mit unregelmässigen Zyklen. Was daraus Beschwerden macht, ist sehr verschieden: Hitzewallungen, Schlafstörungen, Stimmungsschwankungen, Trockenheit, Gelenkschmerzen. Eine Hormonbestimmung im Blut ist dafür meistens nicht nötig — die Werte schwanken in dieser Zeit stark, und die Beschwerden sagen mehr als eine Momentaufnahme. Was hilft, hängt davon ab, was Sie stört und was Sie an Vorerkrankungen mitbringen; eine Hormontherapie ist eine von mehreren Möglichkeiten, und wir besprechen Nutzen und Risiken, bevor wir etwas beginnen.',
+  },
+  {
+    id: 'beckenboden',
+    titel: 'Blase & Beckenboden',
+    kurz: 'Hilfe bei Inkontinenz und Senkungsbeschwerden — diskret, individuell, wirkungsvoll.',
+    absatz:
+      'Ungewollter Urinverlust ist häufig und fast nie ein Grund, damit zu leben. Etwa jede dritte Frau ist im Lauf ihres Lebens betroffen, nach Geburten und in den Wechseljahren häufiger. Wichtig ist zuerst die Unterscheidung: Verlieren Sie Urin beim Husten, Niesen oder Heben, oder überfällt Sie ein Drang, den Sie nicht aufhalten können? Die beiden Formen werden unterschiedlich behandelt. Am Anfang steht ein Gespräch, eine Untersuchung und oft ein Trink- und Miktionsprotokoll über zwei bis drei Tage. Beckenbodentraining unter Anleitung ist bei der Belastungsform die erste Massnahme und wirkt bei vielen Frauen; Pessare, örtliche Behandlung und Medikamente kommen dazu oder danach.',
+  },
+  {
+    id: 'nachsorge',
+    titel: 'Onkologische Nachsorge',
+    kurz: 'Verlässliche Begleitung und Nachsorge nach gynäkologischen Krebserkrankungen.',
+    absatz:
+      'Nach einer abgeschlossenen Behandlung geht die Betreuung weiter, und sie folgt einem festen Plan: in den ersten drei Jahren üblicherweise alle drei Monate ein Termin, danach halbjährlich, ab dem sechsten Jahr jährlich. Der grösste Teil davon ist Gespräch und körperliche Untersuchung — Bildgebung und Laborwerte nur, wenn es einen Anlass gibt, denn Routinekontrollen ohne Beschwerden verbessern das Ergebnis nicht und verunsichern oft mehr, als sie klären. Was in diese Termine ebenso gehört: die Folgen der Behandlung. Wechseljahresbeschwerden nach einer Therapie, Lymphödeme, Erschöpfung, Sexualität, die Angst vor dem nächsten Befund. Ich halte den Kontakt zu Ihrer behandelnden Klinik.',
+  },
+  {
+    id: 'aesthetik',
+    titel: 'Ästhetische Medizin',
+    kurz: 'Für Ihr Wohlbefinden und ein gutes Gefühl in Ihrem Körper.',
+    absatz:
+      'Über ästhetische Behandlungen mit Botulinumtoxin darf ich auf einer Website nicht mehr schreiben als: es gibt sie hier. Das Heilmittelwerbegesetz erlaubt bei solchen Eingriffen keine Vorher-Nachher-Bilder und keine Wirkversprechen, und das halte ich für richtig. Was die Behandlung kostet, wie sie abläuft, was sie kann und was nicht, besprechen wir im Termin. Es ist eine Selbstzahlerleistung.',
   },
 ];
 
 /**
- * „Weitere Leistungen" — ihre eigene Einordnung.
+ * „Weitere Leistungen" — was in ihrer Übersicht vom 23.08.2026 NICHT auftaucht.
  *
- * ═══ Warum bei Botox drei Sätze fehlen ═══
+ * Impfungen standen in ihrer ersten Aufzählung („dazu als weitere: Impfungen und
+ * kleine ästhetische Botoxbehandlungen"), in der neuen Übersicht mit neun
+ * Kacheln aber nicht mehr. Das kann Absicht sein oder ein Vergessen — beides ist
+ * möglich, und keins davon darf hier geraten werden.
  *
- * Das Heilmittelwerbegesetz verbietet bei ästhetischen Eingriffen die Werbung mit
- * Vorher-Nachher-Bildern (§ 11 Abs. 1 Satz 3 HWG) und untersagt Heilungs- oder
- * Wirkversprechen. Nennen darf man die Leistung, bewerben nicht. Kein Preis,
- * kein Ergebnisbild, kein „strahlend jung", keine Haltbarkeitsangabe.
- *
- * Das ist bei Heilberufen kein Formalkram: abgemahnt wird von Mitbewerbern, und
- * eine Praxis, die am Eröffnungstag eine Abmahnung im Briefkasten hat, hat ein
- * echtes Problem. Der kurze Text ist Absicht, nicht Faulheit.
+ * Deshalb bleibt der Eintrag stehen, bis sie es sagt. Etwas wegzunehmen, das sie
+ * einmal genannt hat, ist der teurere Fehler: eine Leistung, die sie anbietet
+ * und die auf ihrer Seite fehlt, merkt niemand — ausser der Patientin, die
+ * deswegen woanders anruft.
  */
 export const weitereLeistungen: readonly Leistung[] = [
   {
@@ -283,13 +310,6 @@ export const weitereLeistungen: readonly Leistung[] = [
     kurz: 'Nach den Empfehlungen der Ständigen Impfkommission.',
     absatz:
       'Die HPV-Impfung empfiehlt die Ständige Impfkommission für Mädchen und Jungen zwischen 9 und 14 Jahren; nachgeholt werden kann sie bis zum 18. Geburtstag, bis dahin zahlt die Kasse. Wer vor dem 15. Geburtstag anfängt, braucht zwei Dosen statt drei. Vor einer geplanten Schwangerschaft sehe ich mir den Impfpass an — Röteln, Windpocken und Keuchhusten sind die drei, auf die es dabei ankommt. Bringen Sie den Pass mit, wenn Sie ihn finden: ohne ihn müssen wir raten oder Blut abnehmen.',
-  },
-  {
-    id: 'aesthetik',
-    titel: 'Kleine ästhetische Botoxbehandlungen',
-    kurz: 'Biete ich an. Besprochen wird das im Termin, nicht auf einer Website.',
-    absatz:
-      'Über ästhetische Behandlungen mit Botulinumtoxin darf ich auf einer Website nicht mehr schreiben als: es gibt sie hier. Das Heilmittelwerbegesetz erlaubt bei solchen Eingriffen keine Vorher-Nachher-Bilder und keine Wirkversprechen, und das halte ich für richtig. Was die Behandlung kostet, wie sie abläuft, was sie kann und was nicht, besprechen wir im Termin. Es ist eine Selbstzahlerleistung.',
   },
 ];
 
