@@ -4,6 +4,7 @@ import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { praxis, DEMO } from './src/praxis.config';
 import { SEITEN } from './src/seiten';
+import { HERO_SIZES, heroSrcSet } from './src/lib/heroBild';
 
 /**
  * Titel, Beschreibung und Ort stehen auch im HTML-Kopf aus praxis.config.ts —
@@ -19,9 +20,43 @@ function praxisdatenInsHtml(): Plugin {
    * „Musterpraxis" oder „Dr. med. [Nachname]" waere beides falsch — das eine
    * erfunden, das andere im Tab unlesbar.
    */
+  /*
+   * Der Basispfad, so wie ihn `weg()` zur Laufzeit auch benutzt.
+   *
+   * ═══ Warum das hier stehen MUSS ═══
+   *
+   * Gemessen am 23.08.2026: im HTML-Kopf stand ein
+   * `<link rel="preload" href="/bilder/hero.webp">` mit ABSOLUTEM Pfad. Unter
+   * GitHub Pages liegt die Seite in einem Unterordner — der Verweis zeigte
+   * damit an die Wurzel der Domain, wo nichts liegt. Neun erzeugte HTML-Dateien
+   * trugen ihn, neunmal 404, und die Seite lieferte trotzdem Statuscode 200.
+   * Genau diese Falle beschreibt `engine/ausrollen.mjs` im Kopf.
+   *
+   * Dazu zeigte er auf `hero.webp`, das es seit der Umstellung auf `srcset`
+   * gar nicht mehr gibt.
+   */
+  const basis = process.env.VITE_BASIS ?? '/';
+
+  /*
+   * Das Vorladen des Hero-Bildes.
+   *
+   * `imagesrcset` und `imagesizes` MUESSEN mit dem `<img>` uebereinstimmen,
+   * sonst laedt der Browser eine Groesse vor, die er dann nicht nimmt, und holt
+   * die richtige ein zweites Mal — Vorladen macht die Seite dann langsamer.
+   * Beide Angaben kommen deshalb aus `src/lib/heroBild.ts`, derselben Datei,
+   * aus der auch die Komponente liest.
+   *
+   * Nur wenn kein echtes Portraet gesetzt ist: sobald ihr Foto da ist, steht
+   * dort eine einzelne Datei, und die Groessen dafuer gibt es nicht.
+   */
+  const vorladen = praxis.portraet
+    ? `<link rel="preload" as="image" href="${basis}${praxis.portraet.src.replace(/^\//, '')}" fetchpriority="high" />`
+    : `<link rel="preload" as="image" imagesrcset="${heroSrcSet(basis)}" imagesizes="${HERO_SIZES}" fetchpriority="high" />`;
+
   const ersetzungen: Record<string, string> = {
     '%PRAXIS_NAME%': praxis.name ?? `Gynäkologische Praxis ${praxis.ort}`,
     '%PRAXIS_ORT%': praxis.ort,
+    '<!-- %HERO_PRELOAD% -->': vorladen,
   };
 
   return {

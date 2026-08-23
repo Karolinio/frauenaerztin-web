@@ -24,15 +24,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
+      # npm und nicht pnpm — von Hand geaendert am 23.08.2026, Grund im Kopf
+      # dieser Datei verlangt.
+      #
+      # Der Ablauf lief `pnpm install --frozen-lockfile` gegen eine
+      # pnpm-lock.yaml vom 05.08.2026. Seitdem hat sich die package.json
+      # geaendert (Skript `freigabe`, die fontsource-Pakete fuer `npm run
+      # fonts`). `--frozen-lockfile` bricht dann ab, statt aufzuloesen — und
+      # zwar zu Recht: ein Lockfile, das nicht zur package.json passt, ist
+      # keine reproduzierbare Grundlage.
+      #
+      # Gearbeitet wird an diesem Projekt mit npm; package-lock.json ist die
+      # gepflegte Datei. Der Ablauf folgt jetzt dem, was tatsaechlich benutzt
+      # wird, statt umgekehrt.
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+          cache: npm
+      - run: npm ci
+      - run: npm run build
         env:
           # Der Basispfad. Unter github.io liegt die Seite in einem Unterordner,
           # der so heisst wie das Repo — steht hier etwas anderes, sucht der

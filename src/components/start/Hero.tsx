@@ -4,6 +4,7 @@ import { zeiten, hatZeiten, istHeute } from '../../inhalt';
 import { Marke } from '../ui/Marke';
 import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
+import { HERO_BREITEN, HERO_SIZES } from '../../lib/heroBild';
 import './hero.css';
 
 /**
@@ -320,10 +321,8 @@ function Portraet() {
         {...(praxis.portraet
           ? {}
           : {
-              srcSet: [760, 1100, 1800].map((b) => `${weg(`/bilder/hero-${b}.webp`)} ${b}w`).join(', '),
-              /* Am Handy füllt das Bild die Breite, ab 62rem sitzt es in der
-                 rechten Spalte und belegt gut zwei Fünftel des Fensters. */
-              sizes: '(min-width: 62rem) 42vw, 100vw',
+              srcSet: HERO_BREITEN.map((b) => `${weg(`/bilder/hero-${b}.webp`)} ${b}w`).join(', '),
+              sizes: HERO_SIZES,
             })}
         width={1800}
         height={1208}
