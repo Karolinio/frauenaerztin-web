@@ -13,6 +13,31 @@
  * halbe Frau.
  */
 .figur {
+  /*
+   * ── Wo die Naht durch die Figur laeuft ───────────────────────────────────
+   *
+   * Der Anteil der Figur, der OBERHALB der Sektionskante liegt. Der Rest liegt
+   * darunter, auf der Salbeiflaeche.
+   *
+   * ═══ Warum nicht 50 % ═══
+   *
+   * Weil 50 % zwar symmetrisch ist, beim Scrollen aber genau das erzeugt, was
+   * Karol am 23.08.2026 beanstandet hat: man sieht dauerhaft eine halbe Figur
+   * im Gruenen. Die Salbeiflaeche ist der Ort, an dem die Zeichnung wirkt —
+   * dort ist der Kontrast am hoechsten (Papier auf Salbei), und dort steht der
+   * Satz, zu dem sie gehoert.
+   *
+   * Mit 30 % steht knapp ein Drittel oben auf dem Beige — genug, damit die
+   * Farbumkehr an der Kante sichtbar bleibt und man begreift, dass die Figur
+   * durchgeht — und gut zwei Drittel unten im Gruenen.
+   *
+   * Diese eine Zahl steuert BEIDES: die Verschiebung und den Beschnitt der zwei
+   * Haelften. Getrennt gepflegt waeren es zwei Werte, die auseinanderlaufen,
+   * sobald jemand einen davon anfasst — und dann sitzt die Farbkante nicht mehr
+   * auf der Sektionskante, sondern irgendwo daneben.
+   */
+  --naht: 30%;
+
   position: absolute;
   top: 0;
   /* Rechts, weil der Textblock links steht (max-width 48rem in der Schale).
@@ -25,7 +50,7 @@
      man von dieser Seite in Erinnerung behaelt. */
   height: clamp(20rem, 12rem + 40vw, 52rem);
   aspect-ratio: 652.36 / 1547.82;
-  transform: translateY(-50%);
+  transform: translateY(calc(-1 * var(--naht)));
   /* Ueber den Flaechen, unter dem Text. Der Satz muss lesbar bleiben, auch wenn
      die Figur einmal zu weit nach links geraet. */
   z-index: 1;
@@ -40,12 +65,13 @@
 /**
  * Die Farbumkehr an der Naht.
  *
- * Beide Haelften sind deckungsgleich, jede zeigt nur ihre Haelfte der
- * Zeichnung. 50 % ist keine Schaetzung: die Figur ist um exakt ihre halbe Hoehe
- * hochgezogen, ihre Mitte liegt damit auf der Kante.
+ * Beide Haelften sind deckungsgleich, jede zeigt nur ihren Teil der Zeichnung.
+ * Der Schnitt liegt bei `--naht`, und um genau denselben Betrag ist die Figur
+ * nach oben gezogen — deshalb faellt die Farbkante zwangslaeufig mit der
+ * Sektionskante zusammen, egal welchen Wert `--naht` traegt.
  */
 .figur__haelfte--oben {
-  clip-path: inset(0 0 50% 0);
+  clip-path: inset(0 0 calc(100% - var(--naht)) 0);
   /* Salbei tief auf Beige — dieselbe Farbe, die auf der ganzen Seite den
      naechsten Schritt markiert. Hier ist sie ausnahmsweise Zeichnung und nicht
      Signal; das ist vertretbar, weil es EINE Stelle ist und weil es ihre eigene
@@ -54,7 +80,7 @@
 }
 
 .figur__haelfte--unten {
-  clip-path: inset(50% 0 0 0);
+  clip-path: inset(var(--naht) 0 0 0);
   color: var(--auf-signal);
 }
 
