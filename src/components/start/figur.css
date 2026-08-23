@@ -18,7 +18,12 @@
   /* Rechts, weil der Textblock links steht (max-width 48rem in der Schale).
      Auf der Naht mittig waere sie schoen und wuerde den Satz zerschneiden. */
   right: clamp(1rem, -1rem + 8vw, 7rem);
-  height: clamp(16rem, 10rem + 26vw, 34rem);
+  /* Deutlich groesser als die erste Fassung (34rem Deckelung, bei 1440px rund
+     534px hoch). Sie war als Akzent bemessen; gewollt ist ein Element, das die
+     Naht traegt. Bei 52rem sind es an einem 1440px-Schirm rund 768px — die
+     Figur ueberragt damit beide Sektionskanten deutlich und wird zu dem, was
+     man von dieser Seite in Erinnerung behaelt. */
+  height: clamp(20rem, 12rem + 40vw, 52rem);
   aspect-ratio: 652.36 / 1547.82;
   transform: translateY(-50%);
   /* Ueber den Flaechen, unter dem Text. Der Satz muss lesbar bleiben, auch wenn

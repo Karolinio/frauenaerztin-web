@@ -168,7 +168,7 @@
           "hinweis": "Optional, steht klein neben der Zeile — z. B. „nur nach Vereinbarung\"."
         }
       },
-      "achtung": "Solange beide Zeitfelder eines Tages leer sind, zeigt die Seite dort eine sichtbare Lücke und keine Uhrzeit. Das ist Absicht: eine geratene Öffnungszeit ist eine Patientin vor einer verschlossenen Tür."
+      "achtung": "Solange beide Zeitfelder eines Tages leer sind, zeigt die Seite dort eine sichtbare Lücke und keine Uhrzeit. Das ist Absicht: eine geratene Öffnungszeit ist eine Patientin vor einer verschlossenen Tür. AUSNAHME: Steht im Feld „Zusatz“ etwas, gilt das als Aussage und wird statt der Lücke gezeigt. Für Tage ohne Sprechstunde gehört dort „geschlossen“ hinein — sonst behauptet die Seite, die Zeiten stünden noch nicht fest."
     }
   ]
 }

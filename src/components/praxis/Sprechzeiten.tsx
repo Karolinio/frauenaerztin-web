@@ -50,13 +50,36 @@ export function Sprechzeiten() {
                 <th scope="row">
                   {z.tag}
                   {heute ? <span className="zeiten__marke">heute</span> : null}
-                  {z.hinweis ? <span className="zeiten__zusatz">{z.hinweis}</span> : null}
+                  {/* Der Zusatz steht NUR neben dem Tag, wenn daneben auch Zeiten
+                      stehen. Traegt der Tag keine Zeiten, ist der Zusatz die
+                      Aussage und gehoert in die Wertespalte — sonst stuende er
+                      zweimal in derselben Zeile. */}
+                  {z.hinweis && hatZeiten(z) ? <span className="zeiten__zusatz">{z.hinweis}</span> : null}
                 </th>
                 {hatZeiten(z) ? (
                   <>
                     <td>{z.vormittag || <span className="zeiten__leer">—</span>}</td>
                     <td>{z.nachmittag || <span className="zeiten__leer">—</span>}</td>
                   </>
+                ) : z.hinweis ? (
+                  /*
+                   * ═══ Ein geschlossener Tag ist keine fehlende Angabe ═══
+                   *
+                   * Gefunden am 23.08.2026, an einem Sonntag: die Zeile
+                   * „Samstag und Sonntag" war als heutiger Tag hervorgehoben
+                   * und sagte „Zeiten stehen noch nicht fest" — obwohl direkt
+                   * daneben „geschlossen" stand. Wer an einem Sonntag
+                   * nachschlaegt, bekam damit die Auskunft, das sei noch offen.
+                   *
+                   * Die Luecken-Doktrin dieser Seite ist richtig, aber sie hatte
+                   * einen blinden Fleck: sie kannte nur „Wert da" und „Wert
+                   * fehlt". „Es gibt hier bewusst keinen Wert" ist ein dritter
+                   * Fall, und der Hinweis ist genau die Stelle, an der die
+                   * Aerztin ihn ausspricht.
+                   */
+                  <td colSpan={2} className="zeiten__aussage">
+                    {z.hinweis}
+                  </td>
                 ) : (
                   <td colSpan={2}>
                     <span className="luecke">Zeiten stehen noch nicht fest</span>

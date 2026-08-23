@@ -57,6 +57,40 @@
     repeating-linear-gradient(90deg, oklch(26% 0.012 150 / 0.035) 0 1px, transparent 1px 3px),
     repeating-linear-gradient(0deg, oklch(26% 0.012 150 / 0.035) 0 1px, transparent 1px 3px);
 
+  /**
+   * ── Das Karo ─────────────────────────────────────────────────────────────
+   *
+   * Das Raster aus dem Mutterpass. Es ist KEINE zweite Textur im Sinne der
+   * Direktion, sondern etwas anderes: `--gewebe` sagt „diese Flaeche ist
+   * Material", `--karo` sagt „diese Flaeche ist ein Formular".
+   *
+   * ═══ Warum es das ueberhaupt gibt ═══
+   *
+   * Weil die Direktion es seit dem ersten Tag verlangt und es nie gebaut wurde.
+   * Referenz 4, woertlich: „Der deutsche Mutterpass — zu klauen: das Raster aus
+   * Feldern und Datumsspalten, das jede Frau in der Zielgruppe schon in der
+   * Hand hatte. Fuer die Sprechzeiten und den Terminbereich. Vertrautheit als
+   * Mittel, nicht als Zitat."
+   *
+   * Genau diese zwei Flaechen bekommen es, keine dritte. Ein Raster, das
+   * ueberall liegt, ist Tapete; eins, das an zwei Stellen liegt, ist eine
+   * Aussage darueber, was diese zwei Stellen sind.
+   *
+   * ═══ Die Masse ═══
+   *
+   * 24px Zellen — dasselbe Mass wie `--tippziel` halbiert, damit das Raster
+   * mit dem Zeilenrhythmus der Tabelle mitlaeuft und nicht dagegen. 1px
+   * Linien in derselben Farbfamilie wie die Tinte; ein neutrales Grau auf
+   * warmem Beige ergibt einen schmutzigen Schleier.
+   *
+   * Deckkraft 5,5 % — staerker als das Gewebe (3,5 %), weil das Karo GESEHEN
+   * werden soll. Es ist der Unterschied zwischen einer Flaeche mit Oberflaeche
+   * und einer Flaeche, die zitiert.
+   */
+  --karo:
+    repeating-linear-gradient(90deg, oklch(26% 0.012 150 / 0.055) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(0deg, oklch(26% 0.012 150 / 0.055) 0 1px, transparent 1px 24px);
+
   /* ── Rollen: hiermit wird gearbeitet, nicht mit den beiden Zeilen darüber ── */
 
   /** Fläche in hellem Salbei. Hintergrund, Balken, Marke. Niemals Text. */

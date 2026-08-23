@@ -85,6 +85,12 @@
 
 .t-section {
   font-family: var(--schrift-display);
+  /* SOFT folgt der Groesse wie opsz auch: 70 im Hero, 55 in der Aussage, 20 im
+     Untertitel. Der Sektionstitel stand als einziger auf 30 und fiel damit aus
+     der Reihe — bei rund 48px gehoert er zwischen Aussage und Untertitel.
+     Warum die Achse ueberhaupt gestaffelt wird: viel Rundung traegt Waerme,
+     solange die Kurven gross genug sind, um gelesen zu werden. Im kleinen Grad
+     frisst dieselbe Rundung die Kontur — das Wort wird weich statt warm. */
   font-variation-settings:
     'SOFT' 40,
     'opsz' 48,

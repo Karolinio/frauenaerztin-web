@@ -68,46 +68,35 @@ export function TerminBlock() {
             </a>
           </div>
 
-          {/* Feldraster statt Fliesstextzeile. Wer nach Öffnungszeiten sucht,
-              überfliegt — und eine Zeile mit drei Doppelpunkten überfliegt
-              niemand. */}
-          <dl className="termin__daten">
-            <div className="termin__zeile">
-              <dt>Telefon</dt>
-              <dd>
-                {telefonSteht ? (
-                  <a className="link" href={telefon}>
-                    {praxis.telefon.anzeige}
-                  </a>
-                ) : (
-                  <span className="luecke">Telefonnummer</span>
-                )}
-              </dd>
-            </div>
-            <div className="termin__zeile">
-              <dt>Telefonzeiten</dt>
-              <dd>{praxis.telefonzeiten ?? <span className="luecke">stehen noch nicht fest</span>}</dd>
-            </div>
-            {/*
-              ═══ Warum hier KEINE Sprechzeiten mehr stehen ═══
+          {/*
+            ═══ Warum hier kein Feldraster mehr steht ═══
 
-              Weil sie auf dieser einen Seite dreimal standen: im Hero die von
-              heute, hier die naechsten drei Tage, und in der Fusszeile die
-              vollstaendige Tabelle. Gemessen am 20.08.2026 war der Terminblock
-              mit 1,55 Bildschirmhoehen die laengste Sektion der Startseite am
-              Handy — ein gutes Stueck davon war Wiederholung.
+            Es stand hier — Telefon und Telefonzeiten als zwei Zeilen mit
+            Haarlinien — und war zweimal falsch.
 
-              Drei Fassungen derselben Angabe sind ausserdem drei Stellen, an
-              denen sie falsch werden kann. Sie kommen zwar alle aus
-              inhalt/zeiten.json und koennen nicht auseinanderlaufen — aber eine
-              Patientin, die dreimal dieselbe Tabelle liest, glaubt beim dritten
-              Mal nicht mehr, dass sie etwas Neues erfaehrt.
+            Erstens doppelt: die Telefonnummer stand als Wert in der Zeile
+            „Telefon", 150px unter dem gruenen Knopf, auf dem dieselbe Nummer
+            steht. Zweimal dieselbe Nummer in einem Bild ist kein Feldraster,
+            das ist ein Versehen.
 
-              Was bleibt: heute oben, vollstaendig unten, und der Weg zu /termin/
-              als Knopf. Das ist einmal die Antwort und einmal der Ort, an dem
-              alles steht.
-            */}
-          </dl>
+            Zweitens erzeugte es genau die Leere, wegen der dieser Abschnitt
+            beanstandet wurde. Gemessen am 21.08.2026 bei 1920px: die Sektion
+            843px hoch, davon 288px Polsterung, und das Feldraster sass 119px
+            hoch ganz unten, 200px unterhalb der Kante des Notfallkastens
+            daneben. Rechts endete der Inhalt, links lief er weiter, und
+            dazwischen stand nichts.
+
+            Die Telefonzeit ist die einzige Angabe, die hier wirklich fehlte —
+            sie steht jetzt als ein Satz direkt unter dem Knopf, zu dem sie
+            gehoert. Wann jemand anrufen kann, gehoert neben das Anrufen.
+          */}
+          {praxis.telefonzeiten ? (
+            <p className="t-meta termin__wann">Erreichbar {praxis.telefonzeiten}</p>
+          ) : (
+            <p className="t-meta termin__wann">
+              <span className="luecke">Telefonzeiten stehen noch nicht fest</span>
+            </p>
+          )}
         </Enthuellen>
 
         {/* Der Notfallhinweis steht bewusst NEBEN dem Termin und nicht am
