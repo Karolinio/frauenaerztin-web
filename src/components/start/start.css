@@ -77,7 +77,6 @@
 
 .werbin {
   background-color: var(--leinen);
-  background-image: var(--gewebe);
 }
 
 .werbin__name {
@@ -418,7 +417,6 @@
    wäre einer hier der erste Bruch der Direktion. */
 .termin__notfall {
   background-color: var(--leinen);
-  background-image: var(--gewebe);
   padding: var(--raum);
   align-self: start;
 }
@@ -661,7 +659,6 @@
 .kachel:hover,
 .kachel:focus-visible {
   background-color: var(--leinen);
-  background-image: var(--gewebe);
   transition-duration: 150ms;
 }
 

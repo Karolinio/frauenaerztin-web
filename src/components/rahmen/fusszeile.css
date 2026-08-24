@@ -15,7 +15,6 @@
  */
 .fuss {
   background-color: var(--leinen);
-  background-image: var(--gewebe);
   border-top: 1px solid var(--linie);
   padding-block: var(--raum-gross) var(--raum);
   margin-top: 0;

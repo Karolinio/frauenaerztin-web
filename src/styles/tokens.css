@@ -39,39 +39,37 @@
   --salbei-tief: oklch(42% 0.055 152); /* tief — Signal */
 
   /**
-   * ── Die eine Textur ──────────────────────────────────────────────────────
+   * ── Die Textur ist abgeschafft ───────────────────────────────────────────
    *
-   * Feines Leinengewebe, 4 % Deckkraft, AUSSCHLIESSLICH auf Leinen-Flächen.
-   * Die Direktion nennt genau diese eine und schliesst alles andere aus: kein
-   * Korn, kein Rauschen, kein Verlauf.
+   * Hier stand `--gewebe`: ein feines Kreuzraster, das acht Flaechen der Seite
+   * Materialitaet geben sollte. Es ist am 24.08.2026 ersatzlos entfernt worden.
    *
-   * Zwei gekreuzte Streifenraster mit 3px Periode, beide gleich stark — mit
-   * ungleichen Werten kippt das Gewebe optisch in Cord. Bei normalem Betrachtungs-
-   * abstand sieht man kein Muster, sondern dass die Fläche eine Oberfläche hat
-   * — und genau das ist der Unterschied zwischen „beiger Kasten" und „Material".
+   * ═══ Warum ═══
    *
-   * Der Ton ist --tinte, nicht Schwarz: ein neutrales Grau auf warmem Beige
-   * ergibt einen schmutzigen Schleier. Dieselbe Farbfamilie bleibt sauber.
+   * Weil es nicht als Material ankam, sondern als Karo. Karol zweimal am
+   * Bildschirm: „dieser karierte Teil finde ich nicht so schoen" und „mir ist
+   * der karierte Hintergrund in vielen Sektionen [zu viel]".
+   *
+   * Die technische Ursache war die Periode: 3px sind auf einem Bildschirm mit
+   * doppelter Pixeldichte 6 Geraetepixel, und ein Streifenraster dieser Groesse
+   * schlaegt mit dem Pixelraster. Ein Versuch mit 4px und geringerer Deckkraft
+   * hat das gemildert und nicht geloest — das Muster war leiser, aber es war
+   * weiter ein Muster.
+   *
+   * ═══ Warum ersatzlos und nicht feiner ═══
+   *
+   * Weil die Belege dagegen stehen. Gegengeprueft am 24.08.2026 an ruhigen
+   * Editorial-Seiten (Calm, SSENSE, IKEA, Runway): KEINE davon legt eine Textur
+   * auf grosse Flaechen. Wo sie Tiefe brauchen, nehmen sie Typografie oder ein
+   * Bild — nie ein Raster.
+   *
+   * Das steht auch so in der Direktion, sie wurde nur anders gelesen: „Kein
+   * Korn, kein Rauschen, kein Verlauf." Ein Kreuzraster ist Korn.
+   *
+   * Was bleibt: `--karo` auf dem Notfallkasten und der Sprechzeitentabelle.
+   * Das ist kein Dekor, sondern eine Aussage — die Flaechen zitieren den
+   * Mutterpass, und zwar genau die zwei, die die Direktion dafuer nennt.
    */
-  /*
-   * ═══ Zurueckgenommen am 24.08.2026 ═══
-   *
-   * Karol am Bildschirm: „dieser karierte Teil finde ich nicht so schoen."
-   * Auf seinem Screenshot traegt die ganze beige Sektion ein sichtbares Karo
-   * statt einer Oberflaeche.
-   *
-   * Die Ursache ist die Periode, nicht die Deckkraft: 3px sind auf einem
-   * Bildschirm mit doppelter Pixeldichte 6 Geraetepixel, und ein Streifenraster
-   * in dieser Groesse faengt an, mit dem Pixelraster zu schlagen — aus Textur
-   * wird Muster. Genau davor warnt die Direktion („kein Korn, kein Rauschen").
-   *
-   * Jetzt 4px Periode und 2,2 statt 3,5 Prozent. Bei normalem Abstand bleibt,
-   * was gemeint war: die Flaeche hat eine Oberflaeche. Was verschwindet, ist
-   * das Karo.
-   */
-  --gewebe:
-    repeating-linear-gradient(90deg, oklch(26% 0.012 150 / 0.022) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(0deg, oklch(26% 0.012 150 / 0.022) 0 1px, transparent 1px 4px);
 
   /**
    * ── Das Karo ─────────────────────────────────────────────────────────────

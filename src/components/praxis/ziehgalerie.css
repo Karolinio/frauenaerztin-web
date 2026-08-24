@@ -168,7 +168,6 @@
   width: clamp(16rem, 22vw, 22rem);
   padding: var(--raum);
   background-color: var(--leinen);
-  background-image: var(--gewebe);
 }
 
 .galerie__adresse {

@@ -12,7 +12,6 @@
 
 .notfall {
   background-color: var(--leinen);
-  background-image: var(--gewebe);
   border-block: 1px solid var(--linie);
   padding-block: var(--raum);
 }

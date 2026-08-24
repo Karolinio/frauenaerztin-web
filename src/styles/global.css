@@ -176,7 +176,6 @@ main {
  */
 .flaeche-leinen {
   background-color: var(--leinen);
-  background-image: var(--gewebe);
 }
 
 .strich {
