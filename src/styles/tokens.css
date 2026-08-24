@@ -53,9 +53,25 @@
    * Der Ton ist --tinte, nicht Schwarz: ein neutrales Grau auf warmem Beige
    * ergibt einen schmutzigen Schleier. Dieselbe Farbfamilie bleibt sauber.
    */
+  /*
+   * ═══ Zurueckgenommen am 24.08.2026 ═══
+   *
+   * Karol am Bildschirm: „dieser karierte Teil finde ich nicht so schoen."
+   * Auf seinem Screenshot traegt die ganze beige Sektion ein sichtbares Karo
+   * statt einer Oberflaeche.
+   *
+   * Die Ursache ist die Periode, nicht die Deckkraft: 3px sind auf einem
+   * Bildschirm mit doppelter Pixeldichte 6 Geraetepixel, und ein Streifenraster
+   * in dieser Groesse faengt an, mit dem Pixelraster zu schlagen — aus Textur
+   * wird Muster. Genau davor warnt die Direktion („kein Korn, kein Rauschen").
+   *
+   * Jetzt 4px Periode und 2,2 statt 3,5 Prozent. Bei normalem Abstand bleibt,
+   * was gemeint war: die Flaeche hat eine Oberflaeche. Was verschwindet, ist
+   * das Karo.
+   */
   --gewebe:
-    repeating-linear-gradient(90deg, oklch(26% 0.012 150 / 0.035) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(0deg, oklch(26% 0.012 150 / 0.035) 0 1px, transparent 1px 3px);
+    repeating-linear-gradient(90deg, oklch(26% 0.012 150 / 0.022) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg, oklch(26% 0.012 150 / 0.022) 0 1px, transparent 1px 4px);
 
   /**
    * ── Das Karo ─────────────────────────────────────────────────────────────
@@ -88,8 +104,58 @@
    * und einer Flaeche, die zitiert.
    */
   --karo:
-    repeating-linear-gradient(90deg, oklch(26% 0.012 150 / 0.055) 0 1px, transparent 1px 24px),
-    repeating-linear-gradient(0deg, oklch(26% 0.012 150 / 0.055) 0 1px, transparent 1px 24px);
+    repeating-linear-gradient(90deg, oklch(26% 0.012 150 / 0.042) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(0deg, oklch(26% 0.012 150 / 0.042) 0 1px, transparent 1px 24px);
+
+  /**
+   * ── Der Ton ihres Logos ──────────────────────────────────────────────────
+   *
+   * Am 24.08.2026 aus `media-raw/logo/logo-original.jpeg` GEMESSEN, nicht
+   * geschaetzt — ueber die Blasen- und Linienflaeche gemittelt:
+   *
+   *   Blase   #EDEDED   oklch(94.6% 0.000  90)   vollstaendig neutral
+   *   Linie   #7B7E75   oklch(58.8% 0.014 122)   ein Hauch Gruen
+   *
+   * ═══ Der Befund, der daraus folgt ═══
+   *
+   * Ihr Logo ist fast farblos. Die Seite arbeitet mit `--salbei` (Chroma 0,045)
+   * und `--salbei-tief` (0,055) — das ist die drei- bis vierfache Saettigung
+   * dessen, was ihre eigene Marke traegt.
+   *
+   * Das ist kein Fehler: „etwas salbeigruen" hat sie selbst bestellt, und eine
+   * Seite braucht mehr Farbe als ein Logo, das auf einem Briefbogen steht. Aber
+   * es erklaert, warum ihr Logo zwischen den Salbeiflaechen blass wirkt — es ist
+   * blass, gemessen.
+   *
+   * ═══ Wofuer dieser Ton da ist ═══
+   *
+   * Fuer ZEICHNUNGEN: die grosse Figur auf der Naht und die neun Leistungs-
+   * zeichen. Beide stammen aus ihrer Marke und sollen deren Ton tragen, nicht
+   * den unseren.
+   *
+   * Nebenbei loest das eine Ueberladung auf: bis hierher liefen die Zeichnungen
+   * ueber `--signal`, und das markiert laut Direktion GENAU EINE Sache — den
+   * naechsten Schritt. Neun Symbole und eine zwei Meter grosse Figur sind kein
+   * naechster Schritt.
+   */
+  --marke-linie-gemessen: oklch(58.8% 0.014 122); /* der Rohwert, zum Nachschlagen */
+
+  /*
+   * ═══ Warum nicht der gemessene Wert selbst ═══
+   *
+   * Weil er zu hell ist, sobald er nicht mehr auf einem Briefbogen steht.
+   * Gemessen am 24.08.2026 im Browser: bei 58,8 Prozent Helligkeit auf Leinen
+   * (94 Prozent) kommt ein 32px-Zeichen auf rund 3,2 : 1 — es verschwindet.
+   * Die neun Leistungszeichen waren praktisch nicht zu sehen.
+   *
+   * Uebernommen werden deshalb ihr FARBTON (122 statt unserer 150) und ihre
+   * ZURUECKHALTUNG (Chroma 0,018 statt der 0,055 des Signals). Dazu kommt die
+   * Tiefe, die eine Zeichnung braucht: 46 statt 58,8 Prozent.
+   *
+   * Das Ergebnis ist immer noch dreimal weniger gesaettigt als die Signalfarbe
+   * — es traegt also weiterhin ihre Handschrift und nicht unsere.
+   */
+  --marke-linie: oklch(46% 0.018 122);
 
   /* ── Rollen: hiermit wird gearbeitet, nicht mit den beiden Zeilen darüber ── */
 

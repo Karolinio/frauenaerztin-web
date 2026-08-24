@@ -665,8 +665,8 @@
   transition-duration: 150ms;
 }
 
-/* Das Zeichen. Salbei tief — hier ausnahmsweise Zeichnung und nicht Signal,
-   wie bei der grossen Figur auch: es ist ihre Bildsprache, kein Ornament. */
+/* Das Zeichen traegt den gemessenen Linienton ihres Logos, nicht das Signal.
+   Neun Symbole in der Signalfarbe waeren neun naechste Schritte, also keiner. */
 .kachel__zeichen {
   /* Etwas groesser als zuerst gesetzt (1,75–2,25rem). Bei 28px verloren die
      feineren Zeichen — Trieb, Schleife, Profil — ihre Kontur und lasen sich als
@@ -675,7 +675,7 @@
      32px auch keine. */
   width: clamp(2rem, 1.6rem + 1.6vw, 2.6rem);
   height: auto;
-  color: var(--signal);
+  color: var(--marke-linie);
   margin-bottom: 0.35rem;
 }
 

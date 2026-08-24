@@ -72,11 +72,9 @@
  */
 .figur__haelfte--oben {
   clip-path: inset(0 0 calc(100% - var(--naht)) 0);
-  /* Salbei tief auf Beige — dieselbe Farbe, die auf der ganzen Seite den
-     naechsten Schritt markiert. Hier ist sie ausnahmsweise Zeichnung und nicht
-     Signal; das ist vertretbar, weil es EINE Stelle ist und weil es ihre eigene
-     Marke ist, kein von uns erfundenes Ornament. */
-  color: var(--signal);
+  /* Der gemessene Linienton IHRES Logos, nicht unser Salbei. Die Figur stammt
+     aus ihrer Marke und traegt deshalb deren Farbe — siehe --marke-linie. */
+  color: var(--marke-linie);
 }
 
 .figur__haelfte--unten {

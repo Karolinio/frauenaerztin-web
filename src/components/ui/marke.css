@@ -65,7 +65,13 @@
      einem breiten Logo gross aussieht, ist fuer die Schrift darin klein.
      Bei 9rem sind es rund 370px, also gut die Haelfte der linken Heros-Spalte:
      ein Briefkopf, kein Aufkleber. */
-  height: clamp(4rem, 2.6rem + 6.2vw, 9rem);
+  /* Noch einmal groesser (vorher 4–9rem, bei 1440px rund 342px breit).
+     Karol am 24.08.2026: „das Logo gerne noch was groesser, das geht so ein
+     bisschen unter." Es geht unter, weil daneben eine 120px-Zeile steht — ein
+     Logo, das halb so hoch ist wie ein Buchstabe der Ueberschrift, verliert
+     jeden Vergleich. Bei 11rem sind es rund 430px, gut zwei Drittel der linken
+     Herospalte. */
+  height: clamp(4.5rem, 3rem + 8vw, 11rem);
 }
 
 /* Die Fassung im Hero. Sie trägt den Namen der Praxis über der grossen Zeile
