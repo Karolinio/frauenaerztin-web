@@ -79,7 +79,22 @@
 
 .figur__haelfte--unten {
   clip-path: inset(var(--naht) 0 0 0);
-  color: var(--auf-signal);
+  /*
+   * Papier auf ihrem #8D9788 — gemessen 3,04 : 1.
+   *
+   * ═══ Warum das hier zulaessig ist und beim Text nicht ═══
+   *
+   * Weil die Regel, an der 3,04 scheitert, fuer TEXT gilt. Diese Zeichnung ist
+   * `aria-hidden`, traegt keine Information und wird nicht gelesen — sie faellt
+   * unter keine Kontrastanforderung. Der Satz daneben faellt darunter, und der
+   * steht deshalb in Tinte.
+   *
+   * Der erste Versuch nach dem Farbwechsel setzte auch die untere Haelfte auf
+   * Tinte. Sicher, aber dann war die Farbumkehr an der Naht weg — und die ist
+   * der ganze Grund, warum es diese Figur gibt: eine Zeichnung, die durch eine
+   * Kante geht und dabei kippt.
+   */
+  color: var(--papier);
 }
 
 .figur__svg {

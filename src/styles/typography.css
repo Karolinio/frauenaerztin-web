@@ -1,81 +1,62 @@
 /**
- * Schriften. Selbst gehostet, kein Google-CDN, kein externer Request — bei einer
- * Arztseite ist jede Fremdverbindung eine Datenschutzfrage, die man sich sparen kann.
+ * Die Schrift. Selbst gehostet, kein Google-CDN, kein externer Request — bei
+ * einer Arztseite ist jede Fremdverbindung eine Datenschutzfrage, die man sich
+ * sparen kann.
  *
- * Fraunces liegt als EINE variable Datei vor (Achsen: opsz, wght, SOFT).
- * Instrument Sans als drei statische Schnitte — mehr braucht die Seite nicht.
+ * ═══ Eine Familie, keine Paarung ═══
+ *
+ * Bis zum 25.08.2026 standen hier Fraunces (Display) und Instrument Sans (Text).
+ * Karol: „schriftart montserrat light. auch bei ueberschriften."
+ *
+ * Montserrat liegt variabel vor (Gewicht 100–900) und deckt damit alles ab, was
+ * die Seite braucht: 300 fuer Ueberschriften, 400 fuer Fliesstext, 500 und 600
+ * fuer Etiketten. EINE Datei, 26,4 kB — die vier Dateien davor wogen zusammen
+ * 133 kB.
+ *
+ * ═══ Was der Wechsel kostet ═══
+ *
+ * Die Unterscheidung zwischen Display und Text laeuft jetzt ueber GEWICHT und
+ * GRAD, nicht mehr ueber zwei Schriftbilder. Das ist weniger Kontrast, als eine
+ * Paarung liefert — dafuer ist es ruhiger, und Montserrat traegt beides, weil
+ * sie geometrisch gebaut ist und bei 300 nicht auseinanderfaellt.
+ *
+ * Die optische Groessenachse von Fraunces (`opsz`) faellt weg. Ersatz ist die
+ * Laufweite: sie wird bei grossen Graden enger gestellt und bei kleinen offener
+ * — von Hand, was `opsz` vorher automatisch tat.
  */
 
 @font-face {
-  font-family: 'Fraunces';
-  src: url('/fonts/fraunces-var-latin.woff2') format('woff2-variations');
-  font-weight: 300 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Sans';
-  src: url('/fonts/instrument-sans-400.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Sans';
-  src: url('/fonts/instrument-sans-500.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Sans';
-  src: url('/fonts/instrument-sans-600.woff2') format('woff2');
-  font-weight: 600;
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat-var-latin.woff2') format('woff2-variations');
+  font-weight: 300 600;
   font-style: normal;
   font-display: swap;
 }
 
 /* ── Rollen ─────────────────────────────────────────────────────────────────
-   Fraunces wird ueber ZWEI Achsen gesteuert, nicht ueber eine.
+   Der Unterschied zwischen Ueberschrift und Fliesstext laeuft ueber drei Regler:
+   GEWICHT, GRAD und LAUFWEITE.
 
-   ═══ SOFT folgt dem Grad, statt ueberall gleich zu stehen ═══
+   ═══ Gewicht ═══
+   300 (Light) fuer alle Ueberschriften — so bestellt. 400 fuer Fliesstext.
+   500 und 600 fuer Etiketten und Knoepfe, wo Kleinschrift sonst wegsackt.
 
-   Bis zum 19.08.2026 stand `SOFT 30` auf jeder Rolle. Eine variable Schrift, bei
-   der eine Achse ueberall denselben Wert hat, ist eine statische Schrift mit
-   Mehrgewicht — man bezahlt die Achse und benutzt sie nicht.
+   ═══ Warum der Fliesstext NICHT auf 300 steht ═══
+   Weil Montserrat Light bei 17px duenn wird und diese Seite fuer Leserinnen
+   zwischen 16 und 75 gebaut ist. Bei einer Ueberschrift von 60px traegt Light
+   und wirkt leicht; bei 17px Fliesstext ueber mehrere Absaetze wird daraus
+   Anstrengung. Wenn es trotzdem ueberall Light sein soll, ist es eine Zeile —
+   `--gewicht-text` unten.
 
-   Jetzt traegt SOFT eine Regel: **weich wenn gross, klar wenn klein.**
-
-     t-hero     SOFT 70   Die Serifen werden rund und offen. Bei 120px ist das
-                          der Unterschied zwischen einer Praxis und einer Kanzlei.
-     t-aussage  SOFT 55
-     t-section  SOFT 40
-     t-unter    SOFT 20
-     klein      SOFT 10   Runde Terminals verschlucken bei 17px Details.
-
-   Das ist keine Kosmetik: SOFT veraendert die Strichenden. Bei grossem Grad hat
-   eine runde Endung Platz und wirkt warm; bei kleinem Grad frisst sie den
-   Kontrast, den das Auge zum Unterscheiden braucht.
-
-   Nachgemessen (Browser, 150px, 'Gynaekologie'): SOFT 0 = 1084,78px,
-   SOFT 100 = 1095,28px. Die Achse reagiert also nachweislich — anders als WONK,
-   siehe scripts/copy-fonts.mjs.
-
-   `opsz` folgt der Grösse von Hand, weil `auto` in Safari nicht überall greift:
-   grosse Grade bekommen 72 (offener, schmalere Strichstärkenkontraste), kleine
-   Grade 14. Wer das weglässt, bekommt bei 5rem eine Schrift, die für 16px
-   gezeichnet wurde — sie wirkt dann plump, ohne dass man sagen kann warum. */
-
+   ═══ Laufweite statt optischer Groesse ═══
+   Fraunces hatte eine `opsz`-Achse, die Formen automatisch an den Grad
+   anpasste. Montserrat hat sie nicht. Ersatz von Hand: grosse Grade laufen
+   enger (bis -0,03em), kleine offener. Ohne das wirkt eine geometrische
+   Grotesk bei 60px zerfallen und bei 12px gedraengt.
+*/
 .t-hero {
   font-family: var(--schrift-display);
-  font-variation-settings:
-    'SOFT' 70,
-    'opsz' 96,
-    'WONK' 0;
-  font-weight: 400;
+  font-weight: 300;
   font-size: var(--text-hero);
   line-height: 0.94;
   letter-spacing: var(--tracking-hero);
@@ -91,11 +72,7 @@
      Warum die Achse ueberhaupt gestaffelt wird: viel Rundung traegt Waerme,
      solange die Kurven gross genug sind, um gelesen zu werden. Im kleinen Grad
      frisst dieselbe Rundung die Kontur — das Wort wird weich statt warm. */
-  font-variation-settings:
-    'SOFT' 40,
-    'opsz' 48,
-    'WONK' 0;
-  font-weight: 400;
+  font-weight: 300;
   font-size: var(--text-section);
   line-height: 1.06;
   letter-spacing: var(--tracking-head);
@@ -105,11 +82,7 @@
 
 .t-unter {
   font-family: var(--schrift-display);
-  font-variation-settings:
-    'SOFT' 20,
-    'opsz' 24,
-    'WONK' 0;
-  font-weight: 400;
+  font-weight: 300;
   font-size: var(--text-unter);
   line-height: 1.18;
   letter-spacing: var(--tracking-head);
@@ -129,11 +102,7 @@
  */
 .t-aussage {
   font-family: var(--schrift-display);
-  font-variation-settings:
-    'SOFT' 55,
-    'opsz' 72,
-    'WONK' 0;
-  font-weight: 400;
+  font-weight: 300;
   font-size: var(--text-aussage);
   line-height: 1.08;
   letter-spacing: var(--tracking-hero);

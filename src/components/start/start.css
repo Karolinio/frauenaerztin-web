@@ -447,9 +447,6 @@
 
 .termin__nummer {
   font-family: var(--schrift-display);
-  font-variation-settings:
-    'SOFT' 30,
-    'opsz' 40;
   font-size: 1.875rem;
   line-height: 1.05;
   letter-spacing: 0.01em;
@@ -678,11 +675,7 @@
 
 .kachel__titel {
   font-family: var(--schrift-display);
-  font-variation-settings:
-    'SOFT' 25,
-    'opsz' 24,
-    'WONK' 0;
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
   line-height: 1.15;
   letter-spacing: var(--tracking-head);

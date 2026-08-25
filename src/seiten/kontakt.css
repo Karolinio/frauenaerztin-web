@@ -48,9 +48,6 @@
 .notfall__nummer {
   grid-area: nummer;
   font-family: var(--schrift-display);
-  font-variation-settings:
-    'SOFT' 30,
-    'opsz' 48;
   font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
   line-height: 1;
   color: var(--signal);
@@ -109,9 +106,6 @@
   align-items: center;
   min-height: var(--tippziel);
   font-family: var(--schrift-display);
-  font-variation-settings:
-    'SOFT' 30,
-    'opsz' 32;
   font-size: 1.75rem;
   color: var(--signal);
   text-decoration: none;

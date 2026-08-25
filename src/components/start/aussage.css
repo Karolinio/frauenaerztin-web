@@ -60,19 +60,36 @@
  * Papierweiss auf dem tiefen Ton. */
 
 /* Salbei tief als Fläche, Papier darauf — 7,88 : 1, AAA. */
+/*
+ * Die Flaeche traegt jetzt IHRE Farbe (#8D9788) — und der Text darauf ist
+ * dunkel, nicht weiss.
+ *
+ * Gerechnet am 25.08.2026: Weiss auf #8D9788 ergibt 3,04 : 1 und faellt durch;
+ * Tinte darauf ergibt 4,56 : 1 und besteht. Die Umkehrung ist keine
+ * Geschmacksentscheidung, sondern die einzige, bei der ihre Farbe hier stehen
+ * kann.
+ */
 .aussage--dunkel {
-  background: var(--signal);
+  background: var(--flaeche-salbei);
 }
 
 .aussage--dunkel .aussage__satz {
-  color: var(--auf-signal);
+  color: var(--tinte);
 }
 
 .aussage--dunkel .aussage__label,
 .aussage--dunkel .aussage__zusatz {
-  /* Nicht Papier auf voller Deckkraft: der Zusatz soll unter der Aussage
-     stehen, nicht neben ihr. 78 % ergibt gemessen 5,40 : 1 — über AA. */
-  color: color-mix(in oklch, var(--auf-signal) 78%, var(--signal));
+  /*
+   * Zurueckgenommen gegenueber der Aussage, aber in derselben Richtung.
+   *
+   * 82 Prozent waren zu wenig: gemessen 3,97 : 1, durchgefallen. Gefunden hat
+   * das die Probe, die am selben Tag neu dazukam — vorher stand diese Paarung
+   * in keiner Pruefung, und der Fehler waere mit ausgerollt worden.
+   *
+   * 94 Prozent halten die Zuruecknahme sichtbar und bestehen. Wer hier wieder
+   * heruntergeht, faellt durch und erfaehrt es beim naechsten Lauf.
+   */
+  color: color-mix(in oklch, var(--tinte) 94%, var(--flaeche-salbei));
 }
 
 /* Salbei hell als Fläche, Tinte darauf — 6,34 : 1. Bleibt hell. */

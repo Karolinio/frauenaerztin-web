@@ -31,11 +31,7 @@
  */
 .marke__name {
   font-family: var(--schrift-display);
-  font-variation-settings:
-    'SOFT' 30,
-    'opsz' 72,
-    'wght' 400,
-    'WONK' 0;
+  font-weight: 300;
   font-size: 1.1875rem;
   line-height: 1.1;
   letter-spacing: 0.008em;
@@ -71,7 +67,10 @@
      Logo, das halb so hoch ist wie ein Buchstabe der Ueberschrift, verliert
      jeden Vergleich. Bei 11rem sind es rund 430px, gut zwei Drittel der linken
      Herospalte. */
-  height: clamp(4.5rem, 3rem + 8vw, 11rem);
+  /* Dritte Vergroesserung, auf Ansage. 342 → 427 → jetzt rund 505px breit bei
+     1440. Damit belegt das Logo gut drei Viertel der linken Herospalte und ist
+     das erste, was man sieht — vor der Ueberschrift. */
+  height: clamp(5rem, 3.5rem + 9.5vw, 13rem);
 }
 
 /* Die Fassung im Hero. Sie trägt den Namen der Praxis über der grossen Zeile

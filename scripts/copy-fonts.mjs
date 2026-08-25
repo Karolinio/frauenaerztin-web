@@ -31,41 +31,22 @@ const CHARSET = [
 
 const JOBS = [
   {
-    from: '@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2',
-    to: 'fraunces-var-latin.woff2',
-    /* WONK festnageln, die drei genutzten Achsen im Bereich lassen.
+    /*
+     * Montserrat, variabel (Gewicht 100–900) — die EINE Schrift dieser Seite.
      *
-     * ═══ WONK ist nicht verfuegbar, auch wenn es so aussieht ═══
+     * ═══ Was sie ersetzt ═══
      *
-     * Die Metadaten von @fontsource-variable/fraunces melden `WONK 0..1`, und
-     * das Paket liefert sogar eine eigene Datei `fraunces-latin-wonk-normal`.
-     * Gemessen am 19.08.2026 im Browser, per Pixelvergleich zweier Schnitte bei
-     * 150px: `font-variation-settings: 'WONK' 1` erzeugt in KEINER dieser
-     * Dateien ein anderes Bild — nicht in der subsetteten, nicht in der
-     * Rohdatei `fraunces-latin-full-normal`, nicht in der WONK-Datei selbst.
-     * In der von Google ausgelieferten Binaerdatei ist die Achse festgenagelt.
+     * Fraunces (Display) und Instrument Sans in drei statischen Schnitten.
+     * Karol am 25.08.2026: „schriftart montserrat light. auch bei ueberschriften."
      *
-     * Wer sie haben will, braucht das Original von undercasetype/Fraunces.
-     * Bis dahin: nicht noch einmal untersuchen. SOFT und opsz reagieren
-     * dagegen nachweislich — mit denen wird gearbeitet. */
-    variationAxes: {
-      WONK: 0,
-      opsz: { min: 9, max: 144 },
-      wght: { min: 300, max: 700 },
-      SOFT: { min: 0, max: 100 },
-    },
-  },
-  {
-    from: '@fontsource/instrument-sans/files/instrument-sans-latin-400-normal.woff2',
-    to: 'instrument-sans-400.woff2',
-  },
-  {
-    from: '@fontsource/instrument-sans/files/instrument-sans-latin-500-normal.woff2',
-    to: 'instrument-sans-500.woff2',
-  },
-  {
-    from: '@fontsource/instrument-sans/files/instrument-sans-latin-600-normal.woff2',
-    to: 'instrument-sans-600.woff2',
+     * Eine variable Datei statt vier statischen: die Seite braucht 300 fuer
+     * Ueberschriften, 400 fuer Fliesstext und 500/600 fuer Etiketten — das sind
+     * mit Fraunces und drei Schnitten Instrument Sans vier Dateien und rund
+     * 133 kB gewesen. Hier ist es eine.
+     */
+    from: '@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2',
+    to: 'montserrat-var-latin.woff2',
+    variationAxes: { wght: { min: 300, max: 600 } },
   },
 ];
 

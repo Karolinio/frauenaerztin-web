@@ -25,7 +25,25 @@
      Nichts dazuerfunden. Gemessen mit packages/shared/src/kontrast.ts. */
 
   --papier: oklch(98.5% 0.004 95); /* Grund. Fast weiß, minimal warm */
-  --leinen: oklch(94% 0.012 85); /* warmes Beige. Zweite Fläche */
+  /*
+   * Die zweite Flaeche — #E5E6E3, von ihr geliefert (25.08.2026).
+   *
+   * ═══ Was sich damit aendert ═══
+   *
+   * Vorher: oklch(94% 0.012 85), ein warmes Beige. Jetzt oklch(92.3% 0.004 122),
+   * ein fast neutrales Grau mit einem Hauch Gruen — derselbe Farbton wie die
+   * Blase in ihrem Logo.
+   *
+   * Damit faellt „warmes beige" weg, das sie in der ersten Sprachnachricht
+   * genannt hatte („viel weiss, etwas salbeigruen und warmes beige"). Das ist
+   * eine bewusste Korrektur von ihr, keine Nachlaessigkeit von uns — sie hat den
+   * Wert selbst geschickt, mit dem Hinweis, er solle an die Stelle des
+   * Hintergrunds treten.
+   *
+   * Gemessen: Tinte darauf ergibt 11,04 : 1. Die Flaeche ist heller und kuehler
+   * als das Beige und traegt Text damit besser als vorher.
+   */
+  --leinen: oklch(92.3% 0.004 122); /* #E5E6E3 — ihr helles Grau */
   --leinen-tief: oklch(90% 0.016 82); /* dritte Fläche, Tabellenzeilen */
 
   /* Text trägt einen grünen Stich, kein neutrales Grau. Neutral neben Salbei
@@ -35,8 +53,33 @@
 
   --linie: oklch(88% 0.01 90); /* Haarlinien, immer 1px */
 
-  --salbei: oklch(72% 0.045 150); /* hell — Fläche */
-  --salbei-tief: oklch(42% 0.055 152); /* tief — Signal */
+  /* #8D9788 — die Farbe der Silhouette in ihrem Logo, von ihr geliefert. */
+  --salbei: oklch(66.4% 0.025 135);
+  /*
+   * Der dunkle Verwandte von #8D9788 — abgeleitet, nicht erfunden.
+   *
+   * ═══ Warum ihre Farbe hier NICHT direkt stehen kann ═══
+   *
+   * Karol wollte #8D9788 „anstelle des ganz dunklen Gruens". Gerechnet am
+   * 25.08.2026 geht das an einer Stelle nicht auf:
+   *
+   *     WEISS auf #8D9788        3,04 : 1   faellt durch (noetig 4,5)
+   *     #8D9788 als Text         2,91 : 1   faellt durch
+   *     Tinte  auf #8D9788       4,56 : 1   besteht
+   *
+   * Ihre Farbe ist zu hell fuer weisse Schrift. Auf einer Arztseite ist ein
+   * Termin-Knopf, den man bei Sonnenlicht nicht liest, kein Stilfehler.
+   *
+   * ═══ Die Loesung ═══
+   *
+   * Zwei Schritte statt einer Absage. Erstens: die grosse Flaeche BEKOMMT ihre
+   * Farbe — der Text darauf wird dunkel statt weiss (siehe aussage.css).
+   * Zweitens: Knoepfe und Verweise bekommen einen dunkleren Verwandten mit
+   * IHREM Farbton (135) und IHRER Zurueckhaltung (Chroma 0,025), nur tiefer.
+   *
+   * Gemessen bei L 38 Prozent: weiss darauf 9,85 : 1.
+   */
+  --salbei-tief: oklch(38% 0.025 135); /* #3D4638 — abgeleitet aus #8D9788 */
 
   /**
    * ── Die Textur ist abgeschafft ───────────────────────────────────────────
@@ -186,8 +229,13 @@
      Die Referenz benutzt -apple-system — dort wurde nie eine Schrift gewählt.
      Eine echte Paarung ist der billigste und grösste Vorsprung dieser Seite. */
 
-  --schrift-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-  --schrift-text: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+  /*
+   * Eine Familie fuer alles. Die beiden Namen bleiben, weil sie im ganzen Code
+   * benutzt werden und weil sie eine ROLLE benennen, nicht eine Datei — waere
+   * je wieder eine zweite Schrift gewuenscht, ist es hier eine Zeile.
+   */
+  --schrift-display: 'Montserrat', system-ui, -apple-system, sans-serif;
+  --schrift-text: 'Montserrat', system-ui, -apple-system, sans-serif;
 
   /* Der Hero-Grad. Von 5,5rem auf 7,5rem angehoben.
      Gemessen am 19.08.2026 bei 1440px: der alte Wert ergab 88px Hero gegen 48px
@@ -207,8 +255,8 @@
   --text-base: 1.0625rem;
   --text-meta: 0.9375rem;
 
-  --tracking-hero: -0.022em;
-  --tracking-head: -0.012em;
+  --tracking-hero: -0.03em; /* enger, weil Montserrat ohne opsz-Achse bei 60px+ sonst zerfaellt */
+  --tracking-head: -0.018em;
   --tracking-label: 0.14em;
 
   --measure: 64ch;

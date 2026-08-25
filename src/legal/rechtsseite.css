@@ -37,10 +37,6 @@
   font-size: clamp(2.25rem, 1.5rem + 2.4vw, 3.25rem);
   line-height: 1.1;
   letter-spacing: var(--tracking-head);
-  font-variation-settings:
-    'opsz' 60,
-    'wght' 400,
-    'SOFT' 30;
   color: var(--tinte);
 }
 
@@ -59,10 +55,6 @@
   font-family: var(--schrift-display);
   font-size: 1.5rem;
   line-height: 1.25;
-  font-variation-settings:
-    'opsz' 32,
-    'wght' 460,
-    'SOFT' 30;
   letter-spacing: var(--tracking-head);
   margin-bottom: 1rem;
   color: var(--tinte);

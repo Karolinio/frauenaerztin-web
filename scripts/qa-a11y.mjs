@@ -99,6 +99,18 @@ const messung = await seite.evaluate(() => {
     ['Meta in der Fußzeile', '.fuss__ort', true],
     ['Navigation inaktiv', '.kopf__punkt', true],
     ['Weiß auf Signal (Knopf)', '.knopf', true],
+    /*
+     * Die riskanteste Paarung der Seite, und sie fehlte hier.
+     *
+     * Am 25.08.2026 bekam die Aussage-Sektion ihre Logofarbe #8D9788. Gerechnet
+     * ergibt das mit weisser Schrift 3,04 : 1 (durchgefallen) und mit Tinte
+     * 4,56 : 1 (bestanden) — der Abstand zur Grenze betraegt also 0,06.
+     * Eine Paarung, die so knapp besteht, muss gemessen werden und nicht
+     * gerechnet: wer die Flaeche spaeter um zwei Prozent aufhellt, faellt durch
+     * und merkt es nicht.
+     */
+    ['Aussage auf ihrer Salbeifläche', '.aussage--dunkel .aussage__satz', true],
+    ['Zusatz auf ihrer Salbeifläche', '.aussage--dunkel .aussage__zusatz', true],
   ];
 
   return proben
