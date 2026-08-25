@@ -4,7 +4,56 @@ import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { praxis, DEMO } from './src/praxis.config';
 import { SEITEN } from './src/seiten';
+import { existsSync } from 'node:fs';
 import { HERO_SIZES, heroSrcSet } from './src/lib/heroBild';
+
+/**
+ * Die beiden Demo-Marken muessen zusammenpassen — sonst bricht der Bau ab.
+ *
+ * ═══ Der Widerspruch, den das verhindert ═══
+ *
+ * Diese Seite hat ZWEI Quellen erfundener Daten und zwei Marken dafuer:
+ *
+ *   DEMO in praxis.config.ts   Anschrift, Telefon, Kammer — alles, was im Code steht
+ *   die Datei inhalt/DEMO      Team, Aktuelles, Sprechzeiten — was die Aerztin pflegt
+ *
+ * Gefunden am 25.08.2026 beim Durchspielen des Live-Zustands: mit DEMO = false
+ * verschwanden Anschrift und Telefonnummer zu sichtbaren Luecken — aber im Hero
+ * stand weiter „HEUTE 08:00 – 12:30 Uhr", auf /team/ zwei erfundene
+ * Mitarbeiterinnen, und in der Hinweiszeile eine erfundene Meldung.
+ *
+ * Wer den Schalter umlegt und die Seite ansieht, haelt sie fuer sauber. Sie ist
+ * es zur Haelfte — und die Haelfte, die bleibt, sind Namen von Menschen, die es
+ * nicht gibt, und Oeffnungszeiten, vor denen jemand steht.
+ *
+ * `pruefe-freigabe.mjs` faengt das ab. Aber eine Pruefung, die man vergessen
+ * kann, ist schwaecher als ein Bau, der nicht durchlaeuft. Deshalb hier.
+ *
+ * Die umgekehrte Richtung ist erlaubt: DEMO an und inhalt/DEMO weg heisst, dass
+ * ihre echten Inhalte schon da sind, waehrend der Rest noch aussteht. Das ist
+ * genau der Weg, den dieses Projekt nehmen wird.
+ */
+function demoMarkenPruefen(): void {
+  const inhaltIstDemo = existsSync(resolve(__dirname, 'inhalt/DEMO'));
+  if (DEMO || !inhaltIstDemo) return;
+  throw new Error(
+    [
+      '',
+      '  WIDERSPRUCH ZWISCHEN DEN DEMO-MARKEN — Bau abgebrochen.',
+      '',
+      '  src/praxis.config.ts sagt DEMO = false (die Seite soll live gehen),',
+      '  aber inhalt/DEMO ist noch da: Team, Aktuelles und Sprechzeiten sind',
+      '  weiterhin erfunden.',
+      '',
+      '  Die Seite saehe damit sauber aus und truege trotzdem Namen von Menschen,',
+      '  die es nicht gibt, und Oeffnungszeiten, vor denen jemand steht.',
+      '',
+      '  Zum Loesen: inhalt/*.json durch die echten Angaben ersetzen, dann',
+      '  inhalt/DEMO loeschen.',
+      '',
+    ].join('\n'),
+  );
+}
 
 /**
  * Titel, Beschreibung und Ort stehen auch im HTML-Kopf aus praxis.config.ts —
@@ -125,6 +174,8 @@ function einstiegeAnlegen() {
   }
   return eingaben;
 }
+demoMarkenPruefen();
+
 export default defineConfig({
   /*
    * `base` aus der Umgebung, nicht fest verdrahtet.
