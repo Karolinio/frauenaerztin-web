@@ -684,27 +684,44 @@
   color: var(--tinte);
 }
 
-/* A — ihr helles Grau */
+/*
+ * ═══ Zwei Toene, nicht drei ═══
+ *
+ * Der erste Wurf verteilte alle drei Toene als lateinisches Quadrat. Karol am
+ * 26.08.2026: „lass nur die 3er-Kombi gruen wie bisher, diese von links unten
+ * bis rechts oben. Und Rest in dem normalen Grau wie vorher — fuer Kontrast zum
+ * dunkleren Gruen."
+ *
+ * Er hat recht: mit einem Mittelton dazwischen war das Gruen nur noch eine
+ * Abstufung unter dreien. Ohne ihn ist es eine Aussage. Drei Felder leuchten
+ * gruen, sechs grau — und die drei bilden die Diagonale von links unten nach
+ * rechts oben:
+ *
+ *     · · G
+ *     · G ·
+ *     G · ·
+ *
+ * Das sind die Felder 3, 5 und 7. Sie waren schon vorher die gruenen; entfallen
+ * ist nur der Mittelton auf 2, 4 und 9, die jetzt zum Grau gehoeren.
+ */
+
+/* Grau — sechs Felder */
 .auszug__raster > li:nth-child(1) .kachel:hover,
 .auszug__raster > li:nth-child(1) .kachel:focus-visible,
-.auszug__raster > li:nth-child(6) .kachel:hover,
-.auszug__raster > li:nth-child(6) .kachel:focus-visible,
-.auszug__raster > li:nth-child(8) .kachel:hover,
-.auszug__raster > li:nth-child(8) .kachel:focus-visible {
-  background-color: var(--leinen);
-}
-
-/* B — ihr Salbei, aufgehellt: der Mittelton zwischen den beiden anderen */
 .auszug__raster > li:nth-child(2) .kachel:hover,
 .auszug__raster > li:nth-child(2) .kachel:focus-visible,
 .auszug__raster > li:nth-child(4) .kachel:hover,
 .auszug__raster > li:nth-child(4) .kachel:focus-visible,
+.auszug__raster > li:nth-child(6) .kachel:hover,
+.auszug__raster > li:nth-child(6) .kachel:focus-visible,
+.auszug__raster > li:nth-child(8) .kachel:hover,
+.auszug__raster > li:nth-child(8) .kachel:focus-visible,
 .auszug__raster > li:nth-child(9) .kachel:hover,
 .auszug__raster > li:nth-child(9) .kachel:focus-visible {
-  background-color: color-mix(in oklch, var(--flaeche-salbei) 45%, var(--papier));
+  background-color: var(--leinen);
 }
 
-/* C — ihr Salbei in voller Staerke */
+/* Gruen — die Diagonale von links unten nach rechts oben */
 .auszug__raster > li:nth-child(3) .kachel:hover,
 .auszug__raster > li:nth-child(3) .kachel:focus-visible,
 .auszug__raster > li:nth-child(5) .kachel:hover,
