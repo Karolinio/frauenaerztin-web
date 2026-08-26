@@ -104,27 +104,6 @@
 }
 
 /**
- * Das Karo auf der Sprechzeitentabelle.
- *
- * Die Direktion nennt den Mutterpass als Referenz fuer genau diese Flaeche:
- * „das Raster aus Feldern und Datumsspalten, das jede Frau in der Zielgruppe
- * schon in der Hand hatte."
- *
- * `background-attachment: local` waere hier falsch und `fixed` erst recht: das
- * Raster gehoert zur Flaeche und muss mit ihr wandern. Voreinstellung stimmt.
- *
- * Die Zellen sind 24px, die Tabellenzeilen ein Vielfaches davon — deshalb
- * laeuft das Raster mit den Zeilen mit und nicht dagegen. Ein Raster, dessen
- * Periode zur Zeilenhoehe schwebt, erzeugt ein Moire aus Beinahe-Treffern.
- */
-.zeiten__tabelle {
-  background-image: var(--karo);
-  /* Am oberen linken Innenrand ansetzen, damit die erste Rasterlinie mit der
-     ersten Zeilenkante zusammenfaellt statt 3px darunter zu liegen. */
-  background-position: top left;
-}
-
-/**
  * Ein Tag ohne Sprechstunde, der das auch SAGT.
  *
  * Nicht als Luecke gesetzt (gestrichelt, in Signalfarbe) — eine Luecke ist eine

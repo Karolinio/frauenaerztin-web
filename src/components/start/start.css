@@ -593,22 +593,6 @@
   }
 }
 
-/**
- * Das Karo auf dem Notfallkasten.
- *
- * Die zweite der beiden Flaechen, die die Direktion nennt („Fuer die
- * Sprechzeiten und den Terminbereich"). Der Kasten war bis hierher eine glatte
- * Leinenflaeche — richtig, aber stumm.
- *
- * Er ist ausserdem die Flaeche, auf der es am meisten traegt: was hier steht,
- * sind Nummern, die man im Ernstfall abliest. Ein Formularraster darunter sagt
- * ohne ein Wort, dass das hier eine Angabe ist und keine Werbung.
- */
-.termin__notfall {
-  background-image: var(--karo);
-  background-position: top left;
-}
-
 /* ══ Das Leistungsraster ═════════════════════════════════════════════════════
  *
  * Ihr Aufbau vom 23.08.2026: neun Leistungen, je ein Zeichen, je ein Satz,

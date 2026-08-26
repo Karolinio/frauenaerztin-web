@@ -115,38 +115,34 @@
    */
 
   /**
-   * ── Das Karo ─────────────────────────────────────────────────────────────
+   * ── Auch das Karo ist abgeschafft ────────────────────────────────────────
    *
-   * Das Raster aus dem Mutterpass. Es ist KEINE zweite Textur im Sinne der
-   * Direktion, sondern etwas anderes: `--gewebe` sagt „diese Flaeche ist
-   * Material", `--karo` sagt „diese Flaeche ist ein Formular".
+   * Hier stand `--karo`: das Feldraster aus dem Mutterpass, 24px Zellen, auf
+   * dem Notfallkasten und der Sprechzeitentabelle. Entfernt am 26.08.2026.
    *
-   * ═══ Warum es das ueberhaupt gibt ═══
+   * ═══ Warum ═══
    *
-   * Weil die Direktion es seit dem ersten Tag verlangt und es nie gebaut wurde.
-   * Referenz 4, woertlich: „Der deutsche Mutterpass — zu klauen: das Raster aus
-   * Feldern und Datumsspalten, das jede Frau in der Zielgruppe schon in der
-   * Hand hatte. Fuer die Sprechzeiten und den Terminbereich. Vertrautheit als
-   * Mittel, nicht als Zitat."
+   * Karol vor dem Notfallkasten: „bei dem hier auch die Raster weg." Damit ist
+   * es die dritte Absage an ein Raster auf dieser Seite — nach `--gewebe` auf
+   * acht Flaechen und nach dem Zwischenschritt mit feinerer Periode.
    *
-   * Genau diese zwei Flaechen bekommen es, keine dritte. Ein Raster, das
-   * ueberall liegt, ist Tapete; eins, das an zwei Stellen liegt, ist eine
-   * Aussage darueber, was diese zwei Stellen sind.
+   * Der Befund ist damit eindeutig und nicht mehr ein Einzelfall: diese Seite
+   * vertraegt kein Muster im Hintergrund. Die Direktion sagt es seit dem ersten
+   * Tag, nur wurde es dreimal anders gelesen — „Kein Korn, kein Rauschen, kein
+   * Verlauf."
    *
-   * ═══ Die Masse ═══
+   * ═══ Was daraus folgt, und was das die Referenz kostet ═══
    *
-   * 24px Zellen — dasselbe Mass wie `--tippziel` halbiert, damit das Raster
-   * mit dem Zeilenrhythmus der Tabelle mitlaeuft und nicht dagegen. 1px
-   * Linien in derselben Farbfamilie wie die Tinte; ein neutrales Grau auf
-   * warmem Beige ergibt einen schmutzigen Schleier.
+   * Die vierte Referenz der Direktion — der deutsche Mutterpass, „das Raster
+   * aus Feldern und Datumsspalten" — ist damit gestalterisch nicht mehr
+   * eingeloest. Sie war nie als Tapete gemeint, sondern als Vertrautheit; wenn
+   * sie wiederkommt, dann ueber die FORM der Sprechzeitentabelle (Felder,
+   * Spalten, Zeilenrhythmus) und nicht ueber eine Flaeche mit Linien darauf.
    *
-   * Deckkraft 5,5 % — staerker als das Gewebe (3,5 %), weil das Karo GESEHEN
-   * werden soll. Es ist der Unterschied zwischen einer Flaeche mit Oberflaeche
-   * und einer Flaeche, die zitiert.
+   * Die Tabelle traegt das bereits: Kopfzeile, Wochentagsspalte, zwei
+   * Zeitspalten, hervorgehobener heutiger Tag. Das ist der Mutterpass, ohne ihn
+   * zu bedrucken.
    */
-  --karo:
-    repeating-linear-gradient(90deg, oklch(26% 0.012 150 / 0.042) 0 1px, transparent 1px 24px),
-    repeating-linear-gradient(0deg, oklch(26% 0.012 150 / 0.042) 0 1px, transparent 1px 24px);
 
   /**
    * ── Der Ton ihres Logos ──────────────────────────────────────────────────
