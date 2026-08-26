@@ -13,45 +13,48 @@ import './figur.css';
  *
  * ═══ Woher sie kommt ═══
  *
- * Am 21.08.2026 aus `media-raw/logo/logo-original.jpeg` gewonnen. Der frühere
- * Befund „die Bildmarke lässt sich nicht herauslösen" galt der BLASE samt
- * Schriftzug — „Dr." liegt gestalterisch darauf, das stimmt weiterhin. Die
- * FIGUR ist ein anderer Fall: gemessen liegen ihre Linien bei Helligkeit
- * 110–140, die Blase bei 230, der Grund bei 250. Eine Schwelle bei 185 trennt
- * das sauber.
+ * Am 21.08.2026 aus `media-raw/logo/logo-original.jpeg` gewonnen. Gemessen
+ * liegen ihre Linien bei Helligkeit 110–140, die Blase bei 230, der Grund bei
+ * 250 — eine Schwelle bei 185 trennt das sauber. Danach vierfach hochskaliert
+ * (damit potrace ruhige Kurven statt Treppen liefert) und vektorisiert. Von den
+ * zehn Pfaden gehoeren vier zur Figur und sechs zu „FR" und „Dr."; welche
+ * welche sind, wurde im Browser ueber `getBBox()` gemessen, nicht geraten.
  *
- * Der Weg: Blasenbereich beschneiden → vierfach hochskalieren (damit potrace
- * ruhige Kurven statt Treppen bekommt) → Schwelle → `potrace` → die vier Pfade
- * der Figur behalten und die sechs Pfade von „FR" und „Dr." verwerfen. Welche
- * welche sind, wurde nicht geraten: im Browser über `getBBox()` gemessen — die
- * Figur endet bei x 12.325, der Schriftzug beginnt bei x 17.701.
+ * ═══ Einfarbig, seit dem 26.08.2026 ═══
  *
- * ═══ Warum sie zweimal im Markup steht ═══
+ * Bis dahin stand sie hier zweimal im Markup: zwei deckungsgleiche Kopien, jede
+ * an ihrer Haelfte beschnitten, damit die Farbe an der Sektionskante kippte —
+ * oben dunkel auf Grau, unten weiss auf Salbei.
  *
- * Weil sie über die Naht läuft und die Farbe dort kippt: oberhalb salbeigrün
- * auf Beige, unterhalb papierweiss auf Salbei. Eine einzelne Zeichnung kann das
- * nicht — eine Farbe pro Element. Also zwei deckungsgleiche Kopien, jede an
- * ihrer Hälfte beschnitten. Der Schnitt liegt exakt auf der Sektionskante, und
- * weil beide dieselbe Geometrie haben, liest man EINE Figur, die hindurchgeht.
+ * Yvonne wollte sie einfarbig. Das ist nicht nur ihr Geschmack, es ist auch das
+ * Richtigere: IHR Logo zeichnet die Frau in einer Farbe. Die Zweifarbigkeit war
+ * unsere Erfindung, nicht ihre Marke.
+ *
+ * Gemessen wurde vorher, ob das ueberhaupt geht — die Figur liegt ja auf zwei
+ * verschiedenen Gruenden:
+ *
+ *     Tinte  #202621   auf Grau 12,32   auf Salbei 5,08   ← gewaehlt
+ *     Signal #3D4638   auf Grau  7,86   auf Salbei 3,24
+ *     Marke  #565A4F   auf Grau  5,64   auf Salbei 2,33
+ *     Papier #FBFAF7   auf Grau  1,20   auf Salbei 2,91
+ *
+ * Nur Tinte traegt auf beiden. Die helleren Toene verschwinden auf dem Salbei,
+ * Weiss verschwindet auf dem Grau — eine einfarbige Figur MUSS hier dunkel sein.
+ *
+ * Damit faellt die halbe Komponente weg: eine Zeichnung, kein Beschnitt, keine
+ * zwei Wahrheiten ueber dieselbe Geometrie.
  *
  * ═══ Was sie NICHT ist ═══
  *
- * Kein Dekor, das man auch weglassen könnte, und keine zweite Bewegung. Sie ist
- * die EINE Bewegung, die über Yvonnes zwei Wünsche hinausgeht — und sie ersetzt
- * keine davon: die Zieh-Galerie ist Bedienung, das Einblenden des Porträts hat
- * sie selbst bestellt.
+ * Kein Dekor, das man auch weglassen koennte. Sie ist die eine Bewegung, die
+ * ueber Yvonnes zwei Wuensche hinausgeht — und sie ersetzt keine davon.
  *
  * Vorgelesen wird sie nicht: sie sagt nichts, was der Satz daneben nicht sagt.
  */
 export function Figur() {
   return (
     <div className="figur" aria-hidden="true">
-      <div className="figur__haelfte figur__haelfte--oben">
-        <Zeichnung className="figur__svg" />
-      </div>
-      <div className="figur__haelfte figur__haelfte--unten">
-        <Zeichnung className="figur__svg" />
-      </div>
+      <Zeichnung className="figur__svg" />
     </div>
   );
 }

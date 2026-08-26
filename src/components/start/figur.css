@@ -31,10 +31,10 @@
    * Farbumkehr an der Kante sichtbar bleibt und man begreift, dass die Figur
    * durchgeht — und gut zwei Drittel unten im Gruenen.
    *
-   * Diese eine Zahl steuert BEIDES: die Verschiebung und den Beschnitt der zwei
-   * Haelften. Getrennt gepflegt waeren es zwei Werte, die auseinanderlaufen,
-   * sobald jemand einen davon anfasst — und dann sitzt die Farbkante nicht mehr
-   * auf der Sektionskante, sondern irgendwo daneben.
+   * Seit die Figur einfarbig ist, steuert diese Zahl nur noch die Verschiebung.
+   * Vorher bestimmte sie zusaetzlich den Beschnitt der zwei Farbhaelften — dass
+   * beides aus EINEM Wert kam, war der Grund, warum die Farbkante zwangslaeufig
+   * auf der Sektionskante sass.
    */
   --naht: 30%;
 
@@ -57,44 +57,19 @@
   pointer-events: none;
 }
 
-.figur__haelfte {
-  position: absolute;
-  inset: 0;
-}
-
-/**
- * Die Farbumkehr an der Naht.
+/*
+ * Einfarbig, dunkel.
  *
- * Beide Haelften sind deckungsgleich, jede zeigt nur ihren Teil der Zeichnung.
- * Der Schnitt liegt bei `--naht`, und um genau denselben Betrag ist die Figur
- * nach oben gezogen — deshalb faellt die Farbkante zwangslaeufig mit der
- * Sektionskante zusammen, egal welchen Wert `--naht` traegt.
+ * Hier standen zwei Regeln fuer zwei Haelften, die an der Sektionskante die
+ * Farbe tauschten. Yvonne wollte die Figur einfarbig — und ihr Logo zeichnet
+ * sie auch so.
+ *
+ * Warum ausgerechnet Tinte: die Figur liegt auf ZWEI Gruenden. Gemessen am
+ * 26.08.2026 traegt nur dieser eine Ton auf beiden (Grau 12,32 : 1, Salbei
+ * 5,08 : 1); die helleren verschwinden auf dem Salbei, Weiss auf dem Grau.
  */
-.figur__haelfte--oben {
-  clip-path: inset(0 0 calc(100% - var(--naht)) 0);
-  /* Der gemessene Linienton IHRES Logos, nicht unser Salbei. Die Figur stammt
-     aus ihrer Marke und traegt deshalb deren Farbe — siehe --marke-linie. */
-  color: var(--marke-linie);
-}
-
-.figur__haelfte--unten {
-  clip-path: inset(var(--naht) 0 0 0);
-  /*
-   * Papier auf ihrem #8D9788 — gemessen 3,04 : 1.
-   *
-   * ═══ Warum das hier zulaessig ist und beim Text nicht ═══
-   *
-   * Weil die Regel, an der 3,04 scheitert, fuer TEXT gilt. Diese Zeichnung ist
-   * `aria-hidden`, traegt keine Information und wird nicht gelesen — sie faellt
-   * unter keine Kontrastanforderung. Der Satz daneben faellt darunter, und der
-   * steht deshalb in Tinte.
-   *
-   * Der erste Versuch nach dem Farbwechsel setzte auch die untere Haelfte auf
-   * Tinte. Sicher, aber dann war die Farbumkehr an der Naht weg — und die ist
-   * der ganze Grund, warum es diese Figur gibt: eine Zeichnung, die durch eine
-   * Kante geht und dabei kippt.
-   */
-  color: var(--papier);
+.figur {
+  color: var(--tinte);
 }
 
 .figur__svg {
