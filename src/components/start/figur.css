@@ -157,18 +157,60 @@
 }
 
 /**
- * Am Handy.
+ * Am Handy bekommt die Figur eigenen Platz.
  *
- * Bei 393px ist die Schale randlos und der Satz nimmt die volle Breite. Eine
- * Figur rechts laege dann auf der Schrift. Sie wird deshalb kleiner, rutscht
- * weiter an den Rand und tritt hinter den Text zurueck — sichtbar genug, dass
- * die Naht etwas hat, leise genug, dass der Satz gewinnt.
+ * ═══ Was vorher falsch war ═══
+ *
+ * Gemessen am 26.08.2026 bei 393px: 90 x 214px, davon 24px ausserhalb des
+ * Bildschirms, bei 50 Prozent Deckkraft. Karol nach dem Oeffnen des Links auf
+ * dem Handy: „da geht die Figur voll unter."
+ *
+ * Er hat recht, und es wiegt schwerer als es klingt: der Link geht per WhatsApp
+ * raus. Die meisten sehen diese Seite zuerst auf einem Telefon — und dort war
+ * die EINE Bewegung der Seite ein blasser Splitter am Rand, der wie ein
+ * Versehen aussieht.
+ *
+ * ═══ Warum sie nicht einfach groesser wird ═══
+ *
+ * Weil bei 393px kein Platz NEBEN dem Text ist. Der Satz „was gleich passiert,"
+ * braucht die volle Breite; eine Figur daneben zwingt ihn in einen
+ * Flatterrand aus zwei Woertern pro Zeile.
+ *
+ * Also bekommt sie Platz UEBER dem Text: die Sektion polstert oben genau so
+ * weit, wie die Figur in sie hineinragt. Das kostet rund 0,2 Bildschirmhoehen
+ * und ist der Preis dafuer, dass das Signaturelement der Seite auf dem Geraet
+ * sichtbar ist, auf dem sie zuerst geoeffnet wird.
  */
 @media (max-width: 48rem) {
   .figur {
-    right: -1.5rem;
-    height: clamp(11rem, 8rem + 22vw, 15rem);
-    opacity: 0.5;
-    z-index: 0;
+    /* Ganz im Bild, nicht mehr angeschnitten. */
+    right: var(--rand);
+    height: 17rem;
+    /* Volle Deckkraft — sie steht jetzt frei und muss sich nicht mehr hinter
+       dem Text verstecken. */
+    opacity: 1;
+    z-index: 1;
+  }
+
+  /*
+   * Der Platz, in den sie hineinragt — als Wert, nicht als Polsterung.
+   *
+   * ═══ Warum nicht einfach `padding-top` hier ═══
+   *
+   * Weil `aussage.css` die Polsterung als Kurzform `padding-block` setzt. Eine
+   * Kurzform schreibt BEIDE Seiten, also auch die, die hier gerade gesetzt
+   * wurde — je nach Reihenfolge der Dateien gewinnt mal die eine, mal die
+   * andere. Gemessen am 26.08.2026: die Polsterung kam bei 67,65px an statt bei
+   * den gerechneten 214, und die Figur lag auf dem Satz.
+   *
+   * Zwei Dateien, die dieselbe Eigenschaft schreiben, sind ein Streit, den man
+   * nicht sieht. Hier wird deshalb nur der BEDARF angemeldet; wer ihn einloest,
+   * ist `aussage.css` — die Datei, der die Polsterung gehoert.
+   *
+   * 70 Prozent von 17rem sind rund 190px, plus Luft, damit die Ueberschrift
+   * nicht am Fuss der Figur klebt.
+   */
+  .aussage {
+    --figur-platz: calc(17rem * 0.7 + 1.5rem);
   }
 }

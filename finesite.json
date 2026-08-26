@@ -2,7 +2,9 @@
   "schema": 1,
   "kunde": "frauenaerztin",
   "name": "Gynäkologische Praxis Erkelenz (Name offen)",
-  "branche": ["arzt"],
+  "branche": [
+    "arzt"
+  ],
   "betriebsart": "betrieb",
   "stand": "im-bau",
   "seit": null,
@@ -29,7 +31,16 @@
     "datenschutz": "geruest",
     "geprueft": null
   },
-  "eimer": ["hero", "ueber", "leistungen", "erster-besuch", "galerie", "zeiten", "kontakt", "recht"],
+  "eimer": [
+    "hero",
+    "ueber",
+    "leistungen",
+    "erster-besuch",
+    "galerie",
+    "zeiten",
+    "kontakt",
+    "recht"
+  ],
   "prompt": "clients/frauenaerztin/prompt-v3.md",
   "assets": {
     "master": "nano_banana_pro",
@@ -56,6 +67,16 @@
   "ort": "Erkelenz",
   "cms": {
     "schema": "inhalt/schema.json",
-    "bereiche": ["team", "aktuelles", "zeiten"]
+    "bereiche": [
+      "team",
+      "aktuelles",
+      "zeiten"
+    ]
+  },
+  "herkunft": {
+    "art": "eigener-entwurf",
+    "quelle": null,
+    "portfolio": true,
+    "_vermerkt_am": "2026-08-25"
   }
 }

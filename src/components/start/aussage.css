@@ -12,6 +12,16 @@
      in einer Sektion. Deshalb kein `border-radius` und kein Innenabstand aussen. */
   padding-block: clamp(4rem, 3rem + 5vw, 8rem);
 
+  /*
+   * Oben mindestens so viel, wie die Figur an Platz braucht.
+   *
+   * `--figur-platz` wird in figur.css angemeldet und ist ausserhalb der
+   * Handy-Breite nicht gesetzt — dann greift der Rueckfall 0px und `max()`
+   * liefert die normale Polsterung. Eine Zeile, zwei Faelle, kein zweiter
+   * Medienabfrage-Block, der auseinanderlaufen kann.
+   */
+  padding-top: max(clamp(4rem, 3rem + 5vw, 8rem), var(--figur-platz, 0px));
+
   /* Bezugspunkt für die Figur, die auf der Oberkante dieser Sektion sitzt. */
   position: relative;
 
