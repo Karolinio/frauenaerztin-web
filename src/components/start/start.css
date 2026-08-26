@@ -653,10 +653,81 @@
     color 250ms var(--ease-ruhig);
 }
 
+/**
+ * ══ Die neun Felder leuchten verschieden ═══════════════════════════════════
+ *
+ * Karol am 26.08.2026: „mach mal die Felder in den 3 Farbcodes Tic-Tac-Toe-
+ * maessig, wenn man mit der Maus ueber einzelne Felder streicht — die Farben
+ * sind aktuell noch eintoenig."
+ *
+ * ═══ Warum nicht einfach drei Farben durchzaehlen ═══
+ *
+ * Weil `nth-child(3n)` bei drei Spalten SPALTEN einfaerbt, nicht Felder — man
+ * bekommt drei senkrechte Streifen, und das ist kein Spielfeld, sondern eine
+ * Tabelle.
+ *
+ * Verteilt wird deshalb nach `(Zeile + Spalte) mod 3`. Das ergibt ein
+ * lateinisches Quadrat: jede Zeile UND jede Spalte traegt jede der drei Farben
+ * genau einmal, und keine zwei waagerecht oder senkrecht benachbarten Felder
+ * sind gleich. Genau das Muster, das ein Tic-Tac-Toe-Brett hat.
+ *
+ *     A B C
+ *     B C A
+ *     C A B
+ *
+ * ═══ Warum der Text beim Ueberfahren die Farbe wechselt ═══
+ *
+ * Weil die dritte Flaeche ihr volles #8D9788 ist. Gemessen: der Satz steht
+ * normalerweise in `--tinte-mtl`, und das ergibt darauf rund 2,5 : 1 — er waere
+ * beim Ueberfahren schlechter lesbar als im Ruhezustand. Ein Zustand, der die
+ * Lesbarkeit VERSCHLECHTERT, ist kein Hervorheben.
+ *
+ * Auf allen drei Flaechen gehen Satz und Verweis deshalb auf volle Tinte. Das
+ * ist nebenbei auch gestalterisch richtig: das Feld unter dem Zeiger soll das
+ * am besten lesbare der neun sein.
+ */
 .kachel:hover,
 .kachel:focus-visible {
-  background-color: var(--leinen);
   transition-duration: 150ms;
+}
+
+.kachel:hover .kachel__satz,
+.kachel:focus-visible .kachel__satz,
+.kachel:hover .kachel__weiter,
+.kachel:focus-visible .kachel__weiter,
+.kachel:hover .kachel__zeichen,
+.kachel:focus-visible .kachel__zeichen {
+  color: var(--tinte);
+}
+
+/* A — ihr helles Grau */
+.auszug__raster > li:nth-child(1) .kachel:hover,
+.auszug__raster > li:nth-child(1) .kachel:focus-visible,
+.auszug__raster > li:nth-child(6) .kachel:hover,
+.auszug__raster > li:nth-child(6) .kachel:focus-visible,
+.auszug__raster > li:nth-child(8) .kachel:hover,
+.auszug__raster > li:nth-child(8) .kachel:focus-visible {
+  background-color: var(--leinen);
+}
+
+/* B — ihr Salbei, aufgehellt: der Mittelton zwischen den beiden anderen */
+.auszug__raster > li:nth-child(2) .kachel:hover,
+.auszug__raster > li:nth-child(2) .kachel:focus-visible,
+.auszug__raster > li:nth-child(4) .kachel:hover,
+.auszug__raster > li:nth-child(4) .kachel:focus-visible,
+.auszug__raster > li:nth-child(9) .kachel:hover,
+.auszug__raster > li:nth-child(9) .kachel:focus-visible {
+  background-color: color-mix(in oklch, var(--flaeche-salbei) 45%, var(--papier));
+}
+
+/* C — ihr Salbei in voller Staerke */
+.auszug__raster > li:nth-child(3) .kachel:hover,
+.auszug__raster > li:nth-child(3) .kachel:focus-visible,
+.auszug__raster > li:nth-child(5) .kachel:hover,
+.auszug__raster > li:nth-child(5) .kachel:focus-visible,
+.auszug__raster > li:nth-child(7) .kachel:hover,
+.auszug__raster > li:nth-child(7) .kachel:focus-visible {
+  background-color: var(--flaeche-salbei);
 }
 
 /* Das Zeichen traegt den gemessenen Linienton ihres Logos, nicht das Signal.
