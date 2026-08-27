@@ -1,4 +1,4 @@
-import { praxis, rechtliches } from '../praxis.config';
+import { aerztinVollerName, praxis, rechtliches } from '../praxis.config';
 import { Offen, Rechtsseite } from './Rechtsseite';
 
 /**
@@ -18,10 +18,8 @@ export function Datenschutz() {
       <section aria-labelledby="verantwortlich">
         <h2 id="verantwortlich">Verantwortliche Stelle</h2>
         <p>
-          <Offen>
-            {praxis.aerztin.titel} {praxis.aerztin.nachname}
-          </Offen>
-          , <Offen was="Strasse und Hausnummer">{praxis.adresse.strasse}</Offen>,{' '}
+          <Offen was="Vollständiger Name der Ärztin">{aerztinVollerName}</Offen>,{' '}
+          <Offen was="Strasse und Hausnummer">{praxis.adresse.strasse}</Offen>,{' '}
           <Offen>
             {praxis.adresse.plz} {praxis.adresse.ort}
           </Offen>
@@ -48,7 +46,7 @@ export function Datenschutz() {
           <dd>Art. 6 Abs. 1 lit. f DSGVO — berechtigtes Interesse am sicheren Betrieb der Website.</dd>
           <dt>Speicherdauer</dt>
           <dd>
-            <Offen>[Speicherdauer der Logfiles beim Hoster]</Offen>
+            <Offen was="Speicherdauer der Logfiles beim Hoster" />
           </dd>
           <dt>Auftragsverarbeiter</dt>
           <dd>
@@ -81,22 +79,46 @@ export function Datenschutz() {
           </dd>
           <dt>Empfänger</dt>
           <dd>
-            <Offen>[Anbieter des Formular-Endpunkts, Sitz in der EU, Auftragsverarbeitungsvertrag]</Offen>
+            <Offen was="Anbieter des Formular-Endpunkts mit Sitz in der EU, dazu der Auftragsverarbeitungsvertrag" />
           </dd>
         </dl>
       </section>
 
+      {/*
+        ═══ Diese Seite beschrieb eine Karte, die es nicht gibt ═══
+
+        Hier stand: „Auf der Seite ‚Praxis & Anfahrt' ist eine Karte von
+        OpenStreetMap eingebunden. Mit dem Klick wird Ihre IP-Adresse an die
+        OpenStreetMap Foundation übertragen." Dazu eine Rechtsgrundlage nach
+        Art. 6 Abs. 1 lit. a DSGVO.
+
+        Gemessen am 27.08.2026: es gibt keine Karte. Kein `iframe`, kein
+        Leaflet, kein Kartenanbieter irgendwo im Quelltext. Und `/kontakt/` sagt
+        der Leserin ausdrücklich das Gegenteil des Abschnitts hier — „Eine
+        eingebettete Karte gibt es hier bewusst nicht."
+
+        Die Pflichtseite widersprach also der Seite selbst. Dazu nannte sie eine
+        Seite „Praxis & Anfahrt", die es seit dem Umbau nicht mehr gibt.
+
+        Eine Datenschutzerklärung, die einen Datenfluss beschreibt, den es nicht
+        gibt, ist nicht bloss falsch — sie ist der Beleg dafür, dass sie nicht
+        gegen die Seite geprüft wurde. Genau derselbe Fehler steckte im
+        Bildnachweis des Impressums und wurde dort schon einmal behoben.
+
+        Wenn später eine Karte dazukommt, gehört dieser Abschnitt zurück — dann
+        aber MIT dem Einwilligungsdialog, den `/kontakt/` als Bedingung nennt.
+      */}
       <section aria-labelledby="karte">
         <h2 id="karte">Karte</h2>
         <p>
-          Auf der Seite „Praxis &amp; Anfahrt" ist eine Karte von OpenStreetMap eingebunden. Sie wird erst
-          geladen, wenn Sie ausdrücklich darauf klicken. Vorher geht kein Request an openstreetmap.org, auch
-          keine Vorschaukachel. Mit dem Klick wird Ihre IP-Adresse an die OpenStreetMap Foundation übertragen.
+          Diese Website bindet <strong>keine Karte</strong> ein. Die Anfahrt steht als Text auf der Seite
+          „Kontakt und Anfahrt". Es geht dadurch kein Request an einen Kartenanbieter, und Ihre IP-Adresse
+          wird an keinen übertragen — auch nicht für eine Vorschaukachel.
         </p>
-        <dl>
-          <dt>Rechtsgrundlage</dt>
-          <dd>Art. 6 Abs. 1 lit. a DSGVO — Ihre Einwilligung durch den Klick.</dd>
-        </dl>
+        <p className="recht__notiz">
+          Sollte später eine Karte dazukommen, wird sie erst nach ausdrücklicher Einwilligung geladen, und
+          dieser Abschnitt wird vorher entsprechend ergänzt.
+        </p>
       </section>
 
       <section aria-labelledby="keine">

@@ -173,6 +173,32 @@ export const praxis = {
   onlineTermin: null as Offen<{ readonly anbieter: string; readonly url: string }>,
 } as const;
 
+/**
+ * Ihr vollständiger Name, wie er auf die Pflichtseiten gehört.
+ *
+ * ═══ Warum das eine eigene Stelle bekommt ═══
+ *
+ * Weil Impressum und Datenschutzerklärung ihn bis zum 27.08.2026 beide selbst
+ * zusammengesetzt haben — und beide dabei den VORNAMEN weggelassen haben. Auf
+ * beiden Seiten stand „Dr. med. Erkens".
+ *
+ * § 5 DDG verlangt den Namen des Anbieters, und bei einer natürlichen Person ist
+ * das der volle Name, nicht der Nachname mit Titel. Auf der Datenschutzseite
+ * benennt dieselbe Angabe die Verantwortliche im Sinne der DSGVO — dort ist eine
+ * unvollständige Person noch schlechter.
+ *
+ * Zwei Stellen, die denselben Namen zusammensetzen, sind zwei Stellen, an denen
+ * er falsch sein kann. Jetzt ist es eine.
+ *
+ * `null`, sobald ein Teil fehlt: ein halber Name auf einer Pflichtseite ist
+ * keine Angabe, sondern eine Lücke — und wird auch so gezeigt.
+ */
+export const aerztinVollerName: Offen<string> = (() => {
+  const teile = [praxis.aerztin.titel, praxis.aerztin.vorname, praxis.aerztin.nachname];
+  if (teile.some((t) => t === null || t === undefined)) return null;
+  return teile.join(' ');
+})();
+
 /* ══ Leistungen ═══════════════════════════════════════════════════════════
  *
  * Ihre Worte, ihre Reihenfolge, keine dazuerfunden:

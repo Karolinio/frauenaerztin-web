@@ -1,4 +1,4 @@
-import { praxis, rechtliches } from '../praxis.config';
+import { aerztinVollerName, praxis, rechtliches } from '../praxis.config';
 import { Offen, Rechtsseite } from './Rechtsseite';
 
 /**
@@ -16,9 +16,7 @@ export function Impressum() {
       <section aria-labelledby="anbieter">
         <h2 id="anbieter">Angaben nach § 5 DDG</h2>
         <p>
-          <Offen was="Name der Ärztin">
-            {praxis.aerztin.titel} {praxis.aerztin.nachname}
-          </Offen>
+          <Offen was="Vollständiger Name der Ärztin">{aerztinVollerName}</Offen>
           <br />
           <Offen was="Berufsbezeichnung laut Kammerurkunde">{praxis.aerztin.fachbezeichnung}</Offen>
           <br />
@@ -102,10 +100,7 @@ export function Impressum() {
       <section aria-labelledby="verantwortlich">
         <h2 id="verantwortlich">Verantwortlich für den Inhalt</h2>
         <p>
-          <Offen was="Name der Ärztin">
-            {praxis.aerztin.titel} {praxis.aerztin.nachname}
-          </Offen>
-          , Anschrift wie oben.
+          <Offen was="Vollständiger Name der Ärztin">{aerztinVollerName}</Offen>, Anschrift wie oben.
         </p>
       </section>
 
