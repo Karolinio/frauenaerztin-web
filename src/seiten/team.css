@@ -31,6 +31,8 @@
 
 /* Der leere Rahmen. Er sagt, was fehlt und wohin es gehört — kein Stockfoto,
    kein Initialenkreis, keine graue Silhouette. */
+/* Der leere Rahmen. Er sagt, was fehlt — kein Stockfoto, kein Initialenkreis,
+   keine graue Silhouette. */
 .team__rahmen {
   display: flex;
   flex-direction: column;
@@ -38,7 +40,9 @@
   align-items: flex-start;
   gap: 0.8rem;
   height: 100%;
-  padding: var(--raum);
+  /* Der Innenabstand faellt in den kleinen Rahmen mit: bei 176px Breite frisst
+     ein Abstand, der fuer 352px bemessen ist, die halbe Flaeche. */
+  padding: clamp(0.75rem, 0.4rem + 1.2vw, 1.5rem);
   border: 1px dashed var(--tinte-mtl);
 }
 
@@ -62,9 +66,60 @@
 }
 
 @media (min-width: 48rem) {
+  /*
+   * ══ Hierarchie statt Aufzaehlung ═══════════════════════════════════════
+   *
+   * Die erste Person — die Aerztin — bekommt das grosse Portraet. Alle
+   * weiteren stehen als kompakte Zeile darunter.
+   *
+   * ═══ Warum das der Sache entspricht ═══
+   *
+   * Weil es eine Einzelpraxis ist. Drei gleich grosse Eintraege behaupten drei
+   * gleich wichtige Personen; die Patientin sucht aber die Aerztin und findet
+   * daneben, wer sonst noch da ist. Das Schema sagt es der Aerztin ohnehin zu:
+   * „Die erste Person steht oben und groesser."
+   *
+   * Gemessen war die Seite mit drei gleichen Eintraegen 2,76 Bildschirmhoehen
+   * lang — bei drei Personen ohne Fotos. Das war keine Ruhe, das war Luft.
+   */
   .team__person {
-    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
     gap: var(--raum-gross);
     align-items: start;
   }
+
+  .team__person--erste {
+    grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+    padding-bottom: var(--raum-sektion);
+  }
+
+  /* Der Text der Aerztin laeuft nicht ueber die ganze Restbreite: bei 1440px
+     waeren das rund 78 Zeichen je Zeile, und ab etwa 75 verliert das Auge beim
+     Zeilenwechsel den Anschluss. Rechts bleibt dadurch Raum — der ist gewollt
+     und nicht das Loch, das er vorher war, weil links jetzt ein grosses
+     Portraet dagegensteht. */
+  .team__person--erste .team__text {
+    max-width: 52ch;
+  }
+}
+
+/*
+ * Der Name der Aerztin traegt die Seite, die uebrigen Namen ordnen sich unter.
+ * Ohne diesen Unterschied waere die Groesse des Portraets die einzige
+ * Hierarchie — und eine Hierarchie, die nur am Bild haengt, faellt in dem
+ * Moment zusammen, in dem ein Foto fehlt. Genau das ist hier bis Oktober der
+ * Fall.
+ */
+.team__person--erste .t-unter {
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-head);
+}
+
+.team__person:not(.team__person--erste) .t-unter {
+  font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem);
+}
+
+.team__person:not(.team__person--erste) .team__satz {
+  font-size: var(--text-meta);
 }

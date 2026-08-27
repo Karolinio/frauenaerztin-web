@@ -32,9 +32,33 @@ export default function TeamSeite() {
         }
       />
 
+      {/*
+        ═══ Die erste Person steht groesser — endlich ═══
+
+        `inhalt/schema.json` verspricht der Aerztin das woertlich: „Erscheint auf
+        /team/ in der Reihenfolge dieser Liste. Die erste Person steht oben und
+        groesser." Umgesetzt war es nie — alle drei Eintraege waren gleich gross.
+
+        Das ist mehr als ein Schoenheitsfehler. Ein Schema, das etwas zusagt, was
+        die Seite nicht tut, ist eine Falschangabe gegenueber der Person, die
+        danach ihre Inhalte sortiert: sie stellt jemanden nach vorn und erwartet
+        eine Wirkung, die ausbleibt.
+
+        Und es loest zugleich das gestalterische Problem dieser Seite. Drei
+        gleich grosse Eintraege untereinander sind 2,76 Bildschirmhoehen
+        Aufzaehlung ohne Leserichtung. Mit Hierarchie wird daraus eine Aerztin
+        und ihr Team — was der Wahrheit einer Einzelpraxis entspricht.
+
+        Abgelesen an Analogue Agency (Mobbin, 27.08.2026): eine Aussage gross,
+        die uebrigen als kompakte Zeilen daneben.
+      */}
       <div className="schale team">
         {team.map((p, i) => (
-          <Enthuellen als="article" key={p.rolle + i} className="team__person">
+          <Enthuellen
+            als="article"
+            key={p.rolle + i}
+            className={`team__person ${i === 0 ? 'team__person--erste' : ''}`}
+          >
             <div className="team__bild">
               {steht(p.bild) ? (
                 <img
@@ -66,11 +90,22 @@ export default function TeamSeite() {
                  * hingehört und wann es kommt. Das ist wahr und geht niemanden
                  * etwas an, der es nicht einsetzen muss.
                  */
+                /*
+                 * Der erklaerende Satz steht NUR am grossen Rahmen.
+                 *
+                 * In den kleinen brach er auf acht Zeilen um und fuellte den
+                 * Rahmen randvoll — ein Platzhalter, der aussieht, als waere er
+                 * kaputt, ist schlechter als einer, der nur zwei Woerter sagt.
+                 * Und er stuende dreimal dasselbe: gelesen wird er beim ersten
+                 * Mal, danach ist er Wiederholung.
+                 */
                 <p className="team__rahmen">
                   <span className="luecke">Foto folgt</span>
-                  <span className="t-meta team__rahmen-hinweis">
-                    Die Praxis wird gerade eingerichtet. Die Fotos entstehen im Oktober.
-                  </span>
+                  {i === 0 ? (
+                    <span className="t-meta team__rahmen-hinweis">
+                      Die Praxis wird gerade eingerichtet. Die Fotos entstehen im Oktober.
+                    </span>
+                  ) : null}
                 </p>
               )}
             </div>
