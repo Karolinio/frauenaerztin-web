@@ -20,7 +20,7 @@
    * liefert die normale Polsterung. Eine Zeile, zwei Faelle, kein zweiter
    * Medienabfrage-Block, der auseinanderlaufen kann.
    */
-  padding-top: max(clamp(4rem, 3rem + 5vw, 8rem), var(--figur-platz, 0px));
+  padding-top: clamp(4rem, 3rem + 5vw, 8rem);
 
   /* Bezugspunkt für die Figur, die auf der Oberkante dieser Sektion sitzt. */
   position: relative;
@@ -38,8 +38,8 @@
    * hinausläuft. Gemessen am 21.08.2026 bei 393px: ohne diese Zeile liess sich
    * die Seite seitlich schieben.
    */
-  overflow-x: clip;
-  overflow-y: visible;
+  /* `overflow-x: clip` ist entfallen: es gab die Figur nur, solange sie aus der
+     Sektion herausragte. Als Rasterkind tut sie das nicht mehr. */
 }
 
 .aussage__block {
@@ -126,4 +126,26 @@
   font-size: var(--text-lead);
   line-height: 1.5;
   max-width: 32ch;
+}
+
+/**
+ * Zweispaltig: der Satz links, die Figur rechts.
+ *
+ * Die Figur bestimmt die Hoehe der Sektion mit, statt aus ihr herauszuragen.
+ * Damit waechst die Salbeiflaeche von rund 615 auf gut 950px — sie war vorher
+ * die kuerzeste Sektion der Seite und ist jetzt ihr Mittelstueck.
+ *
+ * `align-items: center` haelt den Satz auf halber Hoehe der Figur; linksbuendig
+ * an ihrem Kopf saehe er aus, als waere er nach oben gerutscht.
+ */
+.aussage__schale {
+  display: grid;
+  gap: var(--raum-gross);
+  align-items: center;
+}
+
+@media (min-width: 56rem) {
+  .aussage__schale {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
 }

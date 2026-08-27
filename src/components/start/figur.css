@@ -12,64 +12,48 @@
  * das spaeter setzt, schneidet die obere Haelfte ab und wundert sich ueber eine
  * halbe Frau.
  */
-.figur {
-  /*
-   * ── Wo die Naht durch die Figur laeuft ───────────────────────────────────
-   *
-   * Der Anteil der Figur, der OBERHALB der Sektionskante liegt. Der Rest liegt
-   * darunter, auf der Salbeiflaeche.
-   *
-   * ═══ Warum nicht 50 % ═══
-   *
-   * Weil 50 % zwar symmetrisch ist, beim Scrollen aber genau das erzeugt, was
-   * Karol am 23.08.2026 beanstandet hat: man sieht dauerhaft eine halbe Figur
-   * im Gruenen. Die Salbeiflaeche ist der Ort, an dem die Zeichnung wirkt —
-   * dort ist der Kontrast am hoechsten (Papier auf Salbei), und dort steht der
-   * Satz, zu dem sie gehoert.
-   *
-   * Mit 30 % steht knapp ein Drittel oben auf dem Beige — genug, damit die
-   * Farbumkehr an der Kante sichtbar bleibt und man begreift, dass die Figur
-   * durchgeht — und gut zwei Drittel unten im Gruenen.
-   *
-   * Seit die Figur einfarbig ist, steuert diese Zahl nur noch die Verschiebung.
-   * Vorher bestimmte sie zusaetzlich den Beschnitt der zwei Farbhaelften — dass
-   * beides aus EINEM Wert kam, war der Grund, warum die Farbkante zwangslaeufig
-   * auf der Sektionskante sass.
-   */
-  --naht: 30%;
-
-  position: absolute;
-  top: 0;
-  /* Rechts, weil der Textblock links steht (max-width 48rem in der Schale).
-     Auf der Naht mittig waere sie schoen und wuerde den Satz zerschneiden. */
-  right: clamp(1rem, -1rem + 8vw, 7rem);
-  /* Deutlich groesser als die erste Fassung (34rem Deckelung, bei 1440px rund
-     534px hoch). Sie war als Akzent bemessen; gewollt ist ein Element, das die
-     Naht traegt. Bei 52rem sind es an einem 1440px-Schirm rund 768px — die
-     Figur ueberragt damit beide Sektionskanten deutlich und wird zu dem, was
-     man von dieser Seite in Erinnerung behaelt. */
-  height: clamp(20rem, 12rem + 40vw, 52rem);
-  aspect-ratio: 652.36 / 1547.82;
-  transform: translateY(calc(-1 * var(--naht)));
-  /* Ueber den Flaechen, unter dem Text. Der Satz muss lesbar bleiben, auch wenn
-     die Figur einmal zu weit nach links geraet. */
-  z-index: 1;
-  pointer-events: none;
-}
-
-/*
- * Einfarbig, dunkel.
+/**
+ * ── FASSUNG A — ganz in der Salbeiflaeche, weiss ─────────────────────────────
  *
- * Hier standen zwei Regeln fuer zwei Haelften, die an der Sektionskante die
- * Farbe tauschten. Yvonne wollte die Figur einfarbig — und ihr Logo zeichnet
- * sie auch so.
+ * Karol am 27.08.2026: die Figur soll in EINER Sektion stehen, nicht mehr durch
+ * die Naht laufen — und mindestens so gross bleiben wie bisher, eher etwas
+ * groesser.
  *
- * Warum ausgerechnet Tinte: die Figur liegt auf ZWEI Gruenden. Gemessen am
- * 26.08.2026 traegt nur dieser eine Ton auf beiden (Grau 12,32 : 1, Salbei
- * 5,08 : 1); die helleren verschwinden auf dem Salbei, Weiss auf dem Grau.
+ * ═══ Warum ausgerechnet hier ═══
+ *
+ * Weil es die einzige Sektion ist, in der sie neben den Text passt. Gemessen am
+ * 27.08.2026 bei 1440px, freie Breite rechts vom Text:
+ *
+ *     Aussage (Salbei)        536px   ← passt
+ *     Wer ich bin (Grau)      136px
+ *     Erster Besuch (Grau)    136px
+ *     Termin (Grau)           172px
+ *
+ * Die Figur ist 324px breit. In den grauen Sektionen laege sie AUF dem Text,
+ * nicht daneben — dort ginge sie nur als blasser Hintergrund, und genau das war
+ * der Zustand, den Karol am Handy als „geht voll unter" beanstandet hat.
+ *
+ * ═══ Warum sie jetzt im Raster steht und nicht mehr darueber ═══
+ *
+ * Vorher war sie absolut positioniert und ragte aus der Sektion heraus — sie
+ * musste, denn sie war groesser als die Sektion hoch war (768 gegen 615px).
+ * Als Rasterkind bestimmt sie die Hoehe selbst mit: die Flaeche waechst auf die
+ * Figur, statt dass die Figur aus der Flaeche ragt.
+ *
+ * Das macht `--naht`, `translateY` und `overflow-x: clip` ueberfluessig — drei
+ * Regeln, die es nur gab, um ein Element zu baendigen, das am falschen Ort sass.
  */
 .figur {
-  color: var(--tinte);
+  align-self: center;
+  justify-self: end;
+  /* Etwas groesser als die 768px zuvor, aber nicht viel: bei 1440px rund 810px. */
+  height: clamp(20rem, 12rem + 42vw, 54rem);
+  aspect-ratio: 652.36 / 1547.82;
+  pointer-events: none;
+  /* Papier auf ihrem Salbei. Gemessen 2,91 : 1 — fuer TEXT zu wenig, fuer eine
+     rein dekorative Zeichnung ohne Information gilt die Regel nicht. Und sie
+     ist hier das Gegenteil von zurueckhaltend: die Flaeche gehoert ihr. */
+  color: var(--papier);
 }
 
 .figur__svg {
@@ -132,60 +116,17 @@
 }
 
 /**
- * Am Handy bekommt die Figur eigenen Platz.
+ * Am Handy steht sie unter dem Satz, nicht daneben.
  *
- * ═══ Was vorher falsch war ═══
- *
- * Gemessen am 26.08.2026 bei 393px: 90 x 214px, davon 24px ausserhalb des
- * Bildschirms, bei 50 Prozent Deckkraft. Karol nach dem Oeffnen des Links auf
- * dem Handy: „da geht die Figur voll unter."
- *
- * Er hat recht, und es wiegt schwerer als es klingt: der Link geht per WhatsApp
- * raus. Die meisten sehen diese Seite zuerst auf einem Telefon — und dort war
- * die EINE Bewegung der Seite ein blasser Splitter am Rand, der wie ein
- * Versehen aussieht.
- *
- * ═══ Warum sie nicht einfach groesser wird ═══
- *
- * Weil bei 393px kein Platz NEBEN dem Text ist. Der Satz „was gleich passiert,"
- * braucht die volle Breite; eine Figur daneben zwingt ihn in einen
- * Flatterrand aus zwei Woertern pro Zeile.
- *
- * Also bekommt sie Platz UEBER dem Text: die Sektion polstert oben genau so
- * weit, wie die Figur in sie hineinragt. Das kostet rund 0,2 Bildschirmhoehen
- * und ist der Preis dafuer, dass das Signaturelement der Seite auf dem Geraet
- * sichtbar ist, auf dem sie zuerst geoeffnet wird.
+ * Bei 393px gibt es keine freie Breite — der Satz braucht sie ganz. Die Figur
+ * rutscht deshalb in eine eigene Zeile unter den Text und wird dort mittig
+ * gesetzt. Sie bleibt gross genug, um eine Zeichnung zu sein: rund 300px hoch
+ * statt der 214px, die sie als angeschnittener Splitter am Rand hatte.
  */
 @media (max-width: 48rem) {
   .figur {
-    /* Ganz im Bild, nicht mehr angeschnitten. */
-    right: var(--rand);
-    height: 17rem;
-    /* Volle Deckkraft — sie steht jetzt frei und muss sich nicht mehr hinter
-       dem Text verstecken. */
-    opacity: 1;
-    z-index: 1;
-  }
-
-  /*
-   * Der Platz, in den sie hineinragt — als Wert, nicht als Polsterung.
-   *
-   * ═══ Warum nicht einfach `padding-top` hier ═══
-   *
-   * Weil `aussage.css` die Polsterung als Kurzform `padding-block` setzt. Eine
-   * Kurzform schreibt BEIDE Seiten, also auch die, die hier gerade gesetzt
-   * wurde — je nach Reihenfolge der Dateien gewinnt mal die eine, mal die
-   * andere. Gemessen am 26.08.2026: die Polsterung kam bei 67,65px an statt bei
-   * den gerechneten 214, und die Figur lag auf dem Satz.
-   *
-   * Zwei Dateien, die dieselbe Eigenschaft schreiben, sind ein Streit, den man
-   * nicht sieht. Hier wird deshalb nur der BEDARF angemeldet; wer ihn einloest,
-   * ist `aussage.css` — die Datei, der die Polsterung gehoert.
-   *
-   * 70 Prozent von 17rem sind rund 190px, plus Luft, damit die Ueberschrift
-   * nicht am Fuss der Figur klebt.
-   */
-  .aussage {
-    --figur-platz: calc(17rem * 0.7 + 1.5rem);
+    justify-self: center;
+    height: 19rem;
+    margin-top: var(--raum-gross);
   }
 }

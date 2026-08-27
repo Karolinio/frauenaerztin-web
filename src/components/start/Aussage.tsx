@@ -42,7 +42,6 @@ import './aussage.css';
 export function Aussage({ fassung = 'dunkel' }: { fassung?: 'dunkel' | 'hell' }) {
   return (
     <section className={`aussage aussage--${fassung}`} aria-labelledby="aussage-titel">
-      <Figur />
       <div className="schale aussage__schale">
         <Enthuellen className="aussage__block">
           <p className="t-label aussage__label">Wie ich arbeite</p>
@@ -53,6 +52,7 @@ export function Aussage({ fassung = 'dunkel' }: { fassung?: 'dunkel' | 'hell' })
             Und Sie dürfen jederzeit sagen, dass Sie es nicht möchten. Auch mittendrin.
           </p>
         </Enthuellen>
+        <Figur />
       </div>
     </section>
   );
