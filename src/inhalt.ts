@@ -68,8 +68,29 @@ export const zeiten: readonly Zeile[] = zeitenRoh;
  * Meldung ist schlimmer als keine: sie sieht aus wie eine gepflegte Seite.
  */
 export function aktuellerHinweis(heute: Date = new Date()): Meldung | null {
-  const tag = heute.toISOString().slice(0, 10);
-  return aktuelles.find((m) => !m.bisWann || m.bisWann >= tag) ?? null;
+  return aktuelles.find((m) => giltNoch(m, heute)) ?? null;
+}
+
+/**
+ * Gilt diese Meldung heute noch?
+ *
+ * ═══ Warum das aus `aktuellerHinweis` herausgelöst wurde ═══
+ *
+ * Weil die Prüfung dort eingebaut war und deshalb nur auf der Startseite wirkte.
+ * `/aktuelles/` trägt die Überschrift „Was gerade gilt" und zeigte trotzdem jede
+ * Meldung gleich — auch eine, deren „Gilt bis" längst vorbei war.
+ *
+ * Gefunden am 27.08.2026. Der Fall ist nicht theoretisch: die Ärztin trägt eine
+ * Urlaubsvertretung mit Enddatum ein, und im November liest eine Patientin auf
+ * einer Seite namens „Was gerade gilt", die Praxis sei vertreten. Sie ruft dann
+ * bei jemandem an, der nicht mehr zuständig ist.
+ *
+ * Ohne `bisWann` gilt eine Meldung unbegrenzt — das ist der Normalfall und das
+ * Feld ist im Schema ausdrücklich freiwillig.
+ */
+export function giltNoch(m: Meldung, heute: Date = new Date()): boolean {
+  if (!m.bisWann) return true;
+  return m.bisWann >= heute.toISOString().slice(0, 10);
 }
 
 /** Hat dieser Tag überhaupt eine Zeit? Sonst zeigt die Tabelle dort eine Lücke. */

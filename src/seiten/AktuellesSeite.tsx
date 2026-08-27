@@ -1,4 +1,4 @@
-import { aktuelles } from '../inhalt';
+import { aktuelles, giltNoch } from '../inhalt';
 import { Seitenkopf } from '../components/ui/Seitenkopf';
 import { Enthuellen } from '../components/ui/Enthuellen';
 import './aktuelles.css';
@@ -30,9 +30,30 @@ export default function AktuellesSeite() {
         }
       />
 
+      {/*
+        ═══ Zwei Dinge, die diese Seite vorher nicht tat ═══
+
+        ERSTENS: Sie heisst „Was gerade gilt" und zeigte trotzdem abgelaufene
+        Meldungen wie gueltige. Das Feld „Gilt bis" wurde nur auf der Startseite
+        ausgewertet. Eine Patientin las im November eine Urlaubsvertretung vom
+        Oktober und rief bei jemandem an, der nicht mehr zustaendig ist.
+        Abgelaufene Meldungen verschwinden nicht — sie bleiben als Archiv
+        stehen, aber sichtbar getrennt und gekennzeichnet.
+
+        ZWEITENS: Alle Meldungen waren gleich gross. Die neueste ist die, wegen
+        der jemand diese Seite aufruft — sie steht jetzt als Aufmacher. Dieselbe
+        Hierarchie wie auf /team/, und hier ist sie noch zwingender: eine
+        Nachrichtenliste ohne Aufmacher ist ein Stapel.
+      */}
       <div className="schale aktuelles">
-        {aktuelles.map((m) => (
-          <Enthuellen als="article" key={m.datum + m.titel} className="meldung">
+        {aktuelles.map((m, i) => (
+          <Enthuellen
+            als="article"
+            key={m.datum + m.titel}
+            className={`meldung ${i === 0 && giltNoch(m) ? 'meldung--aufmacher' : ''} ${
+              giltNoch(m) ? '' : 'meldung--vorbei'
+            }`}
+          >
             <div className="meldung__kopf">
               {/* `dateTime` macht das Datum maschinenlesbar — für Screenreader,
                   die „15.8." sonst als Zahlenfolge vorlesen, und für Google. */}
@@ -40,6 +61,7 @@ export default function AktuellesSeite() {
                 {FORMAT.format(new Date(m.datum))}
               </time>
               <span className="t-label meldung__rubrik">{m.art}</span>
+              {giltNoch(m) ? null : <span className="t-label meldung__vorbei">Nicht mehr aktuell</span>}
             </div>
             <div className="meldung__text">
               <h2 className="t-unter">{m.titel}</h2>

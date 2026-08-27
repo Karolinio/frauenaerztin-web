@@ -42,3 +42,54 @@
     gap: 0.4rem;
   }
 }
+
+/* ══ Der Aufmacher ═══════════════════════════════════════════════════════════
+ *
+ * Die neueste gueltige Meldung ist die, wegen der jemand diese Seite aufruft.
+ * Sie steht deshalb groesser — dieselbe Hierarchie wie auf /team/, und hier
+ * noch zwingender: eine Nachrichtenliste ohne Aufmacher ist ein Stapel.
+ *
+ * Abgelesen an Seed und Function (Mobbin): ein grosser Aufmacher, darunter die
+ * uebrigen kompakt.
+ */
+.meldung--aufmacher .t-unter {
+  font-size: clamp(1.5rem, 1.15rem + 1.4vw, 2.2rem);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-head);
+}
+
+.meldung--aufmacher .meldung__satz {
+  font-size: var(--text-lead);
+  max-width: 58ch;
+}
+
+.meldung--aufmacher {
+  padding-bottom: var(--raum-sektion);
+}
+
+/* ══ Was nicht mehr gilt ═════════════════════════════════════════════════════
+ *
+ * Abgelaufene Meldungen verschwinden nicht — jemand kann nachlesen wollen, was
+ * im Oktober war. Sie treten aber zurueck und tragen eine Marke, damit niemand
+ * eine vergangene Vertretung fuer die aktuelle haelt.
+ *
+ * Zurueckgenommen ueber die FARBE, nicht ueber Deckkraft: eine Meldung auf 60
+ * Prozent Deckkraft sieht auf jedem Grund anders aus und faellt beim Ausdrucken
+ * ganz weg. Eine gesetzte Farbe ist messbar.
+ */
+.meldung--vorbei .t-unter,
+.meldung--vorbei .meldung__satz,
+.meldung--vorbei .meldung__datum {
+  color: var(--tinte-mtl);
+}
+
+.meldung--vorbei .meldung__rubrik {
+  color: var(--tinte-mtl);
+}
+
+.meldung__vorbei {
+  color: var(--tinte-mtl);
+  border: 1px solid var(--linie);
+  padding: 0.15em 0.5em;
+  white-space: nowrap;
+}
