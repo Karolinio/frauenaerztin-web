@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { praxis } from '../../praxis.config';
 import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
+import { PRAXIS_PLAETZE, praxisLead, zeigt, type Bildplatz } from '../../lib/bildplaetze';
 import './ziehgalerie.css';
 
 /**
@@ -34,102 +35,22 @@ import './ziehgalerie.css';
  * Medienabfrage getrennt und kommen sich nie in die Quere.
  */
 
-interface Kachel {
-  readonly datei: string;
-  readonly breite: number;
-  readonly hoehe: number;
-  readonly alt: string;
-  readonly bildunterschrift: string;
-}
-
 /**
- * Die vier Slots von `/praxis/`. Nach der Eröffnung wird hier die Datei
- * getauscht — gleiche Masse, gleiche Position, kein Umbau. Siehe
- * `public/bilder/PLATZHALTER.md`.
+ * ═══ Die beiden Kachelsätze sind weg (30.08.2026) ═══
  *
- * Die Bildunterschriften sagen, was WIRKLICH zu sehen ist. Eine Materialstudie
- * als „unser Wartezimmer" auszugeben wäre eine Aussage über einen Ort, den eine
- * Patientin betreten wird — und den es noch nicht gibt.
+ * Hier standen `PRAXIS_KACHELN` und `MATERIAL_KACHELN`: zwei Listen aus Dateien
+ * mit fest eingetragenen Pixelmassen, zwischen denen der Aufrufer wählte. Die
+ * Startseite nahm die Materialstudien, `/praxis/` die Praxis-Slots.
+ *
+ * Das war die Stelle, an der am Liefertag etwas hängengeblieben wäre. Die beiden
+ * Sätze hatten verschiedene Seitenverhältnisse — die Reihe hätte beim Einsetzen
+ * der echten Fotos ihre Höhen geändert — und ihre Bildunterschriften und
+ * Leitsätze („noch nicht fotografiert") standen im Aufrufer, nicht bei den
+ * Bildern.
+ *
+ * Beides liegt jetzt in `lib/bildplaetze.ts`: das Seitenverhältnis am PLATZ, die
+ * Datei darin austauschbar. Diese Komponente stellt nur noch dar.
  */
-export const PRAXIS_KACHELN: readonly Kachel[] = [
-  {
-    datei: 'praxis-01.webp',
-    breite: 1400,
-    hoehe: 1045,
-    alt: 'Leere helle Ecke mit frisch gestrichenem Kalkputz und flacher Fussleiste, Tageslicht von links oben.',
-    bildunterschrift: 'Kalkputz und Fussleiste',
-  },
-  {
-    datei: 'praxis-02.webp',
-    breite: 1000,
-    hoehe: 1491,
-    alt: 'Naturbelassenes Leinengewebe im Streiflicht, die einzelnen Fäden sind zu erkennen.',
-    bildunterschrift: 'Leinen im Streiflicht',
-  },
-  {
-    datei: 'praxis-03.webp',
-    breite: 1800,
-    hoehe: 1005,
-    alt: 'Heller Estrichboden, über den ein weiches Fensterlicht als Rechteck läuft.',
-    bildunterschrift: 'Licht auf hellem Boden',
-  },
-  {
-    datei: 'praxis-04.webp',
-    breite: 1400,
-    hoehe: 939,
-    alt: 'Glatte warmweisse Fläche mit einem weichen Lichtverlauf von links oben nach rechts unten.',
-    bildunterschrift: 'Tageslicht auf heller Fläche',
-  },
-];
-
-/**
- * Die drei Materialstudien der Startseite.
- *
- * Sie standen bis zum 20.08.2026 in einem gestaffelten Band, das beim Scrollen
- * wanderte. Yvonne wollte stattdessen schieben können — also stehen sie jetzt
- * in derselben Reihe wie die Praxisbilder, nur kleiner und ohne Adresskarte.
- *
- * Keins der drei zeigt einen Raum. Sie behaupten nichts über einen Ort, den eine
- * Patientin betreten wird, und müssen deshalb nach der Eröffnung auch nicht
- * getauscht werden — anders als die Slots auf `/praxis/`.
- */
-export const MATERIAL_KACHELN: readonly Kachel[] = [
-  {
-    datei: 'material-wandkante.webp',
-    breite: 1100,
-    hoehe: 821,
-    alt: 'Nahaufnahme der Kante, an der eine warmweisse Kalkputzwand auf eine salbeigrün gestrichene Fläche trifft.',
-    bildunterschrift: 'Kalkputz und Salbei',
-  },
-  {
-    datei: 'material-leinen.webp',
-    breite: 900,
-    hoehe: 1205,
-    alt: 'Gefaltetes ungefärbtes Leinen auf heller Putzfläche, das Streiflicht zeichnet die einzelnen Fäden nach.',
-    bildunterschrift: 'Leinen im Streiflicht',
-  },
-  {
-    datei: 'material-karten.webp',
-    breite: 760,
-    hoehe: 1018,
-    alt: 'Ein kleiner Stapel unbedruckter warmweisser Karten auf naturbelassenem Leinen, die Schatten fallen nach rechts unten.',
-    bildunterschrift: 'Papier auf Leinen',
-  },
-  {
-    datei: 'material-eiche.webp',
-    breite: 1000,
-    hoehe: 747,
-    alt: 'Helle Eichenfläche im Streiflicht, die Maserung wirft feine Schatten nach rechts unten.',
-    bildunterschrift: 'Eiche im Streiflicht',
-  },
-  {
-    datei: 'material-salbei.webp',
-    breite: 800,
-    hoehe: 800,
-    alt: 'Ein frischer Salbeizweig mit vier Blättern auf warmweissem Papier, der Schatten fällt nach rechts unten.',
-    bildunterschrift: 'Salbei',
-  },
-];
 
 /** Wie stark der Schwung nachläuft. Aus dem Gefühl gedreht, nicht aus einer Formel. */
 const NACHLAUF_MS = 240;
@@ -155,19 +76,36 @@ const ZIEH_SCHWELLE = 6;
  * „nächster Schritt" auf derselben Seite ist keiner.
  */
 export function ZiehGalerie({
-  kacheln = PRAXIS_KACHELN,
+  plaetze = PRAXIS_PLAETZE,
   titel = 'Die Räume',
-  lead = 'Die Praxis wird gerade gebaut, fotografiert ist sie noch nicht. Solange stehen hier Material- und Lichtstudien — der Putz, das Leinen, das Licht, mit dem eingerichtet wird. Nach der Eröffnung stehen an denselben Stellen die echten Fotos.',
+  lead,
   kennung = 'galerie-titel',
   mitKarte = true,
+  weiter,
   klein = false,
   erstesBildSofort = true,
 }: {
-  kacheln?: readonly Kachel[];
+  plaetze?: readonly Bildplatz[];
   titel?: string;
+  /**
+   * Der Leitsatz. Wird er weggelassen, schreibt ihn das Register — und zwar
+   * passend dazu, ob echte Fotos da sind. Das ist der Normalfall und soll es
+   * bleiben: ein von Hand gesetzter Leitsatz ist der Satz, der nach der
+   * Lieferung unter echten Fotos „noch nicht fotografiert" behauptet.
+   */
   lead?: string;
   kennung?: string;
   mitKarte?: boolean;
+  /**
+   * Der Weg aus der Reihe heraus.
+   *
+   * Am Ende der grossen Fassung steht eine Karte mit Anschrift und Terminknopf.
+   * Die kleine Fassung auf der Startseite hat sie nicht — dort stünde ein
+   * zweiter „nächster Schritt" neben dem Terminblock. Ohne Ersatz war die Reihe
+   * dort aber eine Sackgasse: vier Bilder der Praxis, und kein Weg zu der Seite,
+   * auf der es mehr davon gibt.
+   */
+  weiter?: { readonly href: string; readonly text: string };
   klein?: boolean;
   /**
    * Ob die erste Kachel sofort geholt wird.
@@ -378,11 +316,16 @@ export function ZiehGalerie({
         <h2 id={kennung} className="t-section galerie__titel">
           {titel}
         </h2>
-        <p className="t-body galerie__lead">{lead}</p>
+        <p className="t-body galerie__lead">{lead ?? praxisLead(plaetze)}</p>
         <p className="t-meta galerie__anleitung">
           Zum Verschieben ziehen oder wischen. Mit der Tabulatortaste hineinspringen, dann mit den Pfeiltasten
           weiter.
         </p>
+        {weiter ? (
+          <a className="link galerie__weiter" href={weiter.href}>
+            {weiter.text}
+          </a>
+        ) : null}
       </div>
 
       <div
@@ -394,29 +337,36 @@ export function ZiehGalerie({
         onPointerCancel={hoch}
         onClickCapture={klickSperre}
       >
-        {kacheln.map((k, i) => (
-          <figure
-            key={k.datei}
-            className="galerie__kachel"
-            style={{ aspectRatio: `${k.breite} / ${k.hoehe}` }}
-            tabIndex={0}
-            onKeyDown={taste}
-          >
-            <img
-              src={weg(`/bilder/${k.datei}`)}
-              width={k.breite}
-              height={k.hoehe}
-              /* Die erste Kachel ist beim Öffnen im Bild und wird sofort geholt.
-                 Die übrigen erst beim Heranziehen — sonst lädt eine Patientin im
-                 Mobilfunknetz vier Bilder für eines, das sie sieht. */
-              loading={i === 0 && erstesBildSofort ? 'eager' : 'lazy'}
-              decoding="async"
-              draggable={false}
-              alt={k.alt}
-            />
-            <figcaption className="t-meta galerie__unterschrift">{k.bildunterschrift}</figcaption>
-          </figure>
-        ))}
+        {plaetze.map((platz, i) => {
+          const bild = zeigt(platz);
+          return (
+            <figure
+              key={platz.kennung}
+              className="galerie__kachel"
+              /* Das Seitenverhältnis kommt vom PLATZ, nicht von der Datei. Damit
+                 ändert sich die Reihe nicht, wenn ihre Fotos die Studien
+                 ablösen — gleiche Höhen, gleiche Kanten, gleicher Rastpunkt. */
+              style={{ aspectRatio: bild.verhaeltnis }}
+              tabIndex={0}
+              onKeyDown={taste}
+            >
+              <img
+                src={weg(bild.src)}
+                width={bild.breite}
+                height={bild.hoehe}
+                style={{ objectPosition: bild.fokus }}
+                /* Die erste Kachel ist beim Öffnen im Bild und wird sofort geholt.
+                   Die übrigen erst beim Heranziehen — sonst lädt eine Patientin im
+                   Mobilfunknetz vier Bilder für eines, das sie sieht. */
+                loading={i === 0 && erstesBildSofort ? 'eager' : 'lazy'}
+                decoding="async"
+                draggable={false}
+                alt={bild.alt}
+              />
+              <figcaption className="t-meta galerie__unterschrift">{bild.unterschrift}</figcaption>
+            </figure>
+          );
+        })}
 
         {/* Am Ende der Reihe steht kein weiteres Bild, sondern der nächste
             Schritt. Die Galerie endet dort, wo etwas zu tun ist.

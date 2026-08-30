@@ -34,7 +34,7 @@
     {
       "id": "team",
       "titel": "Team",
-      "hinweis": "Erscheint auf /team/ in der Reihenfolge dieser Liste. Die erste Person steht oben und grösser. Bei Personalwechsel wird hier ein Eintrag getauscht — sonst nichts.",
+      "hinweis": "Erscheint auf /team/ in der Reihenfolge dieser Liste. Die erste Person steht oben und grösser. Sie steht ausserdem mit Text auf der Startseite unter „Wer ich bin\", die übrigen dort als Gesicht mit Name und Funktion. Bei Personalwechsel wird hier ein Eintrag getauscht — sonst nichts.",
       "art": "liste",
       "quelle": "inhalt/team.json",
       "ziel": "/team/ — gelesen in src/inhalt.ts als `team`, gerendert von src/seiten/TeamSeite.tsx",
@@ -70,7 +70,7 @@
           "ordner": "/bilder/team",
           "seitenverhaeltnis": "4:5",
           "beschreibt": "bildAlt",
-          "hinweis": "Hochformat, mindestens 800 Pixel breit. Das Licht sollte von links kommen — dann passt es zu den übrigen Bildern der Seite. Solange kein Foto da ist, zeigt die Seite einen leeren Rahmen mit Hinweis, kein fremdes Bild."
+          "hinweis": "Hochformat, mindestens 800 Pixel breit. Das Licht sollte von links kommen — dann passt es zu den übrigen Bildern der Seite. Dasselbe Foto wird auf /team/ gross und auf der Startseite klein gezeigt — es wird nie anders beschnitten. Solange kein Foto da ist, zeigt die Seite einen leeren Rahmen mit Hinweis, kein fremdes Bild."
         },
         "bildAlt": {
           "art": "text",

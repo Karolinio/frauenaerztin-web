@@ -52,6 +52,21 @@
 }
 
 .recht h2 {
+  /**
+   * ═══ Lange Wörter dürfen brechen ═══
+   *
+   * Gemessen am 30.08.2026 bei 375px: „Berufshaftpflichtversicherung" ragte
+   * 7px über den Bildschirmrand. Auf einer Pflichtseite ist das kein Detail —
+   * die Wörter dort sind alle so gebaut („Verbraucherstreitbeilegungsgesetz",
+   * „Aufsichtsbehörde"), und man kann sie nicht kürzer schreiben, weil sie
+   * Rechtsbegriffe sind.
+   *
+   * `hyphens: auto` trennt sie nach deutschen Regeln (`lang="de"` steht am
+   * `<html>`); `overflow-wrap: break-word` fängt ab, was auch danach zu lang
+   * bleibt.
+   */
+  hyphens: auto;
+  overflow-wrap: break-word;
   font-family: var(--schrift-display);
   font-size: 1.5rem;
   line-height: 1.25;
@@ -108,6 +123,19 @@
 }
 
 .recht dd {
+  /**
+   * Adressen und Verweise brechen an jeder Stelle.
+   *
+   * Gemessen am 30.08.2026 bei 375px: „https://www.aekno.de/aerzte/berufsordnung"
+   * schob die Seite auf 397px auf — sie liess sich also seitwärts scrollen, und
+   * `qa.mjs` meldete genau das. Eine URL hat keine Trennstelle, an der ein
+   * Browser von sich aus umbrechen dürfte; `anywhere` gibt sie ihm.
+   *
+   * `anywhere` und nicht `break-word`: `break-word` bricht ein langes Wort erst,
+   * wenn es allein auf einer Zeile immer noch nicht passt — steht davor noch
+   * Text, schiebt es trotzdem hinaus.
+   */
+  overflow-wrap: anywhere;
   margin: 0;
   text-wrap: pretty;
 }

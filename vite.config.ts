@@ -102,10 +102,28 @@ function praxisdatenInsHtml(): Plugin {
     ? `<link rel="preload" as="image" href="${basis}${praxis.portraet.src.replace(/^\//, '')}" fetchpriority="high" />`
     : `<link rel="preload" as="image" imagesrcset="${heroSrcSet(basis)}" imagesizes="${HERO_SIZES}" fetchpriority="high" />`;
 
+  /*
+   * Das Vorladen der Schrift.
+   *
+   * Genau EINE Datei — die variable Montserrat, aus der alle Schnitte der Seite
+   * kommen. Die Leistungsregel dieses Hauses sagt „nur das wirklich kritische
+   * Gewicht vorladen"; bei einer variablen Schrift ist das die ganze Datei,
+   * weil es keine getrennten Schnitte gibt.
+   *
+   * `crossorigin` ist Pflicht und kein Beiwerk: Schriften werden immer im
+   * anonymen CORS-Modus geholt. Fehlt das Attribut am Vorladen, holt der
+   * Browser die Datei ein ZWEITES Mal — das Vorladen macht die Seite dann
+   * langsamer statt schneller.
+   */
+  const schriftVorladen =
+    `<link rel="preload" href="${basis}fonts/montserrat-var-latin.woff2" ` +
+    `as="font" type="font/woff2" crossorigin />`;
+
   const ersetzungen: Record<string, string> = {
     '%PRAXIS_NAME%': praxis.name ?? `Gynäkologische Praxis ${praxis.ort}`,
     '%PRAXIS_ORT%': praxis.ort,
     '<!-- %HERO_PRELOAD% -->': vorladen,
+    '<!-- %SCHRIFT_PRELOAD% -->': schriftVorladen,
   };
 
   return {

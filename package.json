@@ -11,8 +11,10 @@
     "fonts": "node scripts/copy-fonts.mjs",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"*.{ts,json,html}\" \"scripts/*.mjs\"",
     "qa": "node scripts/qa.mjs",
+    "qa:bau": "node scripts/qa-bau.mjs",
     "qa:a11y": "node scripts/qa-a11y.mjs",
-    "qa:recht": "node scripts/qa-recht.mjs"
+    "qa:recht": "node scripts/qa-recht.mjs",
+    "bilder": "node scripts/bildplaetze.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

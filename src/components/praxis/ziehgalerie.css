@@ -230,3 +230,13 @@
 .galerie--klein .galerie__lead {
   max-width: 52ch;
 }
+
+/* Der Weg aus der kleinen Fassung heraus. Steht über der Reihe und nicht am
+   Ende: am Ende sähe ihn nur, wer bis dorthin schiebt — und genau wer das nicht
+   tut, sucht die Seite mit den übrigen Bildern. */
+.galerie__weiter {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tippziel);
+  margin-top: 0.5rem;
+}

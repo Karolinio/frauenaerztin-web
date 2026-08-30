@@ -23,12 +23,69 @@
  * einen Datenfluss beschreibt, den es nicht gibt, ist der Beleg dafuer, dass sie
  * nie gegen die Seite geprueft wurde.
  *
- *   node scripts/qa-recht.mjs        (Vorschau-Server auf 4319 muss laufen)
+ *   npm run qa:recht                 (startet den Vorschau-Server selbst)
+ *   node scripts/qa-recht.mjs <url>  (gegen einen laufenden Server)
+ *
+ * ═══ Warum das Skript seinen Server selbst startet ═══
+ *
+ * Weil es das am 30.08.2026 nicht tat und deshalb gegen nichts lief: es hatte
+ * `localhost:4319` fest eingetragen, und dort läuft dieses Projekt nur, wenn
+ * jemand vorher zufällig einen Vorschau-Server auf genau diesem Port gestartet
+ * hat. Am Tag des Baus war das so; am Tag danach nicht mehr.
+ *
+ * Das war an einem Tag der dritte Fund derselben Art — `qa.mjs` zeigte auf
+ * 5178, `qa-bau.mjs` gab es noch gar nicht. Eine Prüfung, die von einem von
+ * Hand gestarteten Server abhängt, prüft irgendwann nichts mehr und sagt es
+ * nicht.
  */
 import { chromium } from 'playwright-core';
+import { fileURLToPath } from 'node:url';
+
+/**
+ * Der Vorschau-Server direkt aus `node_modules`, nicht über `npx`.
+ *
+ * `npx` löst den Namen bei jedem Aufruf neu auf und braucht dafür je nach
+ * Zustand des Zwischenspeichers mehrere Sekunden. Genau daran ist der erste
+ * Lauf dieser Prüfung am 30.08.2026 gescheitert: der Server war noch nicht
+ * oben, als das Wartefenster ablief, und die Prüfung meldete einen Fehler, den
+ * es nicht gab. Eine Prüfung, die gelegentlich grundlos scheitert, wird
+ * abgeschaltet — und dann prüft wieder niemand.
+ */
+const VITE = fileURLToPath(new URL('../node_modules/.bin/vite', import.meta.url));
 import { readFileSync } from 'node:fs';
 
-const BASIS = process.env.QA_BASIS ?? 'http://localhost:4319';
+const PORT = 4319;
+const EIGENER_SERVER = process.argv[2] === undefined && process.env.QA_BASIS === undefined;
+const BASIS = process.argv[2] ?? process.env.QA_BASIS ?? `http://localhost:${PORT}`;
+
+/** Der selbst gestartete Vorschau-Server, falls es einen gibt. */
+let server = null;
+
+if (EIGENER_SERVER) {
+  const { spawn } = await import('node:child_process');
+  await new Promise((fertig, scheitern) => {
+    const bau = spawn('npm', ['run', 'build'], { stdio: 'ignore' });
+    bau.on('exit', (c) => (c === 0 ? fertig() : scheitern(new Error(`build endete mit ${c}`))));
+    bau.on('error', scheitern);
+  });
+  server = spawn(VITE, ['preview', '--port', String(PORT), '--strictPort'], {
+    stdio: 'ignore',
+  });
+
+  let bereit = false;
+  for (let i = 0; i < 120 && !bereit; i++) {
+    try {
+      bereit = (await fetch(`${BASIS}/impressum.html`)).ok;
+    } catch {
+      await new Promise((r) => setTimeout(r, 500));
+    }
+  }
+  if (!bereit) {
+    server.kill();
+    console.error(`FEHLER: der Vorschau-Server auf ${PORT} kam nicht hoch.`);
+    process.exit(1);
+  }
+}
 const konfig = readFileSync(new URL('../src/praxis.config.ts', import.meta.url), 'utf8');
 
 /* Alle in der Konfig gesetzten Werte — gegen sie wird geprueft, ob ein
@@ -126,6 +183,9 @@ for (const [datei, name] of [
 }
 
 await browser.close();
+/* Den selbst gestarteten Server wieder abräumen — sonst bleibt er nach jedem
+   Lauf auf 4319 stehen und der nächste scheitert an `--strictPort`. */
+if (server) server.kill();
 
 if (befunde.length) {
   console.error('\n  BEFUNDE AUF DEN PFLICHTSEITEN\n');

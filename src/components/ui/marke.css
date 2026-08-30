@@ -70,7 +70,13 @@
   /* Dritte Vergroesserung, auf Ansage. 342 → 427 → jetzt rund 505px breit bei
      1440. Damit belegt das Logo gut drei Viertel der linken Herospalte und ist
      das erste, was man sieht — vor der Ueberschrift. */
-  height: clamp(5rem, 3.5rem + 9.5vw, 13rem);
+  /* Vierte Vergroesserung, 30.08.2026 — diesmal nicht nur groesser, sondern an
+     einem anderen Ort. Das Logo steht seit dem Umbau des Heros allein auf der
+     Mittelachse und muss die Breite mit nichts mehr teilen. Bei 1440px sind es
+     rund 577px statt 505px, und weil daneben nichts mehr steht, wirkt es
+     deutlich mehr als die 14 Prozent Zuwachs.
+     Yvonne: „Logo gerne mehr in den Mittelpunkt stellen." */
+  height: clamp(5.5rem, 3rem + 12vw, 16rem);
 }
 
 /* Die Fassung im Hero. Sie trägt den Namen der Praxis über der grossen Zeile

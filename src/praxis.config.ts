@@ -122,14 +122,24 @@ export const praxis = {
   },
 
   /**
-   * Ihr Porträt — das einzige Bild dieser Seite, das echt sein MUSS.
+   * Ihr Foto im Hero — das einzige Bild dieser Seite, das echt sein MUSS.
    *
    * Es wird nicht erzeugt, auch nicht als Symbolbild einer Ärztin. Solange es
-   * fehlt, hält im Hero eine Materialstudie exakt dessen Platz, und darüber
-   * steht sichtbar „Porträt folgt". Beides verschwindet, sobald hier ein Wert
-   * steht — es gibt keinen zweiten Handgriff, den jemand vergessen könnte.
+   * fehlt, hält eine Materialstudie exakt dessen Platz, und darauf steht
+   * sichtbar „Foto folgt". Beides verschwindet, sobald hier ein Wert steht — es
+   * gibt keinen zweiten Handgriff, den jemand vergessen könnte.
    *
-   * Aufnahmehinweis siehe `public/bilder/PLATZHALTER.md`.
+   * ═══ Welches Foto hier hingehört ═══
+   *
+   * Seit dem 30.08.2026 ist der Platz QUER (16:7 am Rechner, 4:3 am Handy) und
+   * nicht mehr hochkant. Gebraucht wird also Yvonne IN ihrer Praxis, quer
+   * aufgenommen, der Raum darf mit aufs Bild — nicht ein Studioporträt vor
+   * neutralem Grund. Ein Hochformat funktioniert trotzdem: der Ausschnitt lässt
+   * sich über `fokus` in `lib/bildplaetze.ts` auf das Gesicht ziehen.
+   *
+   * Der Platz und seine Masse stehen in `lib/bildplaetze.ts` (`HERO_PLATZ`).
+   * Diese Zeile hier ist nur die Datei — sie steht in der Konfiguration, weil
+   * `vite.config.ts` sie fürs Vorladen braucht.
    */
   portraet: null as Offen<{ readonly src: string; readonly alt: string }>,
 

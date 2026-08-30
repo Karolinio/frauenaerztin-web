@@ -1,25 +1,52 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { praxis } from '../../praxis.config';
 import { zeiten, hatZeiten, istHeute } from '../../inhalt';
 import { Marke } from '../ui/Marke';
 import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
-import { HERO_BREITEN, HERO_SIZES } from '../../lib/heroBild';
+import { HERO_PLATZ, zeigt } from '../../lib/bildplaetze';
+import { HERO_SIZES, heroSrcSet } from '../../lib/heroBild';
 import './hero.css';
 
 /**
- * Der geteilte Hero — ihre Vorgabe, in ihrer Reihenfolge.
+ * Der Hero — ihre Vorgabe, in ihrer Reihenfolge.
  *
  *   „Startseite: Logo/Name, Medizin für Frauen, Die neue gynäkologische Praxis
  *    in Erkelenz, Foto von mir und kurzer Einleitungstext."
  *
- * ═══ Die zweite Zeile ist die wichtige ═══
+ * ═══ Umbau vom 30.08.2026: die Mittelachse ═══
  *
- * „Medizin für Frauen" steht wörtlich so auf ihrer Referenz (gynpraxisbonn.de).
- * Sie hat es übernommen und darf es behalten. Aber „Die neue gynäkologische
- * Praxis in Erkelenz" ist der Satz, den es nur einmal gibt — er ist der Grund,
- * warum diese Seite existiert, und er wird deshalb nicht kleiner gesetzt als
- * eine Bildunterschrift.
+ * Yvonne: „Logo gerne mehr in den Mittelpunkt stellen."
+ *
+ * Bis dahin stand der Hero zweispaltig: links Text, rechts ein hohes Bild. Das
+ * Logo sass oben in der linken Spalte — gemessen bei 1440px 505px breit, und
+ * direkt darunter eine Überschrift, deren Versalhöhe allein 86px betrug. Ein
+ * Logo verliert diesen Vergleich immer, egal wie gross man es setzt: es steht
+ * in einer Spalte, die Überschrift auch, und die Überschrift ist lauter.
+ *
+ * Deshalb ist die Spalte weg. Logo, Überschrift und Einleitung stehen jetzt auf
+ * EINER Mittelachse, und das Logo steht darauf zuerst und allein — es hat oben
+ * die ganze Breite für sich und muss sie mit nichts teilen.
+ *
+ * Ihr Lockup ist 2,6 : 1 quer. Genau so ein Format braucht eine Mittelachse:
+ * in einer Spalte ist es entweder klein oder es sprengt sie.
+ *
+ * ═══ Warum die Überschrift trotzdem die Überschrift bleibt ═══
+ *
+ * Ein zentriertes Logo über einer zentrierten Zeile ist der häufigste Weg,
+ * einen Hero belanglos zu machen — beide werden dann gleich laut und keiner
+ * führt. Das Gegenmittel steht in den Grössen, nicht in der Anordnung: das Logo
+ * ist breit und ruhig, die Zeile darunter ist hoch und laut. Sie unterscheiden
+ * sich in der Achse, in der sie wachsen, und deshalb kommen sie sich nicht in
+ * die Quere.
+ *
+ * ═══ Warum das Bild jetzt unten liegt und quer ═══
+ *
+ * Siehe `lib/bildplaetze.ts`. Kurz: 3:4 war ein Studioporträt-Slot, und was bei
+ * einer Praxiseröffnung entsteht, ist ein Querbild aus den neuen Räumen. Unten
+ * quer über die ganze Breite ist ausserdem die Stelle, an der ein einzelnes
+ * Foto am meisten trägt — es trennt den Kopf der Seite vom Rest, statt neben
+ * ihm um Aufmerksamkeit zu bitten.
  *
  * Beide Zeilen bilden EINE Überschrift. Zwei h1 wären zwei Themen, und die
  * zweite Zeile als Absatz wäre für Google eine Bildunterschrift.
@@ -30,7 +57,7 @@ export function Hero() {
 
   return (
     <section className={`hero ${auf ? 'hero--auf' : ''}`} aria-labelledby="hero-titel">
-      <div className="hero__text">
+      <div className="hero__kopf">
         <div className="hero__marke" ref={marke}>
           <Marke alsUeberschrift />
         </div>
@@ -47,13 +74,33 @@ export function Hero() {
           </span>
           <span className="hero__zeile2">Die neue gynäkologische Praxis in {praxis.ort}</span>
         </h1>
+      </div>
 
-        {/* Der kurze Einleitungstext steht in ihrer Aufzählung direkt beim Foto
-            („Foto von ihr + kurzer Einleitungstext") und sitzt deshalb hier und
-            nicht in einer eigenen Sektion darunter. Er füllt ausserdem die
-            linke Spalte: ein 3:4-Bild, das bis an die Kante geht, ist bei
-            1440px rund 780px hoch, und daneben nur zwei Zeilen stehen zu haben
-            sieht nicht nach Ruhe aus, sondern nach fehlendem Inhalt. */}
+      <Buehne />
+
+      {/*
+        ═══ Warum Einleitung und Sprechzeit UNTER dem Bild stehen ═══
+
+        Sie standen zuerst darüber, mit allem anderen auf der Mittelachse.
+        Gemessen bei 1440 × 1000: die Oberkante des Bildes lag dann bei 1185px —
+        also unter der Falz, zusammen mit Sprechzeit und Telefonnummer. Beides
+        war in der zweispaltigen Fassung sofort sichtbar gewesen.
+
+        Das ist kein Schönheitsfehler. Der Wettbewerbsbefund vom 18.08.2026 —
+        drei der vier Erkelenzer Praxen zeigen Zeiten oder Nummer ganz oben —
+        war der Grund, warum dieser Block überhaupt im Hero sitzt. Ihn unter die
+        Falz zu schieben, hebt genau diese Entscheidung wieder auf.
+
+        Unter dem Bild lösen sich zwei Dinge auf einmal: die Oberkante des
+        Bildes rückt auf rund 815px und ist damit im ersten Bild, und der Text
+        steht wieder linksbündig. Vier zentrierte Absätze hintereinander sind
+        eine Wand — beim zentrierten Satz sucht das Auge nach jeder Zeile den
+        Anfang neu, und das trägt eine Überschrift, aber keinen Fliesstext.
+
+        Ihre Vorgabe „Foto von mir und kurzer Einleitungstext" bleibt gewahrt:
+        der Text steht beim Foto. Nur darunter statt darüber.
+      */}
+      <div className="hero__fuss">
         <div className="hero__einleitung t-lead">
           <p>
             In {praxis.ort} entsteht eine neue gynäkologische Praxis. Vorsorge, Schwangerschaft, Verhütung und
@@ -68,8 +115,6 @@ export function Hero() {
 
         <Praxisdaten />
       </div>
-
-      <Portraet />
     </section>
   );
 }
@@ -134,7 +179,7 @@ function useAndocken() {
  *
  * ═══ Warum nicht einfach beim Mounten ═══
  *
- * Weil Fraunces dann noch lädt. Die Zeile führe ihre Bewegung in der
+ * Weil Montserrat dann noch lädt. Die Zeile führe ihre Bewegung in der
  * Ersatzschrift aus, käme zur Ruhe, und WÄHREND sie steht, tauschte der Browser
  * die Schrift — bei 120px verschiebt sich dabei jede Zeile sichtbar. Die
  * Bewegung wäre sauber und der Moment danach kaputt.
@@ -239,6 +284,8 @@ function Praxisdaten() {
 }
 
 /**
+ * Die Bühne: das eine grosse Bild, quer über die volle Breite.
+ *
  * Das Bild blendet ein. Ihr einziger Bewegungswunsch, wörtlich:
  *
  *   „Vllt das Foto auf der Hauptseite, dass es eingeblendet wird und nicht fest
@@ -256,10 +303,18 @@ function Praxisdaten() {
  *
  * Fällt `decode()` aus (ältere Browser, abgebrochene Ladung), wird trotzdem
  * eingeblendet. Ein unsichtbares Bild ist der teurere Fehler.
+ *
+ * ═══ Was hier NICHT mehr steht ═══
+ *
+ * Die Frage, ob ihr Porträt schon da ist. Die beantwortet das Bildregister
+ * (`lib/bildplaetze.ts`) für alle Bildplätze der Seite an einer Stelle. Diese
+ * Komponente bekommt eine Quelle, eine Beschreibung und ein Ja/Nein und muss
+ * nichts davon selbst herleiten.
  */
-function Portraet() {
+function Buehne() {
   const bild = useRef<HTMLImageElement>(null);
   const [da, setDa] = useState(false);
+  const zeigen_ = zeigt(HERO_PLATZ);
 
   useEffect(() => {
     const el = bild.current;
@@ -271,37 +326,58 @@ function Portraet() {
     }
 
     let abgebrochen = false;
-    const zeigen = () => {
+    const fertig = () => {
       if (!abgebrochen) setDa(true);
     };
 
-    el.decode().then(zeigen, zeigen);
+    el.decode().then(fertig, fertig);
     return () => {
       abgebrochen = true;
     };
   }, []);
 
-  /*
-   * Die Markierung steht so lange, wie `praxis.portraet` fehlt — und sie
-   * verschwindet in dem Moment, in dem das echte Bild eingetragen wird. Es gibt
-   * keinen zweiten Handgriff, den jemand vergessen könnte.
-   */
-  const portraetFehlt = praxis.portraet === null;
-
   return (
-    <figure className={`hero__bild ${da ? 'hero__bild--da' : ''}`}>
-      {portraetFehlt ? (
+    <figure
+      className={`hero__buehne ${da ? 'hero__buehne--da' : ''}`}
+      /* Zwei Verhältnisse als Variablen, die Medienabfrage wählt in `hero.css`.
+         Beide kommen aus dem Register — hier steht keine Geometrie. */
+      style={
+        {
+          '--verhaeltnis-breit': zeigen_.verhaeltnis,
+          '--verhaeltnis-schmal': zeigen_.verhaeltnisSchmal,
+        } as CSSProperties
+      }
+    >
+      {/*
+       * „Foto folgt".
+       *
+       * ═══ Warum eine Markierung und kein Symbolbild ═══
+       *
+       * Weil ein Symbolbild einer Ärztin genau das wäre, was diese Seite
+       * nirgends tut: eine Behauptung über etwas, das es noch nicht gibt. Eine
+       * Fremde in einem Kittel auf der Startseite einer Einzelpraxis ist die
+       * schlimmste Variante davon — die Patientin glaubt, sie hätte die Ärztin
+       * gesehen.
+       *
+       * ═══ Warum sie im Bild sitzt und nicht darunter ═══
+       *
+       * Weil sie sonst wie eine Bildunterschrift aussähe und damit wie Inhalt.
+       * Sie liegt auf der Studie, in Papier auf Papier, und sagt in zwei Sätzen,
+       * was hier hingehört. Kein Schlagschatten, kein Milchglas: eine Fläche,
+       * wie überall.
+       *
+       * Sie verschwindet, sobald im Register eine Datei steht — es gibt keinen
+       * zweiten Handgriff, den jemand vergessen könnte.
+       */}
+      {zeigen_.echt ? null : (
         <p className="hero__marker">
-          <span className="hero__marker-wort">Porträt folgt</span>
-          <span className="hero__marker-satz">
-            Hier steht das Foto der Ärztin. Bis es da ist, hält eine Materialstudie den Platz — sie hat exakt
-            dessen Masse.
-          </span>
+          <span className="hero__marker-wort">{HERO_PLATZ.ersatz.wort}</span>
+          <span className="hero__marker-satz">{HERO_PLATZ.ersatz.satz}</span>
         </p>
-      ) : null}
+      )}
       <img
         ref={bild}
-        src={weg(praxis.portraet?.src ?? '/bilder/hero-1100.webp')}
+        src={weg(zeigen_.src)}
         /*
          * Drei Grössen, solange die Materialstudie den Platz hält.
          *
@@ -313,32 +389,31 @@ function Portraet() {
          * ausgeliefert und auf 393px dargestellt: 64 kB für ein Bild, das in
          * 3,4 kB dieselbe Fläche füllt.
          *
-         * Sobald ihr echtes Porträt da ist, greift `srcset` nicht mehr — dann
+         * Sobald ihr echtes Foto da ist, greift `srcset` nicht mehr — dann
          * steht dort eine Datei, und die Grössen dafür gibt es noch nicht. Das
          * ist Absicht: lieber ein einzelnes, korrekt eingesetztes Bild als ein
          * `srcset`, das auf drei Dateien zeigt, von denen zwei fehlen.
          */
-        {...(praxis.portraet
-          ? {}
-          : {
-              srcSet: HERO_BREITEN.map((b) => `${weg(`/bilder/hero-${b}.webp`)} ${b}w`).join(', '),
-              sizes: HERO_SIZES,
-            })}
-        width={1800}
-        height={1208}
+        {...(zeigen_.echt ? {} : { srcSet: heroSrcSet(weg('/')), sizes: HERO_SIZES })}
+        width={zeigen_.breite}
+        height={zeigen_.hoehe}
+        style={{ objectPosition: zeigen_.fokus }}
         /* Das erste Bild der Seite. `eager` und hohe Priorität, sonst steht es
            in der Warteschlange hinter dem Bündel — und die halbe Startseite ist
            dann eine leere Fläche. */
         loading="eager"
-        fetchPriority="high"
+        /* Kleingeschrieben und über einen Spread.
+           React 18 kennt `fetchPriority` in camelCase nicht: es setzt das
+           Attribut zwar, warnt aber bei jedem Aufbau in der Konsole. Gemessen am
+           30.08.2026 war das die einzige Konsolenmeldung der Startseite — und
+           eine Konsole voller bekannter Warnungen ist der Ort, an dem ein echter
+           Fehler unbemerkt liegt. */
+        {...({ fetchpriority: 'high' } as Record<string, string>)}
         decoding="async"
         /* Die Bildbeschreibung beschreibt, was WIRKLICH zu sehen ist. „Porträt
-           der Ärztin" wäre hier eine Falschangabe gegenüber genau den Nutzerinnen,
-           die das Bild nicht sehen können. */
-        alt={
-          praxis.portraet?.alt ??
-          'Frisch gestrichene Wand aus warmweissem Kalkputz, daneben eine salbeigrün gestrichene Fläche, Tageslicht von links.'
-        }
+           der Ärztin" wäre hier eine Falschangabe gegenüber genau den
+           Nutzerinnen, die das Bild nicht sehen können. */
+        alt={zeigen_.alt}
       />
     </figure>
   );

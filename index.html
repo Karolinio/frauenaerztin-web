@@ -17,10 +17,19 @@
 
     <!-- Schriften: selbst gehostet, kein Google-CDN, kein externer Request.
          Bei einer Arztseite ist jede Fremdverbindung eine Datenschutzfrage,
-         die man sich sparen kann. Nur die zwei Schnitte vorladen, die im
-         ersten Bild wirklich gebraucht werden. -->
-    <link rel="preload" href="/fonts/fraunces-var-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin />
+         die man sich sparen kann.
+
+         Hier standen bis zum 30.08.2026 zwei Verweise auf `fraunces-var-latin`
+         und `instrument-sans-400`. Beide Dateien gibt es seit der Umstellung
+         auf Montserrat nicht mehr — jede Seite forderte also zwei Schriften mit
+         hoher Priorität an, bekam zweimal 404, und die Schrift, die tatsächlich
+         gebraucht wird, wurde gar nicht vorgeladen.
+
+         Der Pfad kommt aus `vite.config.ts` und nicht aus dieser Datei: ein
+         absoluter Pfad zeigt unter GitHub Pages an die Wurzel der Domain statt
+         in den Unterordner. Genau daran sind die alten Verweise mit gescheitert.
+         Siehe den Kommentar zu %HERO_PRELOAD% dort. -->
+    <!-- %SCHRIFT_PRELOAD% -->
 
     <!-- Das erste sichtbare Bild. Ohne dieses Vorladen steht es in der
          Warteschlange hinter dem Bündel, und die halbe Startseite ist beim

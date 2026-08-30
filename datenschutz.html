@@ -9,8 +9,12 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#f7f4ef" />
     <meta name="color-scheme" content="light" />
-    <link rel="preload" href="/fonts/fraunces-var-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Der Pfad wird beim Bauen eingesetzt, siehe `vite.config.ts`.
+         Ein absoluter Pfad zeigt unter GitHub Pages an die Wurzel der Domain
+         statt in den Unterordner — hier standen bis zum 30.08.2026 zwei
+         Verweise auf Schriften, die es gar nicht mehr gibt, und beide gaben auf
+         jedem Aufruf 404. -->
+    <!-- %SCHRIFT_PRELOAD% -->
   </head>
   <body>
     <div id="root"></div>

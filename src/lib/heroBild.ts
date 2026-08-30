@@ -23,12 +23,15 @@ export const HERO_BREITEN = [760, 1100, 1800] as const;
 /**
  * Wie breit das Bild dargestellt wird.
  *
- * Am Handy fuellt es die Fensterbreite; ab 62rem sitzt es in der rechten
- * Herospalte und belegt gut zwei Fuenftel. Muss mit `hero.css` uebereinstimmen —
- * eine zu grosse Angabe holt unnoetig grosse Dateien, eine zu kleine liefert
- * ein unscharfes Bild.
+ * Seit dem 30.08.2026 liegt das Bild unter dem Text und geht randlos ueber die
+ * volle Breite — auf jeder Fensterbreite. Bis dahin sass es in der rechten
+ * Herospalte und belegte dort gut zwei Fuenftel, daher die alte Angabe
+ * `(min-width: 62rem) 42vw, 100vw`.
+ *
+ * Muss mit `hero.css` uebereinstimmen — eine zu grosse Angabe holt unnoetig
+ * grosse Dateien, eine zu kleine liefert ein unscharfes Bild.
  */
-export const HERO_SIZES = '(min-width: 62rem) 42vw, 100vw';
+export const HERO_SIZES = '100vw';
 
 /** Das `srcset`, gegen einen Basispfad aufgeloest. */
 export const heroSrcSet = (basis: string): string =>

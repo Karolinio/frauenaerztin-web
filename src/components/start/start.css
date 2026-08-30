@@ -126,17 +126,135 @@
     grid-row: 1 / span 3;
     margin-top: 0;
   }
+}
 
-  .werbin__mehr {
-    grid-column: 2;
-    margin-top: var(--raum);
+/* ── Und wer noch da ist ──────────────────────────────────────────────────
+ *
+ * Die Gesichter der übrigen. Klein, in einer Reihe, ohne Text — die Texte
+ * stehen auf `/team/`.
+ *
+ * ═══ Warum die Rahmen so klein sind ═══
+ *
+ * Weil sie nicht mit ihr konkurrieren dürfen. Auf dieser Seite ist EINE Person
+ * die Praxis; die übrigen sind die Antwort auf „wer geht ans Telefon". Gleich
+ * grosse Bilder machten daraus eine Belegschaft, und das wäre bei zwei
+ * Angestellten eine Behauptung über die Grösse des Hauses.
+ */
+.werbin__team {
+  margin-top: var(--raum);
+  padding-top: var(--raum);
+  border-top: 1px solid var(--linie);
+}
+
+.werbin__team-label {
+  margin-bottom: 0.9rem;
+}
+
+/**
+ * Ab Tablet auf demselben Raster wie der Block darüber: Bezeichner links,
+ * Inhalt rechts.
+ *
+ * Ohne das standen die zwei Rahmen unten links und darüber, rechts daneben, ein
+ * leeres Drittel der Sektion — gemessen bei 1440px rund 800 × 250px Leinen ohne
+ * Inhalt. Das ist kein Weissraum, das ist eine Lücke im Satz; dieselbe Diagnose
+ * wie bei `/team/` und aus demselben Grund: eine Reihe, die eine eigene Achse
+ * aufmacht, statt der vorhandenen zu folgen.
+ */
+@media (min-width: 52rem) {
+  .werbin__team {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    column-gap: var(--raum-gross);
+    align-items: start;
   }
+
+  .werbin__team-label {
+    margin-bottom: 0;
+  }
+}
+
+.werbin__reihe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--raum);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.werbin__person {
+  /* Feste Breite statt `flex: 1`: bei zwei Personen zöge `1fr` jede auf die
+     halbe Seitenbreite, und aus zwei Porträts würden zwei Plakate. */
+  width: clamp(6rem, 4.5rem + 6vw, 11rem);
+}
+
+/**
+ * 4:5 — dasselbe Verhältnis wie auf `/team/` und in `inhalt/schema.json`.
+ * Steht es hier anders, schneidet dieselbe Datei an zwei Stellen verschieden,
+ * und eine der beiden schneidet durchs Kinn.
+ */
+.werbin__bild {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--papier);
+}
+
+.werbin__bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Der leere Rahmen. Gestrichelt wie überall auf dieser Seite, wo etwas fehlt —
+   und mit derselben Bedeutung: hier gehört etwas hin, das es noch nicht gibt. */
+.werbin__luecke {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0.5rem;
+  border: 1px dashed var(--tinte-mtl);
+  text-align: center;
+  font-size: var(--text-meta);
+}
+
+.werbin__person-name {
+  margin-top: 0.7rem;
+  font-size: var(--text-base);
+  line-height: 1.3;
+}
+
+.werbin__person-rolle {
+  margin-top: 0.2rem;
+  color: var(--tinte-mtl);
 }
 
 /* ── Leistungen im Auszug ─────────────────────────────────────────────────── */
 
 .auszug {
   position: relative;
+  /**
+   * Der Salbeizweig wird HIER beschnitten, nicht am Bildschirmrand.
+   *
+   * ═══ Warum `body { overflow-x: hidden }` dafür nicht reicht ═══
+   *
+   * Gemessen am 30.08.2026 bei 1024px: `document.documentElement.scrollWidth`
+   * war 1050. Der Zweig ragt gewollt über die rechte Kante hinaus
+   * (`right: calc(-0.5 * var(--rand))`), und seine Drehung um 8° verbreitert
+   * sein Rechteck zusätzlich um rund 12px je Seite.
+   *
+   * `overflow-x: hidden` steht am `body`. Ein Kind, das aus dem Body
+   * herausragt, wird dadurch zwar unsichtbar — aber die Seite MISST weiter
+   * 1050px, und `scripts/qa.mjs` meldet genau das zu Recht als waagerechtes
+   * Scrollen. Der Kommentar an `.auszug__salbei` beschreibt denselben Befund
+   * schon vom 19.08.2026 und hat ihn halbiert statt beseitigt.
+   *
+   * `clip` und nicht `hidden`: `hidden` macht aus dieser Sektion einen
+   * Scroll-Container. Damit würde sie zum Sprungziel für `scrollIntoView` und
+   * für die Tastaturbedienung — eine Sektion, die scrollen kann, obwohl nichts
+   * darin scrollen soll.
+   */
+  overflow-x: clip;
 }
 
 .auszug__titel {
