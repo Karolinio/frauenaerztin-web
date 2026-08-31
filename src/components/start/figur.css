@@ -50,10 +50,21 @@
   height: clamp(20rem, 12rem + 42vw, 54rem);
   aspect-ratio: 652.36 / 1547.82;
   pointer-events: none;
-  /* Papier auf ihrem Salbei. Gemessen 2,91 : 1 — fuer TEXT zu wenig, fuer eine
-     rein dekorative Zeichnung ohne Information gilt die Regel nicht. Und sie
-     ist hier das Gegenteil von zurueckhaltend: die Flaeche gehoert ihr. */
-  color: var(--papier);
+  /*
+   * Ihr tiefes Salbei auf ihrem hellen Grau — Fassung B, 7,86 : 1.
+   *
+   * ═══ Warum nicht das helle Salbei ═══
+   *
+   * Weil #8D9788 auf #E5E6E3 nur 2,43 : 1 ergibt. Das ist weniger als das
+   * Weiss auf Salbei, das hier vorher stand (2,91 : 1) — und genau dessen
+   * Blassheit war der Anlass, ueberhaupt etwas zu aendern. Zwei helle Toene
+   * nebeneinander ergeben keine Zeichnung, sondern einen Schatten.
+   *
+   * #3D4638 ist aus ihrem #8D9788 abgeleitet, nicht danebengesetzt: gleicher
+   * Farbton, gleiche Saettigung, nur dunkler. Es ist ihr Gruen, und es ist zu
+   * sehen.
+   */
+  color: var(--signal);
 }
 
 .figur__svg {
@@ -98,19 +109,60 @@
     .figur {
       animation: figur-fliessen linear both;
       animation-timeline: view();
-      /* Abgestimmt, nicht geraten. Gemessen am 21.08.2026 bei 1440x900, wie
-         weit die Zeichnung an vier Scrollstaenden vor der Naht gediehen ist:
-
-           entry 10% cover 55%   31 %   54 %   74 %   95 %
-           entry  5% cover 40%   46 %   77 %  100 %  100 %   ← gewaehlt
-           entry  0% cover 30%   65 %  100 %  100 %  100 %
-
-         Der erste Wert war zu langsam: die Figur war noch im Entstehen, wenn
-         der Satz daneben schon zu lesen war — dann konkurrieren beide. Der
-         letzte ist zu schnell, da ist sie fertig, bevor man sie bemerkt hat.
-         Mit dem mittleren steht sie 300px vor der Naht, also kurz bevor der
-         Satz mittig steht. */
-      animation-range: entry 5% cover 40%;
+      /*
+       * ═══ Neu vermessen am 31.08.2026 ═══
+       *
+       * Hier stand `entry 5% cover 40%`. Der Wert war am 21.08.2026 sauber
+       * ermittelt — fuer eine Figur, die auf der NAHT zwischen zwei Sektionen
+       * sass. Am 27.08.2026 ist sie in die Flaeche umgezogen und Rasterkind
+       * geworden. Nachgemessen hat das niemand.
+       *
+       * Beide Spannen bei 1440x900, Figur 797px hoch, je 1500ms Wartezeit:
+       *
+       *     Oberkante   im Bild    alt     neu
+       *       700px       25 %     25 %     0 %
+       *       500px       50 %     56 %    16 %
+       *       300px       75 %     88 %    38 %
+       *       100px      100 %    100 %    61 %
+       *      -100px       87 %    100 %    83 %
+       *      -300px       62 %    100 %   100 %
+       *
+       * Die alte Spanne war FERTIG in dem Moment, in dem die Figur zum ersten
+       * Mal ganz im Bild stand. Alles danach war ein Standbild — und das ist
+       * genau der Befund („die Animation war irgendwie verloren gegangen").
+       * Die Animation lief die ganze Zeit; sie lief nur ab, waehrend die Figur
+       * noch halb unter dem Bildrand steckte.
+       *
+       * ═══ Warum in `cover` gerechnet wird und nicht in `entry` ═══
+       *
+       * Weil `entry` endet, sobald das Element vollstaendig im Bild ist — bei
+       * 797px Figur in einem 900px hohen Fenster ist das nach 797px Scrollweg
+       * vorbei. `cover` laeuft weiter, bis das Element oben wieder hinaus ist,
+       * und nur so wird die Spanne lang genug.
+       *
+       * Die Randbedingung, die sich nicht wegdiskutieren laesst: die Figur ist
+       * fast so hoch wie der Bildschirm. Es gibt keinen langen Moment, in dem
+       * sie ganz und mit Luft dasteht — der Bereich „ganz im Bild" ist 103px
+       * Scrollweg breit. Also wird gezeichnet, solange ein guter Teil von ihr
+       * zu sehen ist, und fertig wird sie erst beim Hinausschieben.
+       *
+       * Rund 900px Scrollweg, also eine volle Bildschirmhoehe. Vorher 639px,
+       * und davon lagen zwei Drittel unterhalb des Bildrands.
+       *
+       * ═══ Wie hier gemessen werden MUSS ═══
+       *
+       * Mit mindestens einer Sekunde Wartezeit nach jedem Scrollsprung.
+       *
+       * Die Animation laeuft im Compositor, `getComputedStyle` liest vom
+       * Hauptstrang — der Wert kommt dort verzoegert an. Mit 200ms Wartezeit
+       * lieferte dieselbe Scrollposition vorwaerts und rueckwaerts
+       * VERSCHIEDENE Werte (bei scrollY 2768: 95 % gegen 38 %), und das sah aus
+       * wie eine Animation, die nicht sauber zurueckspult. Sie tut es: mit
+       * 1500ms sind beide Richtungen auf die Nachkommastelle gleich.
+       *
+       * Wer hier mit kurzer Wartezeit misst, tunt gegen den Messfehler.
+       */
+      animation-range: cover 15% cover 68%;
     }
   }
 }

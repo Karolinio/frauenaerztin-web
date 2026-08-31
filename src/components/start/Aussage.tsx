@@ -16,7 +16,7 @@ import './aussage.css';
  * Halbsatz im Hero-Einleitungstext, wo er unterging. Er ist die These der
  * ganzen Praxis, und er gehört in die grösste Schrift der Seite.
  *
- * ═══ Warum ausgerechnet hier Farbe ═══
+ * ═══ Wo die Farbe geblieben ist ═══
  *
  * Yvonne hat „viel weiß, etwas salbeigrün und warmes beige" gesagt. Gemessen
  * am 19.08.2026 kam Salbei auf der Startseite in genau drei Formen vor: als
@@ -24,24 +24,21 @@ import './aussage.css';
  * eine Spur, kein „etwas salbeigrün" — die Seite war faktisch beige auf weiss,
  * und daher kam ihre Gleichförmigkeit.
  *
- * Genau EINE Sektion trägt deshalb Farbe. Zwei wären ein Muster, und ein Muster
- * ist wieder Gleichförmigkeit.
+ * Diese Sektion war daraufhin die eine, die Farbe trug: Salbei als Fläche.
  *
- * ═══ Die zwei Fassungen ═══
+ * Seit dem 31.08.2026 trägt sie die Farbe anders. Yvonne hat aus dem
+ * Vergleichsdokument die Fassung B gewählt — helles Grau als Fläche, die
+ * Zeichnung darauf in ihrem tiefen Salbei. Die Farbe ist damit nicht weg; sie
+ * ist von der Fläche in die Figur gewandert. Was der Vergleich dazu ausgewiesen
+ * hat: die Zeichnung springt von 2,91 : 1 auf 7,86 : 1, die Seite verliert
+ * dafür ihre einzige Farbfläche. Beides stimmt, und sie hat es so gewollt.
  *
- * `aussage--dunkel`  Salbei tief als Fläche, Papierweiss darauf. 7,88 : 1, AAA.
- *                    Der stärkere Bruch — und ein Widerspruch zur Direktion,
- *                    die „kein dunkler Grund" sagt.
- * `aussage--hell`    Salbei hell als Fläche, Tinte darauf. 9,4 : 1. Bleibt hell
- *                    und damit näher an ihrem „viel weiß", wirkt aber leiser.
- *
- * Beide sind gebaut, weil sich das am Bild entscheiden lässt und an einer
- * Beschreibung nicht. Die unterlegene Fassung fliegt raus, sobald entschieden
- * ist — zwei Fassungen im Code sind sonst zwei Wahrheiten.
+ * Die zweite Fassung (`aussage--hell`) ist damit weggefallen. Zwei Fassungen im
+ * Code sind zwei Wahrheiten, und entschieden ist entschieden.
  */
-export function Aussage({ fassung = 'dunkel' }: { fassung?: 'dunkel' | 'hell' }) {
+export function Aussage() {
   return (
-    <section className={`aussage aussage--${fassung}`} aria-labelledby="aussage-titel">
+    <section className="aussage" aria-labelledby="aussage-titel">
       <div className="schale aussage__schale">
         <Enthuellen className="aussage__block">
           <p className="t-label aussage__label">Wie ich arbeite</p>

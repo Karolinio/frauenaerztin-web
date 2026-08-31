@@ -75,8 +75,26 @@
 
 /* ── Wer ich bin ──────────────────────────────────────────────────────────── */
 
+/**
+ * Papierweiss, seit dem 31.08.2026.
+ *
+ * ═══ Warum diese Sektion die Farbe wechselt, obwohl an ihr nichts geaendert
+ * werden sollte ═══
+ *
+ * Weil die Aussage-Sektion direkt darunter am 31.08.2026 von Salbei auf
+ * dasselbe Grau gewechselt ist. Zwei gleich graue Sektionen hintereinander sind
+ * keine zwei Sektionen: gemessen waeren das bei 1440px rund 1960px
+ * ununterbrochenes Grau, und die Naht dazwischen ist unsichtbar.
+ *
+ * Der Wechsel ist also keine Zutat, sondern die Folge. Der Rhythmus der Seite
+ * bleibt damit erhalten — Papier, Papier, GRAU, Papier, Papier, GRAU, Papier —
+ * statt aus zwei Farbwechseln einen zu machen.
+ *
+ * Nach oben trennt die Hinweiszeile mit ihren zwei Haarlinien; nach unten die
+ * Aussage-Flaeche selbst.
+ */
 .werbin {
-  background-color: var(--leinen);
+  background-color: var(--papier);
 }
 
 .werbin__name {

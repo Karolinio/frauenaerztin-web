@@ -7,14 +7,28 @@
  */
 import { chromium } from 'playwright-core';
 
-const BASIS = process.argv[2] ?? 'http://localhost:5178';
+/*
+ * 5173 ist der Port, den `npm run dev` nimmt. Hier stand 5178 — ein Port, auf
+ * dem dieses Projekt nie laeuft; dieselbe Falle wie in `qa.mjs` und
+ * `qa-recht.mjs`, gefunden am 30.08.2026. Ein anderer Port wird als Argument
+ * uebergeben: `node scripts/qa-a11y.mjs http://localhost:5174`.
+ */
+const BASIS = process.argv[2] ?? 'http://localhost:5173';
 
 const browser = await chromium.launch({
   channel: 'chrome',
   args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
 });
 const seite = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-await seite.goto(BASIS, { waitUntil: 'networkidle' });
+try {
+  await seite.goto(BASIS, { waitUntil: 'networkidle', timeout: 10000 });
+  await seite.waitForSelector('.hero', { timeout: 10000 });
+} catch {
+  console.error(`FEHLER: unter ${BASIS} laeuft nicht die Startseite dieses Projekts.`);
+  console.error('Laeuft `npm run dev`? Sonst: node scripts/qa-a11y.mjs http://localhost:<port>');
+  await browser.close();
+  process.exit(1);
+}
 await seite.waitForTimeout(800);
 
 // ── Tastaturweg ────────────────────────────────────────────────────────────
@@ -109,8 +123,22 @@ const messung = await seite.evaluate(() => {
      * gerechnet: wer die Flaeche spaeter um zwei Prozent aufhellt, faellt durch
      * und merkt es nicht.
      */
-    ['Aussage auf ihrer Salbeifläche', '.aussage--dunkel .aussage__satz', true],
-    ['Zusatz auf ihrer Salbeifläche', '.aussage--dunkel .aussage__zusatz', true],
+    ['Aussage auf ihrer grauen Fläche', '.aussage .aussage__satz', true],
+    ['Zusatz auf ihrer grauen Fläche', '.aussage .aussage__zusatz', true],
+    /*
+     * Die Zeichnung selbst.
+     *
+     * Sie traegt keine Information und ist `aria-hidden` — die WCAG-Schwelle
+     * gilt fuer sie also nicht. Gemessen wird sie trotzdem, und zwar aus einem
+     * anderen Grund: sie hat ihre Farbe am 31.08.2026 gewechselt, weil die
+     * vorherige Paarung (Weiss auf Salbei, 2,91 : 1) so blass war, dass die
+     * Animation darauf nicht mehr zu erkennen war.
+     *
+     * Wer die Flaeche spaeter aufhellt oder die Figur zurueck ins helle Salbei
+     * setzt (#8D9788 auf #E5E6E3 ergaebe 2,43 : 1), soll das hier sehen und
+     * nicht erst, wenn jemand fragt, wo die Frau geblieben ist.
+     */
+    ['Zeichnung auf ihrer grauen Fläche', '.figur', true],
   ];
 
   return proben

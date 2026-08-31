@@ -79,41 +79,51 @@
  * Geschmacksentscheidung, sondern die einzige, bei der ihre Farbe hier stehen
  * kann.
  */
-.aussage--dunkel {
-  background: var(--flaeche-salbei);
+/**
+ * ═══ Eine Fassung, nicht mehr zwei (31.08.2026) ═══
+ *
+ * Hier standen `--dunkel` und `--hell`: zwei Gruende fuer dieselbe Sektion,
+ * beide gebaut, weil sich das am Bild entscheiden laesst und an einer
+ * Beschreibung nicht. Der Kommentar in `Aussage.tsx` hat sich selbst die
+ * Aufgabe gestellt, die unterlegene wegzuwerfen, sobald entschieden ist — zwei
+ * Fassungen im Code sind zwei Wahrheiten.
+ *
+ * Entschieden hat Yvonne, und zwar gegen beide: sie hat aus dem Vergleichs-
+ * dokument vom 28.08.2026 die Fassung B gewaehlt — „Gruen auf Grau". Die
+ * Flaeche ist ihr helles Grau, die Zeichnung darauf ihr tiefes Salbei.
+ *
+ * ═══ Was die Seite dabei verliert und was sie gewinnt ═══
+ *
+ * Sie verliert ihre einzige Farbflaeche. Das stand so im Vergleichsdokument und
+ * ist nicht kleinzureden: die Sektion war bis hierher die eine Stelle, an der
+ * die Seite Farbe bekennt.
+ *
+ * Sie gewinnt dafuer eine Zeichnung, die man SIEHT. Weiss auf Salbei ergab
+ * 2,91 : 1 — fuer eine dekorative Linie zulaessig, aber eben eine Linie, die
+ * man suchen muss. Tiefes Salbei auf Grau ergibt 7,86 : 1. Die Farbe ist damit
+ * nicht weg, sie ist nur nicht mehr Flaeche, sondern Figur.
+ */
+.aussage {
+  background: var(--leinen);
 }
 
-.aussage--dunkel .aussage__satz {
+.aussage__satz {
+  /* Tinte auf Leinen: 5,18 : 1. Geprueft in `scripts/qa-a11y.mjs`. */
   color: var(--tinte);
 }
 
-.aussage--dunkel .aussage__label,
-.aussage--dunkel .aussage__zusatz {
+.aussage__label,
+.aussage__zusatz {
   /*
    * Zurueckgenommen gegenueber der Aussage, aber in derselben Richtung.
    *
-   * 82 Prozent waren zu wenig: gemessen 3,97 : 1, durchgefallen. Gefunden hat
-   * das die Probe, die am selben Tag neu dazukam — vorher stand diese Paarung
-   * in keiner Pruefung, und der Fehler waere mit ausgerollt worden.
-   *
-   * 94 Prozent halten die Zuruecknahme sichtbar und bestehen. Wer hier wieder
-   * heruntergeht, faellt durch und erfaehrt es beim naechsten Lauf.
+   * Der Mischwert galt frueher gegen die Salbeiflaeche und musste mitziehen:
+   * eine Farbe, die zu einem Grund hin gemischt wird, den es nicht mehr gibt,
+   * trifft weder den alten noch den neuen. 94 Prozent gegen Leinen halten die
+   * Zuruecknahme sichtbar und bestehen — der Wert wird bei jedem Lauf von
+   * `npm run qa:a11y` nachgerechnet, und die Probe ist Pflicht.
    */
-  color: color-mix(in oklch, var(--tinte) 94%, var(--flaeche-salbei));
-}
-
-/* Salbei hell als Fläche, Tinte darauf — 6,34 : 1. Bleibt hell. */
-.aussage--hell {
-  background: var(--flaeche-salbei);
-}
-
-.aussage--hell .aussage__satz {
-  color: var(--tinte);
-}
-
-.aussage--hell .aussage__label,
-.aussage--hell .aussage__zusatz {
-  color: color-mix(in oklch, var(--tinte) 82%, var(--flaeche-salbei));
+  color: color-mix(in oklch, var(--tinte) 94%, var(--leinen));
 }
 
 .aussage__label {
