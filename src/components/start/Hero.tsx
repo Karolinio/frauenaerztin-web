@@ -6,6 +6,7 @@ import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
 import { HERO_PLATZ, zeigt } from '../../lib/bildplaetze';
 import { HERO_SIZES, heroSrcSet } from '../../lib/heroBild';
+import { Hoerer, Uhr } from '../ui/Strichzeichen';
 import './hero.css';
 
 /**
@@ -268,14 +269,17 @@ function Praxisdaten() {
       <div className="hero__wege">
         {telefonSteht ? (
           <a className="knopf" href={praxis.telefon.href as string}>
+            <Hoerer className="knopf__zeichen" />
             {praxis.telefon.anzeige} anrufen
           </a>
         ) : (
           <a className="knopf" href={weg('/termin/')}>
+            <Uhr className="knopf__zeichen" />
             Zeiten und Termin
           </a>
         )}
         <a className="knopf knopf--leise" href={weg('/termin/')}>
+          <Uhr className="knopf__zeichen" />
           Alle Sprechzeiten
         </a>
       </div>

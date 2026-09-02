@@ -5,6 +5,7 @@ import { Sprechzeiten } from '../components/praxis/Sprechzeiten';
 import { steht } from '../components/ui/Angabe';
 import { weg } from '../lib/weg';
 import './termin.css';
+import { Hoerer } from '../components/ui/Strichzeichen';
 
 /**
  * Öffnungszeiten und Terminvergabe.
@@ -64,6 +65,7 @@ export default function TerminSeite() {
               </p>
               {telefonSteht ? (
                 <a className="knopf weg__knopf" href={telefon}>
+                  <Hoerer className="knopf__zeichen" />
                   {praxis.telefon.anzeige} anrufen
                 </a>
               ) : (

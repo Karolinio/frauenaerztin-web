@@ -2,6 +2,7 @@ import { praxis, notruf } from '../../praxis.config';
 import { Enthuellen } from '../ui/Enthuellen';
 import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
+import { Hoerer, Uhr } from '../ui/Strichzeichen';
 
 /**
  * Der Terminblock. Der einzige gefüllte Knopf der Startseite.
@@ -49,10 +50,12 @@ export function TerminBlock() {
           <div className="termin__wege">
             {telefonSteht ? (
               <a className="knopf" href={telefon}>
+                <Hoerer className="knopf__zeichen" />
                 {praxis.telefon.anzeige} anrufen
               </a>
             ) : (
               <a className="knopf" href={weg('/termin/')}>
+                <Uhr className="knopf__zeichen" />
                 Zeiten und Termin
               </a>
             )}

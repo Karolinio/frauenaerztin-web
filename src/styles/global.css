@@ -101,6 +101,40 @@ ol {
   border-radius: 2px;
 }
 
+/*
+ * Der Fokusring folgt der Form des Knopfes.
+ *
+ * Ohne diese Zeile liegt ein 2px-Rechteck um einen Kiesel — und zwar genau
+ * dort, wo an der runden Ecke am meisten Luft ist. Wer mit der Tastatur
+ * bedient, saehe als Einziger eine Form, die es sonst nirgends gibt.
+ */
+.knopf:focus-visible {
+  border-radius: var(--kiesel);
+}
+
+/**
+ * Das Strichzeichen im Knopf.
+ *
+ * ═══ Warum nur eine Spur groesser als die Schrift ═══
+ *
+ * Weil es die Beschriftung begleiten und nicht ersetzen soll. Bei 1,15em steht
+ * seine Oberkante auf der Versalhoehe und seine Unterkante auf der Grundlinie —
+ * das Zeichen sitzt damit in der Zeile und nicht daneben.
+ *
+ * `flex: none`, weil ein SVG in einem Flexkasten sonst zusammengedrueckt wird,
+ * sobald der Text lang wird. Bei „02431 · 97 84 20 anrufen" passiert das schon
+ * am Handy.
+ */
+.knopf__zeichen {
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+  /* Der Strich ist bei 32px Kantenlaenge auf 1,25 bemessen. Bei 20px
+     Darstellung waere er 0,78px dick und verschwaende auf einem Bildschirm
+     ohne Verdopplung. Hochgerechnet bleibt er sichtbar so fein wie im Logo. */
+  stroke-width: 1.9;
+}
+
 /**
  * ═══ Warum `main` mindestens einen Bildschirm hoch ist ═══
  *
@@ -200,6 +234,8 @@ main {
   font-weight: 500;
   text-decoration: none;
   border: 1px solid transparent;
+  /* Ihre Form. Gemessen aus dem Logo — siehe `--kiesel` in tokens.css. */
+  border-radius: var(--kiesel);
   background: var(--signal);
   color: var(--auf-signal);
   cursor: pointer;

@@ -271,4 +271,64 @@
      dieses Repos waren ausgerechnet die Notrufnummern die kleinsten Ziele der
      ganzen Seite — 40px. Deshalb steht die Zahl hier und nicht in einer Regel. */
   --tippziel: 44px;
+
+  /**
+ * ═══ Der Kiesel — die Form aus ihrem Logo ═══
+ *
+ * Ihr Logo besteht aus zwei Dingen: der Linienzeichnung und der weichen Flaeche
+ * dahinter. Die Zeichnung hat die Seite laengst uebernommen (Figur, Symbole);
+ * die FLAECHE kam bis zum 02.09.2026 nirgends vor.
+ *
+ * Karol: „diese viel eckigen, langweiligen Kaesten."
+ *
+ * ═══ Woher die Zahlen kommen ═══
+ *
+ * Aus `bilder/logo.webp` gemessen, nicht geschaetzt. Die Blase in der linken
+ * Haelfte ist 323 x 274 Pixel, und ihre vier Ecken sind VERSCHIEDEN rund. Der
+ * Weg von der Ecke des umschliessenden Rechtecks diagonal nach innen, bis die
+ * Form beginnt, in Prozent der kuerzeren Kante:
+ *
+ *     oben links   15,3 %      oben rechts   35,0 %
+ *     unten links  20,4 %      unten rechts  25,9 %
+ *
+ * Das ist kein Radius, das ist ein Kiesel. Genau diese Ungleichheit ist der
+ * Unterschied zwischen „ihrer Marke" und „abgerundete Ecken", und abgerundete
+ * Ecken hat jede zweite Seite.
+ *
+ * ═══ Warum die Werte hochskaliert sind ═══
+ *
+ * Ein Knopf ist rund 2,7em hoch. 35 % davon waeren 0,95em — sichtbar, aber
+ * nicht als Absicht lesbar: es saehe aus, als haette jemand einen Radius
+ * vergessen. Die vier Werte sind deshalb so gestreckt, dass die RUNDESTE Ecke
+ * genau halb so gross wird wie die Hoehe, also eine volle Viertelkreis-Kante.
+ * Die drei anderen folgen im gemessenen Verhaeltnis. Der Faktor ist 1,43 und
+ * gilt fuer alle vier gleich — die Form bleibt ihre, sie wird nur lauter.
+ *
+ * ═══ Warum in `em` und nicht in Pixeln ═══
+ *
+ * Damit die Form beim kleinen Knopf dieselbe ist wie beim grossen. Ein fester
+ * Pixelwert macht aus dem Kiesel bei kleiner Schrift eine Kapsel und bei
+ * grosser ein Rechteck mit angeschlagenen Ecken.
+ *
+ * ═══ Was uebernommen ist und was nicht ═══
+ *
+ * Uebernommen ist die REIHENFOLGE: oben rechts am rundesten, dann unten rechts,
+ * dann unten links, oben links am schaerfsten. Das ist der Kiesel.
+ *
+ * Nicht uebernommen sind die Abstaende zwischen den vier Werten. Massstabsgetreu
+ * hochgerechnet ergaben sie 13/29/21/17px — und das las sich als „abgerundetes
+ * Rechteck". Vier Werte, die so nah beieinander liegen, sehen nicht nach
+ * Entscheidung aus, sondern nach Zufall; genau das unterscheidet eine Form von
+ * einem vergessenen Radius.
+ *
+ * Der Abstand ist deshalb gespreizt: die rundeste Ecke bleibt bei der halben
+ * Knopfhoehe, die schaerfste geht fast auf null. Vier Fassungen standen dafuer
+ * am 02.09.2026 nebeneinander im Bild — die gemessene, diese, ein Blatt (zwei
+ * gegenueberliegende Ecken rund) und eine volle Kapsel. Das Blatt war mutiger
+ * und wurde bei langer Beschriftung zur Sprechblase; die Kapsel ist sauber und
+ * sieht aus wie ueberall.
+ *
+ * Reihenfolge wie in CSS: oben links, oben rechts, unten rechts, unten links.
+ */
+  --kiesel: 0.3em 1.7em 1.2em 0.9em;
 }

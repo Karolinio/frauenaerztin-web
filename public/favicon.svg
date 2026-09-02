@@ -1,9 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Praxis für Frauenheilkunde">
-  <!-- Dasselbe Motiv wie die Wortmarke und wie das Master-Asset: die Kante, an der
-       der warmweisse Kalkputz auf die salbeigrün gestrichene Fläche trifft.
-       Kein Logo — es gibt noch keins, und ein erfundenes wäre das erste, was
-       getauscht werden müsste. -->
-  <rect width="32" height="32" fill="#fbf9f5" />
-  <rect x="19" y="5" width="8" height="22" fill="#9db29c" />
-  <rect x="5" y="5" width="11" height="22" fill="#f1ece3" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Frauenarztpraxis Dr. med. Yvonne Erkens">
+  <!--
+    Ihr Kiesel in ihren zwei Farben.
+
+    ═══ Was hier bis zum 02.09.2026 stand ═══
+
+    Zwei Rechtecke: die Kante, an der Kalkputz auf eine salbeigrün gestrichene
+    Fläche trifft. Der Kommentar dazu sagte: „Kein Logo — es gibt noch keins,
+    und ein erfundenes wäre das Erste, was getauscht werden müsste."
+
+    Der Satz stimmte, als er geschrieben wurde. Ihr Logo kam am 23.08.2026, und
+    das Favicon war seitdem die einzige Stelle der Seite, die ihre Marke nicht
+    trägt — noch dazu in Farben, die es auf der Seite nicht mehr gibt (#9db29c
+    und #f1ece3, beide aus der Palette vor ihren eigenen Werten).
+
+    ═══ Warum die Figur NICHT darin steht ═══
+
+    Weil sie bei 16px verschwindet. Ihre Zeichnung ist eine offene Linie von
+    1,25 Stärke auf 32px Kantenlänge — bei halber Grösse ist das ein halbes
+    Pixel. Was übrig bliebe, wäre ein Schmutzfleck, und ein Schmutzfleck ist
+    schlechter als eine saubere Form.
+
+    Was bei dieser Grösse überhaupt trägt, sind zwei Dinge: eine Silhouette und
+    ein Farbpaar. Beide sind hier ihre — die Form des Kiesels aus ihrem Logo
+    (gemessen, siehe den Kiesel-Wert in tokens.css) und das Paar Grau/Salbei, das sie
+    am 31.08.2026 für die Aussage-Sektion gewählt hat.
+
+    ═══ Die Ecken ═══
+
+    Aus dem Logo gemessen, in Prozent der kürzeren Kante: oben links 15,3 ·
+    oben rechts 35,0 · unten rechts 25,9 · unten links 20,4. Anders als am
+    Knopf sind sie hier UNVERÄNDERT übernommen — auf einer quadratischen Fläche
+    ist der Unterschied ohne Spreizung lesbar.
+  -->
+  <rect width="32" height="32" fill="#E5E6E3" />
+  <path
+    fill="#3D4638"
+    d="M6.3 2 H20.2 A9.8 9.8 0 0 1 30 11.8 V22.75 A7.25 7.25 0 0 1 22.75 30 H7.7 A5.7 5.7 0 0 1 2 24.3 V6.3 A4.3 4.3 0 0 1 6.3 2 Z"
+  />
 </svg>

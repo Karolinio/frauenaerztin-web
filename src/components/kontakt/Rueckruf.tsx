@@ -1,6 +1,7 @@
 import { praxis } from '../../praxis.config';
 import { Enthuellen } from '../ui/Enthuellen';
 import { steht } from '../ui/Angabe';
+import { Hoerer } from '../ui/Strichzeichen';
 
 /**
  * Das Rückrufformular.
@@ -89,6 +90,7 @@ export function Rueckruf() {
             </p>
             {telefonSteht ? (
               <a className="knopf" href={telefon}>
+                <Hoerer className="knopf__zeichen" />
                 {praxis.telefon.anzeige} anrufen
               </a>
             ) : (
