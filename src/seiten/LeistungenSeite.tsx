@@ -42,11 +42,34 @@ export default function LeistungenSeite() {
             <div className="leistung__text">
               <p className="t-lead leistung__kurz">{l.kurz}</p>
               <p className="t-body">{l.absatz}</p>
+              {/*
+                Ihre Vorgabe vom 11.09.2026: „wenn man auf die einzelne Leistung
+                klickt der ausfuehrlichere Text." Ein natives <details> — keine
+                Skriptlogik, per Tastatur bedienbar, vom Vorleser als
+                aufklappbar angesagt. Zu ist es ein Satz, offen ihr ganzer Text.
+                Der erste Absatz steht schon oben, deshalb beginnt der
+                Aufklapper beim zweiten.
+              */}
+              {l.lang.length > 1 && (
+                <details className="leistung__mehr">
+                  <summary className="link">Mehr zu {l.titel}</summary>
+                  <div className="leistung__lang">
+                    {l.lang.slice(1).map((a, i) =>
+                      a.startsWith('# ') ? (
+                        <h3 key={i} className="t-meta leistung__zwischen">{a.slice(2)}</h3>
+                      ) : (
+                        <p key={i} className="t-body">{a}</p>
+                      ),
+                    )}
+                  </div>
+                </details>
+              )}
             </div>
           </Enthuellen>
         ))}
       </div>
 
+      {weitereLeistungen.length > 0 && (
       <section className="sektion flaeche-leinen">
         <div className="schale leistungen">
           <Enthuellen>
@@ -65,6 +88,7 @@ export default function LeistungenSeite() {
           ))}
         </div>
       </section>
+      )}
 
       <section className="sektion">
         <div className="schale">

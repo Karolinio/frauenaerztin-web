@@ -113,7 +113,11 @@ export default function TeamSeite() {
             <div className="team__text">
               <h2 className="t-unter">{steht(p.name) ? p.name : <span className="luecke">Name</span>}</h2>
               <p className="t-meta team__rolle">{p.rolle}</p>
-              <p className="t-body team__satz">{p.text}</p>
+              {/* Ihr Ueber-mich hat sechs Absaetze (11.09.2026). Ein einziges <p>
+                  machte daraus eine Wand; die Leerzeile im Text ist die Absatzgrenze. */}
+              {p.text.split('\n\n').filter(Boolean).map((a, i) => (
+                <p key={i} className="t-body team__satz">{a}</p>
+              ))}
             </div>
           </Enthuellen>
         ))}

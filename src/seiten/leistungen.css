@@ -98,3 +98,12 @@
     align-items: start;
   }
 }
+
+/* Der Aufklapper je Leistung — ihr ganzer Text hinter einem Klick (11.09.2026). */
+.leistung__mehr { margin-top: var(--raum-klein); }
+.leistung__mehr > summary { cursor: pointer; list-style: none; display: inline-block; }
+.leistung__mehr > summary::-webkit-details-marker { display: none; }
+.leistung__mehr > summary::after { content: " ↓"; display: inline-block; transition: transform 200ms var(--ease, ease); }
+.leistung__mehr[open] > summary::after { transform: rotate(180deg); }
+.leistung__lang { display: grid; gap: var(--raum-klein); margin-top: var(--raum-klein); max-width: var(--schale-eng); }
+.leistung__zwischen { margin: var(--raum-klein) 0 0; color: var(--tinte); font-weight: 600; }

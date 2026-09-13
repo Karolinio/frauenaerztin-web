@@ -70,10 +70,10 @@ export function Hero() {
         <h1 id="hero-titel" className="hero__titel">
           <span className="t-hero hero__zeile1">
             <span className="hero__maske">
-              <span className="hero__hub">Medizin für Frauen</span>
+              <span className="hero__hub">Medizin für Frauen.</span>
             </span>
           </span>
-          <span className="hero__zeile2">Die neue gynäkologische Praxis in {praxis.ort}</span>
+          <span className="hero__zeile2">Für Sie. Vertrauensvoll. In jeder Lebensphase.</span>
         </h1>
       </div>
 
@@ -103,15 +103,21 @@ export function Hero() {
       */}
       <div className="hero__fuss">
         <div className="hero__einleitung t-lead">
+          {/*
+            Ihr Text vom 11.09.2026, woertlich — „Das erste soll direkt auf der
+            ersten Seite oben erscheinen. Dann waere es super wenn darunter ein
+            Button waere fuer ‚Mehr' und wenn man da drauf klickt, dass man dann
+            zu der Teamseite kommt."
+
+            Der Satz „Ich nehme mir fuer jede Untersuchung die Zeit ..." stand
+            hier vorher — eine Zusage, die der Bau erfunden hatte und die sie nie
+            gemacht hat. Weg damit; jetzt steht hier nur, was sie geschrieben hat.
+          */}
           <p>
-            In {praxis.ort} entsteht eine neue gynäkologische Praxis. Vorsorge, Schwangerschaft, Verhütung und
-            Kinderwunsch — und eine eigene Sprechstunde für Mädchen und junge Frauen.
+            Herzlich willkommen in meiner Praxis für Frauenheilkunde und Geburtshilfe.
+            Schön, dass Sie da sind.
           </p>
-          {/* Der zweite Satz dieses Absatzes — „Sie sollen wissen, was gleich
-              passiert, bevor es passiert" — steht jetzt als eigene Sektion in
-              der grössten Schrift der Seite. Er ist die These der Praxis und
-              ging hier als Halbsatz unter. Siehe Aussage.tsx. */}
-          <p>Ich nehme mir für jede Untersuchung die Zeit, sie vorher zu erklären.</p>
+          <a className="link hero__mehr" href={weg('/team/')}>Mehr</a>
         </div>
 
         <Praxisdaten />

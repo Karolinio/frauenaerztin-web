@@ -63,7 +63,7 @@ export type Offen<T> = T | null;
  * jede Angabe auf, die dann noch fehlt. Diese Liste ist die Frageliste an die
  * Ärztin — sie muss nicht von Hand gepflegt werden.
  */
-export const DEMO = true;
+export const DEMO = false;
 
 /**
  * Ein erfundener Wert. Gilt nur, solange `DEMO` an ist — sonst ist er `null`.
@@ -128,7 +128,16 @@ export const praxis = {
      * Geburtshilfe". Ihre Impressum-Angabe gilt hier, weil sie sie dafuer
      * geschickt hat — sie sollte sie aber einmal gegen die Urkunde pruefen.
      */
-    fachbezeichnung: 'Fachärztin für Frauenheilkunde',
+    /*
+     * Berichtigt am 13.09.2026 nach ihrem Praxisschild (Schild Eingangsbereich
+     * 40x30 FINAL.pdf): „Fachärztin für Frauenheilkunde & Geburtshilfe". Das
+     * ist die gefuehrte Weiterbildungsbezeichnung in Nordrhein. Ihr Ueber-mich
+     * sagt „Gynaekologie" — Umgangssprache, im Fliesstext in Ordnung; ihre
+     * Impressum-Nachricht liess „Geburtshilfe" weg. Das Schild ist das
+     * offiziellste Dokument, das sie selbst hat drucken lassen. Trotzdem: einmal
+     * gegen die Urkunde bestaetigen lassen.
+     */
+    fachbezeichnung: 'Fachärztin für Frauenheilkunde und Geburtshilfe',
   },
 
   /**
@@ -282,72 +291,141 @@ export interface Leistung {
    * Altersgrenze aus der langen Fassung steht noch hier.
    */
   readonly absatz: string;
+  /**
+   * Ihr ganzer Text, Absatz fuer Absatz — hinter einem Aufklapper.
+   *
+   * Ihre Vorgabe vom 11.09.2026: „wenn man auf die einzelne Leistung klickt der
+   * ausfuehrlichere Text." Die Liste bleibt kurz (`absatz` ist ihr erster
+   * Absatz), der Rest kommt beim Klick. Ein Eintrag, der mit `# ` beginnt, ist
+   * eine Zwischenueberschrift — die Krebsvorsorge hat drei davon.
+   *
+   * Woertlich ihre Worte. Nichts umformuliert, nichts gekuerzt.
+   */
+  readonly lang: readonly string[];
 }
 
+/*
+ * ═══ Ihre Texte, 11.09.2026 ═══
+ *
+ * Neun Leistungen, in IHRER Reihenfolge („chronologisch die Texte"), mit IHREN
+ * Titeln und IHREN Worten. Die Absaetze, die hier vorher standen, hatte der
+ * Bau geschrieben — als Platzhalter, bis sie liefert. Sie hat geliefert.
+ *
+ * `kurz` ist ihr erster Satz, `absatz` ihr erster Absatz, `lang` alles.
+ * „Aesthetische Medizin" ist auf ihren Wunsch raus („erstmal rausnehmen"),
+ * Impfungen sind auf ihren Wunsch von „weitere" in die Hauptliste gerueckt.
+ */
 export const leistungen: readonly Leistung[] = [
   {
     id: 'vorsorge',
-    titel: 'Vorsorge & Früherkennung',
-    kurz: 'Regelmäßige Vorsorge für Ihre Gesundheit und ein gutes Gefühl.',
-    absatz:
-      'Ab 20 Jahren übernimmt die Kasse einmal im Jahr die Untersuchung auf Gebärmutterhalskrebs. Dazu gehört ein Abstrich vom Muttermund — der sogenannte Pap-Test, benannt nach dem Arzt, der ihn entwickelt hat. Er dauert weniger als eine Minute; das Ergebnis kommt aus dem Labor und braucht einige Tage. Ab 35 ändert sich das Verfahren: dann wird der Abstrich mit einem Test auf humane Papillomviren (HPV) kombiniert, dafür nur noch alle drei Jahre. Zur Untersuchung gehört ausserdem das Abtasten der Brust, ab 30 Jahren als Kassenleistung — auf Wunsch zeige ich Ihnen dabei, worauf Sie beim Selbstabtasten achten können.',
+    titel: 'Krebsvorsorge',
+    kurz: 'Regelmäßige Vorsorgeuntersuchungen sind ein wichtiger Bestandteil der Frauengesundheit.',
+    absatz: 'Regelmäßige Vorsorgeuntersuchungen sind ein wichtiger Bestandteil der Frauengesundheit. Sie dienen dazu, Veränderungen frühzeitig zu erkennen und bei Auffälligkeiten weitere Untersuchungen einzuleiten.',
+    lang: [
+      'Regelmäßige Vorsorgeuntersuchungen sind ein wichtiger Bestandteil der Frauengesundheit. Sie dienen dazu, Veränderungen frühzeitig zu erkennen und bei Auffälligkeiten weitere Untersuchungen einzuleiten.',
+      'Ab 20 Jahren haben Frauen einmal jährlich Anspruch auf eine gynäkologische Krebsfrüherkennungsuntersuchung. Dazu gehören ein Gespräch über mögliche Beschwerden und Veränderungen sowie die Untersuchung der äußeren und inneren Geschlechtsorgane. Zwischen dem 20. und 34. Lebensjahr wird zusätzlich jährlich ein Abstrich vom Gebärmutterhals zur Untersuchung auf Zellveränderungen (Pap-Abstrich) durchgeführt.',
+      'Ab 30 Jahren gehört zusätzlich die jährliche Untersuchung der Brust und der Achselhöhlen zur gesetzlichen Krebsfrüherkennung. Dabei werden Brustdrüsen und Lymphknoten abgetastet.',
+      'Ab 35 Jahren erfolgt zur Früherkennung von Gebärmutterhalskrebs alle drei Jahre eine Kombination aus Pap-Abstrich und HPV-Test. Die klinische gynäkologische Vorsorgeuntersuchung kann weiterhin jährlich wahrgenommen werden.',
+      '# Ergänzende Vorsorgeleistungen',
+      'Über die gesetzlich vorgesehenen Untersuchungen hinaus können auf Wunsch ergänzende Untersuchungen durchgeführt werden.',
+      '# Vaginalultraschall',
+      'Mittels Ultraschall können Gebärmutter, Gebärmutterschleimhaut und Eierstöcke dargestellt und beurteilt werden.',
+      '# Brustultraschall',
+      'Die Ultraschalluntersuchung ermöglicht eine ergänzende Beurteilung des Brustdrüsengewebes und kann insbesondere bei dichtem Brustgewebe zusätzliche Informationen liefern.',
+      'Diese Untersuchungen gehören ohne medizinische Indikation nicht zur gesetzlichen Krebsfrüherkennung und werden als individuelle Gesundheitsleistungen (IGeL) angeboten. Ob eine ergänzende Untersuchung für Sie infrage kommt, besprechen wir gerne individuell.',
+      'Bestehen Beschwerden oder ergibt sich ein konkreter medizinischer Verdacht, werden notwendige weiterführende Untersuchungen selbstverständlich unabhängig davon durchgeführt.',
+    ],
   },
   {
     id: 'maedelssprechstunde',
-    titel: 'Mädelssprechstunde',
-    kurz: 'Raum für alle Fragen rund um Zyklus, Körper, Sexualität und Verhütung.',
-    absatz:
-      'Zum ersten Termin gehört keine Untersuchung auf dem Stuhl, wenn Sie keine möchten. Wir reden — über den Zyklus, über Schmerzen, über Verhütung, über das, was Sie im Internet gelesen haben. Das ist ein vollwertiger Termin und keine Vorstufe zu einem richtigen. Sie dürfen jemanden mitbringen: die Mutter, eine Freundin, den Freund. Sie dürfen auch allein kommen und die Begleitung im Wartebereich lassen; beides ist in Ordnung, und Sie müssen sich vorher nicht entscheiden. Ich unterliege der Schweigepflicht, auch gegenüber Ihren Eltern, sobald Sie die Tragweite selbst überblicken können — in der Regel ab etwa 16 Jahren. Was Sie mir erzählen, bleibt in diesem Zimmer.',
+    titel: 'Mädchensprechstunde',
+    kurz: 'Der erste Besuch bei der Frauenärztin ist für viele Mädchen und junge Frauen mit Fragen und manchmal auch mit Unsicherheit verbunden.',
+    absatz: 'Der erste Besuch bei der Frauenärztin ist für viele Mädchen und junge Frauen mit Fragen und manchmal auch mit Unsicherheit verbunden. In der Mädchensprechstunde ist deshalb zunächst vor allem eines wichtig: in Ruhe ankommen, kennenlernen und Fragen stellen.',
+    lang: [
+      'Der erste Besuch bei der Frauenärztin ist für viele Mädchen und junge Frauen mit Fragen und manchmal auch mit Unsicherheit verbunden. In der Mädchensprechstunde ist deshalb zunächst vor allem eines wichtig: in Ruhe ankommen, kennenlernen und Fragen stellen.',
+      'Dabei können wir über alle Themen sprechen, die gerade wichtig sind – zum Beispiel die erste Periode, Menstruationsbeschwerden, Verhütung, Sexualität, HPV-Impfung oder andere Fragen rund um den eigenen Körper.',
+      'Eine gynäkologische Untersuchung ist beim ersten Besuch nicht automatisch notwendig. Ob und welche Untersuchung sinnvoll ist, richtet sich nach dem jeweiligen Anliegen und wird vorher gemeinsam besprochen.',
+      'Natürlich darf zum ersten Termin gerne eine Vertrauensperson mitgebracht werden.',
+    ],
   },
   {
     id: 'verhuetung',
-    titel: 'Verhütung',
-    kurz: 'Individuelle Beratung für eine Verhütung, die zu Ihnen und Ihrem Leben passt.',
-    absatz:
-      'Pille, Hormonspirale, Kupferspirale, Implantat, Ring, Pflaster, Kupferkette, natürliche Verfahren: jedes davon hat eine andere Sicherheit, andere Nebenwirkungen und andere Kosten. Eine Spirale bleibt je nach Modell drei bis zehn Jahre liegen und wird nach dem Einlegen zweimal per Ultraschall kontrolliert. Das Einlegen dauert wenige Minuten und liegt zeitlich am besten gegen Ende der Periode, weil der Muttermund dann etwas weicher ist; es kann ziehen wie ein starker Regelschmerz, und auf Wunsch geht es mit örtlicher Betäubung. Wir gehen im Termin durch, was für Sie in Frage kommt und was dagegen spricht — dafür muss ich wissen, ob Sie rauchen, welche Medikamente Sie nehmen und ob es in Ihrer Familie Thrombosen gab.',
+    titel: 'Verhütung & Familienplanung',
+    kurz: 'Die passende Verhütung ist eine sehr persönliche Entscheidung und kann sich im Laufe des Lebens verändern.',
+    absatz: 'Die passende Verhütung ist eine sehr persönliche Entscheidung und kann sich im Laufe des Lebens verändern. Gemeinsam besprechen wir, welche Methode zu Ihrer aktuellen Lebenssituation, Ihren Wünschen und möglichen gesundheitlichen Voraussetzungen passt.',
+    lang: [
+      'Die passende Verhütung ist eine sehr persönliche Entscheidung und kann sich im Laufe des Lebens verändern. Gemeinsam besprechen wir, welche Methode zu Ihrer aktuellen Lebenssituation, Ihren Wünschen und möglichen gesundheitlichen Voraussetzungen passt.',
+      'Ich berate Sie zu hormonellen und hormonfreien Verhütungsmethoden – von Pille, Vaginalring und Verhütungspflaster über Spirale und Hormonspirale bis hin zu weiteren Möglichkeiten der Empfängnisverhütung.',
+      'Auch wenn sich Ihre Familienplanung verändert, Sie eine Verhütungsmethode wechseln oder absetzen möchten oder Fragen zu möglichen Nebenwirkungen haben, berate ich Sie gerne individuell.',
+    ],
   },
   {
     id: 'kinderwunsch',
     titel: 'Kinderwunsch',
-    kurz: 'Wir begleiten Sie auf dem Weg zu Ihrem Kinderwunsch — einfühlsam und kompetent.',
-    absatz:
-      'Es gibt eine Faustregel, nach der sich auch die Kostenübernahme richtet: Wenn Sie jünger als 35 sind, gilt ein Jahr regelmässiger Versuche als normal, bevor abgeklärt wird; ab 35 sind es sechs Monate. Wer früher kommt, kommt nicht zu früh — aber diese Zahlen erklären, warum ich manchmal zum Abwarten rate. Der erste Schritt ist meistens keine grosse Diagnostik, sondern der Zyklus: wann der Eisprung stattfindet und ob die zweite Zyklushälfte lang genug ist, dazu Blutwerte und ein Ultraschall der Eierstöcke. Zur Abklärung gehören immer beide Partner — ein Spermiogramm ist einfacher, schneller und günstiger als alles, was ich bei Ihnen untersuchen kann, und steht deshalb meistens am Anfang.',
+    kurz: 'Ein Kinderwunsch ist häufig mit vielen Fragen verbunden.',
+    absatz: 'Ein Kinderwunsch ist häufig mit vielen Fragen verbunden. Gerne begleite ich Sie bereits bei der Planung einer Schwangerschaft und berate Sie zu wichtigen Themen wie Zyklus, Folsäure, Impfstatus und einer gesunden Vorbereitung auf die Schwangerschaft.',
+    lang: [
+      'Ein Kinderwunsch ist häufig mit vielen Fragen verbunden. Gerne begleite ich Sie bereits bei der Planung einer Schwangerschaft und berate Sie zu wichtigen Themen wie Zyklus, Folsäure, Impfstatus und einer gesunden Vorbereitung auf die Schwangerschaft.',
+      'Wenn eine Schwangerschaft auf sich warten lässt, können erste Untersuchungen zur Abklärung möglicher Ursachen in meiner Praxis erfolgen. Dazu gehören je nach individueller Situation beispielsweise eine Ultraschalluntersuchung, Zyklusdiagnostik und Hormonbestimmungen.',
+      'Sollte eine weiterführende Diagnostik oder Behandlung erforderlich sein, besprechen wir gemeinsam die nächsten Schritte und gegebenenfalls die Vorstellung in einem spezialisierten Kinderwunschzentrum.',
+    ],
   },
   {
     id: 'schwangerschaft',
     titel: 'Schwangerschaft',
-    kurz: 'Für eine rundum gut betreute Schwangerschaft in einer besonderen Zeit.',
-    absatz:
-      'Die Vorsorge richtet sich nach den Mutterschaftsrichtlinien: bis zur 32. Woche etwa alle vier Wochen ein Termin, danach alle zwei, dazu drei Ultraschalluntersuchungen in der 9. bis 12., der 19. bis 22. und der 29. bis 32. Schwangerschaftswoche. Alles wird im Mutterpass eingetragen, den Sie beim ersten Termin bekommen und ab dann immer dabeihaben sollten. Untersuchungen, die über diesen Rahmen hinausgehen, bespreche ich vorher mit Ihnen — was sie zeigen kann, was nicht, und was ein auffälliges Ergebnis für Sie bedeuten würde. Nach der Geburt sehen wir uns noch einmal, etwa sechs bis acht Wochen später; Ihr Kind dürfen Sie selbstverständlich mitbringen.',
+    kurz: 'Eine Schwangerschaft bringt viele besondere Momente, aber auch neue Fragen und manchmal Unsicherheiten mit sich.',
+    absatz: 'Eine Schwangerschaft bringt viele besondere Momente, aber auch neue Fragen und manchmal Unsicherheiten mit sich. Mir ist es wichtig, Sie in dieser Zeit verlässlich zu begleiten und Ihnen bei medizinischen Fragen und Entscheidungen zur Seite zu stehen.',
+    lang: [
+      'Eine Schwangerschaft bringt viele besondere Momente, aber auch neue Fragen und manchmal Unsicherheiten mit sich. Mir ist es wichtig, Sie in dieser Zeit verlässlich zu begleiten und Ihnen bei medizinischen Fragen und Entscheidungen zur Seite zu stehen.',
+      'In meiner Praxis biete ich Ihnen die Schwangerschaftsvorsorge nach den Mutterschafts-Richtlinien mit den vorgesehenen Untersuchungen, Ultraschallkontrollen und Laboruntersuchungen an.',
+      'Darüber hinaus berate ich Sie zu allen Fragen rund um die Schwangerschaft – beispielsweise zu Ernährung, Bewegung, Impfungen, Beschwerden oder Medikamenteneinnahme.',
+      'Ergänzend können auf Wunsch zusätzliche Ultraschalluntersuchungen sowie weitere individuelle Leistungen angeboten werden.',
+    ],
   },
   {
     id: 'wechseljahre',
-    titel: 'Wechseljahre & Hormone',
-    kurz: 'Beschwerden verstehen, Möglichkeiten kennen, neue Balance finden.',
-    absatz:
-      'Die Wechseljahre sind keine Krankheit, sondern ein Abschnitt — er dauert bei den meisten Frauen mehrere Jahre und beginnt im Schnitt Anfang bis Mitte vierzig mit unregelmässigen Zyklen. Was daraus Beschwerden macht, ist sehr verschieden: Hitzewallungen, Schlafstörungen, Stimmungsschwankungen, Trockenheit, Gelenkschmerzen. Eine Hormonbestimmung im Blut ist dafür meistens nicht nötig — die Werte schwanken in dieser Zeit stark, und die Beschwerden sagen mehr als eine Momentaufnahme. Was hilft, hängt davon ab, was Sie stört und was Sie an Vorerkrankungen mitbringen; eine Hormontherapie ist eine von mehreren Möglichkeiten, und wir besprechen Nutzen und Risiken, bevor wir etwas beginnen.',
-  },
-  {
-    id: 'beckenboden',
-    titel: 'Blase & Beckenboden',
-    kurz: 'Hilfe bei Inkontinenz und Senkungsbeschwerden — diskret, individuell, wirkungsvoll.',
-    absatz:
-      'Ungewollter Urinverlust ist häufig und fast nie ein Grund, damit zu leben. Etwa jede dritte Frau ist im Lauf ihres Lebens betroffen, nach Geburten und in den Wechseljahren häufiger. Wichtig ist zuerst die Unterscheidung: Verlieren Sie Urin beim Husten, Niesen oder Heben, oder überfällt Sie ein Drang, den Sie nicht aufhalten können? Die beiden Formen werden unterschiedlich behandelt. Am Anfang steht ein Gespräch, eine Untersuchung und oft ein Trink- und Miktionsprotokoll über zwei bis drei Tage. Beckenbodentraining unter Anleitung ist bei der Belastungsform die erste Massnahme und wirkt bei vielen Frauen; Pessare, örtliche Behandlung und Medikamente kommen dazu oder danach.',
+    titel: 'Wechseljahre',
+    kurz: 'Die Wechseljahre sind eine natürliche Lebensphase und werden von jeder Frau unterschiedlich erlebt.',
+    absatz: 'Die Wechseljahre sind eine natürliche Lebensphase und werden von jeder Frau unterschiedlich erlebt. Während manche Frauen kaum Veränderungen bemerken, können Beschwerden wie Hitzewallungen, Schlafstörungen, Stimmungsschwankungen, Scheidentrockenheit oder Veränderungen der Sexualität die Lebensqualität beeinträchtigen.',
+    lang: [
+      'Die Wechseljahre sind eine natürliche Lebensphase und werden von jeder Frau unterschiedlich erlebt. Während manche Frauen kaum Veränderungen bemerken, können Beschwerden wie Hitzewallungen, Schlafstörungen, Stimmungsschwankungen, Scheidentrockenheit oder Veränderungen der Sexualität die Lebensqualität beeinträchtigen.',
+      'Gemeinsam besprechen wir Ihre Beschwerden und Wünsche und entscheiden, ob und welche Behandlung für Sie sinnvoll ist. Dabei berate ich Sie zu hormonellen und nicht hormonellen Behandlungsmöglichkeiten und berücksichtige Ihre persönlichen Voraussetzungen und möglichen Risikofaktoren.',
+      'Wenn eine Hormontherapie infrage kommt, wählen wir gemeinsam eine individuell passende Therapieform und begleiten diese im weiteren Verlauf.',
+    ],
   },
   {
     id: 'nachsorge',
     titel: 'Onkologische Nachsorge',
-    kurz: 'Verlässliche Begleitung und Nachsorge nach gynäkologischen Krebserkrankungen.',
-    absatz:
-      'Nach einer abgeschlossenen Behandlung geht die Betreuung weiter, und sie folgt einem festen Plan: in den ersten drei Jahren üblicherweise alle drei Monate ein Termin, danach halbjährlich, ab dem sechsten Jahr jährlich. Der grösste Teil davon ist Gespräch und körperliche Untersuchung — Bildgebung und Laborwerte nur, wenn es einen Anlass gibt, denn Routinekontrollen ohne Beschwerden verbessern das Ergebnis nicht und verunsichern oft mehr, als sie klären. Was in diese Termine ebenso gehört: die Folgen der Behandlung. Wechseljahresbeschwerden nach einer Therapie, Lymphödeme, Erschöpfung, Sexualität, die Angst vor dem nächsten Befund. Ich halte den Kontakt zu Ihrer behandelnden Klinik.',
+    kurz: 'Nach der Behandlung einer gynäkologischen Krebserkrankung sind regelmäßige Nachsorgeuntersuchungen ein wichtiger Bestandteil der weiteren Betreuung.',
+    absatz: 'Nach der Behandlung einer gynäkologischen Krebserkrankung sind regelmäßige Nachsorgeuntersuchungen ein wichtiger Bestandteil der weiteren Betreuung.',
+    lang: [
+      'Nach der Behandlung einer gynäkologischen Krebserkrankung sind regelmäßige Nachsorgeuntersuchungen ein wichtiger Bestandteil der weiteren Betreuung.',
+      'In meiner Praxis begleite ich Sie im Rahmen der onkologischen Nachsorge nach einer Brustkrebserkrankung sowie nach Krebserkrankungen der weiblichen Geschlechtsorgane. Die Untersuchungen richten sich nach Ihrer vorausgegangenen Erkrankung, der durchgeführten Therapie und den entsprechenden Nachsorgeempfehlungen.',
+      'Neben der körperlichen und gynäkologischen Untersuchung besprechen wir aktuelle Beschwerden, mögliche Folgen der Therapie und Ihre weitere Behandlung. Bei Bedarf koordiniere ich zusätzliche Untersuchungen und die Zusammenarbeit mit den weiterbehandelnden Fachdisziplinen.',
+    ],
   },
   {
-    id: 'aesthetik',
-    titel: 'Ästhetische Medizin',
-    kurz: 'Für Ihr Wohlbefinden und ein gutes Gefühl in Ihrem Körper.',
-    absatz:
-      'Über ästhetische Behandlungen mit Botulinumtoxin darf ich auf einer Website nicht mehr schreiben als: es gibt sie hier. Das Heilmittelwerbegesetz erlaubt bei solchen Eingriffen keine Vorher-Nachher-Bilder und keine Wirkversprechen, und das halte ich für richtig. Was die Behandlung kostet, wie sie abläuft, was sie kann und was nicht, besprechen wir im Termin. Es ist eine Selbstzahlerleistung.',
+    id: 'beckenboden',
+    titel: 'Blasenschwäche & Senkungsbeschwerden',
+    kurz: 'Blasenschwäche und Senkungsbeschwerden sind häufig – dennoch fällt es vielen Frauen schwer, darüber zu sprechen.',
+    absatz: 'Blasenschwäche und Senkungsbeschwerden sind häufig – dennoch fällt es vielen Frauen schwer, darüber zu sprechen. Beschwerden können in unterschiedlichen Lebensphasen auftreten, beispielsweise nach Schwangerschaft und Geburt oder mit zunehmendem Alter.',
+    lang: [
+      'Blasenschwäche und Senkungsbeschwerden sind häufig – dennoch fällt es vielen Frauen schwer, darüber zu sprechen. Beschwerden können in unterschiedlichen Lebensphasen auftreten, beispielsweise nach Schwangerschaft und Geburt oder mit zunehmendem Alter.',
+      'In meiner Praxis können wir mögliche Ursachen abklären und gemeinsam besprechen, welche Behandlungsmöglichkeiten für Sie infrage kommen. Je nach Befund reichen diese von Beckenbodentraining und weiteren konservativen Maßnahmen bis hin zu medikamentösen oder operativen Behandlungsmöglichkeiten.',
+      'Sollte eine weiterführende Diagnostik oder Behandlung notwendig sein, erfolgt die Überweisung an eine entsprechend spezialisierte Praxis oder Klinik.',
+    ],
   },
+  {
+    id: 'impfungen',
+    titel: 'Impfungen',
+    kurz: 'Ein vollständiger Impfschutz ist in jeder Lebensphase ein wichtiger Bestandteil der Gesundheitsvorsorge.',
+    absatz: 'Ein vollständiger Impfschutz ist in jeder Lebensphase ein wichtiger Bestandteil der Gesundheitsvorsorge. In meiner Praxis überprüfe ich gerne Ihren Impfstatus und berate Sie zu empfohlenen Impfungen und notwendigen Auffrischungen.',
+    lang: [
+      'Ein vollständiger Impfschutz ist in jeder Lebensphase ein wichtiger Bestandteil der Gesundheitsvorsorge. In meiner Praxis überprüfe ich gerne Ihren Impfstatus und berate Sie zu empfohlenen Impfungen und notwendigen Auffrischungen.',
+      'Ein besonderer Schwerpunkt liegt auf der HPV-Impfung zur Vorbeugung HPV-bedingter Erkrankungen sowie auf Impfungen bei Kinderwunsch und in der Schwangerschaft.',
+      'Bringen Sie zu Ihrem Termin gerne Ihren Impfausweis mit. Gemeinsam können wir prüfen, ob Ihr Impfschutz vollständig ist und welche Impfungen für Sie aktuell empfohlen werden.',
+    ],
+  }
 ];
 
 /**
@@ -363,15 +441,10 @@ export const leistungen: readonly Leistung[] = [
  * und die auf ihrer Seite fehlt, merkt niemand — ausser der Patientin, die
  * deswegen woanders anruft.
  */
-export const weitereLeistungen: readonly Leistung[] = [
-  {
-    id: 'impfungen',
-    titel: 'Impfungen',
-    kurz: 'Nach den Empfehlungen der Ständigen Impfkommission.',
-    absatz:
-      'Die HPV-Impfung empfiehlt die Ständige Impfkommission für Mädchen und Jungen zwischen 9 und 14 Jahren; nachgeholt werden kann sie bis zum 18. Geburtstag, bis dahin zahlt die Kasse. Wer vor dem 15. Geburtstag anfängt, braucht zwei Dosen statt drei. Vor einer geplanten Schwangerschaft sehe ich mir den Impfpass an — Röteln, Windpocken und Keuchhusten sind die drei, auf die es dabei ankommt. Bringen Sie den Pass mit, wenn Sie ihn finden: ohne ihn müssen wir raten oder Blut abnehmen.',
-  },
-];
+/* Seit dem 11.09.2026 leer: Impfungen stehen auf ihren Wunsch in der Hauptliste
+   („Aesthetische Medizin ... durch Impfungen ersetzen"). Der Export bleibt, weil
+   zwei Seiten ihn lesen und eine leere Liste dort nichts rendert. */
+export const weitereLeistungen: readonly Leistung[] = [];
 
 /* ══ Der erste Besuch ═════════════════════════════════════════════════════
  * Allgemeine Angaben, keine Zusage über diese Praxis. */
