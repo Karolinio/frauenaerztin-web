@@ -1,63 +1,67 @@
-# Baut die Seite und liefert sie über GitHub Pages aus.
+# Seite ausrollen — nach Cloudflare Pages, Projekt „gyn-erkens".
 #
-# Erzeugt von `node engine/ausrollen.mjs`. Von Hand geändert werden darf er —
-# dann bitte den Grund dazuschreiben, sonst überschreibt ihn der nächste Lauf
-# wortlos.
+# ═══ Warum nicht mehr GitHub Pages (Stand 13.09.2026) ═══
 #
-# Warum ein Bauschritt und nicht einfach der Ordner: `dist/` steht im .gitignore
-# und gehört da auch hin — ein eingecheckter Bau ist eine zweite Wahrheit neben
-# dem Quellcode und driftet beim ersten vergessenen Lauf.
+# Bis heute rollte dieser Ablauf nach karolinio.github.io/frauenaerztin-web/
+# aus — mit VITE_BASIS als Unterpfad. Karol hat entschieden: Cloudflare, ein
+# Pages-Projekt je Kunde, die Domain der Kundin darauf. Das Projekt existiert,
+# und unter seiner Hauptadresse laeuft seit dem 12.09. die Uebergangsseite
+# (uebergang/, ihr Flyer).
+#
+# ═══ Warum Push NICHT nach Produktion rollt ═══
+#
+# Produktion ist bis zum 1. November der Flyer. Ein Push auf main — auch einer,
+# den die Redaktion beim Speichern ausloest — darf ihn nicht ueberschreiben,
+# solange die echte Seite Fotos und Impressum-Angaben fehlt. Deshalb zielt
+# jeder Push auf den Zweig aus der Repo-Variable PAGES_ZWEIG (Vorgabe:
+# „vorschau" → vorschau.gyn-erkens.pages.dev).
+#
+# Der Livegang ist dann KEIN Code: PAGES_ZWEIG auf „main" stellen, einmal
+# ausloesen — die echte Seite ersetzt den Flyer im selben Projekt, die Domain
+# bleibt, wo sie ist. Ab dann rollt auch jede Aenderung aus der Redaktion
+# live aus, wie es in VOR-DEPLOY.md versprochen ist: wer speichert, hat
+# ausgerollt.
+#
+# Secrets im Repo: CLOUDFLARE_API_TOKEN (Pages: Edit), CLOUDFLARE_ACCOUNT_ID.
 name: Seite ausrollen
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      zweig:
+        description: "Pages-Zweig (vorschau = Vorschau, main = Produktion/Domain)"
+        required: false
+        default: ""
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 jobs:
-  bauen:
+  ausrollen:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # npm und nicht pnpm — von Hand geaendert am 23.08.2026, Grund im Kopf
-      # dieser Datei verlangt.
-      #
-      # Der Ablauf lief `pnpm install --frozen-lockfile` gegen eine
-      # pnpm-lock.yaml vom 05.08.2026. Seitdem hat sich die package.json
-      # geaendert (Skript `freigabe`, die fontsource-Pakete fuer `npm run
-      # fonts`). `--frozen-lockfile` bricht dann ab, statt aufzuloesen — und
-      # zwar zu Recht: ein Lockfile, das nicht zur package.json passt, ist
-      # keine reproduzierbare Grundlage.
-      #
-      # Gearbeitet wird an diesem Projekt mit npm; package-lock.json ist die
-      # gepflegte Datei. Der Ablauf folgt jetzt dem, was tatsaechlich benutzt
-      # wird, statt umgekehrt.
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci
       - run: npm run build
-        env:
-          # Der Basispfad. Unter github.io liegt die Seite in einem Unterordner,
-          # der so heisst wie das Repo — steht hier etwas anderes, sucht der
-          # Browser JS und CSS an einer Stelle, an der nichts liegt.
-          VITE_BASIS: /frauenaerztin-web/
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      # Noindex NUR fuer die Vorschau: ein unfertiges Impressum darf gesehen,
+      # aber nicht gefunden werden. In Produktion faellt der Kopf weg.
+      - name: Zweig bestimmen
+        id: ziel
+        run: |
+          Z="${{ github.event.inputs.zweig }}"
+          [ -z "$Z" ] && Z="${{ vars.PAGES_ZWEIG }}"
+          [ -z "$Z" ] && Z="vorschau"
+          echo "zweig=$Z" >> "$GITHUB_OUTPUT"
+          if [ "$Z" != "main" ]; then printf '/*\n  X-Robots-Tag: noindex\n' > dist/_headers; fi
+          echo "Ziel: $Z"
+      - uses: cloudflare/wrangler-action@v3
         with:
-          path: dist
-  ausliefern:
-    needs: bauen
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name gyn-erkens --branch ${{ steps.ziel.outputs.zweig }} --commit-dirty=true
