@@ -41,7 +41,11 @@
 /* Sobald ihr Logo da ist. Die Höhe ist gedeckelt, damit ein zu gross geliefertes
    Logo nicht die ganze Kopfzeile auseinanderschiebt. */
 .marke__logo {
-  height: clamp(1.75rem, 1.5rem + 0.8vw, 2.25rem);
+  /* Seit 13.09.2026 ist die Marke fast quadratisch (Figur im Blob, ohne Schrift).
+     Die alte Hoehe war fuer ein 2,6:1-Querformat bemessen — bei einem Quadrat
+     ergab sie einen 32px-Fleck. Ein Zeichen braucht in der Kopfzeile etwa die
+     Hoehe von zwei Textzeilen, sonst liest man es nicht als Marke. */
+  height: clamp(2.5rem, 2rem + 1.2vw, 3.25rem);
   width: auto;
 }
 
@@ -76,7 +80,10 @@
      rund 577px statt 505px, und weil daneben nichts mehr steht, wirkt es
      deutlich mehr als die 14 Prozent Zuwachs.
      Yvonne: „Logo gerne mehr in den Mittelpunkt stellen." */
-  height: clamp(5.5rem, 3rem + 12vw, 16rem);
+  /* Quadratische Marke: 16rem Hoehe waeren 16rem Breite — im Hero ein Ballon.
+     Die Figur traegt bei 9–11rem genau die Praesenz, die Karol am 24.08. wollte,
+     ohne die Ueberschrift darunter zu erdruecken. */
+  height: clamp(5rem, 3rem + 7vw, 11rem);
 }
 
 /* Die Fassung im Hero. Sie trägt den Namen der Praxis über der grossen Zeile

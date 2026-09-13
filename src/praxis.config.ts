@@ -97,14 +97,22 @@ export const praxis = {
    * Kopfzeile, Hero, Fusszeile und Rechtsseiten folgen von selbst — das ist der
    * ganze Grund, warum die Marke eine eigene Komponente ist.
    */
+  /*
+   * Seit 13.09.2026 die Figur allein, im Blob ihres Schilds — bilder/marke.svg.
+   * Ihr Wunsch vom 11.09.: „nur das Bild oben einfuegen ohne den Rest". Das
+   * alte logo.webp trug noch „FRAUENARZTPRAXIS" als Zeile, ihr Schild sagt
+   * inzwischen „Fachaerztin fuer Frauenheilkunde & Geburtshilfe" — der
+   * Schriftzug im Bild waere damit falsch gewesen. Der Name steht ohnehin im
+   * Hero, im Team und im Impressum; die Marke traegt ihn als Bildbeschreibung.
+   */
   logo: {
-    src: '/bilder/logo.webp',
+    src: '/bilder/marke.svg',
     /* Die Bildbeschreibung beschreibt, was zu SEHEN ist — nicht, dass es ein
        Logo ist. Wer die Seite vorgelesen bekommt, braucht den Namen der Praxis
        an dieser Stelle, nicht das Wort „Logo". */
     alt: 'Frauenarztpraxis Dr. med. Yvonne Erkens',
-    breite: 720,
-    hoehe: 276,
+    breite: 1000,
+    hoehe: 1040,
   } as Offen<{
     readonly src: string;
     readonly alt: string;
