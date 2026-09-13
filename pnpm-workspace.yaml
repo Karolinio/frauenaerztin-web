@@ -3,4 +3,3 @@ allowBuilds:
   # pnpm schreibt hier einen Platzhaltersatz hinein und wartet auf eine Antwort; bleibt er
   # stehen, bricht jeder `pnpm build` ab, bevor er anfängt.
   esbuild: true
-  workerd: set this to true or false
