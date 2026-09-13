@@ -53,18 +53,21 @@
     "url": null
   },
   "offen": [
+    "Strato: entweder ihr Login für einen Handgriff, oder sie trägt die zwei Cloudflare-Nameserver selbst ein. Und: welche Mailadresse hat sie bei Strato angelegt? MX muss mit.",
     "E-Mail-Adresse fürs Impressum (§ 5 DDG)",
     "Ärztekammer, KV, Berufsordnung, Aufsichtsbehörde — von ihr bestätigen (Nordrhein ist geografisch sicher)",
     "Berufshaftpflicht mit räumlichem Geltungsbereich (DL-InfoV)",
     "EU-Endpunkt für das Rückrufformular mit AVV",
     "Barrierefreiheit vor Ort nachmessen",
     "Echtes Porträt und Praxisfotos nach der Renovierung, Teamfotos nach den Verträgen",
-    "pages.yml von GitHub Pages auf Cloudflare (Projekt gyn-erkens) umstellen — bis dahin NICHT pushen",
     "Fotos: ihr Porträt, vier MFA-Bilder, Praxisräume — frühestens Ende September (ihr Wort: „mindestens 2 Wochen\" ab 11.09.)",
-    "Logo: Fassung nur mit Figur, ohne Schriftzug — sie fragt beim Gestalter nach",
     "Faxnummer fürs Impressum und den Fuß (sie hat Fax aufgelistet)",
     "Fachbezeichnung: laut Schild „Frauenheilkunde & Geburtshilfe\" — einmal gegen die Kammerurkunde bestätigen lassen",
-    "Je ein Satz zu den vier MFA, sobald sie es mit ihnen abgesprochen hat"
+    "Je ein Satz zu den vier MFA, sobald sie es mit ihnen abgesprochen hat",
+    "Kassenzulassung: alle Kassen und privat? Von ihr bestätigen (kassen ist Lücke)",
+    "Terminweg: nur Telefon, oder später Doctolib/Online? (onlineTermin ist Lücke, die Freigabe fragt danach)",
+    "Rückrufformular: will sie eines? Dann EU-Endpunkt und AVV, sonst bleibt es beim Telefon",
+    "Google-Unternehmensprofil: sie hat kein Google-Konto. Legt sie eins an, oder Karol für sie?"
   ],
   "mandant": "finesite",
   "ort": "Erkelenz",
