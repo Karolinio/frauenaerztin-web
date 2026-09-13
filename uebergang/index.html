@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dr. med. Yvonne Erkens — Neueröffnung Frauenarztpraxis Erkelenz</title>
+<meta name="description" content="Neueröffnung / Praxisübernahme ab 01.11.26: Dr. med. Yvonne Erkens, Fachärztin für Gynäkologie und Geburtshilfe, Theodor-Heuss-Str. 15, 41812 Erkelenz. Aufnahme von Neupatientinnen möglich. Terminvergabe mittwochs 09:30–11:00 Uhr unter 02431 70668.">
+<!--
+  noindex, solange im Impressum eine Lücke steht. Wird mit dem Umschalten
+  der Domain entfernt — nicht vorher. Eine Seite mit unvollständigem
+  Impressum darf gesehen, aber nicht gefunden werden.
+-->
+<meta name="robots" content="noindex">
+<link rel="icon" href="./favicon.svg">
+<link rel="canonical" href="https://gyn-erkens.de/">
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════════
+  Ihr Flyer, online. Nicht mehr, nicht weniger.
+  ═══════════════════════════════════════════════════════════════════════════
+
+  Am 08.09.2026 schrieb sie: „Können wir so eine einfache Seite als One-Pager
+  schon mal online setzen? Viele fragen jetzt nach Terminen, aber ich möchte
+  nicht, dass die Seite ohne Texte und ohne Bilder öffentlich gestellt wird.
+  Also einfach nur sowas" — und schickte diesen Entwurf.
+
+  Diese Datei ist der Entwurf, Zeile für Zeile, in derselben Reihenfolge und
+  mit demselben Wortlaut. Es steht nichts drin, was nicht auf dem Flyer
+  steht — mit einer Ausnahme, die das Gesetz verlangt: das Impressum unten.
+
+  ═══ Was bewusst NICHT drin ist ═══
+
+  Ihre Sprechzeiten und die Namen der Fachangestellten hat sie fuer die
+  ECHTE Seite geschickt, nicht fuer diese. Die Fachangestellten haben noch
+  nicht alle unterschrieben; Namen vor dem Vertrag zu veroeffentlichen ist
+  nicht unsere Entscheidung. Und die Sprechzeiten stehen nicht auf dem
+  Flyer — sie kommen mit einer Zeile dazu, wenn sie es will.
+
+  ═══ Farben und Schrift ═══
+
+  Der Flyer: hellgraue Flaeche, salbeigruene Wellen, weisse Karte. Das sind
+  exakt --leinen, --salbei und Weiss aus src/styles/tokens.css — sie hat
+  ihre eigene Palette benutzt, ohne es zu wissen. Deshalb sieht die
+  Uebergangsseite aus wie ein erster Zug der echten und nicht wie ein
+  Fremdkoerper davor.
+
+  Eine Schrift statt zwei: der Flyer setzt die Ueberschrift in einer duennen
+  Serifenschrift. Die echte Seite kennt nur Montserrat, und die liegt hier
+  als eine Datei. Montserrat 300, versal, weit gesperrt tut dasselbe — leise,
+  duenn, gross — ohne dass eine zweite Schrift geladen wird. Die Seite laedt
+  nichts von fremden Servern; auf einer Arztseite ist das keine Feinheit.
+
+  ═══ Farben sind Kopien ═══
+
+  Aus src/styles/tokens.css kopiert, weil dieser Ordner allein ausgerollt
+  wird. Die Kopie hat ein Verfallsdatum: 01.11.2026. Danach ersetzt die
+  echte Seite diese. Laeuft sie danach noch, ist DAS der Fehler.
+-->
+
+<style>
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('./montserrat-var-latin.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    /* aus src/styles/tokens.css, Kontraste dort gemessen */
+    --leinen: oklch(92.3% 0.004 122);       /* ihr helles Grau — der Grund */
+    --weiss: #fff;                           /* die Karte */
+    --tinte: oklch(26% 0.012 150);          /* auf Leinen 12,7 · AAA */
+    --tinte-mtl: oklch(48% 0.014 150);      /* auf Leinen  5,3 · AA  */
+    --salbei: oklch(66.4% 0.025 135);       /* Wellen, Linien, Smiley */
+    --salbei-tief: oklch(38% 0.025 135);    /* Text in Gruen. auf Leinen 7,4 · AAA */
+
+    --spalte: 34rem;
+    --rand: clamp(1.25rem, 0.9rem + 1.8vw, 3rem);
+    --raum: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+    --raum-gross: clamp(2.5rem, 1.6rem + 3vw, 4rem);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: var(--leinen);
+    color: var(--tinte);
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    font-weight: 400;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Die Wellen ─────────────────────────────────────────────────────── */
+  .welle { display: block; width: 100%; height: auto; color: var(--salbei); flex: none; }
+
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: var(--spalte);
+    margin: 0 auto;
+    padding: var(--raum-gross) var(--rand) 0;
+  }
+
+  /* ── Figur im Blob ──────────────────────────────────────────────────── */
+  .blob {
+    width: clamp(7.5rem, 6rem + 6vw, 10rem);
+    aspect-ratio: 1 / 1.05;
+    margin: 0 auto var(--raum);
+    background: oklch(96% 0.003 122);       /* eine Stufe heller als der Grund */
+    border-radius: 58% 42% 50% 50% / 52% 46% 54% 48%;
+    display: grid;
+    place-items: center;
+    color: var(--salbei);
+  }
+  /* Die Figur als Maske: ihre Datei ist einfarbig (currentColor), und ein
+     <img> liesse sich nicht faerben. Die Maske nimmt die Form, die Farbe
+     kommt aus dem Hintergrund — so bleibt sie auf jeder Flaeche Salbei. */
+  .figur {
+    display: block; height: 64%; aspect-ratio: 652 / 1548;
+    background: var(--salbei);
+    -webkit-mask: url('./figur.svg') center / contain no-repeat;
+            mask: url('./figur.svg') center / contain no-repeat;
+  }
+
+  /* ── Überschrift, wie auf dem Flyer: dünn, versal, gesperrt ─────────── */
+  .titel {
+    font-size: clamp(1.5rem, 0.9rem + 2.8vw, 2.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--salbei-tief);
+    margin: 0 0 0.6rem;
+    text-wrap: balance;
+  }
+  .regel {
+    border: 0;
+    border-top: 1px solid var(--salbei);
+    margin: 0 auto var(--raum);
+    width: min(100%, 26rem);
+  }
+  .regel--kurz { width: 4rem; margin: var(--raum) auto; }
+
+  .ab {
+    font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: var(--salbei-tief);
+    font-variant-numeric: tabular-nums;
+    margin: 0 0 0.6rem;
+  }
+  h1 {
+    font-size: clamp(1.75rem, 1.1rem + 2.6vw, 2.75rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0 0 0.35rem;
+  }
+  .fach {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tinte-mtl);
+    margin: 0;
+  }
+
+  .gruss {
+    max-width: 24rem;
+    margin: 0 auto var(--raum-gross);
+    color: var(--tinte-mtl);
+    text-wrap: balance;
+  }
+
+  /* ── Die Karte ──────────────────────────────────────────────────────── */
+  /* Auf dem Flyer bricht sie aus der Spalte aus — breiter als der Text.
+     Hier ebenso: ab Tablet ragt sie beidseitig über die Spalte hinaus. */
+  .karte {
+    background: var(--weiss);
+    border-radius: 1.125rem;
+    padding: var(--raum) var(--raum);
+    margin: 0 0 var(--raum-gross);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem 1.5rem;
+    align-items: center;
+    text-align: left;
+    box-shadow: 0 1px 2px oklch(0% 0 0 / 0.04), 0 12px 32px -16px oklch(38% 0.025 135 / 0.25);
+  }
+  @media (min-width: 40rem) {
+    .karte { margin-inline: -4rem; padding-inline: 2.25rem; }
+  }
+  @media (max-width: 26rem) {
+    .karte { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  }
+  .smiley { width: 5.5rem; height: 5.5rem; color: var(--salbei); }
+  .karte h2 {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tinte-mtl);
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--leinen);
+  }
+  .karte p { margin: 0; line-height: 1.55; }
+  .karte a {
+    color: var(--tinte);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--salbei);
+    white-space: nowrap;
+  }
+  .karte a:hover, .karte a:focus-visible { border-bottom-color: var(--salbei-tief); outline: none; }
+  .karte a:focus-visible { outline: 2px solid var(--salbei-tief); outline-offset: 3px; border-radius: 2px; }
+
+  .adresse {
+    font-style: normal;
+    font-size: 0.9375rem;
+    color: var(--tinte-mtl);
+    margin: 0 0 var(--raum);
+  }
+  .adresse .trenn { padding: 0 0.6em; color: var(--salbei); }
+
+  .neu {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--salbei-tief);
+    margin: 0 0 0.75rem;
+  }
+  .regel--neu { width: 18rem; margin: 0 auto; }
+
+  /* ── Pflichtangaben ─────────────────────────────────────────────────── */
+  /*
+   * Der einzige Inhalt, der nicht auf dem Flyer steht. § 5 DDG gilt fuer
+   * jede geschaeftsmaessige Seite, auch fuer eine mit acht Zeilen. Als
+   * Abschnitt derselben Seite ist es „unmittelbar erreichbar" — ein
+   * Verweis auf eine zweite Datei waere eine zweite Stelle, die veralten
+   * kann. Klein gesetzt, unten, aber vollstaendig.
+   */
+  footer {
+    background: var(--salbei-tief);
+    color: oklch(88% 0.012 122);
+    padding: var(--raum-gross) var(--rand);
+    text-align: left;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    flex: none;
+  }
+  footer .innen { max-width: var(--spalte); margin: 0 auto; }
+  footer h2 { font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500;
+              color: oklch(96% 0.004 122); margin: 0 0 1rem; }
+  footer h3 { font-size: 0.8125rem; font-weight: 600; color: oklch(96% 0.004 122); margin: 1rem 0 0.1rem; }
+  footer p { margin: 0 0 0.25rem; }
+  footer a { color: inherit; text-decoration-color: var(--salbei); text-underline-offset: 2px; }
+  footer .zwei { display: grid; gap: 0 2.5rem; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); }
+
+  /* Was fehlt, ist SICHTBAR. Eine erfundene Aerztekammer ist ein
+     Abmahngrund; eine sichtbare Luecke ist nur eine offene Frage.
+     Solange eine hier steht, bleibt noindex oben drin. */
+  .luecke { background: #ffb703; color: #000; padding: 0 4px; border-radius: 2px; }
+
+  .ende { margin-top: var(--raum); padding-top: 1rem; border-top: 1px solid oklch(50% 0.02 135);
+          font-size: 0.75rem; color: oklch(78% 0.014 122); }
+
+  /* Eine Bewegung, leise, und nur wenn erlaubt. */
+  @media (prefers-reduced-motion: no-preference) {
+    main > * { animation: auf 0.8s var(--ease) backwards; }
+    main > :nth-child(2) { animation-delay: 0.06s; }
+    main > :nth-child(3) { animation-delay: 0.1s; }
+    main > :nth-child(4) { animation-delay: 0.14s; }
+    main > :nth-child(5) { animation-delay: 0.18s; }
+    main > :nth-child(6) { animation-delay: 0.22s; }
+    main > :nth-child(n+7) { animation-delay: 0.28s; }
+    @keyframes auf { from { opacity: 0; transform: translateY(0.6rem); } to { opacity: 1; transform: none; } }
+  }
+
+  @media print {
+    .welle { display: none; }
+    body { background: #fff; }
+    footer { background: none; color: #000; }
+  }
+</style>
+</head>
+<body>
+
+<svg class="welle" viewBox="0 0 1200 96" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <path d="M0 0h1200v40c-170 30-330-6-540 14S180 106 0 66z" fill="currentColor"/>
+</svg>
+
+<main>
+
+  <div class="blob" aria-hidden="true"><span class="figur"></span></div>
+
+  <p class="titel">Neueröffnung /<br>Praxisübernahme</p>
+  <hr class="regel">
+
+  <p class="ab">ab 01.11.26</p>
+  <h1>Dr. med. Yvonne Erkens</h1>
+  <p class="fach">Fachärztin für Gynäkologie und Geburtshilfe</p>
+
+  <hr class="regel regel--kurz">
+
+  <p class="gruss">Ich freue mich sehr, Sie ab dem 01.11.26 in meiner Praxis
+    begrüßen zu dürfen.</p>
+
+  <section class="karte" aria-labelledby="termin">
+    <svg class="smiley" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <circle cx="50" cy="50" r="50" fill="currentColor"/>
+      <path d="M28 58c6 12 14 18 22 18s16-6 22-18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+      <path d="M62 36l8-8" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <h2 id="termin">Terminvergabe</h2>
+      <p>Wegen Umbauarbeiten ist die Terminvergabe telefonisch mittwochs von
+         09:30–11:00 Uhr <strong>unter <a href="tel:+49243170668">02431 70668</a> möglich.</strong></p>
+    </div>
+  </section>
+
+  <address class="adresse">Theodor-Heuss-Str. 15<span class="trenn">|</span>41812 Erkelenz</address>
+
+  <p class="neu">Aufnahme von Neupatientinnen möglich!</p>
+  <hr class="regel regel--neu">
+
+</main>
+
+<svg class="welle" viewBox="0 0 1200 96" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <path d="M0 30c190-36 380 20 560 2s340-40 640-10v74H0z" fill="currentColor"/>
+</svg>
+
+<footer>
+  <div class="innen">
+    <h2 id="impressum">Impressum</h2>
+    <div class="zwei">
+      <div>
+        <h3>Anbieterin</h3>
+        <p>Dr. med. Yvonne Erkens<br>Fachärztin für Gynäkologie und Geburtshilfe<br>
+           Theodor-Heuss-Str. 15, 41812 Erkelenz</p>
+        <h3>Kontakt</h3>
+        <p>Telefon <a href="tel:+49243170668">02431 70668</a><br>
+           E-Mail <span class="luecke">Adresse — § 5 DDG verlangt sie</span></p>
+        <h3>Gesetzliche Berufsbezeichnung</h3>
+        <p>Ärztin, verliehen in der Bundesrepublik Deutschland</p>
+        <h3>Umsatzsteuer</h3>
+        <p>Heilbehandlungen sind nach § 4 Nr. 14 UStG umsatzsteuerfrei.</p>
+      </div>
+      <div>
+        <h3>Zuständige Ärztekammer</h3>
+        <p><span class="luecke">von ihr zu bestätigen</span></p>
+        <h3>Aufsichtsbehörde</h3>
+        <p><span class="luecke">Kammer mit Anschrift</span></p>
+        <h3>Berufsordnung</h3>
+        <p><span class="luecke">Verweis der Kammer</span></p>
+        <h3>Berufshaftpflichtversicherung</h3>
+        <p><span class="luecke">Versicherer, Anschrift, Geltungsbereich</span></p>
+        <h3>Datenschutz</h3>
+        <p>Diese Seite hat kein Formular, setzt keine Cookies und lädt nichts
+           von Dritten. Beim Aufruf verarbeitet der Server technisch
+           notwendige Verbindungsdaten (Art. 6 Abs. 1 lit. f DSGVO).
+           Hosting: <span class="luecke">Anbieter, mit dem Ausrollen</span>.
+           Ihre Rechte aus Art. 15–21 DSGVO richten Sie an die Kontaktdaten oben;
+           Beschwerde: <span class="luecke">zuständige Aufsichtsbehörde</span>.</p>
+      </div>
+    </div>
+    <p class="ende">Übergangsseite bis zur Eröffnung am 1. November 2026 — danach ersetzt durch die vollständige Praxisseite.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -118,7 +118,17 @@ export const praxis = {
     vorname: 'Yvonne',
     nachname: 'Erkens',
     /** Die geschützte Berufsbezeichnung. Muss mit der Kammerurkunde übereinstimmen. */
-    fachbezeichnung: demo('Fachärztin für Frauenheilkunde und Geburtshilfe'),
+    /*
+     * Woertlich, wie sie es am 05.09.2026 unter „Impressum:" geschrieben hat.
+     *
+     * ⚠ Ihr eigener Flyer sagt „FACHAERZTIN FUER GYNAEKOLOGIE UND
+     * GEBURTSHILFE" — eine andere Formulierung. Auf einer Pflichtseite muss
+     * die Bezeichnung mit der Kammerurkunde uebereinstimmen; die gefuehrte
+     * Weiterbildungsbezeichnung in NRW lautet „Frauenheilkunde und
+     * Geburtshilfe". Ihre Impressum-Angabe gilt hier, weil sie sie dafuer
+     * geschickt hat — sie sollte sie aber einmal gegen die Urkunde pruefen.
+     */
+    fachbezeichnung: 'Fachärztin für Frauenheilkunde',
   },
 
   /**
@@ -150,20 +160,34 @@ export const praxis = {
   eroeffnung: '1. November 2026',
 
   adresse: {
-    strasse: demo('Kölner Straße 24'),
-    plz: demo('41812'),
+    /* Von ihr am 05.09.2026 fuer das Impressum geschickt: „Theodor-Heuss-Str.
+       15, 41812 Erkelenz". Hier ausgeschrieben — auf einer Pflichtseite steht
+       die Strasse nicht abgekuerzt. */
+    strasse: 'Theodor-Heuss-Straße 15',
+    plz: '41812',
     ort: 'Erkelenz',
   },
 
   telefon: {
     /** Wie die Nummer dasteht, z. B. „02431 · 12 34 56". */
-    anzeige: demo('02431 · 97 84 20'),
+    anzeige: '02431 · 70668',
     /** Dieselbe Nummer wählbar, z. B. „tel:+492431123456". */
-    href: demo('tel:+4924319784 20'.replace(/\s/g, '')),
+    href: 'tel:+49243170668',
   },
 
   /** Telefonzeiten stehen bewusst getrennt von den Sprechzeiten — sie sind es. */
-  telefonzeiten: demo('Montag bis Freitag, 8:00 – 12:00 Uhr'),
+  /*
+   * ACHTUNG, das ist eine UEBERGANGSREGEL und kein Dauerzustand.
+   *
+   * Ihre Worte vom 05.09.2026: „Wegen Umbauarbeiten ist die Terminvergabe
+   * telefonisch mittwochs von 09:30-11:00 Uhr unter 02431 70668 moeglich."
+   *
+   * Sie gilt BIS zur Eroeffnung. Bleibt diese Zeile nach dem 01.11.2026 stehen,
+   * steht auf der Seite eine Erreichbarkeit von 90 Minuten pro Woche fuer eine
+   * laufende Praxis — das ist schlimmer als keine Angabe. Beim Umstellen auf
+   * den Regelbetrieb gehoert das hier als Erstes geaendert.
+   */
+  telefonzeiten: 'Bis zur Eröffnung nur mittwochs, 9:30 – 11:00 Uhr',
 
   email: demo('praxis@frauenheilkunde-erkelenz.de'),
 
