@@ -208,6 +208,11 @@ export const praxis = {
 
   email: demo('praxis@frauenheilkunde-erkelenz.de'),
 
+  /* Sie hat „Fax" in ihre Fussliste geschrieben (11.09.2026), die Nummer aber
+     nicht genannt. Solange null: Luecke im Fuss, nicht weglassen — sie will
+     sie dort. */
+  fax: null as Offen<string>,
+
   /**
    * Der Endpunkt des Rückrufformulars. MUSS in der EU liegen.
    *

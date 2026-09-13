@@ -190,3 +190,6 @@ main:has(> .flaeche-leinen:last-child) + .fuss {
 .fuss__recht a:hover {
   color: var(--signal);
 }
+
+/* Fax, E-Mail, Karte — ihre Fussliste vom 11.09.2026 */
+.fuss__zeile { margin: 0.35rem 0 0; }

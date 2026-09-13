@@ -61,6 +61,39 @@ export function Fusszeile() {
               <Angabe wert={null} was="Telefonnummer" />
             </p>
           )}
+
+          {/*
+            Ihre Fussliste vom 11.09.2026: Telefon, Fax, E-Mail, Adresse (Google
+            Maps). Fax und E-Mail sind Luecken, bis sie die Angaben schickt —
+            weggelassen werden sie nicht, sie hat sie ausdruecklich aufgezaehlt.
+
+            Google Maps als VERWEIS, nicht als eingebettete Karte: eine Karte im
+            iframe laedt bei jedem Besuch Google, ohne dass jemand gefragt wurde.
+            Ein Link laedt nichts, bis die Patientin ihn anklickt — und dann
+            will sie ja dorthin.
+          */}
+          <p className="t-meta fuss__zeile">
+            Fax{' '}
+            {steht(praxis.fax) ? praxis.fax : <Angabe wert={null} was="Faxnummer" />}
+          </p>
+          <p className="t-meta fuss__zeile">
+            {steht(praxis.email) ? (
+              <a href={`mailto:${praxis.email}`}>{praxis.email}</a>
+            ) : (
+              <Angabe wert={null} was="E-Mail-Adresse" />
+            )}
+          </p>
+          {anschriftSteht && (
+            <p className="t-meta fuss__zeile">
+              <a
+                className="link"
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${praxis.adresse.strasse}, ${praxis.adresse.plz} ${praxis.adresse.ort}`)}`}
+                rel="noopener"
+              >
+                Auf Google Maps öffnen
+              </a>
+            </p>
+          )}
         </div>
 
         <div className="fuss__spalte">
