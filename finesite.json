@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kunde": "frauenaerztin",
-  "name": "Gynäkologische Praxis Erkelenz (Name offen)",
+  "name": "Frauenarztpraxis Dr. med. Yvonne Erkens, Erkelenz",
   "branche": [
     "arzt"
   ],
@@ -16,10 +16,11 @@
   "abweichungen": [],
   "konfig": "src/praxis.config.ts",
   "deploy": {
-    "art": "keins",
-    "ziel": null,
+    "art": "cloudflare",
+    "ziel": "gyn-erkens",
     "domain": null,
-    "vorschau": null
+    "vorschau": "gyn-erkens.pages.dev",
+    "_uebergang": "Auf gyn-erkens.pages.dev läuft seit 12.09.2026 NICHT diese Seite, sondern die Übergangsseite (uebergang/, ihr Flyer). noindex, bis das Impressum vollständig ist. Die echte Seite ersetzt sie im selben Projekt am 01.11.2026 — die Domain gyn-erkens.de (Strato) wird genau einmal umgestellt, vorher MX-Einträge sichern."
   },
   "pflege": {
     "art": "keine",
@@ -52,16 +53,15 @@
     "url": null
   },
   "offen": [
-    "Praxisname · Logo",
-    "Name, Titel und Fachbezeichnung der Ärztin",
-    "Anschrift, Telefonnummer, E-Mail",
-    "Sprech- und Telefonzeiten",
-    "Zuständige Ärztekammer, KV, Berufsordnung, Aufsichtsbehörde",
-    "Berufshaftpflicht und räumlicher Geltungsbereich",
-    "EU-Endpunkt für das Rückrufformular",
+    "E-Mail-Adresse fürs Impressum (§ 5 DDG)",
+    "Ärztekammer, KV, Berufsordnung, Aufsichtsbehörde — von ihr bestätigen (Nordrhein ist geografisch sicher)",
+    "Berufshaftpflicht mit räumlichem Geltungsbereich (DL-InfoV)",
+    "Fachbezeichnung laut Kammerurkunde — sie schrieb „Frauenheilkunde\", der Flyer „Gynäkologie und Geburtshilfe\"",
+    "EU-Endpunkt für das Rückrufformular mit AVV",
     "Barrierefreiheit vor Ort nachmessen",
-    "Echtes Porträt der Ärztin (ersetzt bilder/hero.webp)",
-    "Praxisfotos nach Eröffnung (ersetzen bilder/praxis-01..04.webp)"
+    "Echtes Porträt und Praxisfotos nach der Renovierung, Teamfotos nach den Verträgen",
+    "inhalt/DEMO löschen, sobald team.json und aktuelles.json echt sind",
+    "pages.yml von GitHub Pages auf Cloudflare (Projekt gyn-erkens) umstellen — bis dahin NICHT pushen"
   ],
   "mandant": "finesite",
   "ort": "Erkelenz",
