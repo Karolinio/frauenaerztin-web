@@ -52,7 +52,14 @@ export function WerIchBin() {
             {steht(person.name) ? person.name : <span className="luecke">Name der Ärztin</span>}
           </h2>
           <p className="t-meta werbin__rolle">{person.rolle}</p>
-          <p className="t-lead werbin__satz">{person.text}</p>
+          {/*
+            Nur ihr ERSTER Absatz. Ihr Ueber-mich hat seit dem 11.09.2026 sechs;
+            alle sechs stehen auf /team/, wohin ihr Mehr-Knopf im Hero fuehrt.
+            Hier ganz zu zeigen hiesse: eine Wand auf der Startseite und
+            derselbe Text zweimal. Der erste Absatz ist der Anriss, /team/ der Rest.
+          */}
+          <p className="t-lead werbin__satz">{person.text.split('\n\n')[0]}</p>
+          <a className="link" href={weg('/team/')}>Mehr über mich</a>
         </Enthuellen>
 
         {weitere.length > 0 ? (

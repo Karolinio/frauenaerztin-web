@@ -83,7 +83,9 @@
   /* Quadratische Marke: 16rem Hoehe waeren 16rem Breite — im Hero ein Ballon.
      Die Figur traegt bei 9–11rem genau die Praesenz, die Karol am 24.08. wollte,
      ohne die Ueberschrift darunter zu erdruecken. */
-  height: clamp(5rem, 3rem + 7vw, 11rem);
+  /* Karol, 13.09.: fuer die richtige Website das Logo auf jeden Fall groesser.
+     Bei 1440px rund 14rem, am Handy 7rem. */
+  height: clamp(7rem, 4rem + 9vw, 14rem);
 }
 
 /* Die Fassung im Hero. Sie trägt den Namen der Praxis über der grossen Zeile
