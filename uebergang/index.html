@@ -111,26 +111,8 @@
     padding: var(--raum-gross) var(--rand) 0;
   }
 
-  /* ── Figur im Blob ──────────────────────────────────────────────────── */
-  .blob {
-    width: clamp(7.5rem, 6rem + 6vw, 10rem);
-    aspect-ratio: 1 / 1.05;
-    margin: 0 auto var(--raum);
-    background: oklch(96% 0.003 122);       /* eine Stufe heller als der Grund */
-    border-radius: 58% 42% 50% 50% / 52% 46% 54% 48%;
-    display: grid;
-    place-items: center;
-    color: var(--salbei);
-  }
-  /* Die Figur als Maske: ihre Datei ist einfarbig (currentColor), und ein
-     <img> liesse sich nicht faerben. Die Maske nimmt die Form, die Farbe
-     kommt aus dem Hintergrund — so bleibt sie auf jeder Flaeche Salbei. */
-  .figur {
-    display: block; height: 64%; aspect-ratio: 652 / 1548;
-    background: var(--salbei);
-    -webkit-mask: url('./figur.svg') center / contain no-repeat;
-            mask: url('./figur.svg') center / contain no-repeat;
-  }
+  /* ── Ihre Marke ─────────────────────────────────────────────────────── */
+  .marke { width: clamp(9rem, 7rem + 8vw, 13rem); height: auto; margin: 0 auto var(--raum); display: block; }
 
   /* ── Überschrift, wie auf dem Flyer: dünn, versal, gesperrt ─────────── */
   .titel {
@@ -303,7 +285,11 @@
 
 <main>
 
-  <div class="blob" aria-hidden="true"><span class="figur"></span></div>
+  <!-- Ihre Marke, aus dem Bild in ihrem Schild-PDF nachgezeichnet (14.09.2026):
+       dieselbe Datei wie auf der echten Seite — bilder/marke.svg. Vorher stand
+       hier ein eigener CSS-Blob, und sie hat sofort gesehen, dass die Form nicht
+       ihre war. -->
+  <img class="marke" src="./marke.svg" width="620" height="560" alt="" aria-hidden="true">
 
   <p class="titel">Neueröffnung /<br>Praxisübernahme</p>
   <hr class="regel">
