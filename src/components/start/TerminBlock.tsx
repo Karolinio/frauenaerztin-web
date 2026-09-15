@@ -40,11 +40,11 @@ export function TerminBlock() {
         <Enthuellen className="termin__text">
           <p className="t-label">Termin</p>
           <h2 id="termin-titel" className="t-section termin__titel">
-            Einen Termin bekommen
+            Termin vereinbaren
           </h2>
           <p className="t-lead termin__lead">
-            Termine gibt es am Telefon. Sagen Sie kurz, worum es geht — davon hängt ab, wie viel Zeit
-            eingeplant wird.
+            Termine vereinbaren Sie telefonisch. Teilen Sie uns kurz mit, worum es geht – so können wir
+            die passende Zeit für Ihren Termin einplanen.
           </p>
 
           <div className="termin__wege">
@@ -94,7 +94,7 @@ export function TerminBlock() {
             gehoert. Wann jemand anrufen kann, gehoert neben das Anrufen.
           */}
           {praxis.telefonzeiten ? (
-            <p className="t-meta termin__wann">Erreichbar {praxis.telefonzeiten}</p>
+            <p className="t-meta termin__wann">Sie erreichen uns {praxis.telefonzeiten}.</p>
           ) : (
             <p className="t-meta termin__wann">
               <span className="luecke">Telefonzeiten stehen noch nicht fest</span>

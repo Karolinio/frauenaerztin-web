@@ -43,10 +43,11 @@ export function Aussage() {
         <Enthuellen className="aussage__block">
           <p className="t-label aussage__label">Wie ich arbeite</p>
           <h2 id="aussage-titel" className="t-aussage aussage__satz">
-            Sie sollen wissen, was gleich passiert, bevor es passiert.
+            Gute Medizin entsteht im Miteinander.
           </h2>
           <p className="aussage__zusatz">
-            Und Sie dürfen jederzeit sagen, dass Sie es nicht möchten. Auch mittendrin.
+            Ich höre zu, erkläre verständlich und beziehe Sie in Entscheidungen ein – respektvoll und auf
+            Augenhöhe.
           </p>
         </Enthuellen>
         <Figur />

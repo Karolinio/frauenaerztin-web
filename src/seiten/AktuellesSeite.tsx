@@ -24,8 +24,8 @@ export default function AktuellesSeite() {
         titel="Was gerade gilt"
         einleitung={
           <p>
-            Urlaub, Vertretung, kurzfristig geänderte Sprechzeiten. Wenn hier nichts steht, gelten die
-            normalen Zeiten.
+            Hier finden Sie aktuelle Hinweise zu unserer Praxis, beispielsweise zu geänderten
+            Sprechzeiten, Urlauben und Vertretungen.
           </p>
         }
       />

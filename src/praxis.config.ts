@@ -204,7 +204,7 @@ export const praxis = {
    * laufende Praxis — das ist schlimmer als keine Angabe. Beim Umstellen auf
    * den Regelbetrieb gehoert das hier als Erstes geaendert.
    */
-  telefonzeiten: 'Bis zur Eröffnung nur mittwochs, 9:30 – 11:00 Uhr',
+  telefonzeiten: 'bis zur Praxiseröffnung mittwochs von 09:30 bis 11:00 Uhr',
 
   email: demo('praxis@frauenheilkunde-erkelenz.de'),
 
@@ -375,7 +375,7 @@ export const leistungen: readonly Leistung[] = [
   {
     id: 'kinderwunsch',
     titel: 'Kinderwunsch',
-    kurz: 'Ein Kinderwunsch ist häufig mit vielen Fragen verbunden.',
+    kurz: 'Ein Kinderwunsch kann mit vielen Fragen verbunden sein.',
     absatz: 'Ein Kinderwunsch ist häufig mit vielen Fragen verbunden. Gerne begleite ich Sie bereits bei der Planung einer Schwangerschaft und berate Sie zu wichtigen Themen wie Zyklus, Folsäure, Impfstatus und einer gesunden Vorbereitung auf die Schwangerschaft.',
     lang: [
       'Ein Kinderwunsch ist häufig mit vielen Fragen verbunden. Gerne begleite ich Sie bereits bei der Planung einer Schwangerschaft und berate Sie zu wichtigen Themen wie Zyklus, Folsäure, Impfstatus und einer gesunden Vorbereitung auf die Schwangerschaft.',
@@ -386,7 +386,7 @@ export const leistungen: readonly Leistung[] = [
   {
     id: 'schwangerschaft',
     titel: 'Schwangerschaft',
-    kurz: 'Eine Schwangerschaft bringt viele besondere Momente, aber auch neue Fragen und manchmal Unsicherheiten mit sich.',
+    kurz: 'Eine Schwangerschaft ist eine besondere Zeit – mit vielen schönen Momenten, aber auch neuen Fragen.',
     absatz: 'Eine Schwangerschaft bringt viele besondere Momente, aber auch neue Fragen und manchmal Unsicherheiten mit sich. Mir ist es wichtig, Sie in dieser Zeit verlässlich zu begleiten und Ihnen bei medizinischen Fragen und Entscheidungen zur Seite zu stehen.',
     lang: [
       'Eine Schwangerschaft bringt viele besondere Momente, aber auch neue Fragen und manchmal Unsicherheiten mit sich. Mir ist es wichtig, Sie in dieser Zeit verlässlich zu begleiten und Ihnen bei medizinischen Fragen und Entscheidungen zur Seite zu stehen.',
@@ -409,7 +409,7 @@ export const leistungen: readonly Leistung[] = [
   {
     id: 'nachsorge',
     titel: 'Onkologische Nachsorge',
-    kurz: 'Nach der Behandlung einer gynäkologischen Krebserkrankung sind regelmäßige Nachsorgeuntersuchungen ein wichtiger Bestandteil der weiteren Betreuung.',
+    kurz: 'Auch nach Abschluss einer Krebsbehandlung begleite ich Sie mit regelmäßigen Nachsorgen weiter.',
     absatz: 'Nach der Behandlung einer gynäkologischen Krebserkrankung sind regelmäßige Nachsorgeuntersuchungen ein wichtiger Bestandteil der weiteren Betreuung.',
     lang: [
       'Nach der Behandlung einer gynäkologischen Krebserkrankung sind regelmäßige Nachsorgeuntersuchungen ein wichtiger Bestandteil der weiteren Betreuung.',
@@ -420,7 +420,7 @@ export const leistungen: readonly Leistung[] = [
   {
     id: 'beckenboden',
     titel: 'Blasenschwäche & Senkungsbeschwerden',
-    kurz: 'Blasenschwäche und Senkungsbeschwerden sind häufig – dennoch fällt es vielen Frauen schwer, darüber zu sprechen.',
+    kurz: 'Blasenschwäche und Senkungsbeschwerden sind häufig und können die Lebensqualität deutlich beeinträchtigen.',
     absatz: 'Blasenschwäche und Senkungsbeschwerden sind häufig – dennoch fällt es vielen Frauen schwer, darüber zu sprechen. Beschwerden können in unterschiedlichen Lebensphasen auftreten, beispielsweise nach Schwangerschaft und Geburt oder mit zunehmendem Alter.',
     lang: [
       'Blasenschwäche und Senkungsbeschwerden sind häufig – dennoch fällt es vielen Frauen schwer, darüber zu sprechen. Beschwerden können in unterschiedlichen Lebensphasen auftreten, beispielsweise nach Schwangerschaft und Geburt oder mit zunehmendem Alter.',
@@ -468,26 +468,23 @@ export interface Mitbringen {
 }
 
 export const mitbringen: readonly Mitbringen[] = [
+  /* Ihre vier Punkte, 14.09.2026 — wortgleich. */
   {
     was: 'Ihre Versichertenkarte',
+    warum: 'Bitte bringen Sie Ihre aktuelle elektronische Versichertenkarte mit.',
+  },
+  {
+    was: 'Ihren Mutterpass',
+    warum: 'Wenn Sie schwanger sind, bringen Sie bitte zu jedem Termin Ihren Mutterpass mit.',
+  },
+  {
+    was: 'Ihren Impfpass',
+    warum: 'Gerne überprüfen wir bei Ihrem Besuch auch Ihren aktuellen Impfstatus.',
+  },
+  {
+    was: 'Ihre Vorbefunde und Arztbriefe',
     warum:
-      'Ohne sie geht es auch, dann bekommen Sie aber Post — die Karte muss innerhalb des Quartals nachgereicht werden.',
-  },
-  {
-    was: 'Den Mutterpass, wenn Sie schwanger sind',
-    warum: 'Er gehört Ihnen und wandert mit Ihnen. Alles, was untersucht wird, wird dort eingetragen.',
-  },
-  {
-    was: 'Den Impfpass, wenn Sie ihn finden',
-    warum: 'Damit sehe ich in zwei Minuten, was fehlt. Ohne ihn kostet dieselbe Frage eine Blutabnahme.',
-  },
-  {
-    was: 'Die Namen Ihrer Medikamente',
-    warum: 'Ein Foto der Packungen auf dem Handy genügt. Die Dosis steht drauf.',
-  },
-  {
-    was: 'Den ersten Tag Ihrer letzten Periode',
-    warum: 'Danach wird jedes Mal gefragt, und fast niemand hat die Antwort parat.',
+      'Falls vorhanden, bringen Sie gerne relevante Arztbriefe oder Befunde mit. So können wir Ihre bisherige Behandlung bestmöglich berücksichtigen.',
   },
 ];
 

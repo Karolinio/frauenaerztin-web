@@ -26,9 +26,12 @@ export default function TeamSeite() {
     <>
       <Seitenkopf
         etikett="Team"
-        titel="Wer Sie empfängt"
+        titel="Wer für Sie da ist"
         einleitung={
-          <p>Die Praxis startet klein. Sobald weitere Mitarbeiterinnen dazukommen, stehen sie hier.</p>
+          <p>
+            Gute Medizin lebt auch von den Menschen, die sie begleiten. In meiner Praxis erwartet Sie ein
+            engagiertes Team, das Ihnen mit Freundlichkeit, Offenheit und einem persönlichen Blick begegnet.
+          </p>
         }
       />
 

@@ -47,7 +47,7 @@ export function WerIchBin() {
     <section className="sektion werbin" aria-labelledby="werbin-titel">
       <div className="schale">
         <Enthuellen className="werbin__text">
-          <p className="t-label">Wer ich bin</p>
+          <p className="t-label">Über mich</p>
           <h2 id="werbin-titel" className="t-section werbin__name">
             {steht(person.name) ? person.name : <span className="luecke">Name der Ärztin</span>}
           </h2>
@@ -64,7 +64,7 @@ export function WerIchBin() {
 
         {weitere.length > 0 ? (
           <Enthuellen className="werbin__team">
-            <p className="t-label werbin__team-label">Und wer noch da ist</p>
+            <p className="t-label werbin__team-label">Mein Team</p>
             <ul className="werbin__reihe">
               {weitere.map((p, i) => (
                 <li className="werbin__person" key={p.rolle + i}>

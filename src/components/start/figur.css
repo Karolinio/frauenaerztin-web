@@ -63,8 +63,17 @@
    * #3D4638 ist aus ihrem #8D9788 abgeleitet, nicht danebengesetzt: gleicher
    * Farbton, gleiche Saettigung, nur dunkler. Es ist ihr Gruen, und es ist zu
    * sehen.
+   *
+   * ═══ Zurueckgenommen am 15.09.2026 ═══
+   *
+   * Ihr Befund am Handy: „das Gruen wirkt schon fast schwarz — am liebsten das
+   * vom originalen Logo." Das Schild-PDF, ueber ColorSync gerendert, misst
+   * #859080 — das ist `--salbei` bis auf Messrauschen. Die Figur ist eine
+   * Zeichnung von zwei Metern, kein Text: 2,4 : 1 ist fuer sie kein
+   * Lesbarkeitsproblem, sondern die Zurueckhaltung ihrer Marke. Ihr Wunsch,
+   * ihr Gruen.
    */
-  color: var(--signal);
+  color: var(--salbei);
 }
 
 .figur__svg {

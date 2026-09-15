@@ -29,8 +29,7 @@ export function ErsterBesuch() {
               Was Sie mitbringen
             </h2>
             <p className="t-body besuch__lead">
-              Nichts davon ist Pflicht. Aber jedes Stück auf dieser Liste spart im Termin Zeit, die dann fürs
-              Reden übrig ist.
+              Für Ihren ersten Besuch sind – sofern vorhanden – folgende Unterlagen hilfreich:
             </p>
           </Enthuellen>
         </div>
