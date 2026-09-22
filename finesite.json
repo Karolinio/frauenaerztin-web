@@ -19,7 +19,8 @@
     "art": "cloudflare",
     "ziel": "gyn-erkens",
     "domain": null,
-    "vorschau": "vorschau.gyn-erkens.pages.dev (echte Seite, noindex) · gyn-erkens.pages.dev (Flyer)",
+    "vorschau": "https://vorschau.gyn-erkens.pages.dev",
+    "_vorschau": "die echte Seite, noindex · gyn-erkens.pages.dev zeigt bis 01.11.2026 den Flyer (uebergang/)",
     "_uebergang": "Auf gyn-erkens.pages.dev läuft seit 12.09.2026 NICHT diese Seite, sondern die Übergangsseite (uebergang/, ihr Flyer). noindex, bis das Impressum vollständig ist. Die echte Seite ersetzt sie im selben Projekt am 01.11.2026 — die Domain gyn-erkens.de (Strato) wird genau einmal umgestellt, vorher MX-Einträge sichern."
   },
   "pflege": {
