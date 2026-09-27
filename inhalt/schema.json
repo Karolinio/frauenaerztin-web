@@ -59,9 +59,10 @@
         "text": {
           "art": "langtext",
           "label": "Vorstellung",
-          "pflicht": true,
-          "max": 420,
-          "hinweis": "Zwei bis vier Sätze. Was diese Person in der Praxis macht — nicht der ganze Lebenslauf."
+          "pflicht": false,
+          "max": 1600,
+          "hinweis": "Bei der Ärztin ihr „Über mich“ — Absätze mit einer Leerzeile trennen. Bei allen anderen zwei bis vier Sätze, oder leer lassen: dann stehen Name und Funktion allein.",
+          "_27_09_2026": "Vorher pflicht + max 420. Ihr Über-mich vom 14.09. hat 1370 Zeichen, die vier MFA haben (noch) keinen Text — der ganze Bereich Team war damit in der Redaktion gesperrt: jede Änderung, auch ein Fototausch, endete in fünf Befunden. Die Seite zeigt leere Vorstellungen ohnehin nicht (TeamSeite.tsx filtert leere Absätze)."
         },
         "bild": {
           "art": "bild",
