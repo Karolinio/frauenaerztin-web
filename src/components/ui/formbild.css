@@ -1,0 +1,85 @@
+/**
+ * Die Form. Gedreht und gespiegelt wird der Rahmen, das Foto darin genau
+ * entgegen — so dreht sich der Umriss, das Gesicht bleibt aufrecht.
+ *
+ * Beide Transformationen haben dieselbe Gestalt (rotate · scaleX) und dieselbe
+ * Kurve. Nur dann heben sie sich auch MITTEN im Übergang auf; mit
+ * verschiedenen Kurven kippt das Gesicht für einen Moment mit.
+ */
+.formbild {
+  --dreh-jetzt: var(--dreh);
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  /* Leinen, nicht Leinen-tief: darauf hält die gestrichelte Lücke ihren Kontrast. */
+  background: var(--leinen);
+  -webkit-mask: var(--form) center / contain no-repeat;
+  mask: var(--form) center / contain no-repeat;
+  transform: rotate(var(--dreh-jetzt)) scaleX(var(--spiegel));
+  transition: transform var(--dauer-portraet) var(--ease-ruhig);
+}
+
+.formbild img,
+.formbild__leer {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(var(--spiegel)) rotate(calc(-1 * var(--dreh-jetzt))) scale(1.22);
+  transition: transform var(--dauer-portraet) var(--ease-ruhig);
+}
+
+.formbild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 4:5-Datei in einer fast runden Form: das Gesicht sitzt im oberen Drittel. */
+  object-position: 50% 22%;
+}
+
+/* Der leere Rahmen: die Form in Leinen, darin dieselbe gestrichelte Lücke wie
+   überall auf der Seite, wo etwas fehlt. Der Innenabstand hält längeren Text
+   (auf /team/ bei der Ärztin) aus den schmalen Rändern der Form heraus. */
+.formbild__leer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0 14%;
+  text-align: center;
+  font-size: var(--text-meta);
+}
+
+/* Ohne die Leinen-Fläche der Lücke: sie läge als Kasten in der Form. */
+.formbild__leer .luecke {
+  background: transparent;
+  white-space: nowrap;
+}
+
+/* Beim Eintreten dreht sich die Form die letzten Grad in ihre Lage. */
+.auf:not(.auf--da) .formbild {
+  --dreh-jetzt: calc(var(--dreh) + 14deg);
+}
+
+/* Darüberfahren: vier Grad weiter — nur, wenn die Form in einem Link steht,
+   und nur mit Zeiger; auf dem Handy bliebe der Zustand nach dem Antippen hängen. */
+@media (hover: hover) {
+  a:hover .formbild,
+  a:focus-visible .formbild {
+    --dreh-jetzt: calc(var(--dreh) + 4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formbild,
+  .formbild img,
+  .formbild__leer {
+    transition: none;
+  }
+
+  .auf:not(.auf--da) .formbild,
+  a:hover .formbild,
+  a:focus-visible .formbild {
+    --dreh-jetzt: var(--dreh);
+  }
+}

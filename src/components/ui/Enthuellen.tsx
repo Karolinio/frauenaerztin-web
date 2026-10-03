@@ -25,12 +25,15 @@ export function Enthuellen({
   als: Als = 'div',
   verzoegerung = 0,
   className = '',
+  id,
 }: {
   children: ReactNode;
   als?: ElementType;
   /** Millisekunden. Für Listen, damit die Punkte nicht als Block erscheinen. */
   verzoegerung?: number;
   className?: string;
+  /** Sprungziel, z. B. eine Person auf `/team/`. */
+  id?: string;
 }) {
   const knoten = useRef<HTMLElement>(null);
   const [da, setDa] = useState(false);
@@ -71,6 +74,7 @@ export function Enthuellen({
   return (
     <Als
       ref={knoten}
+      id={id}
       className={`auf ${da ? 'auf--da' : ''} ${className}`.trim()}
       style={verzoegerung ? { transitionDelay: `${verzoegerung}ms` } : undefined}
     >

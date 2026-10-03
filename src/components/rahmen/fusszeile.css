@@ -47,19 +47,11 @@ main:has(> .flaeche-leinen:last-child) + .fuss {
 
 @media (min-width: 68rem) {
   .fuss__raster {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 0.9fr);
+    /* Drei Spalten, seit die kleine Marke als Schlusszeichen unter das Raster
+       gezogen ist. Die mittlere trägt die Zeiten und darf am breitesten sein. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 0.9fr);
     column-gap: var(--raum-gross);
   }
-}
-
-/* Die Markenspalte darf breiter atmen als die drei Datenspalten — gleich breite
-   Spalten wären das Raster, gegen das diese Seite gebaut ist. */
-.fuss__spalte--marke {
-  min-width: 12rem;
-}
-
-.fuss__ort {
-  margin-top: 0.6rem;
 }
 
 .fuss__spalte h2 {
@@ -106,6 +98,8 @@ main:has(> .flaeche-leinen:last-child) + .fuss {
 }
 
 .fuss__spanne {
+  display: grid;
+  justify-items: end;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -193,3 +187,79 @@ main:has(> .flaeche-leinen:last-child) + .fuss {
 
 /* Fax, E-Mail, Karte — ihre Fussliste vom 11.09.2026 */
 .fuss__zeile { margin: 0.35rem 0 0; }
+
+/* ── Die Marke als Schlusszeichen ─────────────────────────────────────────
+ *
+ * Wie ihr Schild am Eingang: der Blob links, der Name rechts daneben, weit
+ * gesperrt. Gross genug, um ein Ende zu sein — und trotzdem leise: keine
+ * Fläche, kein Rahmen, nur die Marke auf dem Grund der Fusszeile.
+ */
+.fuss__signatur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--raum) clamp(1.5rem, 1rem + 3vw, 4rem);
+  margin-top: var(--raum-sektion, 5rem);
+}
+
+.fuss__signatur-marke {
+  width: clamp(9rem, 6rem + 14vw, 20rem);
+  height: auto;
+  flex: none;
+}
+
+.fuss__signatur-text {
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.fuss__signatur-name {
+  font-family: var(--schrift-display);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 1rem + 2.4vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.16em;
+  color: var(--tinte);
+  text-wrap: balance;
+}
+
+.fuss__signatur-fach {
+  font-size: var(--text-meta);
+  letter-spacing: var(--tracking-label);
+  color: var(--tinte-mtl);
+}
+
+/* ── Wer die Seite gebaut hat ─────────────────────────────────────────── */
+.fuss__abschluss .fuss__urheber {
+  gap: 0.5rem;
+  align-items: baseline;
+  padding-inline: 0;
+  border-bottom: 0;
+  color: var(--tinte-mtl);
+  font-weight: 400;
+}
+
+.fuss__urheber-vor {
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.fuss__urheber-marke {
+  font-family: var(--schrift-display);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.03em;
+  color: var(--tinte);
+  transition: color var(--dauer-mikro) var(--ease-ruhig);
+}
+
+.fuss__urheber-strich {
+  color: var(--signal);
+  margin-right: 0.04em;
+}
+
+.fuss__urheber:hover .fuss__urheber-marke {
+  color: var(--signal);
+}

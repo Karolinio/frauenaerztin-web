@@ -7,6 +7,7 @@ import { ZiehGalerie } from '../components/praxis/ZiehGalerie';
 import { ErsterBesuch } from '../components/start/ErsterBesuch';
 import { TerminBlock } from '../components/start/TerminBlock';
 import { weg } from '../lib/weg';
+import { praxisText } from '../praxis.config';
 import '../components/start/start.css';
 
 /**
@@ -66,7 +67,9 @@ export default function Start() {
       */}
       <ZiehGalerie
         kennung="praxis-titel"
-        titel="Die Praxis"
+        etikett="Praxis"
+        titel={praxisText.titel}
+        lead={praxisText.satz}
         mitKarte={false}
         weiter={{ href: weg('/praxis/'), text: 'Alle Bilder der Praxis' }}
         klein

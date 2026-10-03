@@ -80,13 +80,17 @@ export const SYMBOLE: Record<string, ReactNode> = {
     </Zeichen>
   ),
 
-  /* Schwangere im Profil, aus derselben Feder wie ihr Logo: eine Linie. */
+  /*
+   * Schwangere, gezeichnet wie die Figur in ihrem Logo: kein Kopf, nur der
+   * Halsansatz, der Rücken und die Vorderlinie — hier mit dem Bauch.
+   * Neu am 04.10.2026; die erste Fassung (Kreis als Kopf, Strichkörper) fand
+   * sie „nicht so schön" (17.09.).
+   */
   schwangerschaft: (
     <Zeichen>
-      <circle cx="16.5" cy="6.5" r="2.8" />
-      <path d="M15 10c-2 1.6-3 4-3 6.6 0 3.4 1 5.6 1 9.4" />
-      <path d="M15 11.5c3.4 0 5.6 2 5.6 5s-2.4 4.6-5.4 4.6" />
-      <path d="M18.6 21.6c.4 2.4.6 3.4.6 4.4" />
+      <path d="M14.6 4.4c.3 1.5 1.3 2.6 2.7 3.1" />
+      <path d="M12.4 9C10.8 12.4 10.9 15.4 12.5 18.5c1.2 2.4.8 5.8-.8 9.3" />
+      <path d="M19.5 9.6c-.1 2-.9 3.3-.8 4.7 3.9 1.6 5.6 4.9 4.3 7.9-1.1 2.4-3.6 3.3-5.5 3.2.4.9.5 1.7.4 2.4" />
     </Zeichen>
   ),
 
@@ -106,11 +110,33 @@ export const SYMBOLE: Record<string, ReactNode> = {
     </Zeichen>
   ),
 
-  /* Schleife — das Zeichen, das in der Onkologie jede Patientin kennt. */
+  /*
+   * Spritze — „beim Impfen dann noch eine Spritze hinzufügen" (17.09.2026).
+   * Schräg gestellt wie ein Stift, Kolben oben rechts, die Nadel zeigt nach
+   * links unten. Drei Skalenstriche, kein Tropfen an der Spitze.
+   */
+  impfungen: (
+    <Zeichen>
+      <g transform="rotate(45 16 16)">
+        <rect x="13" y="9" width="6" height="13" rx="1.2" />
+        <path d="M13 13h2.5M13 16h2.5M13 19h2.5" />
+        <path d="M16 9V5M12.6 5h6.8" />
+        <path d="M14.8 22v2h2.4v-2" />
+        <path d="M16 24v4.5" />
+      </g>
+    </Zeichen>
+  ),
+
+  /*
+   * Schleife — das Zeichen, das in der Onkologie jede Patientin kennt.
+   * Neu gezeichnet am 04.10.2026: symmetrische Schlaufe, die Bänder kreuzen
+   * sich sichtbar übereinander (das hintere setzt aus). Die erste Fassung war
+   * schief und fand sie „nicht so schön" (17.09.).
+   */
   nachsorge: (
     <Zeichen>
-      <path d="M13 27l4.6-9.2M19 27l-9-18" />
-      <path d="M10 9a5 5 0 0 1 8.6-3.4C21 8 22 11 20.6 13.8L19 17" />
+      <path d="M10.6 27.6 17.4 15.6C19.4 12.2 20.3 10 20.3 8.6 20.3 6 18.4 4.3 16 4.3S11.7 6 11.7 8.6c0 1.4.9 3.6 2.9 7" />
+      <path d="M16.1 18l5.3 9.6" />
     </Zeichen>
   ),
 

@@ -1,7 +1,6 @@
 import { praxis, notruf } from '../praxis.config';
 import { Seitenkopf } from '../components/ui/Seitenkopf';
 import { Enthuellen } from '../components/ui/Enthuellen';
-import { Rueckruf } from '../components/kontakt/Rueckruf';
 import { steht } from '../components/ui/Angabe';
 import { weg } from '../lib/weg';
 import './kontakt.css';
@@ -105,16 +104,17 @@ export default function KontaktSeite() {
 
           <Enthuellen verzoegerung={80}>
             <h2 className="t-section">Anfahrt</h2>
+            {/* Ihre Texte vom 17.09.2026, wörtlich. */}
+            <p className="t-body kontakt__anfahrt">
+              Die Praxis befindet sich in der {praxis.adresse.strasse} und ist sowohl mit dem Auto als auch
+              mit öffentlichen Verkehrsmitteln erreichbar.
+            </p>
             <dl className="kontakt__daten">
-              <dt className="t-label">Mit dem Auto</dt>
-              <dd className="t-body">
-                <span className="luecke">Zufahrt und Parkmöglichkeiten eintragen</span>
-              </dd>
+              <dt className="t-label">Parken</dt>
+              <dd className="t-body">Direkt am Gebäude stehen kostenfreie Parkplätze zur Verfügung.</dd>
 
-              <dt className="t-label">Mit Bus und Bahn</dt>
-              <dd className="t-body">
-                <span className="luecke">Linie, Haltestelle und Fussweg eintragen</span>
-              </dd>
+              <dt className="t-label">Öffentliche Verkehrsmittel</dt>
+              <dd className="t-body">In unmittelbarer Nähe befindet sich die Bushaltestelle Theodor-Heuss-Str.</dd>
 
               <dt className="t-label">Barrierefreiheit</dt>
               <dd className="t-body">
@@ -126,19 +126,29 @@ export default function KontaktSeite() {
               </dd>
             </dl>
 
-            {/* Keine eingebettete Karte, solange kein Einwilligungsdialog dafür
-                steht: Google Maps lädt beim Öffnen der Seite die IP-Adresse der
-                Besucherin in die USA. Auf einer Arztseite ist das die
-                unnötigste Datenübertragung überhaupt — die Anschrift tut es. */}
-            <p className="t-meta kontakt__karte">
-              Eine eingebettete Karte gibt es hier bewusst nicht: sie würde Ihre IP-Adresse an einen fremden
-              Anbieter senden, bevor Sie irgendetwas angeklickt haben.
-            </p>
+            {/*
+              ═══ „Kann man hier ne Karte mit Route planen einfügen?" (17.09.2026) ═══
+
+              Eine EINGEBETTETE Karte nicht ohne Einwilligungsdialog: Google Maps
+              lädt beim Öffnen der Seite die IP-Adresse der Besucherin in die USA.
+              Ein Link dagegen überträgt erst etwas, wenn sie ihn antippt — und
+              öffnet am Handy direkt die Karten-App mit der Route ab ihrem Standort.
+            */}
+            <a
+              className="knopf knopf--leise kontakt__route"
+              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                `${praxis.adresse.strasse}, ${praxis.adresse.plz} ${praxis.adresse.ort}`,
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Route planen
+              <span className="nur-vorlesen"> (öffnet Google Maps in einem neuen Fenster)</span>
+            </a>
           </Enthuellen>
         </div>
       </section>
 
-      <Rueckruf />
     </>
   );
 }

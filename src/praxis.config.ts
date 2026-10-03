@@ -175,6 +175,8 @@ export const praxis = {
 
   /** Der Eröffnungstag. Bis er feststeht, wird er nirgends behauptet. */
   eroeffnung: '1. November 2026',
+  /** Derselbe Tag maschinenlesbar. Bis dahin sagt der Hero „Eröffnung", nie „geöffnet". */
+  eroeffnungAm: '2026-11-01',
 
   adresse: {
     /* Von ihr am 05.09.2026 fuer das Impressum geschickt: „Theodor-Heuss-Str.
@@ -212,15 +214,6 @@ export const praxis = {
      nicht genannt. Solange null: Luecke im Fuss, nicht weglassen — sie will
      sie dort. */
   fax: null as Offen<string>,
-
-  /**
-   * Der Endpunkt des Rückrufformulars. MUSS in der EU liegen.
-   *
-   * Solange `null`, nimmt das Formular nichts entgegen und verweist ans Telefon.
-   * Ein Formular, das ins Nichts sendet, ist schlimmer als keins: die Patientin
-   * wartet auf einen Rückruf, den niemand bekommen hat.
-   */
-  formularEndpunkt: demo('https://api.frauenheilkunde-erkelenz.de/rueckruf'),
 
   /** Kassenzulassung. Steht noch nicht fest, also steht sie nirgends. */
   kassen: demo('Alle gesetzlichen Kassen und privat'),
@@ -474,11 +467,11 @@ export const mitbringen: readonly Mitbringen[] = [
     warum: 'Bitte bringen Sie Ihre aktuelle elektronische Versichertenkarte mit.',
   },
   {
-    was: 'Ihren Mutterpass',
+    was: 'Ihr Mutterpass',
     warum: 'Wenn Sie schwanger sind, bringen Sie bitte zu jedem Termin Ihren Mutterpass mit.',
   },
   {
-    was: 'Ihren Impfpass',
+    was: 'Ihr Impfpass',
     warum: 'Gerne überprüfen wir bei Ihrem Besuch auch Ihren aktuellen Impfstatus.',
   },
   {
@@ -518,6 +511,16 @@ export const notruf = {
   },
 } as const;
 
+/* ══ Die Praxis in ihren Worten ═══════════════════════════════════════════
+ *
+ * Vom 18.09.2026, wörtlich — nur „Detail" statt „Details" und „Sie" groß.
+ * Steht auf der Startseite über der Zieh-Galerie und oben auf `/praxis/`.
+ * EINE Stelle, damit die beiden Fassungen nicht auseinanderlaufen. */
+export const praxisText = {
+  titel: 'Ein Ort zum Wohlfühlen',
+  satz: 'Unsere Praxisräume entstehen gerade mit viel Liebe zum Detail. Helle Farben, natürliche Materialien und eine ruhige Atmosphäre sollen dafür sorgen, dass Sie sich vom ersten Moment an wohlfühlen.',
+} as const;
+
 /* ══ Rechtliches ══════════════════════════════════════════════════════════
  *
  * Bei Heilberufen verlangt § 5 DDG mehr als bei anderen: die zuständige Kammer,
@@ -530,26 +533,25 @@ export const notruf = {
  * werden, und bis dahin steht dort eine Lücke. */
 
 export const rechtliches = {
-  berufsbezeichnung: demo('Ärztin — verliehen in der Bundesrepublik Deutschland'),
+  berufsbezeichnung: 'Ärztin — verliehen in der Bundesrepublik Deutschland',
   verleihenderStaat: 'Bundesrepublik Deutschland',
-  /* Erkelenz liegt im Kreis Heinsberg und damit im Bezirk Nordrhein. Das ist
-     nachprüfbar richtig — es steht trotzdem unter `demo()`, weil es die Ärztin
-     auf ihrer Pflichtseite bestätigen muss und nicht wir. */
-  aerztekammer: demo('Ärztekammer Nordrhein'),
-  aerztekammerUrl: demo('https://www.aekno.de/'),
+  /* „Ärztekammer Nordrhein stimmt“ — von ihr bestätigt am 14.09.2026. */
+  aerztekammer: 'Ärztekammer Nordrhein',
+  aerztekammerUrl: 'https://www.aekno.de/',
   kassenaerztlicheVereinigung: demo('Kassenärztliche Vereinigung Nordrhein'),
   kassenaerztlicheVereinigungUrl: demo('https://www.kvno.de/'),
-  berufsordnungUrl: demo('https://www.aekno.de/aerzte/berufsordnung'),
-  aufsichtsbehoerde: demo('Ärztekammer Nordrhein, Tersteegenstraße 9, 40474 Düsseldorf'),
-  umsatzsteuerId: demo('Heilbehandlungen sind nach § 4 Nr. 14 UStG umsatzsteuerfrei'),
+  berufsordnungUrl: 'https://www.aekno.de/aerzte/berufsordnung',
+  aufsichtsbehoerde: 'Ärztekammer Nordrhein, Tersteegenstraße 9, 40474 Düsseldorf',
+  umsatzsteuerId: 'Heilbehandlungen sind nach § 4 Nr. 14 UStG umsatzsteuerfrei',
   datenschutzbeauftragter: demo('praxis@frauenheilkunde-erkelenz.de'),
-  hostingAnbieter: demo('Hetzner Online GmbH, Industriestraße 25, 91710 Gunzenhausen'),
-  berufshaftpflicht: demo('Deutsche Ärzteversicherung AG, Hansaring 40–50, 50670 Köln'),
+  /* Wie auf der Übergangsseite: beide laufen im selben Cloudflare-Pages-Projekt. */
+  hostingAnbieter: 'Cloudflare Germany GmbH, Rosental 7, 80331 München',
+  /* „Versicherer ist AXA“ (14.09.2026). */
+  berufshaftpflicht: 'AXA Versicherung AG, Colonia-Allee 10–20, 51067 Köln',
   /** Räumlicher Geltungsbereich der Berufshaftpflicht, § 2 DL-InfoV. */
-  berufshaftpflichtGeltung: demo('Bundesrepublik Deutschland'),
-  datenschutzAufsicht: demo('Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen'),
-  /** Wie lange eine Rückrufanfrage gespeichert wird. Pflichtangabe, Art. 13 DSGVO. */
-  speicherdauerRueckruf: demo('Bis zum Rückruf, längstens 30 Tage'),
+  berufshaftpflichtGeltung: 'Deutschland',
+  datenschutzAufsicht:
+    'Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen, Kavalleriestraße 2–4, 40213 Düsseldorf',
 } as const;
 
 /* ══ Anfahrt ══════════════════════════════════════════════════════════════ */

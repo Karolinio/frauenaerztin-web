@@ -192,60 +192,56 @@
 }
 
 .werbin__reihe {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--raum);
+  display: grid;
+  /* Zwei nebeneinander am Handy, vier ab Tablet. Feste Spaltenzahl statt
+     `auto-fill`: bei vier Personen sonst 3 + 1, und die eine steht allein. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--raum) clamp(1rem, 0.6rem + 1.4vw, 2rem);
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.werbin__person {
-  /* Feste Breite statt `flex: 1`: bei zwei Personen zöge `1fr` jede auf die
-     halbe Seitenbreite, und aus zwei Porträts würden zwei Plakate. */
-  width: clamp(6rem, 4.5rem + 6vw, 11rem);
+@media (min-width: 48rem) {
+  .werbin__reihe {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
-/**
- * 4:5 — dasselbe Verhältnis wie auf `/team/` und in `inhalt/schema.json`.
- * Steht es hier anders, schneidet dieselbe Datei an zwei Stellen verschieden,
- * und eine der beiden schneidet durchs Kinn.
- */
-.werbin__bild {
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: var(--papier);
+.werbin__verweis {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 2px;
 }
 
-.werbin__bild img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.werbin__verweis:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 6px;
 }
 
-/* Der leere Rahmen. Gestrichelt wie überall auf dieser Seite, wo etwas fehlt —
-   und mit derselben Bedeutung: hier gehört etwas hin, das es noch nicht gibt. */
-.werbin__luecke {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding: 0.5rem;
-  border: 1px dashed var(--tinte-mtl);
-  text-align: center;
-  font-size: var(--text-meta);
-}
+/* Die Form selbst: `components/ui/formbild.css`, geteilt mit /team/. */
 
 .werbin__person-name {
-  margin-top: 0.7rem;
+  display: block;
+  margin-top: 0.9rem;
   font-size: var(--text-base);
   line-height: 1.3;
+  transition: color var(--dauer-mikro) ease;
+}
+
+@media (hover: hover) {
+  .werbin__verweis:hover .werbin__person-name {
+    color: var(--signal);
+  }
 }
 
 .werbin__person-rolle {
+  display: block;
   margin-top: 0.2rem;
   color: var(--tinte-mtl);
 }
+
 
 /* ── Leistungen im Auszug ─────────────────────────────────────────────────── */
 
@@ -287,10 +283,6 @@
 
 .auszug__kopf {
   margin-bottom: var(--raum);
-}
-
-.auszug__salbei {
-  display: none;
 }
 
 .auszug__liste {
@@ -360,26 +352,7 @@
     padding-bottom: 0.4rem;
   }
 
-  .auszug__salbei {
-    display: block;
-    position: absolute;
-    /* Weit genug nach oben und rechts hinaus, dass nur die unteren Blätter in
-       die Sektion ragen. Ein vollständig sichtbares Motiv wirkt wie ein Symbol,
-       ein angeschnittenes wie eine Fotografie — und dicht am Text wirkt es wie
-       ein Versehen. */
-    top: -6.5rem;
-    /* Nur ein halber Rand nach draussen. Bei -2,5 Rändern ragte der Zweig bei
-       1440px 17px über den Bildschirm — `overflow-x: hidden` versteckte das,
-       aber die Seite liess sich seitlich schieben. Gemessen mit
-       `engine/pruefen.mjs`, nicht gesehen. */
-    right: calc(-0.5 * var(--rand));
-    width: clamp(10rem, 14vw, 15rem);
-    height: auto;
-    opacity: 0.75;
-    pointer-events: none;
-    transform: rotate(-8deg);
-    z-index: 0;
-  }
+
 
   .auszug__liste,
   .auszug__kopf,
@@ -393,6 +366,13 @@
 
 .besuch__kopf {
   margin-bottom: var(--raum);
+}
+
+/* Derselbe Abstand Etikett → Überschrift wie bei Leistungen und Termin.
+   Ohne ihn klebte „Was Sie mitbringen" am Etikett — ihr ist es aufgefallen
+   (17.09.2026: „Da ist der Abstand kleiner als oben"). */
+.besuch__titel {
+  margin-top: 0.8rem;
 }
 
 .besuch__lead {

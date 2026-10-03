@@ -17,7 +17,11 @@
      und darf nie von ihrem eigenen Wasserzeichen verdeckt werden. */
   z-index: 20;
   pointer-events: none;
-  opacity: 0.62;
+  /* 03.10.2026, Karol: „Die soll darüber liegen — oder du legst sie drunter
+     mit Transparenz." Sie bleibt oben, wirkt aber wie darunter gedruckt:
+     `multiply` lässt dunkle Schrift durch, statt sie mit Grau zu überdecken. */
+  opacity: 0.5;
+  mix-blend-mode: multiply;
   transition: opacity 620ms var(--ease-ruhig);
 }
 
@@ -29,7 +33,8 @@
 
 /* Solange das grosse Logo im Hero steht, waere das Wasserzeichen die dritte
    Marke im selben Bild. Es kommt erst, wenn der Hero durch ist. */
-[data-marke-im-hero='ja'] .eckenmarke {
+[data-marke-im-hero='ja'] .eckenmarke,
+[data-marke-im-fuss='ja'] .eckenmarke {
   opacity: 0;
 }
 

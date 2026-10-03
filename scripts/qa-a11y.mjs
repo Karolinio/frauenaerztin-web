@@ -110,7 +110,7 @@ const messung = await seite.evaluate(() => {
     ['Etikett über einer Sektion', '.t-label', true],
     ['Fließtext auf Leinen', '.besuch__warum', true],
     ['Sichtbare Lücke auf Leinen', '.luecke', false],
-    ['Meta in der Fußzeile', '.fuss__ort', true],
+    ['Meta in der Fußzeile', '.fuss__signatur-fach', true],
     ['Navigation inaktiv', '.kopf__punkt', true],
     ['Weiß auf Signal (Knopf)', '.knopf', true],
     /*
@@ -123,8 +123,8 @@ const messung = await seite.evaluate(() => {
      * gerechnet: wer die Flaeche spaeter um zwei Prozent aufhellt, faellt durch
      * und merkt es nicht.
      */
-    ['Aussage auf ihrer grauen Fläche', '.aussage .aussage__satz', true],
-    ['Zusatz auf ihrer grauen Fläche', '.aussage .aussage__zusatz', true],
+    ['Aussage auf ihrer Salbei-Fläche', '.aussage .aussage__satz', true],
+    ['Zusatz auf ihrer Salbei-Fläche', '.aussage .aussage__zusatz', true],
     /*
      * Die Zeichnung selbst.
      *
@@ -138,7 +138,7 @@ const messung = await seite.evaluate(() => {
      * setzt (#8D9788 auf #E5E6E3 ergaebe 2,43 : 1), soll das hier sehen und
      * nicht erst, wenn jemand fragt, wo die Frau geblieben ist.
      */
-    ['Zeichnung auf ihrer grauen Fläche', '.figur', true],
+    ['Zeichnung auf ihrer Salbei-Fläche', '.figur', true],
   ];
 
   return proben

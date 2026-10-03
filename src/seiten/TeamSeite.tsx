@@ -2,7 +2,8 @@ import { team } from '../inhalt';
 import { Seitenkopf } from '../components/ui/Seitenkopf';
 import { Enthuellen } from '../components/ui/Enthuellen';
 import { steht } from '../components/ui/Angabe';
-import { weg } from '../lib/weg';
+import { personAnker } from '../lib/anker';
+import { Formbild } from '../components/ui/Formbild';
 import './team.css';
 
 /**
@@ -22,6 +23,8 @@ import './team.css';
  * schafft, verschiebt beim ersten echten Bild das ganze Layout.
  */
 export default function TeamSeite() {
+  const [erste, ...weitere] = team;
+
   return (
     <>
       <Seitenkopf
@@ -55,75 +58,80 @@ export default function TeamSeite() {
         Abgelesen an Analogue Agency (Mobbin, 27.08.2026): eine Aussage gross,
         die uebrigen als kompakte Zeilen daneben.
       */}
-      <div className="schale team">
-        {team.map((p, i) => (
-          <Enthuellen
-            als="article"
-            key={p.rolle + i}
-            className={`team__person ${i === 0 ? 'team__person--erste' : ''}`}
-          >
-            <div className="team__bild">
-              {steht(p.bild) ? (
-                <img
-                  src={weg(p.bild)}
-                  width={800}
-                  height={1000}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                  alt={p.bildAlt}
-                />
-              ) : (
-                /*
-                 * ═══ Warum hier keine Aufnahmehinweise mehr stehen ═══
-                 *
-                 * Bis zum 20.08.2026 stand an dieser Stelle „Hochformat,
-                 * mindestens 800 px breit, Licht von links. Ablegen unter
-                 * /bilder/team/ und in der Redaktion auswählen." Das ist eine
-                 * Anweisung an die Person, die das Foto einsetzt — und sie stand
-                 * auf einer ÖFFENTLICHEN Seite. Eine Patientin, die wissen will,
-                 * wer sie empfängt, las einen Dateipfad.
-                 *
-                 * Zweiter Grund, unabhängig vom ersten: dieselbe Anweisung steht
-                 * bereits in `inhalt/schema.json` beim Feld `bild` — also genau
-                 * dort, wo Yvonne sie beim Bearbeiten sieht. Zwei Fassungen
-                 * derselben Anweisung driften auseinander, sobald jemand eine
-                 * davon anfasst, und dann widersprechen sich Editor und Seite.
-                 *
-                 * Was bleibt, ist ein Satz für die Leserin: dass hier ein Foto
-                 * hingehört und wann es kommt. Das ist wahr und geht niemanden
-                 * etwas an, der es nicht einsetzen muss.
-                 */
-                /*
-                 * Der erklaerende Satz steht NUR am grossen Rahmen.
-                 *
-                 * In den kleinen brach er auf acht Zeilen um und fuellte den
-                 * Rahmen randvoll — ein Platzhalter, der aussieht, als waere er
-                 * kaputt, ist schlechter als einer, der nur zwei Woerter sagt.
-                 * Und er stuende dreimal dasselbe: gelesen wird er beim ersten
-                 * Mal, danach ist er Wiederholung.
-                 */
-                <p className="team__rahmen">
-                  <span className="luecke">Foto folgt</span>
-                  {i === 0 ? (
-                    <span className="t-meta team__rahmen-hinweis">
-                      Die Praxis wird gerade eingerichtet. Die Fotos entstehen im Oktober.
-                    </span>
-                  ) : null}
-                </p>
-              )}
-            </div>
+      {/*
+        ═══ Seit dem 03.10.2026: dieselbe Form wie auf der Startseite ═══
 
+        Die Gesichter sitzen im Umriss ihrer Marke (`Formbild`), hier wie auf
+        der Startseite — vorher standen hier noch gestrichelte Rechtecke.
+
+        Und die Mitarbeiterinnen stehen nicht mehr als vier Zeilen mit je einer
+        halben Bildschirmhöhe Leere rechts daneben, sondern als Reihe: Gesicht,
+        Name, Funktion — und ihr Satz, sobald es einen gibt („Ggf. würde ich zu
+        denen noch einen Satz hinzufügen", 11.09.2026). Eine Person gross, die
+        übrigen kompakt — wie bei Analogue Agency (Mobbin).
+      */}
+      <div className="schale team">
+        {erste ? (
+          <Enthuellen als="article" id={personAnker(erste.name, 0)} className="team__person team__person--erste">
+            <div className="team__bild">
+              <Formbild bild={erste.bild} alt={erste.bildAlt} index={0} sofort>
+                {/* Der Satz für die Leserin, nicht für die Person, die das Foto
+                    einsetzt — die Anleitung steht in inhalt/schema.json. */}
+                <span className="luecke">Foto folgt</span>
+                <span className="t-meta team__rahmen-hinweis">
+                  Die Praxis wird gerade eingerichtet. Die Fotos entstehen im Oktober.
+                </span>
+              </Formbild>
+            </div>
             <div className="team__text">
-              <h2 className="t-unter">{steht(p.name) ? p.name : <span className="luecke">Name</span>}</h2>
-              <p className="t-meta team__rolle">{p.rolle}</p>
-              {/* Ihr Ueber-mich hat sechs Absaetze (11.09.2026). Ein einziges <p>
+              <h2 className="t-unter">{steht(erste.name) ? erste.name : <span className="luecke">Name</span>}</h2>
+              <p className="t-meta team__rolle">{erste.rolle}</p>
+              {/* Ihr Über-mich hat sechs Absätze (11.09.2026). Ein einziges <p>
                   machte daraus eine Wand; die Leerzeile im Text ist die Absatzgrenze. */}
-              {p.text.split('\n\n').filter(Boolean).map((a, i) => (
-                <p key={i} className="t-body team__satz">{a}</p>
-              ))}
+              {erste.text
+                .split('\n\n')
+                .filter(Boolean)
+                .map((a, i) => (
+                  <p key={i} className="t-body team__satz">
+                    {a}
+                  </p>
+                ))}
             </div>
           </Enthuellen>
-        ))}
+        ) : null}
+
+        {weitere.length > 0 ? (
+          <section className="team__reihe-sektion" aria-labelledby="team-reihe-titel">
+            <h2 id="team-reihe-titel" className="t-label team__reihe-titel">
+              Mein Team
+            </h2>
+            <ul className="team__reihe">
+              {weitere.map((p, i) => (
+                <Enthuellen
+                  als="li"
+                  key={p.rolle + i}
+                  id={personAnker(p.name, i + 1)}
+                  className="team__kollegin"
+                  verzoegerung={i * 90}
+                >
+                  <Formbild bild={p.bild} alt={p.bildAlt} index={i + 1} />
+                  <h3 className="team__kollegin-name">
+                    {steht(p.name) ? p.name : <span className="luecke">Name</span>}
+                  </h3>
+                  <p className="t-meta team__rolle">{p.rolle}</p>
+                  {p.text
+                    .split('\n\n')
+                    .filter(Boolean)
+                    .map((a, j) => (
+                      <p key={j} className="t-meta team__kollegin-satz">
+                        {a}
+                      </p>
+                    ))}
+                </Enthuellen>
+              ))}
+            </ul>
+          </section>
+        ) : null}
       </div>
     </>
   );

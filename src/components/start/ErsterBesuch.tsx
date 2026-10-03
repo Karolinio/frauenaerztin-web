@@ -25,10 +25,13 @@ export function ErsterBesuch() {
         <div className="besuch__kopf">
           <Enthuellen>
             <p className="t-label">Der erste Besuch</p>
-            <h2 id="besuch-titel" className="t-section">
+            <h2 id="besuch-titel" className="t-section besuch__titel">
               Was Sie mitbringen
             </h2>
             <p className="t-body besuch__lead">
+              {/* Ihre letzte Fassung (Nachricht vom Montag, nach dem 18.09.): „sind …
+                  hilfreich" — deshalb stehen die Punkte darunter im Nominativ,
+                  „Ihr Mutterpass", „Ihr Impfpass". */}
               Für Ihren ersten Besuch sind – sofern vorhanden – folgende Unterlagen hilfreich:
             </p>
           </Enthuellen>

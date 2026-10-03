@@ -14,7 +14,8 @@
     "qa:bau": "node scripts/qa-bau.mjs",
     "qa:a11y": "node scripts/qa-a11y.mjs",
     "qa:recht": "node scripts/qa-recht.mjs",
-    "bilder": "node scripts/bildplaetze.mjs"
+    "bilder": "node scripts/bildplaetze.mjs",
+    "test": "node scripts/test-jetzt.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

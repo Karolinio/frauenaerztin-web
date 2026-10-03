@@ -55,34 +55,8 @@ export function Datenschutz() {
         </dl>
       </section>
 
-      <section aria-labelledby="formular">
-        <h2 id="formular">Rückrufformular</h2>
-        <p>
-          Wenn Sie das Rückrufformular nutzen, werden genau drei Angaben übertragen: Ihr Name, Ihre
-          Telefonnummer und der von Ihnen gewählte Zeitraum. Ein Freitextfeld gibt es bewusst nicht — Angaben
-          zu Beschwerden oder Befunden wären Gesundheitsdaten nach Art. 9 DSGVO und gehören nicht in ein
-          Webformular.
-        </p>
-        <dl>
-          <dt>Zweck</dt>
-          <dd>Rückruf zur Terminvereinbarung. Keine andere Verwendung, keine Weitergabe.</dd>
-          <dt>Rechtsgrundlage</dt>
-          <dd>Art. 6 Abs. 1 lit. a DSGVO — Ihre Einwilligung, die Sie im Formular ausdrücklich erteilen.</dd>
-          <dt>Speicherdauer</dt>
-          <dd>
-            <Offen>{rechtliches.speicherdauerRueckruf}</Offen>
-          </dd>
-          <dt>Widerruf</dt>
-          <dd>
-            Sie können die Einwilligung jederzeit formlos widerrufen, telefonisch oder per E-Mail. Die
-            Rechtmäßigkeit der bis dahin erfolgten Verarbeitung bleibt davon unberührt.
-          </dd>
-          <dt>Empfänger</dt>
-          <dd>
-            <Offen was="Anbieter des Formular-Endpunkts mit Sitz in der EU, dazu der Auftragsverarbeitungsvertrag" />
-          </dd>
-        </dl>
-      </section>
+      {/* Der Abschnitt zum Rückrufformular ist mit dem Formular gegangen
+          (17.09.2026). Die Seite erhebt keine Formulardaten mehr. */}
 
       {/*
         ═══ Diese Seite beschrieb eine Karte, die es nicht gibt ═══
@@ -148,8 +122,7 @@ export function Datenschutz() {
 
       <p className="recht__warnung">
         Diese Erklärung ist ein Gerüst und noch nicht vollständig. Alle markierten Stellen müssen eingetragen
-        und die Seite vor der Veröffentlichung datenschutzrechtlich geprüft werden — insbesondere dann, wenn
-        der Formular-Endpunkt feststeht.
+        und die Seite vor der Veröffentlichung datenschutzrechtlich geprüft werden.
       </p>
     </Rechtsseite>
   );

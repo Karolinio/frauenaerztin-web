@@ -16,46 +16,21 @@
 }
 
 .team__bild {
-  /* Die Masse des künftigen Fotos. Der Platz steht schon, damit beim ersten
-     echten Bild nichts verrutscht. */
-  aspect-ratio: 4 / 5;
-  background: var(--leinen);
-  overflow: hidden;
+  /* Die Form selbst kommt aus `components/ui/formbild.css`. Hier nur die
+     Breite: am Handy nicht über die halbe Seite hinaus. */
+  max-width: 26rem;
 }
 
-.team__bild img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 /* Der leere Rahmen. Er sagt, was fehlt und wohin es gehört — kein Stockfoto,
    kein Initialenkreis, keine graue Silhouette. */
 /* Der leere Rahmen. Er sagt, was fehlt — kein Stockfoto, kein Initialenkreis,
    keine graue Silhouette. */
-.team__rahmen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0.8rem;
-  height: 100%;
-  /* Der Innenabstand faellt in den kleinen Rahmen mit: bei 176px Breite frisst
-     ein Abstand, der fuer 352px bemessen ist, die halbe Flaeche. */
-  padding: clamp(0.75rem, 0.4rem + 1.2vw, 1.5rem);
-  border: 1px dashed var(--tinte-mtl);
-}
 
 .team__rahmen-hinweis {
   line-height: 1.6;
 }
 
-.team__rahmen code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.9em;
-  background: var(--leinen-tief);
-  padding: 0.05em 0.3em;
-}
 
 .team__rolle {
   margin-top: 0.35rem;
@@ -122,4 +97,51 @@
 
 .team__person:not(.team__person--erste) .team__satz {
   font-size: var(--text-meta);
+}
+
+/* ── Das Team als Reihe ───────────────────────────────────────────────────
+ *
+ * Zwei nebeneinander am Handy, vier ab Tablet — dieselbe Reihe wie auf der
+ * Startseite, nur mit Platz für ihren Satz unter jeder Person.
+ */
+.team__reihe-sektion {
+  padding-top: var(--raum-gross);
+  border-top: 1px solid var(--linie);
+}
+
+.team__reihe-titel {
+  margin-bottom: var(--raum);
+}
+
+.team__reihe {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--raum-gross) clamp(1rem, 0.6rem + 1.4vw, 2.5rem);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  .team__reihe {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.team__kollegin-name {
+  margin-top: 1rem;
+  font-family: var(--schrift-display);
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.25rem);
+  line-height: 1.3;
+}
+
+.team__kollegin-satz {
+  margin-top: 0.6rem;
+  max-width: 32ch;
+}
+
+/* Die Ärztin steht vor der Reihe; ihr Abstand nach unten trennt die beiden. */
+.team__person--erste {
+  border-top: 0;
 }

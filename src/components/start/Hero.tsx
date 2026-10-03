@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { praxis } from '../../praxis.config';
-import { zeiten, hatZeiten, istHeute } from '../../inhalt';
+import { zeiten } from '../../inhalt';
+import { augenblickInBerlin, sprechzeitJetzt, type Lage } from '../../lib/jetzt';
 import { Marke } from '../ui/Marke';
 import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
@@ -252,24 +253,40 @@ function useSchriftBereit(): boolean {
  * die Zeiten, sagt die Zeile das, statt „geschlossen" zu behaupten: eine falsche
  * Zeitangabe ist eine Patientin vor verschlossener Tür.
  */
+/** Der Satz zur Sprechzeit — einmal pro Minute neu, damit er um 13:00 kippt. */
+function useLage(): Lage {
+  const rechnen = () =>
+    sprechzeitJetzt(zeiten, augenblickInBerlin(), praxis.eroeffnungAm, praxis.eroeffnung.replace(/\s*\d{4}$/, ''));
+  const [lage, setLage] = useState<Lage>(rechnen);
+  useEffect(() => {
+    const neu = () => setLage(rechnen());
+    const takt = window.setInterval(neu, 60_000);
+    /* Ein Tab im Hintergrund wird gedrosselt — wer zurückkommt, sähe sonst
+       ein „Jetzt geöffnet" von heute Vormittag. */
+    const sichtbar = () => document.visibilityState === 'visible' && neu();
+    document.addEventListener('visibilitychange', sichtbar);
+    return () => {
+      window.clearInterval(takt);
+      document.removeEventListener('visibilitychange', sichtbar);
+    };
+  }, []);
+  return lage;
+}
+
 function Praxisdaten() {
   const telefonSteht = steht(praxis.telefon.href) && steht(praxis.telefon.anzeige);
 
-  const heute = zeiten.find((z) => istHeute(z));
-  const spanne =
-    heute && hatZeiten(heute) ? [heute.vormittag, heute.nachmittag].filter(Boolean).join(' · ') : null;
+  const lage = useLage();
 
   return (
     <div className="hero__daten">
+      {/* `aria-live` aus: der Satz wechselt höchstens einmal in der Stunde, und
+          eine Ansage mitten im Lesen wäre lauter als der Wechsel selbst. */}
       <p className="hero__heute">
-        <span className="hero__heute-wort">Heute</span>
-        {heute === undefined ? (
-          <span className="luecke">Sprechzeiten</span>
-        ) : spanne === null ? (
-          <span className="hero__heute-zu">geschlossen</span>
-        ) : (
-          <span className="hero__heute-zeit">{spanne} Uhr</span>
-        )}
+        {lage.offen ? <span className="hero__heute-punkt" aria-hidden="true" /> : null}
+        <span className="hero__heute-wort">{lage.wort}</span>
+        {lage.satz ? <span className="hero__heute-zeit">{lage.satz}</span> : null}
+        {!lage.satz && lage.wort === 'Heute' ? <span className="luecke">Sprechzeiten folgen</span> : null}
       </p>
 
       <div className="hero__wege">

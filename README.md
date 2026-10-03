@@ -93,9 +93,6 @@ Dazu zwei Korrekturen an den Assets:
 - [ ] `src/praxis.config.ts` vollständig ausfüllen — jede Stelle mit `TODO Kunde`.
 - [ ] Impressum und Datenschutz sind **Gerüste**. Die offenen Stellen sind auf
       den Seiten gelb markiert. Anwaltlich prüfen lassen, nicht selbst ergänzen.
-- [ ] Formular-Endpunkt (EU-Hosting, Auftragsverarbeitungsvertrag) eintragen.
-      Solange `formularEndpunkt` null ist, nimmt das Formular nichts entgegen
-      und verweist sichtbar auf das Telefon.
 - [ ] Koordinaten eintragen, sonst erscheint statt der Karte nur die Anschrift.
 - [ ] Räume: entweder durch echte Fotos ersetzen oder den Hinweis in der
       Fußzeile stehen lassen.
@@ -103,9 +100,8 @@ Dazu zwei Korrekturen an den Assets:
 
 ## Recht (Heilberuf — vorgelagert, nicht nachgereicht)
 
-- **Kein Gesundheitsdaten-Formular.** Rückrufformular ohne Freitextfeld „Ihr
-  Anliegen" — das wäre bereits ein Art.-9-Datum. Erhoben werden Name,
-  Telefonnummer, Wunschzeitraum, mehr nicht.
+- **Kein Formular.** Das Rückrufformular ist auf ihren Wunsch raus (17.09.2026).
+  Termine gibt es nur telefonisch; die Seite erhebt keine Formulardaten.
 - HWG + Berufsordnung: keine Heilversprechen, keine Superlative, keine
   vergleichende Werbung.
 - Fonts selbst gehostet, kein Google-CDN. Karte nur nach Consent-Klick, davor

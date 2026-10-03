@@ -3,7 +3,6 @@ import { Seitenkopf } from '../components/ui/Seitenkopf';
 import { Enthuellen } from '../components/ui/Enthuellen';
 import { Sprechzeiten } from '../components/praxis/Sprechzeiten';
 import { steht } from '../components/ui/Angabe';
-import { weg } from '../lib/weg';
 import './termin.css';
 import { Hoerer } from '../components/ui/Strichzeichen';
 
@@ -82,16 +81,8 @@ export default function TerminSeite() {
               </p>
             </Enthuellen>
 
-            <Enthuellen als="article" className="weg" verzoegerung={60}>
-              <p className="t-label">Rückruf</p>
-              <p className="t-body weg__text">
-                Sie hinterlassen Ihre Nummer, ich rufe zurück. Für alles, was sich nicht in einer Sprechzeit
-                klären lässt.
-              </p>
-              <a className="knopf knopf--leise weg__knopf" href={weg('/kontakt/')}>
-                Rückruf anfragen
-              </a>
-            </Enthuellen>
+            {/* Der Rückrufweg ist raus — „Kannst du die Passage mit dem Rückruf
+                rausnehmen?" (17.09.2026). Termine gibt es telefonisch. */}
 
             {/* Die Doctolib-Zeile. Sie steht heute nicht da, weil es sie nicht
                 gibt — und sie kommt, sobald ein Wert in der Konfiguration steht. */}

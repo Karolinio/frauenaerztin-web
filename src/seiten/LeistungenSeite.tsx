@@ -21,13 +21,9 @@ export default function LeistungenSeite() {
     <div className="leistungen-seite">
       <Seitenkopf
         etikett="Leistungen"
-        titel="Was ich anbiete"
-        einleitung={
-          <p>
-            Fachbegriffe erkläre ich beim ersten Mal in einem Halbsatz. Wenn im Termin trotzdem etwas unklar
-            bleibt, fragen Sie — das ist keine Störung, das ist der Termin.
-          </p>
-        }
+        /* Ihr Text vom 17.09.2026 ersetzt „Was ich anbiete" samt Einleitung. */
+        titel="Jede Lebensphase bringt andere Fragen mit sich."
+        einleitung={<p>Ich möchte Sie dabei medizinisch kompetent, verständlich und individuell begleiten.</p>}
       />
 
       <div className="schale leistungen">

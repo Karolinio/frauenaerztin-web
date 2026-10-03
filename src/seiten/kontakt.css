@@ -123,9 +123,13 @@
   max-width: 56ch;
 }
 
-.kontakt__karte {
+.kontakt__anfahrt {
   margin-top: var(--raum);
   max-width: 56ch;
+}
+
+.kontakt__route {
+  margin-top: var(--raum);
 }
 
 @media (min-width: 56rem) {
@@ -148,103 +152,4 @@
     align-items: start;
     gap: 0.2rem;
   }
-}
-
-/* ── Rückruf ──────────────────────────────────────────────────────────────── */
-
-.rueckruf__lead {
-  margin-top: var(--raum);
-  max-width: 56ch;
-}
-
-.rueckruf__form {
-  display: grid;
-  gap: var(--raum);
-  max-width: 32rem;
-  margin-top: var(--raum-gross);
-}
-
-.feld {
-  display: grid;
-  gap: 0.4rem;
-}
-
-.feld label {
-  font-size: var(--text-meta);
-  font-weight: 500;
-  color: var(--tinte);
-}
-
-.feld input[type='text'],
-.feld input[type='tel'],
-.feld select {
-  min-height: var(--tippziel);
-  padding: 0.6rem 0.8rem;
-  background: var(--papier);
-  border: 1px solid var(--tinte-mtl);
-  color: var(--tinte);
-}
-
-/* Kein Kasten mit Schatten beim Fokus — dieselbe Kontur wie überall sonst. */
-.feld input:focus-visible,
-.feld select:focus-visible {
-  border-color: var(--signal);
-}
-
-.feld--zustimmung {
-  grid-template-columns: auto 1fr;
-  align-items: start;
-  gap: 0.7rem;
-}
-
-/**
- * Die Einwilligung. Das einzige Bedienelement des Formulars, das kleiner als
- * 44px war — gemessen am 19.08.2026: 20 x 20px, waehrend jedes andere Feld
- * zwischen 44 und 58px hoch ist.
- *
- * ═══ Warum das kein Fliesstext-Verweis ist ═══
- *
- * Die uebrigen kleinen Ziele dieser Seite sind Verweise MITTEN IN SAETZEN. Fuer
- * die gilt die Inline-Ausnahme aus WCAG 2.5.8: ihre Groesse ist durch die
- * Zeilenhoehe des umgebenden Textes bestimmt, und wer sie aufblaest, zerstoert
- * den Absatz. Eine Checkbox steht dagegen fuer sich — fuer sie gilt die
- * Ausnahme nicht, und 20px sind schlicht zu klein.
- *
- * 1,5rem = 24px ist das Mindestmass aus 2.5.8 (AA). Das tatsaechliche Ziel ist
- * groesser: das `label` haengt ueber `htmlFor` daran und ist zwei bis drei
- * Zeilen hoch, ein Tippen darauf schaltet die Checkbox. `min-height` sichert
- * das auch dann, wenn der Text einmal auf eine Zeile schrumpft.
- */
-.feld--zustimmung input {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-top: 0.1rem;
-  accent-color: var(--signal);
-}
-
-.feld--zustimmung label {
-  display: flex;
-  align-items: center;
-  min-height: var(--tippziel);
-}
-
-.feld--zustimmung label {
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-.rueckruf__aus {
-  margin-top: var(--raum-gross);
-  max-width: 56ch;
-}
-
-.rueckruf__aus .knopf,
-.rueckruf__luecke {
-  margin-top: var(--raum);
-}
-
-.rueckruf__luecke {
-  display: flex;
-  align-items: center;
-  min-height: var(--tippziel);
 }

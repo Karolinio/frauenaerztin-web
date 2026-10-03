@@ -74,22 +74,15 @@ export function LeistungenAuszug() {
             Für jede Lebensphase
           </h2>
           <p className="t-body auszug__lead">
+            {/* Ihr Satz vom 17.09.2026. */}
             Von der Vorsorge über Kinderwunsch und Schwangerschaft bis zu den Wechseljahren und darüber
-            hinaus. Was jeweils dahintersteckt, steht ausführlich auf der Leistungsseite — hier in je einem
-            Satz.
+            hinaus. Jede Lebensphase bringt unterschiedliche Fragen und Bedürfnisse mit sich – und verdient
+            eine individuelle, medizinische Begleitung.
           </p>
         </Enthuellen>
 
-        <img
-          className="auszug__salbei"
-          src={weg('/bilder/salbei.webp')}
-          width={720}
-          height={696}
-          loading="lazy"
-          decoding="async"
-          alt=""
-          aria-hidden="true"
-        />
+        {/* Das Salbeizweiglein oben rechts ist raus — „Kannst du bei Leistungen noch
+            das Pflänzchen wegmachen?" (19.09.2026). */}
 
         <ul className="auszug__raster">
           {leistungen.map((l, i) => (
@@ -107,20 +100,24 @@ export function LeistungenAuszug() {
           ))}
         </ul>
 
-        <Enthuellen className="auszug__weitere">
-          <p className="t-meta">
-            Ausserdem:{' '}
-            {weitereLeistungen.map((l, i) => (
-              <span key={l.id}>
-                {i > 0 ? ' und ' : ''}
-                <a className="link" href={`${weg('/leistungen/')}#${l.id}`}>
-                  {l.titel.toLowerCase()}
-                </a>
-              </span>
-            ))}
-            .
-          </p>
-        </Enthuellen>
+        {/* Seit die Impfungen in die Hauptliste gerückt sind, ist diese Liste
+            leer — und hier stand „Ausserdem: ." als eigene Zeile. */}
+        {weitereLeistungen.length > 0 ? (
+          <Enthuellen className="auszug__weitere">
+            <p className="t-meta">
+              Ausserdem:{' '}
+              {weitereLeistungen.map((l, i) => (
+                <span key={l.id}>
+                  {i > 0 ? ' und ' : ''}
+                  <a className="link" href={`${weg('/leistungen/')}#${l.id}`}>
+                    {l.titel.toLowerCase()}
+                  </a>
+                </span>
+              ))}
+              .
+            </p>
+          </Enthuellen>
+        ) : null}
       </div>
     </section>
   );

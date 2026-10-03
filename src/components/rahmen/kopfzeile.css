@@ -150,3 +150,102 @@
     transform: none;
   }
 }
+
+/* ── Das Telefon ──────────────────────────────────────────────────────────
+ *
+ * Am Rechner: schmaler Knopf in Signal, mit Nummer — rechts aussen, durch eine
+ * Haarlinie vom Menü getrennt. Am Handy: nur der Hörer, rund, gleich gross wie
+ * der Menü-Schalter daneben. Die Nummer selbst steht dort im Hero.
+ */
+.kopf__telefon {
+  order: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: var(--kiesel);
+  background: var(--signal);
+  color: var(--auf-signal);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background var(--dauer-mikro) var(--ease-ruhig),
+    transform var(--dauer-mikro) var(--ease-ruhig);
+}
+
+.kopf__telefon:hover {
+  background: oklch(36% 0.055 152);
+  transform: translateY(-1px);
+}
+
+.kopf__telefon:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+.kopf__telefon-zeichen {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+}
+
+.kopf__menue {
+  order: 2;
+  margin-left: auto;
+}
+
+.kopf__schalter {
+  order: 2;
+}
+
+@media (min-width: 56.01rem) {
+  .kopf__telefon {
+    margin-left: clamp(0.5rem, 0.2rem + 0.8vw, 1.25rem);
+  }
+}
+
+@media (max-width: 56rem) {
+  .kopf__schalter {
+    margin-left: auto;
+  }
+
+  .kopf__telefon {
+    width: var(--tippziel);
+    height: var(--tippziel);
+    min-height: 0;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .kopf__telefon-zeichen {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .kopf__telefon-nummer {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* Das aufgeklappte Menü bleibt die ganze Breite unter der Leiste. */
+  .kopf__menue {
+    order: 4;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kopf__telefon,
+  .kopf__telefon:hover {
+    transform: none;
+  }
+}

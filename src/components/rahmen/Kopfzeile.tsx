@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { MENUE, aktiveSeite } from '../../seiten';
 import { Marke } from '../ui/Marke';
 import { weg } from '../../lib/weg';
+import { praxis } from '../../praxis.config';
+import { steht } from '../ui/Angabe';
+import { Hoerer } from '../ui/Strichzeichen';
 import './kopfzeile.css';
 
 /**
@@ -21,6 +24,7 @@ export function Kopfzeile() {
   const [offen, setOffen] = useState(false);
   const knopf = useRef<HTMLButtonElement>(null);
   const aktiv = aktiveSeite(window.location.pathname);
+  const telefonSteht = steht(praxis.telefon.href) && steht(praxis.telefon.anzeige);
 
   /* Escape schliesst das Menü und gibt den Fokus zurück auf den Knopf. Ohne das
      landet man nach dem Schliessen am Seitenanfang und muss sich neu durchhangeln. */
@@ -39,6 +43,7 @@ export function Kopfzeile() {
     <header className="kopf">
       <div className="schale kopf__zeile">
         <Marke />
+
 
         <button
           ref={knopf}
@@ -75,6 +80,30 @@ export function Kopfzeile() {
             })}
           </ul>
         </nav>
+
+        {/*
+          ═══ Das Telefon in der Kopfzeile, seit dem 03.10.2026 ═══
+
+          Diese Praxis hat keine Online-Termine — das Telefon ist der einzige
+          Weg zum Termin, und es stand erst im Hero. Jetzt steht es auf jeder
+          Seite oben rechts: am Rechner als schmaler Knopf mit Nummer, am Handy
+          als runder Hörer neben „Menü". Abgelesen an Frontify (Mobbin): eine
+          eigene, abgesetzte Gruppe rechts, die nicht zum Menü gehört.
+
+          Er steht im Code NACH dem Menü: am Rechner kommt die Tastatur erst an
+          der Marke, dann am Menü, dann hier vorbei — wie das Auge. Am Handy
+          steht er bei aufgeklapptem Menü optisch ÜBER der Liste, wird aber erst
+          nach ihr angesprungen. Bewusst so: mit dem Knopf vor dem Menü im Code
+          wäre die Reihenfolge am Rechner verdreht, und dort sind die sechs
+          Punkte immer offen.
+        */}
+        {telefonSteht ? (
+          <a className="kopf__telefon" href={praxis.telefon.href as string}>
+            <Hoerer className="kopf__telefon-zeichen" />
+            <span className="kopf__telefon-nummer">{praxis.telefon.anzeige}</span>
+            <span className="nur-vorlesen"> anrufen</span>
+          </a>
+        ) : null}
       </div>
     </header>
   );

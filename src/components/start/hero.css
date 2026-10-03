@@ -196,11 +196,16 @@
   color: var(--tinte);
 }
 
-/* „geschlossen" ist eine vollwertige Antwort und keine Lücke — es wird deshalb
-   nicht gestrichelt unterlegt, sondern nur zurückgenommen. */
-.hero__heute-zu {
-  font-size: var(--text-lead);
-  color: var(--tinte-mtl);
+
+/* Der Punkt steht nur, wenn wirklich geöffnet ist. Salbei als Fläche, ein
+   feiner Rand in Signal — kein Schattenring, die Direktion hat keine Schatten. */
+.hero__heute-punkt {
+  align-self: center;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--flaeche-salbei);
+  border: 1.5px solid var(--signal);
 }
 
 .hero__wege {

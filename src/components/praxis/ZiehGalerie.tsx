@@ -78,6 +78,7 @@ const ZIEH_SCHWELLE = 6;
 export function ZiehGalerie({
   plaetze = PRAXIS_PLAETZE,
   titel = 'Die Räume',
+  etikett,
   lead,
   kennung = 'galerie-titel',
   mitKarte = true,
@@ -87,6 +88,8 @@ export function ZiehGalerie({
 }: {
   plaetze?: readonly Bildplatz[];
   titel?: string;
+  /** Die kleine Zeile über dem Titel, wie bei den übrigen Sektionen. */
+  etikett?: string;
   /**
    * Der Leitsatz. Wird er weggelassen, schreibt ihn das Register — und zwar
    * passend dazu, ob echte Fotos da sind. Das ist der Normalfall und soll es
@@ -313,11 +316,17 @@ export function ZiehGalerie({
   return (
     <section className={`galerie ${klein ? 'galerie--klein' : ''}`} aria-labelledby={kennung}>
       <div className="schale">
+        {etikett ? <p className="t-label galerie__etikett">{etikett}</p> : null}
         <h2 id={kennung} className="t-section galerie__titel">
           {titel}
         </h2>
         <p className="t-body galerie__lead">{lead ?? praxisLead(plaetze)}</p>
         <p className="t-meta galerie__anleitung">
+          {/* Mit eigenem Leitsatz sagt niemand mehr, dass die Bilder Studien
+              sind — `praxisLead` tat es. Dann steht es hier, solange es stimmt. */}
+          {lead && !plaetze.some((pl) => zeigt(pl).echt)
+            ? 'Bis die Räume fotografiert sind, zeigen die Bilder Material- und Lichtstudien. '
+            : null}
           Zum Verschieben ziehen oder wischen. Mit der Tabulatortaste hineinspringen, dann mit den Pfeiltasten
           weiter.
         </p>

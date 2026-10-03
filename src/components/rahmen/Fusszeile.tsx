@@ -2,7 +2,7 @@ import { MENUE, RECHT } from '../../seiten';
 import { praxis } from '../../praxis.config';
 import { zeiten, hatZeiten, zeitenStehenAus } from '../../inhalt';
 import { Angabe, steht } from '../ui/Angabe';
-import { Marke } from '../ui/Marke';
+import { useEffect, useRef } from 'react';
 import { weg } from '../../lib/weg';
 import './fusszeile.css';
 
@@ -25,14 +25,26 @@ import './fusszeile.css';
  */
 export function Fusszeile() {
   const anschriftSteht = steht(praxis.adresse.strasse) && steht(praxis.adresse.plz);
+  const signatur = useRef<HTMLDivElement>(null);
+
+  /* Die Eckenmarke tritt zurück, solange die grosse Marke im Bild ist. */
+  useEffect(() => {
+    const el = signatur.current;
+    if (!el) return;
+    const wurzel = document.documentElement;
+    const beobachter = new IntersectionObserver(([e]) => {
+      wurzel.dataset.markeImFuss = e?.isIntersecting ? 'ja' : 'nein';
+    });
+    beobachter.observe(el);
+    return () => {
+      beobachter.disconnect();
+      delete wurzel.dataset.markeImFuss;
+    };
+  }, []);
 
   return (
     <footer className="fuss">
       <div className="schale fuss__raster">
-        <div className="fuss__spalte fuss__spalte--marke">
-          <Marke />
-          <p className="t-meta fuss__ort">Gynäkologische Praxis in {praxis.ort}</p>
-        </div>
 
         <div className="fuss__spalte">
           <h2 className="t-label">Anschrift</h2>
@@ -107,8 +119,13 @@ export function Fusszeile() {
               {zeiten.filter(hatZeiten).map((z) => (
                 <li key={z.tag}>
                   <span className="fuss__tag">{z.tag}</span>
+                  {/* Vor- und Nachmittag untereinander, wie in der Tabelle auf
+                      /termin/. Nebeneinander lief die Dienstagszeile bei 1280
+                      und 1440 px 4–5 px in die Spalte „Seiten" (02.10.2026). */}
                   <span className="fuss__spanne">
-                    {[z.vormittag, z.nachmittag].filter(Boolean).join(' · ')}
+                    {[z.vormittag, z.nachmittag].filter(Boolean).map((t) => (
+                      <span key={t}>{t}</span>
+                    ))}
                   </span>
                 </li>
               ))}
@@ -131,6 +148,36 @@ export function Fusszeile() {
         </div>
       </div>
 
+      {/*
+        ═══ Die Marke gross, als Schlusszeichen — seit dem 03.10.2026 ═══
+
+        Gesetzt wie ihr Schild am Eingang: links der Blob mit der Figur, rechts
+        der Name, weit gesperrt, darunter die Fachbezeichnung. Abgelesen an
+        Zellerfeld (Mobbin): die Marke unten gross, nicht als 20-px-Stempel in
+        der ersten Spalte. Solange sie im Bild ist, tritt die Eckenmarke zurück —
+        zwei Marken übereinander wären eine zu viel.
+      */}
+      {praxis.logo ? (
+        <div className="schale fuss__signatur" ref={signatur}>
+          <img
+            className="fuss__signatur-marke"
+            /* Die helle Fassung: ihr Blob-Grau ist das Grau dieses Fusses. */
+            src={weg('/bilder/marke-hell.svg')}
+            width={praxis.logo.breite}
+            height={praxis.logo.hoehe}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <p className="fuss__signatur-text">
+            <span className="fuss__signatur-name">
+              {praxis.aerztin.titel} {praxis.aerztin.vorname} {praxis.aerztin.nachname}
+            </span>
+            <span className="fuss__signatur-fach">{praxis.aerztin.fachbezeichnung}</span>
+          </p>
+        </div>
+      ) : null}
+
       <div className="schale fuss__abschluss">
         <p className="t-meta">
           Im Notfall: <a href="tel:112">112</a> · Ausserhalb der Sprechzeiten:{' '}
@@ -143,6 +190,23 @@ export function Fusszeile() {
             </li>
           ))}
         </ul>
+        {/*
+          Ihre Zusage vom Montag: „Ja klar gar kein Problem." Klein, ganz unten,
+          NICHT im Impressum — dort steht, wer die Seite betreibt, und das ist
+          sie. `nofollow`, weil derselbe Fusslink auf vielen Kundenseiten für
+          Google sonst nach Linktausch aussieht.
+
+          Einfarbig in ihrer Tinte statt im finesites-Verlauf: der läuft von
+          Violett nach Magenta, und ihre Direktion schliesst Pink und Magenta
+          ausdrücklich aus. Die Wortmarke bleibt erkennbar an Form und Strich.
+        */}
+        <a className="fuss__urheber" href="https://finesites.de" target="_blank" rel="nofollow noopener">
+          <span className="fuss__urheber-vor">Gestaltet &amp; gebaut von</span>
+          <span className="fuss__urheber-marke" aria-hidden="true">
+            <span className="fuss__urheber-strich">/</span>finesites ↗
+          </span>
+          <span className="nur-vorlesen">finesites (öffnet in neuem Tab)</span>
+        </a>
       </div>
     </footer>
   );

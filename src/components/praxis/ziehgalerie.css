@@ -20,6 +20,11 @@
   max-width: 16ch;
 }
 
+/* Etikett über dem Titel wie bei den übrigen Sektionen der Startseite. */
+.galerie__etikett + .galerie__titel {
+  margin-top: 0.8rem;
+}
+
 .galerie__lead {
   margin-top: var(--raum);
 }

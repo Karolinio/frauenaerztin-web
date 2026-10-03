@@ -1,4 +1,4 @@
-import { zugang } from '../praxis.config';
+import { zugang, praxisText } from '../praxis.config';
 import { Seitenkopf } from '../components/ui/Seitenkopf';
 import { Enthuellen } from '../components/ui/Enthuellen';
 import { ZiehGalerie } from '../components/praxis/ZiehGalerie';
@@ -18,13 +18,8 @@ export default function PraxisSeite() {
     <>
       <Seitenkopf
         etikett="Praxis"
-        titel="Die neue Praxis"
-        einleitung={
-          <p>
-            Neu gebaut, hell und übersichtlich. Was Sie hier über die Räume lesen, ist nachgemessen oder es
-            steht nicht da.
-          </p>
-        }
+        titel={praxisText.titel}
+        einleitung={<p>{praxisText.satz}</p>}
       />
 
       <ZiehGalerie />

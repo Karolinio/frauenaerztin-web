@@ -2,6 +2,10 @@ import { team } from '../../inhalt';
 import { Enthuellen } from '../ui/Enthuellen';
 import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
+import { personAnker } from '../../lib/anker';
+import { Formbild } from '../ui/Formbild';
+
+
 
 /**
  * „Wer ich bin" — der erste Eintrag aus `inhalt/team.json`, und darunter die
@@ -63,42 +67,51 @@ export function WerIchBin() {
         </Enthuellen>
 
         {weitere.length > 0 ? (
-          <Enthuellen className="werbin__team">
+          <div className="werbin__team">
             <p className="t-label werbin__team-label">Mein Team</p>
+            {/*
+              ═══ Die Gesichter in ihrer Form, seit dem 02.10.2026 ═══
+
+              Vorher: vier gestrichelte Rechtecke, 3 + 1 umgebrochen. Jetzt sitzt
+              jedes Gesicht im Umriss ihrer Marke (`bilder/form.svg`, aus
+              `marke.svg` gezogen) — dieselbe Form wie über dem Hero und auf dem
+              Schild am Eingang. Abgelesen an Passionfroot (Mobbin): organische
+              Formen statt Kreisen, jede ein wenig anders.
+
+              „Anders" heisst hier: dieselbe Form, je Person gedreht und
+              gespiegelt. Eine zweite Form zu erfinden wäre eine zweite Marke.
+
+              Bewegung, und nur diese: beim Eintreten dreht sich die Form die
+              letzten Grad in ihre Lage, das Foto bleibt dabei aufrecht. Beim
+              Darüberfahren dreht sie sich um vier Grad weiter. Kein Federn,
+              kein Kippen in 3D — sie hat „ruhig" gesagt.
+            */}
             <ul className="werbin__reihe">
-              {weitere.map((p, i) => (
-                <li className="werbin__person" key={p.rolle + i}>
-                  {/*
-                   * Der Rahmen hat die Masse des künftigen Fotos — 4:5, dasselbe
-                   * Verhältnis wie auf `/team/` und in `inhalt/schema.json`. Wer
-                   * den Platz erst beim Einsetzen schafft, verschiebt beim
-                   * ersten echten Bild die ganze Reihe.
-                   */}
-                  <div className="werbin__bild">
-                    {steht(p.bild) ? (
-                      <img
-                        src={weg(p.bild)}
-                        width={400}
-                        height={500}
-                        loading="lazy"
-                        decoding="async"
-                        alt={p.bildAlt}
-                      />
-                    ) : (
-                      /* Zwei Wörter, mehr nicht. Der erklärende Satz steht auf
-                         `/team/` am grossen Rahmen — hier bräche er in einem
-                         176px breiten Kasten auf acht Zeilen um. */
-                      <span className="luecke werbin__luecke">Foto folgt</span>
-                    )}
-                  </div>
-                  <p className="werbin__person-name">
-                    {steht(p.name) ? p.name : <span className="luecke">Name</span>}
-                  </p>
-                  <p className="t-meta werbin__person-rolle">{p.rolle}</p>
-                </li>
-              ))}
+              {weitere.map((p, i) => {
+                return (
+                  <Enthuellen
+                    als="li"
+                    className="werbin__person"
+                    key={p.rolle + i}
+                    verzoegerung={i * 90}
+                  >
+                    <a
+                      className="werbin__verweis"
+                      href={`${weg('/team/')}#${personAnker(p.name, i + 1)}`}
+                    >
+                      {/* Leeres alt: Name und Funktion stehen im selben Link —
+                          mit Bildbeschreibung läse der Vorleser die Person zweimal. */}
+                      <Formbild bild={p.bild} alt="" index={i + 1} />
+                      <span className="werbin__person-name">
+                        {steht(p.name) ? p.name : <span className="luecke">Name</span>}
+                      </span>
+                      <span className="t-meta werbin__person-rolle">{p.rolle}</span>
+                    </a>
+                  </Enthuellen>
+                );
+              })}
             </ul>
-          </Enthuellen>
+          </div>
         ) : null}
 
         <a className="link werbin__mehr" href={weg('/team/')}>

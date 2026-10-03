@@ -200,6 +200,16 @@
   --flaeche-salbei: var(--salbei);
 
   /**
+   * Salbei als SEKTIONSfläche (03.10.2026, Karol: „eine Sektion in Salbeigrün").
+   * Ihr Logo-Grün selbst trägt Fliesstext nur knapp (Tinte darauf ≈ 4,4:1) —
+   * deshalb ihr Farbton (135°) bei 86 % Helligkeit, etwas kräftiger als das Logo-Grün,
+   * damit es als Salbei und nicht als Grau liest — so hell, dass ihre Figur in
+   * Logo-Grün darauf noch steht (wie im Logo auf dem grauen Blob). Tinte darauf
+   * liegt weit über AA.
+   */
+  --flaeche-salbei-sektion: oklch(86% 0.034 135);
+
+  /**
    * Das Signal. Es markiert GENAU EINE Sache: den nächsten Schritt.
    * Erlaubt: Termin-Knopf · aktiver Menüpunkt · Fokusring · heutiger Tag in der
    * Sprechzeitentabelle · aktive Leistung. Nirgends als grosse Fläche.

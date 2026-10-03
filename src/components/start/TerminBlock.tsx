@@ -43,8 +43,9 @@ export function TerminBlock() {
             Termin vereinbaren
           </h2>
           <p className="t-lead termin__lead">
-            Termine vereinbaren Sie telefonisch. Teilen Sie uns kurz mit, worum es geht – so können wir
-            die passende Zeit für Ihren Termin einplanen.
+            {/* Ihr Text vom 18.09.2026. */}
+            Für Ihre Terminvereinbarung erreichen Sie uns telefonisch. Teilen Sie uns gerne kurz Ihr Anliegen
+            mit – so können wir ausreichend Zeit für Ihren Termin einplanen.
           </p>
 
           <div className="termin__wege">
