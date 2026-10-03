@@ -196,14 +196,15 @@ export function Fusszeile() {
           sie. `nofollow`, weil derselbe Fusslink auf vielen Kundenseiten für
           Google sonst nach Linktausch aussieht.
 
-          Einfarbig in ihrer Tinte statt im finesites-Verlauf: der läuft von
-          Violett nach Magenta, und ihre Direktion schliesst Pink und Magenta
-          ausdrücklich aus. Die Wortmarke bleibt erkennbar an Form und Strich.
+          04.10.2026: im finesites-Verlauf wie bei Aram (Karol). Ihre Direktion
+          schliesst Pink und Magenta aus — Karol hat sich bewusst dafür
+          entschieden, weil es das Zeichen von finesites ist, nicht ihre Gestaltung.
         */}
         <a className="fuss__urheber" href="https://finesites.de" target="_blank" rel="nofollow noopener">
           <span className="fuss__urheber-vor">Gestaltet &amp; gebaut von</span>
           <span className="fuss__urheber-marke" aria-hidden="true">
-            <span className="fuss__urheber-strich">/</span>finesites ↗
+            <span className="fuss__urheber-wort"><span className="fuss__urheber-strich">/</span>finesites</span>
+            <span className="fuss__urheber-pfeil">↗</span>
           </span>
           <span className="nur-vorlesen">finesites (öffnet in neuem Tab)</span>
         </a>

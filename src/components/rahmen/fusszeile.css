@@ -231,35 +231,96 @@ main:has(> .flaeche-leinen:last-child) + .fuss {
 }
 
 /* ── Wer die Seite gebaut hat ─────────────────────────────────────────── */
+/*
+ * 04.10.2026, Karol: „genauso wie bei Aram" — die Signatur wie unter einem Plakat,
+ * Vorsatz in Versalien, darunter die echte finesites-Wortmarke im wandernden
+ * Lila-Magenta-Verlauf. Karol hat das bewusst über Yvonnes Vorgabe „kein Pink,
+ * kein Magenta" gestellt: es ist das Zeichen von finesites, nicht ihre Gestaltung,
+ * und es steht klein, ganz unten. Gleiche Werte wie aram-web/sektionen.css.
+ */
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/lexend-900.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+2000-206F, U+2197;
+}
+
 .fuss__abschluss .fuss__urheber {
-  gap: 0.5rem;
-  align-items: baseline;
-  padding-inline: 0;
+  display: inline-grid;
+  justify-items: end;
+  gap: 0.55rem;
+  padding: 0.35rem 0;
   border-bottom: 0;
   color: var(--tinte-mtl);
   font-weight: 400;
+  text-decoration: none;
 }
 
 .fuss__urheber-vor {
   font-size: 0.6875rem;
-  letter-spacing: var(--tracking-label);
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .fuss__urheber-marke {
-  font-family: var(--schrift-display);
-  font-weight: 800;
-  font-size: 1rem;
-  letter-spacing: -0.03em;
-  color: var(--tinte);
-  transition: color var(--dauer-mikro) var(--ease-ruhig);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
 }
 
+.fuss__urheber-wort {
+  display: inline-block;
+  font-family: 'Lexend', var(--schrift-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  font-size: clamp(1.15rem, 0.95rem + 0.7vw, 1.5rem);
+  line-height: 1;
+  /* Box um die Überstände, sonst schneidet der Verlauf i-Punkte und das s ab. */
+  padding: 0.16em 0.1em 0.2em;
+  margin: -0.16em -0.1em -0.2em;
+  background-image: linear-gradient(104deg,
+    oklch(46% 0.18 295) 0%, oklch(56% 0.2 318) 12.5%, oklch(64% 0.22 340) 25%,
+    oklch(56% 0.2 318) 37.5%, oklch(46% 0.18 295) 50%, oklch(56% 0.2 318) 62.5%,
+    oklch(64% 0.22 340) 75%, oklch(56% 0.2 318) 87.5%, oklch(46% 0.18 295) 100%);
+  background-size: 400% 100%;
+  background-position: 92% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: urheber-wandern 18s linear infinite;
+}
+
+/* Lexends Schrägstrich reicht unter die Grundlinie: verkleinert und angehoben
+   sitzt er auf derselben Ebene wie „finesites" — wie auf finesites.de. */
 .fuss__urheber-strich {
-  color: var(--signal);
-  margin-right: 0.04em;
+  font-size: 0.72em;
+  vertical-align: 0.149em;
+  margin-right: 0.03em;
 }
 
-.fuss__urheber:hover .fuss__urheber-marke {
-  color: var(--signal);
+@keyframes urheber-wandern {
+  from { background-position: 92% 0; }
+  to   { background-position: -308% 0; }
+}
+
+.fuss__urheber-pfeil {
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform var(--dauer-mikro) var(--ease-ruhig);
+}
+
+.fuss__urheber:hover .fuss__urheber-pfeil { transform: translate(2px, -2px); }
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .fuss__urheber-wort { animation: none; background-position: 100% 0; }
+  .fuss__urheber:hover .fuss__urheber-pfeil { transform: none; }
+}
+
+/* Am Handy steht die Signatur unter dem ©, also linksbündig — wie bei Aram. */
+@media (max-width: 43.99rem) {
+  .fuss__abschluss .fuss__urheber { justify-items: start; }
 }
