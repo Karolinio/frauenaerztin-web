@@ -531,14 +531,45 @@
 /* Der Notfallblock: eigene Fläche, keine Umrandung. Er hebt sich durch Leinen
    und dessen Gewebe ab, nicht durch einen Kasten — auf einer Seite ohne Kästen
    wäre einer hier der erste Bruch der Direktion. */
+/**
+ * „Wenn es nicht warten kann" — seit dem 04.10.2026 in ihrer Form statt im
+ * grauen Kasten (Karol: „in diese Ellipse packen, so wie beim Logo").
+ *
+ * Der Blob liegt HINTER dem Inhalt und ist grösser als er: die Nummern bleiben
+ * gerade, gross und tippbar, nur die Fläche darunter ist ihre Marke. Ein Text,
+ * der selbst in die Form geschnitten wäre, verlöre an den Rändern Buchstaben.
+ */
 .termin__notfall {
-  background-color: var(--leinen);
-  padding: var(--raum);
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem) clamp(1.25rem, 0.8rem + 2vw, 2.25rem);
   align-self: start;
+}
+
+.termin__notfall::before {
+  content: '';
+  position: absolute;
+  inset: -12% -9%;
+  z-index: -1;
+  background: var(--leinen);
+  -webkit-mask: url('/bilder/form.svg') center / 100% 100% no-repeat;
+  mask: url('/bilder/form.svg') center / 100% 100% no-repeat;
 }
 
 .termin__notrufe {
   margin-top: var(--raum-klein);
+}
+
+@media (max-width: 55.999rem) {
+  /* Am Handy darf der Blob nicht über den Rand hinaus — dafür rückt der Text
+     nach innen, wo die Form breit genug ist. */
+  .termin__notfall {
+    padding-inline: 12%;
+  }
+
+  .termin__notfall::before {
+    inset: -6% -3%;
+  }
 }
 
 .termin__notrufe li + li {
@@ -730,9 +761,11 @@
   /* Haarlinien statt Abstaenden: das Raster liest sich als Tabelle einer
      Praxis, nicht als Kachelwand eines Baukastens. Erzeugt wird die Linie vom
      Abstand plus dem Hintergrund darunter. */
-  gap: 1px;
-  background: var(--linie);
-  border-block: 1px solid var(--linie);
+  /* 04.10.2026, Karol: „die Tic-Tac-Toe-Einstellung". Die Haarlinien kamen aus
+     1px Abstand auf Liniengrund und zeichneten ein Kreuzgitter über die neun
+     Leistungen. Jetzt trennt nur Weissraum; die Fläche erscheint erst unter
+     der Kachel, über der man steht. */
+  gap: clamp(0.5rem, 0.2rem + 1vw, 1.25rem);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -745,7 +778,10 @@
   gap: 0.6rem;
   height: 100%;
   padding: clamp(1.35rem, 1rem + 1.4vw, 2rem);
-  background: var(--papier);
+  background: transparent;
+  /* Ihre Kiesel-Rundung, dieselbe wie an den Knöpfen — sichtbar nur, wenn die
+     Fläche beim Darüberfahren erscheint. */
+  border-radius: var(--kiesel);
   text-decoration: none;
   color: inherit;
   transition:
@@ -838,13 +874,16 @@
 }
 
 /* Gruen — die Diagonale von links unten nach rechts oben */
+/* Ohne Gitter trug die Salbei-Fläche auf jeder zweiten Kachel zu dick auf —
+   ein grüner Block mitten in einer ruhigen Fläche (04.10.2026). Alle neun
+   bekommen jetzt dieselbe Leinen-Fläche. */
 .auszug__raster > li:nth-child(3) .kachel:hover,
 .auszug__raster > li:nth-child(3) .kachel:focus-visible,
 .auszug__raster > li:nth-child(5) .kachel:hover,
 .auszug__raster > li:nth-child(5) .kachel:focus-visible,
 .auszug__raster > li:nth-child(7) .kachel:hover,
 .auszug__raster > li:nth-child(7) .kachel:focus-visible {
-  background-color: var(--flaeche-salbei);
+  background-color: var(--leinen);
 }
 
 /* Das Zeichen traegt den gemessenen Linienton ihres Logos, nicht das Signal.

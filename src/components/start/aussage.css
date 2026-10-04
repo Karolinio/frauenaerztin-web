@@ -103,13 +103,10 @@
  * man suchen muss. Tiefes Salbei auf Grau ergibt 7,86 : 1. Die Farbe ist damit
  * nicht weg, sie ist nur nicht mehr Flaeche, sondern Figur.
  */
-/* Seit 03.10.2026 die eine Salbei-Sektion der Seite — vorher Leinen-Grau.
-   Zurück: `var(--leinen)` statt `var(--flaeche-salbei-sektion)`.
-   Die Figur bleibt in ihrem Logo-Grün (`figur.css`) — Karol, 04.10.: „mit der
-   Silhouette wieder wie vorher". Deshalb ist die Fläche so hell gemischt,
-   dass die Figur darauf so steht wie im Logo auf dem grauen Blob. */
+/* Salbei als Fläche war vom 03. bis 04.10.2026 hier und ist wieder raus
+   (Karol: „die Salbei-Hinterlegung muss raus"). Leinen wie vorher. */
 .aussage {
-  background: var(--flaeche-salbei-sektion);
+  background: var(--leinen);
 }
 
 
@@ -129,7 +126,7 @@
    * Zuruecknahme sichtbar und bestehen — der Wert wird bei jedem Lauf von
    * `npm run qa:a11y` nachgerechnet, und die Probe ist Pflicht.
    */
-  color: color-mix(in oklch, var(--tinte) 94%, var(--flaeche-salbei-sektion));
+  color: color-mix(in oklch, var(--tinte) 94%, var(--leinen));
 }
 
 .aussage__label {
