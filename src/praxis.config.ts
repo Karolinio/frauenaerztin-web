@@ -326,7 +326,7 @@ export const leistungen: readonly Leistung[] = [
     id: 'vorsorge',
     titel: 'Krebsvorsorge',
     kurz: 'Regelmäßige Vorsorgeuntersuchungen sind ein wichtiger Bestandteil der Frauengesundheit.',
-    absatz: 'Regelmäßige Vorsorgeuntersuchungen sind ein wichtiger Bestandteil der Frauengesundheit. Sie dienen dazu, Veränderungen frühzeitig zu erkennen und bei Auffälligkeiten weitere Untersuchungen einzuleiten.',
+    absatz: 'Sie dienen dazu, Veränderungen frühzeitig zu erkennen und bei Auffälligkeiten weitere Untersuchungen einzuleiten.',
     lang: [
       'Regelmäßige Vorsorgeuntersuchungen sind ein wichtiger Bestandteil der Frauengesundheit. Sie dienen dazu, Veränderungen frühzeitig zu erkennen und bei Auffälligkeiten weitere Untersuchungen einzuleiten.',
       'Ab 20 Jahren haben Frauen einmal jährlich Anspruch auf eine gynäkologische Krebsfrüherkennungsuntersuchung. Dazu gehören ein Gespräch über mögliche Beschwerden und Veränderungen sowie die Untersuchung der äußeren und inneren Geschlechtsorgane. Zwischen dem 20. und 34. Lebensjahr wird zusätzlich jährlich ein Abstrich vom Gebärmutterhals zur Untersuchung auf Zellveränderungen (Pap-Abstrich) durchgeführt.',
@@ -346,7 +346,7 @@ export const leistungen: readonly Leistung[] = [
     id: 'maedelssprechstunde',
     titel: 'Mädchensprechstunde',
     kurz: 'Der erste Besuch bei der Frauenärztin ist für viele Mädchen und junge Frauen mit Fragen und manchmal auch mit Unsicherheit verbunden.',
-    absatz: 'Der erste Besuch bei der Frauenärztin ist für viele Mädchen und junge Frauen mit Fragen und manchmal auch mit Unsicherheit verbunden. In der Mädchensprechstunde ist deshalb zunächst vor allem eines wichtig: in Ruhe ankommen, kennenlernen und Fragen stellen.',
+    absatz: 'In der Mädchensprechstunde ist deshalb zunächst vor allem eines wichtig: in Ruhe ankommen, kennenlernen und Fragen stellen.',
     lang: [
       'Der erste Besuch bei der Frauenärztin ist für viele Mädchen und junge Frauen mit Fragen und manchmal auch mit Unsicherheit verbunden. In der Mädchensprechstunde ist deshalb zunächst vor allem eines wichtig: in Ruhe ankommen, kennenlernen und Fragen stellen.',
       'Dabei können wir über alle Themen sprechen, die gerade wichtig sind – zum Beispiel die erste Periode, Menstruationsbeschwerden, Verhütung, Sexualität, HPV-Impfung oder andere Fragen rund um den eigenen Körper.',
@@ -358,7 +358,7 @@ export const leistungen: readonly Leistung[] = [
     id: 'verhuetung',
     titel: 'Verhütung & Familienplanung',
     kurz: 'Die passende Verhütung ist eine sehr persönliche Entscheidung und kann sich im Laufe des Lebens verändern.',
-    absatz: 'Die passende Verhütung ist eine sehr persönliche Entscheidung und kann sich im Laufe des Lebens verändern. Gemeinsam besprechen wir, welche Methode zu Ihrer aktuellen Lebenssituation, Ihren Wünschen und möglichen gesundheitlichen Voraussetzungen passt.',
+    absatz: 'Gemeinsam besprechen wir, welche Methode zu Ihrer aktuellen Lebenssituation, Ihren Wünschen und möglichen gesundheitlichen Voraussetzungen passt.',
     lang: [
       'Die passende Verhütung ist eine sehr persönliche Entscheidung und kann sich im Laufe des Lebens verändern. Gemeinsam besprechen wir, welche Methode zu Ihrer aktuellen Lebenssituation, Ihren Wünschen und möglichen gesundheitlichen Voraussetzungen passt.',
       'Ich berate Sie zu hormonellen und hormonfreien Verhütungsmethoden – von Pille, Vaginalring und Verhütungspflaster über Spirale und Hormonspirale bis hin zu weiteren Möglichkeiten der Empfängnisverhütung.',
@@ -369,7 +369,7 @@ export const leistungen: readonly Leistung[] = [
     id: 'kinderwunsch',
     titel: 'Kinderwunsch',
     kurz: 'Ein Kinderwunsch kann mit vielen Fragen verbunden sein.',
-    absatz: 'Ein Kinderwunsch ist häufig mit vielen Fragen verbunden. Gerne begleite ich Sie bereits bei der Planung einer Schwangerschaft und berate Sie zu wichtigen Themen wie Zyklus, Folsäure, Impfstatus und einer gesunden Vorbereitung auf die Schwangerschaft.',
+    absatz: 'Gerne begleite ich Sie bereits bei der Planung einer Schwangerschaft und berate Sie zu wichtigen Themen wie Zyklus, Folsäure, Impfstatus und einer gesunden Vorbereitung auf die Schwangerschaft.',
     lang: [
       'Ein Kinderwunsch ist häufig mit vielen Fragen verbunden. Gerne begleite ich Sie bereits bei der Planung einer Schwangerschaft und berate Sie zu wichtigen Themen wie Zyklus, Folsäure, Impfstatus und einer gesunden Vorbereitung auf die Schwangerschaft.',
       'Wenn eine Schwangerschaft auf sich warten lässt, können erste Untersuchungen zur Abklärung möglicher Ursachen in meiner Praxis erfolgen. Dazu gehören je nach individueller Situation beispielsweise eine Ultraschalluntersuchung, Zyklusdiagnostik und Hormonbestimmungen.',
@@ -380,7 +380,7 @@ export const leistungen: readonly Leistung[] = [
     id: 'schwangerschaft',
     titel: 'Schwangerschaft',
     kurz: 'Eine Schwangerschaft ist eine besondere Zeit – mit vielen schönen Momenten, aber auch neuen Fragen.',
-    absatz: 'Eine Schwangerschaft bringt viele besondere Momente, aber auch neue Fragen und manchmal Unsicherheiten mit sich. Mir ist es wichtig, Sie in dieser Zeit verlässlich zu begleiten und Ihnen bei medizinischen Fragen und Entscheidungen zur Seite zu stehen.',
+    absatz: 'Mir ist es wichtig, Sie in dieser Zeit verlässlich zu begleiten und Ihnen bei medizinischen Fragen und Entscheidungen zur Seite zu stehen.',
     lang: [
       'Eine Schwangerschaft bringt viele besondere Momente, aber auch neue Fragen und manchmal Unsicherheiten mit sich. Mir ist es wichtig, Sie in dieser Zeit verlässlich zu begleiten und Ihnen bei medizinischen Fragen und Entscheidungen zur Seite zu stehen.',
       'In meiner Praxis biete ich Ihnen die Schwangerschaftsvorsorge nach den Mutterschafts-Richtlinien mit den vorgesehenen Untersuchungen, Ultraschallkontrollen und Laboruntersuchungen an.',
@@ -392,7 +392,7 @@ export const leistungen: readonly Leistung[] = [
     id: 'wechseljahre',
     titel: 'Wechseljahre',
     kurz: 'Die Wechseljahre sind eine natürliche Lebensphase und werden von jeder Frau unterschiedlich erlebt.',
-    absatz: 'Die Wechseljahre sind eine natürliche Lebensphase und werden von jeder Frau unterschiedlich erlebt. Während manche Frauen kaum Veränderungen bemerken, können Beschwerden wie Hitzewallungen, Schlafstörungen, Stimmungsschwankungen, Scheidentrockenheit oder Veränderungen der Sexualität die Lebensqualität beeinträchtigen.',
+    absatz: 'Während manche Frauen kaum Veränderungen bemerken, können Beschwerden wie Hitzewallungen, Schlafstörungen, Stimmungsschwankungen, Scheidentrockenheit oder Veränderungen der Sexualität die Lebensqualität beeinträchtigen.',
     lang: [
       'Die Wechseljahre sind eine natürliche Lebensphase und werden von jeder Frau unterschiedlich erlebt. Während manche Frauen kaum Veränderungen bemerken, können Beschwerden wie Hitzewallungen, Schlafstörungen, Stimmungsschwankungen, Scheidentrockenheit oder Veränderungen der Sexualität die Lebensqualität beeinträchtigen.',
       'Gemeinsam besprechen wir Ihre Beschwerden und Wünsche und entscheiden, ob und welche Behandlung für Sie sinnvoll ist. Dabei berate ich Sie zu hormonellen und nicht hormonellen Behandlungsmöglichkeiten und berücksichtige Ihre persönlichen Voraussetzungen und möglichen Risikofaktoren.',
@@ -403,7 +403,7 @@ export const leistungen: readonly Leistung[] = [
     id: 'nachsorge',
     titel: 'Onkologische Nachsorge',
     kurz: 'Auch nach Abschluss einer Krebsbehandlung begleite ich Sie mit regelmäßigen Nachsorgen weiter.',
-    absatz: 'Nach der Behandlung einer gynäkologischen Krebserkrankung sind regelmäßige Nachsorgeuntersuchungen ein wichtiger Bestandteil der weiteren Betreuung.',
+    absatz: '',
     lang: [
       'Nach der Behandlung einer gynäkologischen Krebserkrankung sind regelmäßige Nachsorgeuntersuchungen ein wichtiger Bestandteil der weiteren Betreuung.',
       'In meiner Praxis begleite ich Sie im Rahmen der onkologischen Nachsorge nach einer Brustkrebserkrankung sowie nach Krebserkrankungen der weiblichen Geschlechtsorgane. Die Untersuchungen richten sich nach Ihrer vorausgegangenen Erkrankung, der durchgeführten Therapie und den entsprechenden Nachsorgeempfehlungen.',
@@ -414,7 +414,7 @@ export const leistungen: readonly Leistung[] = [
     id: 'beckenboden',
     titel: 'Blasenschwäche & Senkungsbeschwerden',
     kurz: 'Blasenschwäche und Senkungsbeschwerden sind häufig und können die Lebensqualität deutlich beeinträchtigen.',
-    absatz: 'Blasenschwäche und Senkungsbeschwerden sind häufig – dennoch fällt es vielen Frauen schwer, darüber zu sprechen. Beschwerden können in unterschiedlichen Lebensphasen auftreten, beispielsweise nach Schwangerschaft und Geburt oder mit zunehmendem Alter.',
+    absatz: 'Dennoch fällt es vielen Frauen schwer, darüber zu sprechen. Beschwerden können in unterschiedlichen Lebensphasen auftreten, beispielsweise nach Schwangerschaft und Geburt oder mit zunehmendem Alter.',
     lang: [
       'Blasenschwäche und Senkungsbeschwerden sind häufig – dennoch fällt es vielen Frauen schwer, darüber zu sprechen. Beschwerden können in unterschiedlichen Lebensphasen auftreten, beispielsweise nach Schwangerschaft und Geburt oder mit zunehmendem Alter.',
       'In meiner Praxis können wir mögliche Ursachen abklären und gemeinsam besprechen, welche Behandlungsmöglichkeiten für Sie infrage kommen. Je nach Befund reichen diese von Beckenbodentraining und weiteren konservativen Maßnahmen bis hin zu medikamentösen oder operativen Behandlungsmöglichkeiten.',
@@ -425,7 +425,7 @@ export const leistungen: readonly Leistung[] = [
     id: 'impfungen',
     titel: 'Impfungen',
     kurz: 'Ein vollständiger Impfschutz ist in jeder Lebensphase ein wichtiger Bestandteil der Gesundheitsvorsorge.',
-    absatz: 'Ein vollständiger Impfschutz ist in jeder Lebensphase ein wichtiger Bestandteil der Gesundheitsvorsorge. In meiner Praxis überprüfe ich gerne Ihren Impfstatus und berate Sie zu empfohlenen Impfungen und notwendigen Auffrischungen.',
+    absatz: 'In meiner Praxis überprüfe ich gerne Ihren Impfstatus und berate Sie zu empfohlenen Impfungen und notwendigen Auffrischungen.',
     lang: [
       'Ein vollständiger Impfschutz ist in jeder Lebensphase ein wichtiger Bestandteil der Gesundheitsvorsorge. In meiner Praxis überprüfe ich gerne Ihren Impfstatus und berate Sie zu empfohlenen Impfungen und notwendigen Auffrischungen.',
       'Ein besonderer Schwerpunkt liegt auf der HPV-Impfung zur Vorbeugung HPV-bedingter Erkrankungen sowie auf Impfungen bei Kinderwunsch und in der Schwangerschaft.',
@@ -574,11 +574,12 @@ export const zugang: readonly Zugangspunkt[] = [
   { punkt: 'Platz für Kinderwagen', detail: demo('Im Eingangsbereich, überdacht und einsehbar.') },
   {
     punkt: 'Parken',
-    detail: demo('Sechs Plätze hinter dem Haus, dazu Parkhaus Franziskanerplatz in 200 m.'),
+    /* Ihre Anfahrt-Texte vom 17.09.2026 — dieselben wie auf /kontakt/. */
+    detail: 'Direkt am Gebäude stehen kostenfreie Parkplätze zur Verfügung.',
   },
   {
     punkt: 'Bus und Bahn',
-    detail: demo('Bahnhof Erkelenz in 600 m, Bushaltestelle Kölner Straße direkt vor der Tür.'),
+    detail: 'In unmittelbarer Nähe befindet sich die Bushaltestelle Theodor-Heuss-Str.',
   },
-  { punkt: 'Behindertengerechte Toilette', detail: demo('Ja, im Wartebereich.') },
+  /* „Behindertengerechte Toilette“ ist raus — Yvonne, 04.10.2026. */
 ];

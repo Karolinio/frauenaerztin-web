@@ -37,7 +37,10 @@ export default function LeistungenSeite() {
             </h2>
             <div className="leistung__text">
               <p className="t-lead leistung__kurz">{l.kurz}</p>
-              <p className="t-body">{l.absatz}</p>
+              {/* Der Absatz setzt den fetten Satz fort, er wiederholt ihn nicht —
+                  „Da sind inhaltliche Dopplungen“ (Yvonne, 04.10.2026). Bei der
+                  Nachsorge sagte er dasselbe und ist deshalb leer. */}
+              {l.absatz ? <p className="t-body">{l.absatz}</p> : null}
               {/*
                 Ihre Vorgabe vom 11.09.2026: „wenn man auf die einzelne Leistung
                 klickt der ausfuehrlichere Text." Ein natives <details> — keine
@@ -78,7 +81,7 @@ export default function LeistungenSeite() {
               </h2>
               <div className="leistung__text">
                 <p className="t-lead leistung__kurz">{l.kurz}</p>
-                <p className="t-body">{l.absatz}</p>
+                {l.absatz ? <p className="t-body">{l.absatz}</p> : null}
               </div>
             </Enthuellen>
           ))}
@@ -90,8 +93,9 @@ export default function LeistungenSeite() {
         <div className="schale">
           <Enthuellen>
             <p className="t-lead leistungen__schluss">
-              Sie finden nicht, was Sie suchen? Rufen Sie an — manches lässt sich in zwei Sätzen klären, und
-              dafür braucht es keinen Termin.
+              {/* Ihr Satz vom 04.10.2026. */}
+              Sie finden nicht, was Sie suchen? Für Fragen stehen wir Ihnen gerne jederzeit telefonisch oder
+              persönlich beratend zur Seite.
             </p>
             <a className="knopf" href={weg('/termin/')}>
               Zeiten und Termin

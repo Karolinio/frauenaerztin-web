@@ -3,7 +3,6 @@ import { Seitenkopf } from '../components/ui/Seitenkopf';
 import { Enthuellen } from '../components/ui/Enthuellen';
 import { ZiehGalerie } from '../components/praxis/ZiehGalerie';
 import { steht } from '../components/ui/Angabe';
-import { weg } from '../lib/weg';
 import './praxis.css';
 
 /**
@@ -52,15 +51,8 @@ export default function PraxisSeite() {
             ))}
           </dl>
 
-          <Enthuellen>
-            <p className="t-meta zugang__frage">
-              Etwas, das hier nicht steht?{' '}
-              <a className="link" href={weg('/kontakt/')}>
-                Rufen Sie an
-              </a>{' '}
-              — es ist besser, Sie fragen vorher, als Sie stehen vor einer Stufe.
-            </p>
-          </Enthuellen>
+          {/* Hier stand „Etwas, das hier nicht steht? Rufen Sie an …“ —
+              auf ihren Wunsch raus (04.10.2026). */}
         </div>
       </section>
     </>
