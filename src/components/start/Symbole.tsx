@@ -81,16 +81,21 @@ export const SYMBOLE: Record<string, ReactNode> = {
   ),
 
   /*
-   * Schwangere, gezeichnet wie die Figur in ihrem Logo: kein Kopf, nur der
-   * Halsansatz, der Rücken und die Vorderlinie — hier mit dem Bauch.
-   * Neu am 04.10.2026; die erste Fassung (Kreis als Kopf, Strichkörper) fand
-   * sie „nicht so schön" (17.09.).
+   * Schwangere im Profil — nach ihrer Vorlage vom 05.10.2026 (ChatGPT-Bild):
+   * langes Haar über den Rücken, Kopf leicht gesenkt, die Hand unter dem
+   * Bauch. Ihre Vorlage hat an- und abschwellende Pinselstriche; hier im
+   * gleichen dünnen Strich wie die übrigen acht. Die kleine innere Haarsträhne
+   * ist weggelassen — bei 32px lief sie mit dem Haar zu einem Fleck zusammen.
+   * Die Stützpunkte sind aus ihrem Bild abgegriffen, nicht frei gezeichnet.
    */
   schwangerschaft: (
     <Zeichen>
-      <path d="M14.6 4.4c.3 1.5 1.3 2.6 2.7 3.1" />
-      <path d="M12.4 9C10.8 12.4 10.9 15.4 12.5 18.5c1.2 2.4.8 5.8-.8 9.3" />
-      <path d="M19.5 9.6c-.1 2-.9 3.3-.8 4.7 3.9 1.6 5.6 4.9 4.3 7.9-1.1 2.4-3.6 3.3-5.5 3.2.4.9.5 1.7.4 2.4" />
+      <path d="M20.7 3.8C20.31 3.56 19.22 2.6 18.39 2.37C17.55 2.15 16.53 2.11 15.69 2.45C14.86 2.78 13.93 3.54 13.38 4.37C12.84 5.21 12.71 6.49 12.42 7.45C12.13 8.42 12.13 9.35 11.65 10.15C11.17 10.95 10.09 11.62 9.53 12.27C8.97 12.91 8.43 13.39 8.3 14C8.17 14.61 8.56 15.44 8.76 15.92C8.97 16.4 9.4 16.73 9.53 16.89" />
+      <path d="M20.7 4.95C20.18 5.27 18.64 6.23 17.62 6.88C16.59 7.52 15.34 8.06 14.54 8.8C13.73 9.54 13.25 10.31 12.8 11.3C12.36 12.3 12.03 13.55 11.84 14.77C11.65 15.99 11.55 17.27 11.65 18.62C11.75 19.97 11.94 21.57 12.42 22.85C12.9 24.14 13.67 25.29 14.54 26.32C15.4 27.34 16.59 28.47 17.62 29.01C18.64 29.56 20.02 29.56 20.7 29.59C21.37 29.62 21.5 29.27 21.66 29.21" />
+      <path d="M21.08 5.53C21.03 5.98 21.06 7.45 20.77 8.22C20.49 8.99 19.84 9.69 19.35 10.15C18.86 10.61 18.26 10.96 17.81 11C17.36 11.03 16.85 10.45 16.65 10.34" />
+      <path d="M16.46 10.34C16.38 10.63 15.94 11.46 16 12.07C16.06 12.68 16.39 13.45 16.85 14C17.31 14.54 18.23 14.9 18.77 15.35C19.32 15.79 19.88 16.21 20.12 16.69C20.36 17.17 20.38 17.82 20.24 18.23C20.09 18.65 19.4 19.04 19.23 19.2" />
+      <path d="M19.23 19.2C19.64 19.39 20.95 19.74 21.66 20.35C22.37 20.96 23.13 21.92 23.47 22.85C23.81 23.78 24 24.91 23.7 25.93C23.4 26.96 22 28.5 21.66 29.01" />
+      <path d="M15.23 15.54C15.11 16.05 14.7 17.66 14.54 18.62C14.37 19.58 14.1 20.35 14.23 21.31C14.36 22.28 14.74 23.46 15.31 24.39C15.87 25.32 16.91 26.37 17.62 26.9C18.32 27.42 19 27.29 19.54 27.55C20.09 27.81 20.62 28.19 20.89 28.44C21.16 28.68 21.11 28.92 21.16 29.01" />
     </Zeichen>
   ),
 
@@ -128,15 +133,19 @@ export const SYMBOLE: Record<string, ReactNode> = {
   ),
 
   /*
-   * Schleife — das Zeichen, das in der Onkologie jede Patientin kennt.
-   * Neu gezeichnet am 04.10.2026: symmetrische Schlaufe, die Bänder kreuzen
-   * sich sichtbar übereinander (das hintere setzt aus). Die erste Fassung war
-   * schief und fand sie „nicht so schön" (17.09.).
+   * Schleife als Band — nach ihrer Vorlage vom 05.10.2026: symmetrische
+   * Schlaufe, die Enden weit gespreizt und waagrecht abgeschnitten. Ihre
+   * Vorlage ist eine gefüllte Fläche; hier nur die Kontur des Bandes, damit
+   * sie neben den Strichzeichen nicht als Fleck steht. Das Band von links
+   * unten liegt vorn, das hintere setzt an der Kreuzung aus.
    */
   nachsorge: (
     <Zeichen>
-      <path d="M10.6 27.6 17.4 15.6C19.4 12.2 20.3 10 20.3 8.6 20.3 6 18.4 4.3 16 4.3S11.7 6 11.7 8.6c0 1.4.9 3.6 2.9 7" />
-      <path d="M16.1 18l5.3 9.6" />
+      <path d="M11.83 27.6L21.48 13.47L21.91 12.72L22.24 11.97L22.47 11.23L22.61 10.49L22.63 9.76L22.54 9.04L22.34 8.36L21.86 7.46L21.44 6.94L20.72 6.29L19.92 5.79L19.06 5.41L18.17 5.15L17.25 4.98L16.31 4.9L15.06 4.95L13.83 5.15L12.94 5.41L12.08 5.79L11.28 6.29L10.79 6.7L10.34 7.19L9.96 7.74L9.66 8.36L9.4 9.4L9.37 10.12L9.45 10.86L9.76 11.97L10.29 13.09L13.18 17.36" />
+      <path d="M16.46 22.16L20.17 27.6" />
+      <path d="M7.71 27.6L18.44 11.91L18.88 11.17L19.13 10.58L19.22 10.13L19.22 9.82L19.14 9.52L18.94 9.24L18.59 8.95L18.21 8.74L17.56 8.5L17 8.38L15.8 8.3L14.44 8.5L13.53 8.87L13.13 9.17L12.9 9.45L12.79 9.74L12.78 10.13L12.87 10.58L13.12 11.17L15.44 14.64" />
+      <path d="M18.45 19.04L24.29 27.6" />
+      <path d="M7.71 27.6H11.83M20.17 27.6H24.29" />
     </Zeichen>
   ),
 

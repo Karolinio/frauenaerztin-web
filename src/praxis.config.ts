@@ -208,17 +208,20 @@ export const praxis = {
    */
   telefonzeiten: 'bis zur Praxiseröffnung mittwochs von 09:30 bis 11:00 Uhr',
 
-  email: demo('praxis@frauenheilkunde-erkelenz.de'),
+  /* „praxis@gyn-erkens.de darf auf die Seite“ — Yvonne, 05.10.2026. */
+  email: 'praxis@gyn-erkens.de',
 
-  /* Sie hat „Fax" in ihre Fussliste geschrieben (11.09.2026), die Nummer aber
-     nicht genannt. Solange null: Luecke im Fuss, nicht weglassen — sie will
-     sie dort. */
-  fax: null as Offen<string>,
+  /* „Faxnummer 02431/70733“ — Yvonne, 05.10.2026. Geschrieben wie die
+     Telefonnummer, damit beide Zeilen im Fuss gleich aussehen. */
+  fax: '02431 · 70733' as Offen<string>,
 
-  /** Kassenzulassung. Steht noch nicht fest, also steht sie nirgends. */
-  kassen: demo('Alle gesetzlichen Kassen und privat'),
+  /** Kassenzulassung. „Ja habe eine Zulassung also gesetzlich und privat“ —
+      Yvonne, 05.10.2026 (Zulassung über die KV Nordrhein). */
+  kassen: 'Für gesetzlich und privat versicherte Patientinnen.' as Offen<string>,
 
-  /** Kein Doctolib. Sie startet ohne und nimmt es „ggf. später" dazu. */
+  /** Doctolib. Sie richtet Profil und Kalender ein (Stand 05.10.2026); sobald
+      ihr Buchungslink da ist, kommt er hier hinein — `{ anbieter: 'Doctolib', url }`.
+      Nur ein Link, kein eingebettetes Doctolib-Skript. */
   onlineTermin: null as Offen<{ readonly anbieter: string; readonly url: string }>,
 } as const;
 
@@ -538,8 +541,9 @@ export const rechtliches = {
   /* „Ärztekammer Nordrhein stimmt“ — von ihr bestätigt am 14.09.2026. */
   aerztekammer: 'Ärztekammer Nordrhein',
   aerztekammerUrl: 'https://www.aekno.de/',
-  kassenaerztlicheVereinigung: demo('Kassenärztliche Vereinigung Nordrhein'),
-  kassenaerztlicheVereinigungUrl: demo('https://www.kvno.de/'),
+  /* Zulassung über die KV Nordrhein bestätigt — Yvonne, 05.10.2026. */
+  kassenaerztlicheVereinigung: 'Kassenärztliche Vereinigung Nordrhein',
+  kassenaerztlicheVereinigungUrl: 'https://www.kvno.de/',
   berufsordnungUrl: 'https://www.aekno.de/aerzte/berufsordnung',
   aufsichtsbehoerde: 'Ärztekammer Nordrhein, Tersteegenstraße 9, 40474 Düsseldorf',
   umsatzsteuerId: 'Heilbehandlungen sind nach § 4 Nr. 14 UStG umsatzsteuerfrei',
@@ -569,9 +573,11 @@ export interface Zugangspunkt {
  * leer. Eine falsche Zusage über einen Aufzug ist schlimmer als gar keine.
  */
 export const zugang: readonly Zugangspunkt[] = [
-  { punkt: 'Stufenloser Zugang', detail: demo('Ja, ebenerdig von der Kölner Straße aus.') },
-  { punkt: 'Aufzug', detail: demo('Ja, die Praxis liegt im ersten Obergeschoss.') },
-  { punkt: 'Platz für Kinderwagen', detail: demo('Im Eingangsbereich, überdacht und einsehbar.') },
+  /* Ihre Angaben vom 05.10.2026: „Eingang stufenlos, 2. Stock, Aufzug
+     vorhanden, Platz für Kinderwagen vorhanden“. Nichts dazugedichtet. */
+  { punkt: 'Stufenloser Zugang', detail: 'Ja, der Eingang ist stufenlos.' },
+  { punkt: 'Aufzug', detail: 'Ja. Die Praxis liegt im 2. Stock.' },
+  { punkt: 'Platz für Kinderwagen', detail: 'Ja, Platz ist vorhanden.' },
   {
     punkt: 'Parken',
     /* Ihre Anfahrt-Texte vom 17.09.2026 — dieselben wie auf /kontakt/. */

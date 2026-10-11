@@ -41,16 +41,29 @@ test('Dienstag 18:00 genau — geschlossen, öffnet morgen 07:30', () => {
   assert.deepEqual(lage(um(2, '18:00')), { wort: 'Geschlossen', satz: 'öffnet morgen um 07:30 Uhr', offen: false });
 });
 
-test('Freitag nachmittags — Montag ist unbekannt, also keine Behauptung', () => {
-  assert.deepEqual(lage(um(5, '15:00')), { wort: 'Geschlossen', satz: '', offen: false });
+test('Freitag nachmittags — öffnet Montag um 07:30', () => {
+  assert.deepEqual(lage(um(5, '15:00')), { wort: 'Geschlossen', satz: 'öffnet Montag um 07:30 Uhr', offen: false });
 });
 
-test('Samstag — heute geschlossen, ohne erfundenen nächsten Tag', () => {
-  assert.deepEqual(lage(um(6, '10:00')), { wort: 'Heute geschlossen', satz: '', offen: false });
+test('Samstag — heute geschlossen, öffnet Montag', () => {
+  assert.deepEqual(lage(um(6, '10:00')), { wort: 'Heute geschlossen', satz: 'öffnet Montag um 07:30 Uhr', offen: false });
 });
 
-test('Montag ohne Zeiten — keine Aussage statt „geschlossen"', () => {
-  assert.deepEqual(lage(um(1, '10:00')), { wort: 'Heute', satz: '', offen: false });
+test('Montag 10:00 — geöffnet bis 13:00 (Zeiten seit 05.10.2026)', () => {
+  assert.deepEqual(lage(um(1, '10:00')), { wort: 'Jetzt geöffnet', satz: 'bis 13:00 Uhr', offen: true });
+});
+
+/* Der Schutz bleibt, auch seit Montag feststeht: ein Tag ohne Zeiten ist
+   unbekannt, nicht geschlossen — und über ihn wird nichts behauptet. */
+const ohneMontag = zeiten.map((z) => (z.tag === 'Montag' ? { ...z, vormittag: '', nachmittag: '' } : z));
+const lageOhneMontag = (a) => sprechzeitJetzt(ohneMontag, a, '2026-11-01', '1. November');
+
+test('unbekannter Tag — keine Aussage statt „geschlossen"', () => {
+  assert.deepEqual(lageOhneMontag(um(1, '10:00')), { wort: 'Heute', satz: '', offen: false });
+});
+
+test('vor einem unbekannten Tag — kein erfundener nächster Termin', () => {
+  assert.deepEqual(lageOhneMontag(um(5, '15:00')), { wort: 'Geschlossen', satz: '', offen: false });
 });
 
 test('ohne Eröffnungstag gilt sofort die Tabelle', () => {

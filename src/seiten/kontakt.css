@@ -27,7 +27,9 @@
 
 .notfall__ruf {
   display: grid;
-  grid-template-columns: auto 1fr;
+  /* minmax(0, 1fr), nicht 1fr: sonst darf die Textspalte nicht schmaler werden
+     als „Bereitschaftsdienst“, und bei 320px schnitt der Rand den Text ab. */
+  grid-template-columns: auto minmax(0, 1fr);
   grid-template-areas:
     'nummer was'
     'nummer wann';
@@ -54,7 +56,7 @@
   font-variant-numeric: tabular-nums;
   /* Feste Breite, damit „112" und „116 117" untereinander an derselben Kante
      beginnen — sonst wandert die Beschriftung von Zeile zu Zeile. */
-  min-width: 5.5ch;
+  min-width: 7ch; /* „116 016": sieben Ziffernbreiten, Leerzeichen schmaler */
 }
 
 .notfall__was {
@@ -66,6 +68,20 @@
 .notfall__wann {
   grid-area: wann;
   max-width: 60ch;
+}
+
+/* Schmale Handys: „116 016" nimmt neben dem Text die halbe Breite. Untereinander
+   bleibt die Nummer gross und der Text bekommt die ganze Zeile. */
+@media (max-width: 23.99rem) {
+  .notfall__ruf {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'nummer'
+      'was'
+      'wann';
+    row-gap: 0.25rem;
+    padding-block: 0.9rem;
+  }
 }
 
 /* ── Kontaktdaten und Anfahrt ─────────────────────────────────────────────── */
