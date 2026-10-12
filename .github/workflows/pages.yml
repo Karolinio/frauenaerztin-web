@@ -58,7 +58,7 @@ jobs:
           [ -z "$Z" ] && Z="${{ vars.PAGES_ZWEIG }}"
           [ -z "$Z" ] && Z="vorschau"
           echo "zweig=$Z" >> "$GITHUB_OUTPUT"
-          if [ "$Z" != "main" ]; then printf '/*\n  X-Robots-Tag: noindex\n' > dist/_headers; fi
+          if [ "$Z" != "main" ]; then printf '\n/*\n  X-Robots-Tag: noindex\n' >> dist/_headers; fi
           echo "Ziel: $Z"
       - uses: cloudflare/wrangler-action@v3
         with:
