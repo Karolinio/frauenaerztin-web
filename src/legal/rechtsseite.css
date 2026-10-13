@@ -75,6 +75,19 @@
   color: var(--tinte);
 }
 
+/* Zwischenstufe unter h2 — seit 13.10.2026 für „Widerspruchsrecht". Klar
+   kleiner als h2 und mit Luft nach oben, damit sie nicht am Absatz klebt. */
+.recht h3 {
+  hyphens: auto;
+  overflow-wrap: break-word;
+  font-family: var(--schrift-display);
+  font-size: 1.125rem;
+  line-height: 1.3;
+  margin-top: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: var(--tinte);
+}
+
 .recht p {
   max-width: var(--measure);
   text-wrap: pretty;

@@ -548,8 +548,16 @@ export const rechtliches = {
   aufsichtsbehoerde: 'Ärztekammer Nordrhein, Tersteegenstraße 9, 40474 Düsseldorf',
   umsatzsteuerId: 'Heilbehandlungen sind nach § 4 Nr. 14 UStG umsatzsteuerfrei',
   datenschutzbeauftragter: demo('praxis@frauenheilkunde-erkelenz.de'),
-  /* Wie auf der Übergangsseite: beide laufen im selben Cloudflare-Pages-Projekt. */
-  hostingAnbieter: 'Cloudflare Germany GmbH, Rosental 7, 80331 München',
+  /*
+   * Wer die Seite ausliefert. Geändert am 13.10.2026 nach dem Prüfbericht ihres
+   * IT-Dienstleisters (Stand 06.10., Punkt 02): „Cloudflare Germany GmbH" allein
+   * reicht nicht. Vertragspartner für Cloudflare Pages ist Cloudflare, Inc. (USA);
+   * die Verarbeitung kann ausserhalb der EU stattfinden. Karol (Webdienstleister,
+   * Inhaber des Cloudflare-Kontos) bestätigt das gegen den Cloudflare-DPA.
+   */
+  hostingAnbieter: 'Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA',
+  /* Bei Cloudflare nicht einsehbar und nicht von uns festgelegt — wird nicht geraten. */
+  logSpeicherdauer: null as Offen<string>,
   /* „Versicherer ist AXA“ (14.09.2026). */
   berufshaftpflicht: 'AXA Versicherung AG, Colonia-Allee 10–20, 51067 Köln',
   /** Räumlicher Geltungsbereich der Berufshaftpflicht, § 2 DL-InfoV. */

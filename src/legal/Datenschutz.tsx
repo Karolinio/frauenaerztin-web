@@ -9,6 +9,11 @@ import { Offen, Rechtsseite } from './Rechtsseite';
  * Tracking, keine Cookies, keine externen Schriften und keine Karte ohne
  * Klick; genau das steht auch drin.
  *
+ * Am 13.10.2026 nach dem Prüfbericht ihres IT-Dienstleisters (Stand 06.10.)
+ * ergänzt: Cloudflare als US-Anbieter, Fehlerberichte (NEL), Anfragen per
+ * Telefon/Mail, Maps-Link, Widerspruchsrecht. Bleibt ein Entwurf, bis er
+ * rechtlich geprüft ist.
+ *
  * Die Verarbeitung von Patientendaten in der Praxis selbst ist etwas anderes
  * und gehört nicht in diese Erklärung.
  */
@@ -37,16 +42,24 @@ export function Datenschutz() {
       <section aria-labelledby="hosting">
         <h2 id="hosting">Aufruf der Website und Server-Logfiles</h2>
         <p>
-          Beim Aufruf dieser Website überträgt Ihr Browser technisch notwendige Daten an den Server:
-          IP-Adresse, Datum und Uhrzeit, aufgerufene Adresse, übertragene Datenmenge, Browsertyp und
-          Betriebssystem. Diese Daten sind für die Auslieferung der Seite erforderlich.
+          Diese Website wird über den Dienst Cloudflare Pages ausgeliefert. Beim Aufruf überträgt Ihr Browser
+          technisch notwendige Daten an Cloudflare: IP-Adresse, Datum und Uhrzeit, aufgerufene Adresse,
+          übertragene Datenmenge, Browsertyp und Betriebssystem. Diese Daten sind für die Auslieferung der
+          Seite und für ihren sicheren Betrieb erforderlich.
+        </p>
+        <p>
+          Cloudflare verarbeitet diese Daten in unserem Auftrag auf Grundlage eines Vertrags zur
+          Auftragsverarbeitung (Art. 28 DSGVO). Die Verarbeitung kann auch außerhalb der Europäischen Union
+          stattfinden, insbesondere in den USA. Cloudflare, Inc. ist nach dem EU-US Data Privacy Framework
+          zertifiziert; für die USA besteht damit ein Angemessenheitsbeschluss der EU-Kommission (Art. 45
+          DSGVO). Ergänzend sind die EU-Standardvertragsklauseln vereinbart (Art. 46 Abs. 2 lit. c DSGVO).
         </p>
         <dl>
           <dt>Rechtsgrundlage</dt>
           <dd>Art. 6 Abs. 1 lit. f DSGVO — berechtigtes Interesse am sicheren Betrieb der Website.</dd>
           <dt>Speicherdauer</dt>
           <dd>
-            <Offen was="Speicherdauer der Logfiles beim Hoster" />
+            <Offen was="Speicherdauer der Logfiles bei Cloudflare">{rechtliches.logSpeicherdauer}</Offen>
           </dd>
           <dt>Auftragsverarbeiter</dt>
           <dd>
@@ -55,55 +68,91 @@ export function Datenschutz() {
         </dl>
       </section>
 
+      {/* Prüfbericht 06.10.2026, Punkt 03: Cloudflare schickt einen NEL-Header mit
+          (gemessen 13.10. auf vorschau und gyn-erkens.de, success_fraction 0.0 —
+          also nur bei Fehlern). Solange er aktiv ist, steht er hier. Wird er im
+          Cloudflare-Konto abgeschaltet, gehört dieser Abschnitt raus. */}
+      <section aria-labelledby="fehlerberichte">
+        <h2 id="fehlerberichte">Technische Fehlerberichte</h2>
+        <p>
+          Cloudflare nutzt die Browserfunktion „Network Error Logging". Kann Ihr Browser diese Website nicht
+          oder nur fehlerhaft laden, sendet er einen technischen Fehlerbericht an Cloudflare. Der Bericht
+          enthält die Art des Fehlers, die aufgerufene Adresse und den Zeitpunkt; dabei erhält Cloudflare
+          auch Ihre IP-Adresse. Bei einem fehlerfreien Aufruf wird kein Bericht gesendet. Zweck ist, Störungen
+          bei der Erreichbarkeit der Website zu erkennen und zu beheben.
+        </p>
+        <dl>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. f DSGVO — berechtigtes Interesse an einer zuverlässig erreichbaren Website.</dd>
+        </dl>
+      </section>
+
       {/* Der Abschnitt zum Rückrufformular ist mit dem Formular gegangen
           (17.09.2026). Die Seite erhebt keine Formulardaten mehr. */}
 
+      {/* Prüfbericht 06.10.2026, Punkte 04 und 05: Anfragen per Telefon und Mail
+          fehlten ganz. Entwurf — mit ihren Patienteninformationen abstimmen. */}
+      <section aria-labelledby="anfragen">
+        <h2 id="anfragen">Kontakt per Telefon, Fax oder E-Mail</h2>
+        <p>
+          Wenn Sie uns anrufen oder schreiben, verarbeiten wir Ihre Angaben, etwa Name, Kontaktdaten und Ihr
+          Anliegen, um Ihre Anfrage zu beantworten und gegebenenfalls einen Termin zu vereinbaren. Die
+          Angaben werden gelöscht, sobald sie dafür nicht mehr erforderlich sind. Werden sie Teil Ihrer
+          Behandlungsdokumentation, gelten die gesetzlichen Aufbewahrungsfristen.
+        </p>
+        <dl>
+          <dt>Rechtsgrundlage</dt>
+          <dd>
+            Art. 6 Abs. 1 lit. b DSGVO (Anbahnung und Durchführung des Behandlungsvertrags); soweit Sie uns
+            Angaben zu Ihrer Gesundheit mitteilen, zusätzlich Art. 9 Abs. 2 lit. h DSGVO.
+          </dd>
+        </dl>
+        <p>
+          Bitte beachten Sie: Eine gewöhnliche E-Mail wird nicht durchgehend verschlüsselt übertragen. Schicken
+          Sie uns Befunde oder andere Gesundheitsdaten deshalb bitte nicht per E-Mail, sondern sprechen Sie uns
+          an.
+        </p>
+        <p>
+          Wie wir in der Praxis mit Ihren Behandlungsdaten umgehen, erfahren Sie aus unseren
+          Patienteninformationen zum Datenschutz, die in der Praxis ausliegen.
+        </p>
+      </section>
+
       {/*
         ═══ Diese Seite beschrieb eine Karte, die es nicht gibt ═══
-
-        Hier stand: „Auf der Seite ‚Praxis & Anfahrt' ist eine Karte von
-        OpenStreetMap eingebunden. Mit dem Klick wird Ihre IP-Adresse an die
-        OpenStreetMap Foundation übertragen." Dazu eine Rechtsgrundlage nach
-        Art. 6 Abs. 1 lit. a DSGVO.
-
-        Gemessen am 27.08.2026: es gibt keine Karte. Kein `iframe`, kein
-        Leaflet, kein Kartenanbieter irgendwo im Quelltext. Und `/kontakt/` sagt
-        der Leserin ausdrücklich das Gegenteil des Abschnitts hier — „Eine
-        eingebettete Karte gibt es hier bewusst nicht."
-
-        Die Pflichtseite widersprach also der Seite selbst. Dazu nannte sie eine
-        Seite „Praxis & Anfahrt", die es seit dem Umbau nicht mehr gibt.
-
-        Eine Datenschutzerklärung, die einen Datenfluss beschreibt, den es nicht
-        gibt, ist nicht bloss falsch — sie ist der Beleg dafür, dass sie nicht
-        gegen die Seite geprüft wurde. Genau derselbe Fehler steckte im
-        Bildnachweis des Impressums und wurde dort schon einmal behoben.
-
-        Wenn später eine Karte dazukommt, gehört dieser Abschnitt zurück — dann
-        aber MIT dem Einwilligungsdialog, den `/kontakt/` als Bedingung nennt.
+        Seit 13.10.2026 (Prüfbericht, Punkt 04) beschreibt sie den Link, den es gibt.
       */}
       <section aria-labelledby="karte">
-        <h2 id="karte">Karte</h2>
+        <h2 id="karte">Link zu Google Maps</h2>
         <p>
-          Diese Website bindet <strong>keine Karte</strong> ein. Die Anfahrt steht als Text auf der Seite
-          „Kontakt und Anfahrt". Es geht dadurch kein Request an einen Kartenanbieter, und Ihre IP-Adresse
-          wird an keinen übertragen — auch nicht für eine Vorschaukachel.
+          Diese Website bindet <strong>keine Karte</strong> ein. Auf der Seite „Kontakt und Anfahrt" und in der
+          Fußzeile führt ein Link zur Routenplanung bei Google Maps. Solange Sie ihn nicht anklicken, wird
+          keine Verbindung zu Google aufgebaut und keine Information an Google übertragen.
+        </p>
+        <p>
+          Erst wenn Sie den Link anklicken, öffnen Sie eine Seite von Google. Für die Verarbeitung dort ist
+          Google verantwortlich (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland); es
+          gilt die Datenschutzerklärung von Google.
         </p>
         <p className="recht__notiz">
-          Sollte später eine Karte dazukommen, wird sie erst nach ausdrücklicher Einwilligung geladen, und
-          dieser Abschnitt wird vorher entsprechend ergänzt.
+          Sollte später eine eingebettete Karte dazukommen, wird sie erst nach ausdrücklicher Einwilligung
+          geladen, und dieser Abschnitt wird vorher entsprechend ergänzt.
         </p>
       </section>
 
       <section aria-labelledby="keine">
         <h2 id="keine">Was diese Website nicht tut</h2>
         <ul>
-          <li>Keine Cookies. Es wird nichts auf Ihrem Gerät gespeichert.</li>
+          <li>
+            Keine Cookies und kein lokaler Speicher: Die Website setzt keine Cookies und legt keine Daten im
+            Speicher Ihres Browsers ab. Wie bei jeder Website kann Ihr Browser die Dateien der Seite
+            zwischenspeichern (Cache), damit sie beim nächsten Aufruf schneller lädt.
+          </li>
           <li>Keine Analyse-, Tracking- oder Werbedienste.</li>
           <li>
             Keine Schriften von fremden Servern. Alle Schriften liegen auf demselben Server wie die Seite.
           </li>
-          <li>Keine sozialen Netzwerke, keine eingebetteten Videos von Drittanbietern.</li>
+          <li>Keine Formulare, keine sozialen Netzwerke, keine eingebetteten Videos von Drittanbietern.</li>
         </ul>
       </section>
 
@@ -111,12 +160,21 @@ export function Datenschutz() {
         <h2 id="rechte">Ihre Rechte</h2>
         <p>
           Sie haben das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17),
-          Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21
-          DSGVO). Wenden Sie sich dafür an die oben genannte verantwortliche Stelle.
+          Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20 DSGVO). Wenden Sie sich
+          dafür an die oben genannte verantwortliche Stelle.
+        </p>
+        <h3>Widerspruchsrecht (Art. 21 DSGVO)</h3>
+        <p>
+          Soweit wir Daten auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO verarbeiten (Server-Logfiles und
+          technische Fehlerberichte), können Sie dieser Verarbeitung jederzeit aus Gründen widersprechen, die
+          sich aus Ihrer besonderen Situation ergeben. Wir verarbeiten die Daten dann nicht mehr, es sei denn,
+          es liegen zwingende schutzwürdige Gründe für die Verarbeitung vor, die Ihre Interessen überwiegen,
+          oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.
+          Ein formloser Hinweis an die oben genannte Kontaktadresse genügt.
         </p>
         <p>
-          Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren. Zuständig ist:{' '}
-          <Offen>{rechtliches.datenschutzAufsicht}</Offen>
+          Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO).
+          Zuständig ist: <Offen>{rechtliches.datenschutzAufsicht}</Offen>
         </p>
       </section>
 
