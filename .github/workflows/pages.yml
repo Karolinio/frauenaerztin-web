@@ -58,7 +58,10 @@ jobs:
           [ -z "$Z" ] && Z="${{ vars.PAGES_ZWEIG }}"
           [ -z "$Z" ] && Z="vorschau"
           echo "zweig=$Z" >> "$GITHUB_OUTPUT"
-          if [ "$Z" != "main" ]; then printf '\n/*\n  X-Robots-Tag: noindex\n' >> dist/_headers; fi
+          # In den BESTEHENDEN /*-Block schreiben, nicht einen zweiten anhaengen:
+          # bei zwei /*-Bloecken gilt bei Cloudflare nur der letzte (gemessen
+          # 19.10.: CSP, HSTS usw. fehlten dann auf der Vorschau).
+          if [ "$Z" != "main" ]; then sed -i '0,/^\/\*$/s//\/*\n  X-Robots-Tag: noindex/' dist/_headers; fi
           echo "Ziel: $Z"
       - uses: cloudflare/wrangler-action@v3
         with:
