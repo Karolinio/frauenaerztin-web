@@ -1,8 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { praxis } from '../../praxis.config';
-import { zeiten } from '../../inhalt';
+import { team, zeiten } from '../../inhalt';
 import { augenblickInBerlin, sprechzeitJetzt, type Lage } from '../../lib/jetzt';
 import { Marke } from '../ui/Marke';
+import { Formbild } from '../ui/Formbild';
 import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
 import { HERO_PLATZ, zeigt } from '../../lib/bildplaetze';
@@ -54,6 +55,7 @@ import './hero.css';
  * zweite Zeile als Absatz wäre für Google eine Bildunterschrift.
  */
 export function Hero() {
+  const ärztin = team[0];
   const auf = useSchriftBereit();
   const marke = useAndocken();
 
@@ -103,22 +105,39 @@ export function Hero() {
         der Text steht beim Foto. Nur darunter statt darüber.
       */}
       <div className="hero__fuss">
-        <div className="hero__einleitung t-lead">
-          {/*
-            Ihr Text vom 11.09.2026, woertlich — „Das erste soll direkt auf der
-            ersten Seite oben erscheinen. Dann waere es super wenn darunter ein
-            Button waere fuer ‚Mehr' und wenn man da drauf klickt, dass man dann
-            zu der Teamseite kommt."
+        {/*
+          ═══ Ihr Foto beim Einleitungstext, seit 20.10.2026 ═══
 
-            Der Satz „Ich nehme mir fuer jede Untersuchung die Zeit ..." stand
-            hier vorher — eine Zusage, die der Bau erfunden hatte und die sie nie
-            gemacht hat. Weg damit; jetzt steht hier nur, was sie geschrieben hat.
-          */}
-          <p>
-            Herzlich willkommen in meiner Praxis für Frauenheilkunde und Geburtshilfe.
-            Schön, dass Sie da sind.
-          </p>
-          <a className="link hero__mehr" href={weg('/team/')}>Mehr</a>
+          Ihre Vorgabe war „Foto von mir und kurzer Einleitungstext". Das breite
+          Band darüber (16:7) ist für ein Querfoto in der Praxis gedacht; ihr
+          Hochformat wäre dort ein unscharfer Gesichtsausschnitt. Also steht sie
+          hier, in ihrer Form, direkt neben dem Willkommenssatz — noch im ersten
+          Bildschirm und vor jeder anderen Person. Das Foto kommt aus
+          `inhalt/team.json`, Eintrag 0: dieselbe Datei wie unter „Über mich".
+        */}
+        <div className="hero__vorstellung">
+          {ärztin && steht(ärztin.bild) ? (
+            <div className="hero__portraet">
+              <Formbild bild={ärztin.bild} alt={ärztin.bildAlt} index={0} />
+            </div>
+          ) : null}
+          <div className="hero__einleitung t-lead">
+            {/*
+              Ihr Text vom 11.09.2026, woertlich — „Das erste soll direkt auf der
+              ersten Seite oben erscheinen. Dann waere es super wenn darunter ein
+              Button waere fuer ‚Mehr' und wenn man da drauf klickt, dass man dann
+              zu der Teamseite kommt."
+  
+              Der Satz „Ich nehme mir fuer jede Untersuchung die Zeit ..." stand
+              hier vorher — eine Zusage, die der Bau erfunden hatte und die sie nie
+              gemacht hat. Weg damit; jetzt steht hier nur, was sie geschrieben hat.
+            */}
+            <p>
+              Herzlich willkommen in meiner Praxis für Frauenheilkunde und Geburtshilfe.
+              Schön, dass Sie da sind.
+            </p>
+            <a className="link hero__mehr" href={weg('/team/')}>Mehr</a>
+          </div>
         </div>
 
         <Praxisdaten />

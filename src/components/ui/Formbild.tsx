@@ -27,7 +27,9 @@ import './formbild.css';
 const LAGEN = [
   { dreh: 4, spiegel: 1 },
   { dreh: -8, spiegel: 1 },
-  { dreh: 11, spiegel: -1 },
+  /* Nadja (20.10.2026): gespiegelt + 11° schnitt ihr Haar und den Hals an — ihr Gesicht sitzt
+     im Foto links, die gespiegelte Form ist dort schmal. Ungespiegelt ist links die breite Seite. */
+  { dreh: 2, spiegel: 1 },
   { dreh: -3, spiegel: -1 },
   { dreh: 6, spiegel: 1 },
   { dreh: -12, spiegel: -1 },

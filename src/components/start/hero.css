@@ -120,6 +120,28 @@
   gap: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
 }
 
+.hero__vorstellung {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+}
+
+/* Das Foto steht neben dem Satz, sobald die Breite reicht; schmaler darüber, klein
+   gehalten, damit die Sprechzeit am Handy nicht unter die Falz rutscht. */
+.hero__portraet {
+  flex: none;
+  width: clamp(7rem, 4.5rem + 9vw, 13rem);
+}
+
+@media (min-width: 30rem) {
+  .hero__vorstellung {
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(1.1rem, 0.6rem + 2vw, 2rem);
+  }
+}
+
 .hero__einleitung {
   max-width: 46ch;
 }
