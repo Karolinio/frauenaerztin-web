@@ -32,8 +32,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* 4:5-Datei in einer fast runden Form: das Gesicht sitzt im oberen Drittel. */
-  object-position: 50% var(--fokus, 8%);
+  /* 4:5-Datei in einer fast runden Form, oben bündig. Die Dateien haben oben
+     ~10 % Luft (verlängerte Wand), weil die Form das Foto um 22 % hineinzoomt
+     und sonst bei jedem eng gerahmten Kopf die Haare abschneidet (20.10.2026).
+     Neue Fotos brauchen dieselbe Luft über dem Kopf. */
+  object-position: 50% 0%;
 }
 
 /* Der leere Rahmen: die Form in Leinen, darin dieselbe gestrichelte Lücke wie

@@ -34,15 +34,6 @@ const LAGEN = [
   { dreh: 3, spiegel: 1 },
 ] as const;
 
-/**
- * Vertikaler Bildausschnitt in Prozent je Person (Standard 8, siehe `formbild.css`).
- * Das Foto der Ärztin ist enger gerahmt als die der Mitarbeiterinnen — mit 8 %
- * schnitt die Form ihr oben das Haar an (gemessen 20.10.2026); 0 % zeigt den
- * Bildanfang. Bei neuen Fotos
- * mit anderem Abstand zum Kopf hier nachziehen.
- */
-const FOKUS: Readonly<Record<number, number>> = { 0: 0 };
-
 export function Formbild({
   bild,
   alt,
@@ -66,7 +57,6 @@ export function Formbild({
     '--form': `url(${weg('/bilder/form.svg')})`,
     '--dreh': `${lage.dreh}deg`,
     '--spiegel': lage.spiegel,
-    ...(FOKUS[index] !== undefined ? { '--fokus': `${FOKUS[index]}%` } : {}),
   } as CSSProperties;
 
   return (
