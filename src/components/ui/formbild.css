@@ -33,7 +33,7 @@
   height: 100%;
   object-fit: cover;
   /* 4:5-Datei in einer fast runden Form: das Gesicht sitzt im oberen Drittel. */
-  object-position: 50% 22%;
+  object-position: 50% var(--fokus, 8%);
 }
 
 /* Der leere Rahmen: die Form in Leinen, darin dieselbe gestrichelte Lücke wie
