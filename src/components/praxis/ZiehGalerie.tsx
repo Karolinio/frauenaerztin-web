@@ -372,7 +372,6 @@ export function ZiehGalerie({
                 draggable={false}
                 alt={bild.alt}
               />
-              <figcaption className="t-meta galerie__unterschrift">{bild.unterschrift}</figcaption>
             </figure>
           );
         })}

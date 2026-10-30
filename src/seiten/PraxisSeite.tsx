@@ -30,10 +30,6 @@ export default function PraxisSeite() {
             <h2 id="zugang-titel" className="t-section zugang__titel">
               Wie Sie hineinkommen
             </h2>
-            <p className="t-body zugang__lead">
-              Für eine Hochschwangere im achten Monat ist „Aufzug ja oder nein" keine Nebeninformation.
-              Deshalb steht hier nichts, was nicht vor Ort nachgesehen wurde — und solange steht die Lücke.
-            </p>
           </Enthuellen>
 
           <dl className="zugang">
