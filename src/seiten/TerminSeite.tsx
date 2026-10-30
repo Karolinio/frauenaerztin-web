@@ -25,11 +25,12 @@ export default function TerminSeite() {
     <>
       <Seitenkopf
         etikett="Öffnungszeiten und Termine"
-        titel="Wann und wie"
+        titel="Wir sind für Sie da"
         einleitung={
           <p>
-            Sagen Sie beim Anruf kurz, worum es geht. Davon hängt ab, wie viel Zeit eingeplant wird — eine
-            Vorsorge braucht anderes als ein Beratungsgespräch.
+            Ob Vorsorgeuntersuchung, Beratung oder akute Beschwerden – jedes Anliegen ist unterschiedlich.
+            Bitte teilen Sie uns bei der Terminvereinbarung kurz den Grund Ihres Besuchs mit, damit wir
+            Ihren Termin entsprechend planen können.
           </p>
         }
       />
@@ -72,13 +73,7 @@ export default function TerminSeite() {
                   <span className="luecke">Telefonnummer der Praxis</span>
                 </p>
               )}
-              <p className="t-meta weg__zeiten">
-                {praxis.telefonzeiten ?? (
-                  <>
-                    Telefonzeiten: <span className="luecke">stehen noch nicht fest</span>
-                  </>
-                )}
-              </p>
+              {praxis.telefonzeiten ? <p className="t-meta weg__zeiten">{praxis.telefonzeiten}</p> : null}
             </Enthuellen>
 
             {/* Der Rückrufweg ist raus — „Kannst du die Passage mit dem Rückruf

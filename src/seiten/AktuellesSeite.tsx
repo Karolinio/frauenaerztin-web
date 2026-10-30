@@ -21,7 +21,7 @@ export default function AktuellesSeite() {
     <>
       <Seitenkopf
         etikett="Aktuelles"
-        titel="Was gerade gilt"
+        titel="Neues aus unserer Praxis"
         einleitung={
           <p>
             Hier finden Sie aktuelle Hinweise zu unserer Praxis, beispielsweise zu geänderten

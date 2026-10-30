@@ -80,9 +80,13 @@ export default function KontaktSeite() {
                 )}
               </dd>
 
-              <dt className="t-label">Telefonzeiten</dt>
+              <dt className="t-label">Sprechstundenzeiten</dt>
               <dd className="t-body">
-                {praxis.telefonzeiten ?? <span className="luecke">stehen noch nicht fest</span>}
+                {praxis.telefonzeiten ?? (
+                  <a className="link" href={weg('/termin/')}>
+                    Montag bis Freitag – alle Zeiten
+                  </a>
+                )}
               </dd>
 
               <dt className="t-label">E-Mail</dt>
@@ -96,7 +100,7 @@ export default function KontaktSeite() {
                 )}
                 <span className="t-meta kontakt__nachsatz">
                   Bitte keine Beschwerden, Befunde oder Diagnosen per E-Mail — eine normale E-Mail ist nicht
-                  verschlüsselt. Sowas gehört ans Telefon.
+                  verschlüsselt.
                 </span>
               </dd>
             </dl>

@@ -1001,3 +1001,100 @@
     display: none;
   }
 }
+
+/* ══ Team-Reihe, 29.10.2026 ══════════════════════════════════════════════════
+ * Vorher: Etikett links, vier kleine Porträts rechts in der halben Breite
+ * (rund 190 px je Gesicht). Jetzt nach Surfshark/OFF+BRAND (Mobbin): Etikett
+ * und Satz darüber, die vier Porträts über die volle Breite, hochkant und
+ * gross, Name und Funktion darunter. */
+@media (min-width: 52rem) {
+  .werbin__team {
+    display: block;
+  }
+
+  .werbin__team-label {
+    margin-bottom: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+  }
+}
+
+.werbin__reihe .formbild {
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+}
+
+.werbin__reihe .formbild img {
+  transition: transform 700ms var(--ease-ruhig);
+}
+
+@media (hover: hover) {
+  .werbin__verweis:hover .formbild img {
+    transform: scale(1.03);
+  }
+}
+
+.werbin__person-name {
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem);
+}
+
+/* ══ Notfallkasten am Handy, 29.10.2026 ═══════════════════════════════════════
+ * Yvonne (23.10.): „in der Handyversion ist der Text ausserhalb des Feldes, auf
+ * dem normalen Bildschirm finde ich es gut." Am Rechner bleibt die Form. Unter
+ * 56rem wird daraus eine ruhige gerundete Fläche: die Form ist dort zu schmal
+ * für drei Zeilen Text, und ein Rechteck hält jeden Zeilenumbruch. */
+@media (max-width: 55.999rem) {
+  .termin__notfall {
+    padding: clamp(1.4rem, 1rem + 2vw, 2rem);
+    border-radius: 18px;
+    background: var(--leinen);
+  }
+
+  .termin__notfall::before {
+    content: none;
+  }
+}
+
+/* ══ Notfall ohne grosse Form, 29.10.2026 ════════════════════════════════════
+ * Karol: „die Silhouette viel kleiner, der Text klein darunter". Die Form liegt
+ * nicht mehr hinter den Nummern; die Marke steht 48 px gross als Absender oben,
+ * darunter Etikett, die zwei Nummern nebeneinander und der Satz. Am Rechner
+ * trennt eine Haarlinie links von der Terminspalte, am Handy eine oben. */
+.termin__notfall,
+.termin__notfall::before {
+  background: none;
+  border-radius: 0;
+}
+
+.termin__notfall::before {
+  content: none;
+}
+
+.termin__notfall {
+  padding: var(--raum) 0 0;
+  border-top: 1px solid var(--linie);
+}
+
+.termin__notfall-marke {
+  display: block;
+  width: 3rem;
+  height: auto;
+  margin-bottom: 1.1rem;
+}
+
+.termin__notrufe {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.termin__notrufe li + li {
+  border-top: none;
+}
+
+@media (min-width: 62rem) {
+  .termin__notfall {
+    padding: 0.5rem 0 0.5rem clamp(2rem, 1rem + 3vw, 4rem);
+    border-top: none;
+    border-left: 1px solid var(--linie);
+    align-self: start;
+  }
+}

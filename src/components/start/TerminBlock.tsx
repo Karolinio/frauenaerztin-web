@@ -96,16 +96,21 @@ export function TerminBlock() {
           */}
           {praxis.telefonzeiten ? (
             <p className="t-meta termin__wann">Sie erreichen uns {praxis.telefonzeiten}.</p>
-          ) : (
-            <p className="t-meta termin__wann">
-              <span className="luecke">Telefonzeiten stehen noch nicht fest</span>
-            </p>
-          )}
+          ) : null}
         </Enthuellen>
 
         {/* Der Notfallhinweis steht bewusst NEBEN dem Termin und nicht am
             Seitenende: wer akut etwas hat, scrollt nicht weiter. */}
         <Enthuellen className="termin__notfall" verzoegerung={80}>
+          {/* 29.10.2026: die grosse Form ist weg, die Marke steht klein als Absender darüber. */}
+          <img
+            className="termin__notfall-marke"
+            src={weg('/bilder/marke.svg')}
+            width={48}
+            height={48}
+            alt=""
+            loading="lazy"
+          />
           <h3 className="t-label">Wenn es nicht warten kann</h3>
           <ul className="termin__notrufe">
             <li>

@@ -324,3 +324,29 @@ main:has(> .flaeche-leinen:last-child) + .fuss {
 @media (max-width: 43.99rem) {
   .fuss__abschluss .fuss__urheber { justify-items: start; }
 }
+
+/* ── Schlusszeichen als grosse Wortmarke, 29.10.2026 ─────────────────────
+ * Karol: „unten zu Standard". Vorbild Structured / Waka Waka (Mobbin): der
+ * Name als Plakatzeile über die Breite, eng gesetzt statt weit gesperrt; der
+ * Blob klein daneben als Absender. Gleiche Schrift, nur der Massstab ändert
+ * sich — kein neues Element. */
+.fuss__signatur {
+  align-items: flex-end;
+  padding-top: var(--raum);
+  border-top: 1px solid var(--linie);
+}
+
+.fuss__signatur-marke {
+  width: clamp(4.5rem, 3rem + 5vw, 8rem);
+}
+
+.fuss__signatur-text {
+  flex: 1 1 32rem;
+}
+
+.fuss__signatur-name {
+  font-size: clamp(2.4rem, 0.6rem + 6.2vw, 7.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}

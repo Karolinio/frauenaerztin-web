@@ -86,3 +86,23 @@
     --dreh-jetzt: var(--dreh);
   }
 }
+
+/* 23.10.2026, Yvonne: „Fotos ganz normal rechteckig einfügen — mit den Gesichtern ist die Logoform
+   nicht gut, die Damen haben alle keinen Hals." Die Form bleibt als Marke im Logo, die Porträts
+   stehen als ruhige Rechtecke im Format der Dateien (4:5). Kein Zoom, keine Drehung. */
+.formbild {
+  aspect-ratio: 4 / 5;
+  -webkit-mask: none;
+  mask: none;
+  transform: none;
+  border-radius: 6px;
+}
+
+.formbild img,
+.formbild__leer {
+  transform: none;
+}
+
+.formbild img {
+  object-position: 50% 12%;
+}
