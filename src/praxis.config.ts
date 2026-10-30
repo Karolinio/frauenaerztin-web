@@ -168,15 +168,18 @@ export const praxis = {
    * Diese Zeile hier ist nur die Datei — sie steht in der Konfiguration, weil
    * `vite.config.ts` sie fürs Vorladen braucht.
    */
-  portraet: null as Offen<{ readonly src: string; readonly alt: string }>,
+  portraet: {
+    src: '/bilder/yvonne-praxis.webp',
+    alt: 'Yvonne Erkens lächelt mit verschränkten Armen in ihrer Praxis, neben einem großen Gemälde in Grau, Blau und Gold.',
+  } as Offen<{ readonly src: string; readonly alt: string }>,
 
   /** Der Ort steht fest — er ist der Grund, warum es die Seite gibt. */
   ort: 'Erkelenz',
 
   /** Der Eröffnungstag. Bis er feststeht, wird er nirgends behauptet. */
-  eroeffnung: '1. November 2026',
+  eroeffnung: '2. November 2026',
   /** Derselbe Tag maschinenlesbar. Bis dahin sagt der Hero „Eröffnung", nie „geöffnet". */
-  eroeffnungAm: '2026-11-01',
+  eroeffnungAm: '2026-11-02',
 
   adresse: {
     /* Von ihr am 05.09.2026 fuer das Impressum geschickt: „Theodor-Heuss-Str.
@@ -206,7 +209,7 @@ export const praxis = {
    * laufende Praxis — das ist schlimmer als keine Angabe. Beim Umstellen auf
    * den Regelbetrieb gehoert das hier als Erstes geaendert.
    */
-  telefonzeiten: 'bis zur Praxiseröffnung mittwochs von 09:30 bis 11:00 Uhr',
+  telefonzeiten: null as Offen<string>,
 
   /* „praxis@gyn-erkens.de darf auf die Seite“ — Yvonne, 05.10.2026. */
   email: 'praxis@gyn-erkens.de',
@@ -222,7 +225,11 @@ export const praxis = {
   /** Doctolib. Sie richtet Profil und Kalender ein (Stand 05.10.2026); sobald
       ihr Buchungslink da ist, kommt er hier hinein — `{ anbieter: 'Doctolib', url }`.
       Nur ein Link, kein eingebettetes Doctolib-Skript. */
-  onlineTermin: null as Offen<{ readonly anbieter: string; readonly url: string }>,
+  /* 29.10.2026: ihr öffentliches Doctolib-Profil, Adresse Theodor-Heuss-Str. geprüft. */
+  onlineTermin: {
+    anbieter: 'Doctolib',
+    url: 'https://www.doctolib.de/frauenarzt/erkelenz/yvonne-erkens',
+  } as Offen<{ readonly anbieter: string; readonly url: string }>,
 } as const;
 
 /**
@@ -393,7 +400,7 @@ export const leistungen: readonly Leistung[] = [
   },
   {
     id: 'wechseljahre',
-    titel: 'Wechseljahre',
+    titel: 'Hormonelle Gesundheit und Wechseljahre',
     kurz: 'Die Wechseljahre sind eine natürliche Lebensphase und werden von jeder Frau unterschiedlich erlebt.',
     absatz: 'Während manche Frauen kaum Veränderungen bemerken, können Beschwerden wie Hitzewallungen, Schlafstörungen, Stimmungsschwankungen, Scheidentrockenheit oder Veränderungen der Sexualität die Lebensqualität beeinträchtigen.',
     lang: [
@@ -521,7 +528,7 @@ export const notruf = {
  * EINE Stelle, damit die beiden Fassungen nicht auseinanderlaufen. */
 export const praxisText = {
   titel: 'Ein Ort zum Wohlfühlen',
-  satz: 'Unsere Praxisräume entstehen gerade mit viel Liebe zum Detail. Helle Farben, natürliche Materialien und eine ruhige Atmosphäre sollen dafür sorgen, dass Sie sich vom ersten Moment an wohlfühlen.',
+  satz: 'Unsere Praxisräume sind mit viel Liebe zum Detail eingerichtet. Helle Farben, natürliche Materialien und eine ruhige Atmosphäre sollen dafür sorgen, dass Sie sich vom ersten Moment an wohlfühlen.',
 } as const;
 
 /* ══ Rechtliches ══════════════════════════════════════════════════════════

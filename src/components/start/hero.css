@@ -419,3 +419,50 @@
     overflow: visible;
   }
 }
+
+/* ══ Szene: Foto neben Willkommenssatz (29.10.2026) ═════════════════════════
+ *
+ * Das Foto kam als 640 × 480 px. Über die volle Breite (16:7, 1440 px) wäre es
+ * 2,25-fach hochgezogen und sichtbar weich. Also steht es in seinem eigenen
+ * Format (4:3) in einer Spalte von rund 680 px, in einer Rundung, und der
+ * Willkommenssatz mit Telefonknopf steht daneben. Am Handy steht das Bild
+ * über dem Text in voller Breite. Layout-Vorbild: Ease (Mobbin), Bild in
+ * Rundung neben der Aussage. */
+.hero__szene {
+  max-width: var(--schale);
+  margin-inline: auto;
+  padding: clamp(1.5rem, 1.1rem + 2vw, 3.5rem) var(--rand) 0;
+  display: grid;
+  gap: clamp(1.75rem, 1.2rem + 2vw, 3rem);
+}
+
+.hero__szene .hero__buehne {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-gross, 14px);
+}
+
+.hero__szene .hero__fuss {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  gap: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
+  align-self: center;
+}
+
+@media (min-width: 52rem) {
+  .hero__szene {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    align-items: center;
+  }
+  .hero__szene .hero__buehne {
+    aspect-ratio: 4 / 3;
+  }
+  .hero__szene .hero__fuss {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero__szene .hero__daten {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--linie);
+  }
+}

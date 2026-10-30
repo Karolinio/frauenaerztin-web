@@ -1,9 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { praxis } from '../../praxis.config';
-import { team, zeiten } from '../../inhalt';
+import { zeiten } from '../../inhalt';
 import { augenblickInBerlin, sprechzeitJetzt, type Lage } from '../../lib/jetzt';
 import { Marke } from '../ui/Marke';
-import { Formbild } from '../ui/Formbild';
 import { steht } from '../ui/Angabe';
 import { weg } from '../../lib/weg';
 import { HERO_PLATZ, zeigt } from '../../lib/bildplaetze';
@@ -55,7 +54,6 @@ import './hero.css';
  * zweite Zeile als Absatz wäre für Google eine Bildunterschrift.
  */
 export function Hero() {
-  const ärztin = team[0];
   const auf = useSchriftBereit();
   const marke = useAndocken();
 
@@ -80,9 +78,12 @@ export function Hero() {
         </h1>
       </div>
 
-      <Buehne />
+      {/* Szene: das Foto in seiner eigenen Grösse neben dem Willkommenssatz (Layout wie bei Ease:
+          Bild in Rundung neben Text). 640 px breite Quelle, darum nie über die Spaltenbreite gezogen. */}
+      <div className="hero__szene">
+        <Buehne />
 
-      {/*
+        {/*
         ═══ Warum Einleitung und Sprechzeit UNTER dem Bild stehen ═══
 
         Sie standen zuerst darüber, mit allem anderen auf der Mittelachse.
@@ -104,8 +105,8 @@ export function Hero() {
         Ihre Vorgabe „Foto von mir und kurzer Einleitungstext" bleibt gewahrt:
         der Text steht beim Foto. Nur darunter statt darüber.
       */}
-      <div className="hero__fuss">
-        {/*
+        <div className="hero__fuss">
+          {/*
           ═══ Ihr Foto beim Einleitungstext, seit 20.10.2026 ═══
 
           Ihre Vorgabe war „Foto von mir und kurzer Einleitungstext". Das breite
@@ -115,14 +116,9 @@ export function Hero() {
           Bildschirm und vor jeder anderen Person. Das Foto kommt aus
           `inhalt/team.json`, Eintrag 0: dieselbe Datei wie unter „Über mich".
         */}
-        <div className="hero__vorstellung">
-          {ärztin && steht(ärztin.bild) ? (
-            <div className="hero__portraet">
-              <Formbild bild={ärztin.bild} alt={ärztin.bildAlt} index={0} />
-            </div>
-          ) : null}
-          <div className="hero__einleitung t-lead">
-            {/*
+          <div className="hero__vorstellung">
+            <div className="hero__einleitung t-lead">
+              {/*
               Ihr Text vom 11.09.2026, woertlich — „Das erste soll direkt auf der
               ersten Seite oben erscheinen. Dann waere es super wenn darunter ein
               Button waere fuer ‚Mehr' und wenn man da drauf klickt, dass man dann
@@ -132,15 +128,18 @@ export function Hero() {
               hier vorher — eine Zusage, die der Bau erfunden hatte und die sie nie
               gemacht hat. Weg damit; jetzt steht hier nur, was sie geschrieben hat.
             */}
-            <p>
-              Herzlich willkommen in meiner Praxis für Frauenheilkunde und Geburtshilfe.
-              Schön, dass Sie da sind.
-            </p>
-            <a className="link hero__mehr" href={weg('/team/')}>Mehr</a>
+              <p>
+                Herzlich willkommen in meiner Praxis für Frauenheilkunde und Geburtshilfe. Schön, dass Sie da
+                sind.
+              </p>
+              <a className="link hero__mehr" href={weg('/team/')}>
+                Mehr
+              </a>
+            </div>
           </div>
-        </div>
 
-        <Praxisdaten />
+          <Praxisdaten />
+        </div>
       </div>
     </section>
   );
@@ -275,7 +274,12 @@ function useSchriftBereit(): boolean {
 /** Der Satz zur Sprechzeit — einmal pro Minute neu, damit er um 13:00 kippt. */
 function useLage(): Lage {
   const rechnen = () =>
-    sprechzeitJetzt(zeiten, augenblickInBerlin(), praxis.eroeffnungAm, praxis.eroeffnung.replace(/\s*\d{4}$/, ''));
+    sprechzeitJetzt(
+      zeiten,
+      augenblickInBerlin(),
+      praxis.eroeffnungAm,
+      praxis.eroeffnung.replace(/\s*\d{4}$/, ''),
+    );
   const [lage, setLage] = useState<Lage>(rechnen);
   useEffect(() => {
     const neu = () => setLage(rechnen());
@@ -301,12 +305,16 @@ function Praxisdaten() {
     <div className="hero__daten">
       {/* `aria-live` aus: der Satz wechselt höchstens einmal in der Stunde, und
           eine Ansage mitten im Lesen wäre lauter als der Wechsel selbst. */}
-      <p className="hero__heute">
-        {lage.offen ? <span className="hero__heute-punkt" aria-hidden="true" /> : null}
-        <span className="hero__heute-wort">{lage.wort}</span>
-        {lage.satz ? <span className="hero__heute-zeit">{lage.satz}</span> : null}
-        {!lage.satz && lage.wort === 'Heute' ? <span className="luecke">Sprechzeiten folgen</span> : null}
-      </p>
+      {/* Vor der Eröffnung steht hier nichts: der Eröffnungstag gehört nicht in den ersten Bildschirm.
+          Ab dem Eröffnungstag zeigt `useLage` die echte Sprechzeit. */}
+      {lage.wort === 'Eröffnung' ? null : (
+        <p className="hero__heute">
+          {lage.offen ? <span className="hero__heute-punkt" aria-hidden="true" /> : null}
+          <span className="hero__heute-wort">{lage.wort}</span>
+          {lage.satz ? <span className="hero__heute-zeit">{lage.satz}</span> : null}
+          {!lage.satz && lage.wort === 'Heute' ? <span className="luecke">Sprechzeiten folgen</span> : null}
+        </p>
+      )}
 
       <div className="hero__wege">
         {telefonSteht ? (
