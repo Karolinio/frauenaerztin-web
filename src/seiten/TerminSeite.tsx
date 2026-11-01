@@ -58,11 +58,6 @@ export default function TerminSeite() {
 
           <div className="wege">
             <Enthuellen als="article" className="weg">
-              <p className="t-label">Am Telefon</p>
-              <p className="t-body weg__text">
-                Der übliche Weg, und der schnellste. Wenn niemand abnimmt, ist gerade jemand im Zimmer —
-                versuchen Sie es später noch einmal.
-              </p>
               {telefonSteht ? (
                 <a className="knopf weg__knopf" href={telefon}>
                   <Hoerer className="knopf__zeichen" />
@@ -83,8 +78,6 @@ export default function TerminSeite() {
                 gibt — und sie kommt, sobald ein Wert in der Konfiguration steht. */}
             {praxis.onlineTermin ? (
               <Enthuellen als="article" className="weg" verzoegerung={120}>
-                <p className="t-label">Online</p>
-                <p className="t-body weg__text">Rund um die Uhr, ohne anzurufen.</p>
                 <a className="knopf knopf--leise weg__knopf" href={praxis.onlineTermin.url}>
                   Über {praxis.onlineTermin.anbieter} buchen
                 </a>
@@ -92,15 +85,6 @@ export default function TerminSeite() {
             ) : null}
           </div>
 
-          <Enthuellen>
-            <p className="t-meta wege__nachsatz">
-              {praxis.kassen ?? (
-                <>
-                  Welche Kassen abgerechnet werden: <span className="luecke">steht noch nicht fest</span>
-                </>
-              )}
-            </p>
-          </Enthuellen>
         </div>
       </section>
     </>
