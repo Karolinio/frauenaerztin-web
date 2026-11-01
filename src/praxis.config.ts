@@ -209,7 +209,8 @@ export const praxis = {
    * laufende Praxis — das ist schlimmer als keine Angabe. Beim Umstellen auf
    * den Regelbetrieb gehoert das hier als Erstes geaendert.
    */
-  telefonzeiten: null as Offen<string>,
+  /* Ihre Angabe vom 01.11.2026: die Telefonzeiten entsprechen den Sprechzeiten. */
+  telefonzeiten: 'zu unseren Sprechzeiten',
 
   /* „praxis@gyn-erkens.de darf auf die Seite“ — Yvonne, 05.10.2026. */
   email: 'praxis@gyn-erkens.de',

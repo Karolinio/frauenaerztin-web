@@ -31,12 +31,6 @@ export function Datenschutz() {
           , Telefon <Offen was="Telefonnummer">{praxis.telefon.anzeige}</Offen>, E-Mail{' '}
           <Offen was="E-Mail-Adresse">{praxis.email}</Offen>.
         </p>
-        <dl>
-          <dt>Datenschutzbeauftragte Person</dt>
-          <dd>
-            <Offen>{rechtliches.datenschutzbeauftragter}</Offen>
-          </dd>
-        </dl>
       </section>
 
       <section aria-labelledby="hosting">
