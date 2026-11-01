@@ -564,8 +564,11 @@ export const rechtliches = {
    * Inhaber des Cloudflare-Kontos) bestätigt das gegen den Cloudflare-DPA.
    */
   hostingAnbieter: 'Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA',
-  /* Bei Cloudflare nicht einsehbar und nicht von uns festgelegt — wird nicht geraten. */
-  logSpeicherdauer: null as Offen<string>,
+  /* 01.11.2026: Cloudflare nennt für Besucher-Logs keine feste Frist (Datenschutzerklärung
+     Abschn. 11, AVV Anh. 1). Deshalb steht hier das Kriterium statt einer Zahl — das lässt
+     Art. 13 Abs. 2 lit. a DSGVO ausdrücklich zu. Keine Zahl raten. */
+  logSpeicherdauer:
+    'Diese Daten werden nur so lange gespeichert, wie es für die Auslieferung und den sicheren Betrieb der Website erforderlich ist. Eine feste Frist nennt Cloudflare nicht; maßgeblich sind die Datenschutzerklärung und der Auftragsverarbeitungsvertrag von Cloudflare.',
   /* „Versicherer ist AXA“ (14.09.2026). */
   berufshaftpflicht: 'AXA Versicherung AG, Colonia-Allee 10–20, 51067 Köln',
   /** Räumlicher Geltungsbereich der Berufshaftpflicht, § 2 DL-InfoV. */
